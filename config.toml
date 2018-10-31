@@ -1,8 +1,9 @@
 baseurl = "/"
 languageCode = "ja-jp"
-title = "Classic"
+title = "capyBaral"
 publishDir = "docs"
 theme = "hugo-classic"
+disqusShortname = ""
 googleAnalytics = ""
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 preserveTaxonomyNames = true
@@ -34,7 +35,9 @@ footnotereturnlinkcontents = "↩"
 [params]
     brand = "bsakatu.net"
     description = ""
-    footer = "Copyright&copy; B-SAKATU | [Twitter](https://twitter.com/bsakatu) | [Hatena](https://www.hatena.ne.jp/B-SAKATU/) | [GitHub](https://github.com/bsakatu)"
+    copyrighthtml = "Copyright &copy; 2018 B-SAKATU"
+    footer = ""
     custom_css = ["css/theme-override.css"]
     twitter = "bsakatu"
     github = "bsakatu"
+    hatena = "B-SAKATU"

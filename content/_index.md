@@ -2,7 +2,7 @@
 title: Home
 ---
 
-# bsakatu.net
+# capyBaral - bsakatu.net
 blog以外は暇があれば……
 
-## Blog
+## Latest Posts

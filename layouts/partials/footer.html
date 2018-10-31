@@ -1,9 +1,10 @@
     <footer>
       {{ partial "foot_custom.html" . }}
-      {{ with .Site.Params.footer }}
       <hr/>
-      {{ . | markdownify }}
-      {{ end }}
+      {{ .Site.Params.copyrightHTML | safeHTML }}
+      <a href="https://twitter.com/{{.Site.Params.twitter }}">Twitter</a> | 
+      <a href="https://www.hatena.ne.jp/{{.Site.Params.hatena }}/">Hatena</a> | 
+      <a href="https://github.com/{{.Site.Params.github }}">GitHub</a>
     </footer>
   </body>
 </html>
