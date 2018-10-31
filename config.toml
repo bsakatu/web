@@ -1,3 +1,40 @@
-baseURL = "https://bsakatu.net/"
+baseurl = "/"
 languageCode = "ja-jp"
-title = "bsakatu.net"
+title = "Classic"
+publishDir = "docs"
+theme = "hugo-classic"
+googleAnalytics = ""
+ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
+preserveTaxonomyNames = true
+enableEmoji = true
+footnotereturnlinkcontents = "↩"
+
+[permalinks]
+    post = "/post/:year/:month/:day/:slug/"
+    doc = "/:filename/"
+[author]
+    name = "B-SAKATU"
+    email = "bsakatu.bleu.blanc.rouge@gmail.com"
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+[[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 2
+[[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 3
+[[menu.feed]]
+    name = "Subscribe"
+    url = "/index.xml"
+
+[params]
+    brand = "bsakatu.net"
+    description = ""
+    footer = "Copyright&copy; B-SAKATU | [Twitter](https://twitter.com/bsakatu) | [Hatena](https://www.hatena.ne.jp/B-SAKATU/) | [GitHub](https://github.com/bsakatu)"
+    custom_css = ["css/theme-override.css"]
+    twitter = "bsakatu"
+    github = "bsakatu"
