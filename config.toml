@@ -11,7 +11,7 @@ enableEmoji = true
 footnotereturnlinkcontents = "↩"
 
 [permalinks]
-    post = "/post/:year/:month/:day/:slug/"
+    post = "/post/:year/:month/:day/:filename/"
     doc = "/:filename/"
 [author]
     name = "B-SAKATU"
