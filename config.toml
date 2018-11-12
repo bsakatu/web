@@ -12,7 +12,7 @@ footnotereturnlinkcontents = "↩"
 
 [permalinks]
     post = "/post/:year/:month/:day/:filename/"
-    doc = "/:filename/"
+    doc = "/doc/:filename/"
 [author]
     name = "B-SAKATU"
     email = "bsakatu.bleu.blanc.rouge@gmail.com"
