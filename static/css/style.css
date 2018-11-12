@@ -1,5 +1,5 @@
 body {
-  max-width: 800px;
+  max-width: 60em;
   margin: auto;
   padding: .2em;
   line-height: 1.5;
@@ -107,6 +107,9 @@ table {
   border-top: 1px solid #666;
   border-bottom: 1px solid #666;
 }
-table thead th { border-bottom: 1px solid #ddd; }
+table > thead th {
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
 th, td { padding: 5px; }
-tr:nth-child(even) { background: #eee }
+tbody tr:nth-child(even) { background: #eee }
