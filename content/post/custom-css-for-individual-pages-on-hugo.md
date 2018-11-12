@@ -1,5 +1,5 @@
 ---
-title: "Custom Css for Individual Pages on Hugo"
+title: "Hugo で各ページ固有のスタイルシートを呼び出す"
 date: 2018-11-13T01:16:08+09:00
 draft: false
 

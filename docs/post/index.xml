@@ -14,7 +14,7 @@
     
     
     <item>
-      <title>Custom Css for Individual Pages on Hugo</title>
+      <title>Hugo で各ページ固有のスタイルシートを呼び出す</title>
       <link>/post/2018/11/13/custom-css-for-individual-pages-on-hugo/</link>
       <pubDate>Tue, 13 Nov 2018 01:16:08 +0900</pubDate>
       <author>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</author>
