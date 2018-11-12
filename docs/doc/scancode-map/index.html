@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scancode Map による Scancode の変更 | capyBaral</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    
+    <header>
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">/home/capybaral</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/">~/home</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">~/categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">~/tags</a>
+      </li>
+      
+
+      
+      
+      <li class="pull-right">
+        <a href="/index.xml">~/subscribe</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+</header>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">Scancode Map による Scancode の変更</span></h1>
+
+<h2 class="date">2018/11/12</h2>
+<p class="terms">
+  
+  
+  
+  
+  
+</p>
+</div>
+
+
+
+<main>
+
+
+<h2 id="scancode-map-とは">Scancode Map とは?</h2>
+
+<p>基本的には Microsoft の<a title="Keyboard and mouse class drivers - Windows drivers | Microsoft Docs" href="https://docs.microsoft.com/en-us/windows-hardware/drivers/hid/keyboard-and-mouse-class-drivers#scan-code-mapper-for-keyboards">公式資料</a> を読めば分かりますが、元々はキーボードが送出するスキャンコードがおかしかった場合にそれを訂正する設定をするために作られたようです。現在では左 Ctrl キーと CapsLock キーの入れ替えや、Esc キーと 半角全角キーとの入れ替えに使うのがメインだと思いますが……。</p>
+
+<p>ちなみにスキャンコードについては自分で資料を整理してまとめを作っていましたが作ろうとしていたもの以上にしっかりしたページを見つけてしまったので今回はそれを載せておきます。すごい資料です。</p>
+
+<p><a href="http://hp.vector.co.jp/authors/VA003720/lpproj/others/kbdjpn.htm">Key Layout and Scancodes</a></p>
+
+<h2 id="書き換え方法">書き換え方法</h2>
+
+<p>マップのエントリは標準では存在しないので、下記のレジストリパスにバイナリ形式で作る必要があります。</p>
+
+<p>Registry path:  <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout</code></p>
+
+<p>（※ちなみに、 <code>HKEY_CURRENT_USER\Keyboard Layout</code> に作成してもいいと書かれた記事もいくつか見かけるが、Windows Vista か 7 の頃から動作しなくなっている。XP の頃は使えたらしいが未確認。なんでちょっと試せばいいだけのことを試さないで書いちゃうかな……。）</p>
+
+<p>データは例えば US 配列のキーボードなどで CapsLock &lt;-&gt; Left Control としたい場合、 <code>00000000 00000000 03000000 1D003A00 3A001D00 00000000</code> のようなものになります。何がどういう順番に並んでいるかは以下の通り。</p>
+
+<blockquote cite="https://docs.microsoft.com/en-us/windows-hardware/drivers/hid/keyboard-and-mouse-class-drivers#scan-code-mapper-for-keyboards">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Start offset (in bytes)</th>
+        <th>Size (in bytes)</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>0</td>
+        <td>4</td>
+        <td>Header: Version Information</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>4</td>
+        <td>Header: Flags</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>4</td>
+        <td>Header: Number of Mappings</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>4</td>
+        <td>Individual Mapping</td>
+      </tr>
+      <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+      <tr>
+        <td>Last 4 bytes</td>
+        <td>4</td>
+        <td>Null Terminator (0x00000000)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <footer><cite><a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/hid/keyboard-and-mouse-class-drivers#scan-code-mapper-for-keyboards">Keyboard and mouse class drivers - Windows drivers | Microsoft Docs</a><cite></footer>
+
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Interpretation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0x00000000</td>
+      <td>Header: Version. Set to all zeroes.</td>
+    </tr>
+    <tr>
+      <td>0x00000000</td>
+      <td>Header: Flags Set to all zeroes.</td>
+    </tr>
+    <tr>
+      <td>0x00000003</td>
+      <td>Three entries in the map (including null entry).</td>
+    </tr>
+    <tr>
+      <td>0x1D003A00</td>
+      <td>Left Control -> CapsLock (0x003A -> 0x001D)</td>
+    </tr>
+    <tr>
+      <td>0x3A001D00</td>
+      <td>CapsLock -> Left Control (0x001D -> 0x003A)</td>
+    </tr>
+    <tr>
+      <td>0x00000000</td>
+      <td>Null terminator.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>レジストリファイルでは以下のように書けます。改行はしなくてもいいですが見やすいので入れています。</p>
+
+<pre><code>&quot;Scancode Map&quot;=hex:00,00,00,00,\
+                   00,00,00,00,\
+                   03,00,00,00,\
+                   1d,00,3a,00,\
+                   3a,00,1d,00,\
+                   00,00,00,00
+</code></pre>
+
+<p>ここで注意しなければならないのが、Scancode Map のデータは<a href="https://ja.wikipedia.org/wiki/エンディアン" title="エンディアン - Wikipedia">リトルエンディアン</a>で書かなければならないということです。順々に並ぶのではなく逆順で並んだデータなので一見すると理解しにくいですが、気をつけて下さい。またそれぞれの置き換え指定は「変換後のデータ、変換前のデータ」という順で並んでいるので、これを注意ポイントです。私は最初見事に混乱しました。</p>
+
+<blockquote cite="https://ja.wikipedia.org/wiki/エンディアン">
+
+例えば、十六進法で表現すると <code>1234ABCD</code> という 1 ワードが 4 バイトのデータを、バイト毎に上位側から 「<code>12 34 AB CD</code>」 のように並べる順序はビッグエンディアン、下位側から 「<code>CD AB 34 12</code>」 のように並べる順序はリトルエンディアンである。
+
+  <footer><cite><a href="https://ja.wikipedia.org/wiki/エンディアン">エンディアン - Wikipedia</a></cite></footer>
+
+</blockquote>
+
+<p>ちなみにとあるキーを無効化したい場合は、置き換え後のキーを定義する部分を <code>0000</code> （レジストリファイル内なら <code>00,00</code>）と指定すれば可能です。なお、使用中の配列データ内に損際しないスキャンコードを割り当てることは出来ない。例えば、US 配列で日本語配列固有のキーを定義してもそもそも US 配列の定義にそれらのキーがそもそも存在しないので指定しても動作しない。</p>
+
+</main>
+
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      <hr/>
+      Copyright &copy; 2018 B-SAKATU
+      <a href="https://twitter.com/bsakatu">Twitter</a> | 
+      <a href="https://www.hatena.ne.jp/B-SAKATU/">Hatena</a> | 
+      <a href="https://github.com/bsakatu">GitHub</a>
+    </footer>
+  </body>
+</html>
+
