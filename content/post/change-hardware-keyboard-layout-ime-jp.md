@@ -9,7 +9,7 @@ markup: "mmark"
 
 Windows 10 において、日本語 <abbr title="Input Method Editor">IME</abbr> のオプションに「ハードウェア キーボード レイアウト」という設定項目がある（ということを今日初めて知った……）。
 
-{{< figure  src="/img/post/2018/change-hardware-keyboard-layout-IME-jp.png" title="ハードウェア キーボード レイアウト変更の設定画面" width="880" height="792" >}}
+{{< figure  src="/img/post/2018/change-hardware-keyboard-layout-ime-jp.png" title="ハードウェア キーボード レイアウト変更の設定画面" width="880" height="792" >}}
 
 この設定では「日本語キーボード(106/109 キー)」と「英語キーボード(101/102 キー)」を選択出来る。これによって下記のレジストリが変化する。
 
