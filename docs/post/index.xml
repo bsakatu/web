@@ -8,10 +8,19 @@
     <language>ja-jp</language>
     <managingEditor>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</managingEditor>
     <webMaster>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</webMaster>
-    <lastBuildDate>Tue, 13 Nov 2018 01:16:08 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 25 Nov 2018 01:22:59 +0900</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ハードウェア キーボード レイアウトの変更</title>
+      <link>/post/2018/11/25/change-hardware-keyboard-layout-ime-jp/</link>
+      <pubDate>Sun, 25 Nov 2018 01:22:59 +0900</pubDate>
+      <author>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</author>
+      <guid>/post/2018/11/25/change-hardware-keyboard-layout-ime-jp/</guid>
+      <description>Windows 10 において、日本語 IME のオプションに「ハードウェア キーボード レイアウト」という設定項目がある（ということを今日初めて知った……）。 ハードウェ</description>
+    </item>
     
     <item>
       <title>Hugo で各ページ固有のスタイルシートを呼び出す</title>
