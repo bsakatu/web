@@ -4,5 +4,6 @@ date: {{ .Date }}
 draft: true
 
 isCJKLanguage:  true
+markup: "mmark"
 ---
 
