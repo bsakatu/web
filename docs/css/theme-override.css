@@ -1,1 +1,8 @@
 footer { font-size: 90%; font-family: monospace; }
+
+@media only screen and (max-width: 900px) {
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
