@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docs on capyBaral</title>
@@ -38,15 +38,6 @@
       <author>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</author>
       <guid>/doc/ax-layout-on-windows/</guid>
       <description>そもそも AX キーボードとは? ネット上にあんまり資料がないのですが、こんなものです（ちなみに私自身は実物を触ったことも見たこともありません……）</description>
-    </item>
-    
-    <item>
-      <title>Scancode Map による Scancode の変更</title>
-      <link>/doc/scancode-map/</link>
-      <pubDate>Mon, 12 Nov 2018 22:57:00 +0900</pubDate>
-      <author>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</author>
-      <guid>/doc/scancode-map/</guid>
-      <description>Scancode Map とは? 基本的には Microsoft の公式資料 を読めば分かりますが、元々はキーボードが送出するスキャンコードがおかしかった場合にそれを訂正する設定をするた</description>
     </item>
     
   </channel>

@@ -6,3 +6,9 @@ footer { font-size: 90%; font-family: monospace; }
     height: auto;
   }
 }
+
+ul > li > span.date {
+  font-family: monospace;
+  font-size: 1.1em;
+  padding-right: 0.5em;
+}

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
   <head>
+    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Windows で同時に複数のキーボード配列を使用する | capyBaral</title>
@@ -10,10 +12,6 @@
     
     <header>
 
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
   <nav>
     <ul>
       
@@ -68,9 +66,9 @@
 </div>
 
 
-
-<main>
-<p>Windows 標準のキーボード配列設定は下記のレジストリで設定されています。この設定は PS/2 キーボードや <abbr title="Universal Serial Bus">USB</abbr> キーボードを問わずにその <abbr title="Personal Computer">PC</abbr> に接続される全てのキーボードに反映されます。</p>
+<div class="content-wrapper">
+  <main>
+    <p>Windows 標準のキーボード配列設定は下記のレジストリで設定されています。この設定は PS/2 キーボードや <abbr title="Universal Serial Bus">USB</abbr> キーボードを問わずにその <abbr title="Personal Computer">PC</abbr> に接続される全てのキーボードに反映されます。</p>
 
 <table>
 <caption>
@@ -195,8 +193,9 @@
 
 <p>ちなみに PS/2 キーボードもデバイス別に設定できるか試してみましたが、こちらはだめでした。残念。試したのは <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\ACPI</code> 以下を USB キーボードと同じ要領で。デバイスインスタンスパスとかはあるんですけどね。</p>
 
-</main>
-
+    <a href="/"> >> Home</a>
+  </main>
+</div>
     <footer>
       
 <script>

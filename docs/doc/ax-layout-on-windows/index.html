@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
   <head>
+    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AX キーボードの配列を現行の Windows で使う | capyBaral</title>
@@ -10,10 +12,6 @@
     
     <header>
 
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
   <nav>
     <ul>
       
@@ -68,9 +66,9 @@
 </div>
 
 
-
-<main>
-<h2 id="そもそも-ax-キーボードとは">そもそも AX キーボードとは?</h2>
+<div class="content-wrapper">
+  <main>
+    <h2 id="そもそも-ax-キーボードとは">そもそも AX キーボードとは?</h2>
 
 <p>ネット上にあんまり資料がないのですが、こんなものです（ちなみに私自身は実物を触ったことも見たこともありません……）。</p>
 
@@ -151,11 +149,10 @@
 <p>よく、左 Ctrl キーと CapsLock キーの入れ替えや、Esc キーと 半角全角キーとの入れ替えに使うレジストリの書き換えです。<a href="/doc/scancode-map/">詳細は別途書いてある</a>のでそちらを参照して下さい。</p>
 
 <p>【極力 JIS 配列と揃えるマップ】</p>
-
 <pre><code>Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
-&quot;Scancode Map&quot;=hex:00,00,00,00,\
+&#34;Scancode Map&#34;=hex:00,00,00,00,\
                    00,00,00,00,\
                    0a,00,00,00,\
                    1d,00,1d,e0,\
@@ -167,9 +164,7 @@
                    29,00,2b,00,\
                    2b,00,7d,00,\
                    2b,00,73,00,\
-                   00,00,00,00
-</code></pre>
-
+                   00,00,00,00</code></pre>
 <table>
 <thead>
 <tr>
@@ -364,8 +359,9 @@
 <li><a href="https://gist.github.com/bsakatu/fccc375610b903a3a4c8d8bb3a6f832f/raw/08becdfd9194ccc7feff95a5c50a36c9ec0732e1/JIS_layout.reg">JIS_layout.reg</a>: JIS 配列に戻す設定</li>
 </ul>
 
-</main>
-
+    <a href="/"> >> Home</a>
+  </main>
+</div>
     <footer>
       
 <script>
