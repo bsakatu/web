@@ -3,7 +3,6 @@ title: "Windows 日本語入力環境で US 配列をより使いやすくする
 date:  2018-12-11T00:25:00+09:00
 draft: false 
 
-isCJKLanguage: true
 markup: "mmark"
 ---
 

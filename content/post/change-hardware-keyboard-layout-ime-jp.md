@@ -3,7 +3,6 @@ title: "ハードウェア キーボード レイアウトの変更"
 date: 2018-11-25T01:22:59+09:00
 draft: false
 
-isCJKLanguage: true
 markup: "mmark"
 ---
 

@@ -2,8 +2,6 @@
 title: "Hugo で各ページ固有のスタイルシートを呼び出す"
 date: 2018-11-13T01:16:08+09:00
 draft: false
-
-isCJKLanguage:  true
 ---
 
 [Hugo](https://gohugo.io/) で各ページ固有の CSS を適用したい場合にどうするか悩んだのでその備忘録。

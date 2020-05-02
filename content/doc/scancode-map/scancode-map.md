@@ -3,7 +3,6 @@ title: "Scancode Map による Scancode の変更"
 date: 2018-11-12T22:57:00+09:00
 draft: false
 
-isCJKLanguage:  true
 ---
 
 ## Scancode Map とは?

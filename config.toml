@@ -10,6 +10,7 @@ preserveTaxonomyNames = true
 enableEmoji = true
 footnotereturnlinkcontents = "↩"
 pygmentsCodeFences = true
+hasCJKLanguage = true
 
 [permalinks]
     post = "/post/:year/:month/:day/:filename/"

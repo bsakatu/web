@@ -3,7 +3,6 @@ title: "USB-PD テスターを買った話"
 date: 2020-05-02T13:49:52+09:00
 draft: false
 
-isCJKLanguage:  true
 markup: "mmark"
 ---
 

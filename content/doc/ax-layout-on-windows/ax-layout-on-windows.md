@@ -3,7 +3,6 @@ title: "AX キーボードの配列を現行の Windows で使う"
 date: 2018-12-11T00:23:00+09:00
 draft: false
 
-isCJKLanguage:  true
 markup: "mmark"
 ---
 
