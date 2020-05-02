@@ -8,10 +8,19 @@
     <language>ja-jp</language>
     <managingEditor>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</managingEditor>
     <webMaster>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</webMaster>
-    <lastBuildDate>Tue, 11 Dec 2018 00:25:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2020 13:49:52 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>USB-PD テスターを買った話</title>
+      <link>/post/2020/05/02/usb-pd-tester-fnc88/</link>
+      <pubDate>Sat, 02 May 2020 13:49:52 +0900</pubDate>
+      <author>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</author>
+      <guid>/post/2020/05/02/usb-pd-tester-fnc88/</guid>
+      <description>手持ちの機器に USB-PD を使う物がちょいちょい揃い始めたので、Aliexpress で 2 種類ほど買ってみた。 RD TC66 製造: HANGZHOU RUIDENG TECHNOLOGY Co., LTD. のようだが公式サイトは</description>
+    </item>
     
     <item>
       <title>Windows 日本語入力環境で US 配列をより使いやすくする</title>
