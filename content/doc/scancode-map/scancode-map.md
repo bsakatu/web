@@ -2,10 +2,10 @@
 title: "Scancode Map による Scancode の変更"
 date: 2018-11-12T22:57:00+09:00
 draft: false
-
 ---
 
-## Scancode Map とは?
+## Scancode Map とは
+
 基本的には Microsoft の<a title="Keyboard and mouse class drivers - Windows drivers | Microsoft Docs" href="https://docs.microsoft.com/en-us/windows-hardware/drivers/hid/keyboard-and-mouse-class-drivers#scan-code-mapper-for-keyboards">公式資料</a> を読めば分かりますが、元々はキーボードが送出するスキャンコードがおかしかった場合にそれを訂正する設定をするために作られたようです。現在では左 Ctrl キーと CapsLock キーの入れ替えや、Esc キーと 半角全角キーとの入れ替えに使うのがメインだと思いますが……。
 
 ちなみにスキャンコードについては自分で資料を整理してまとめを作っていましたが作ろうとしていたもの以上にしっかりしたページを見つけてしまったので今回はそれを載せておきます。すごい資料です。
@@ -13,6 +13,7 @@ draft: false
 [Key Layout and Scancodes](http://hp.vector.co.jp/authors/VA003720/lpproj/others/kbdjpn.htm)
 
 ## 書き換え方法
+
 マップのエントリは標準では存在しないので、下記のレジストリパスにバイナリ形式で作る必要があります。
 
 Registry path:  `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout`
@@ -106,7 +107,7 @@ Registry path:  `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard La
 
 レジストリファイルでは以下のように書けます。改行はしなくてもいいですが見やすいので入れています。
 
-```
+```registry
 "Scancode Map"=hex:00,00,00,00,\
                    00,00,00,00,\
                    03,00,00,00,\

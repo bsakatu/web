@@ -3,7 +3,9 @@
 <div class="content-wrapper">
   {{if not .IsHome }}
     <h1>{{ .Title | markdownify }}</h1>
-    {{ end }}
+  {{ else if .IsHome }}
+    <h1>{{ .Site.Title }} - {{ .Site.Params.brand }}</h1>
+  {{ end }}
   
     {{ .Content }}
   

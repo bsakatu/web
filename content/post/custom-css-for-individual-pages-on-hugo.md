@@ -10,7 +10,7 @@ draft: false
 
 まず記事の元となる `hoge.md` と個別スタイルの `custom.css` が `/doc/hoge/` フォルダにいるとします。ここでテンプレートの `header.html` のスタイルシートを呼び出しているあたりに下記のコードを追加します。
 
-```
+```golang
 {{ if ne (print (.Resources.Match "custom.css")) "[]" }}
 <link rel="stylesheet" href="custom.css" />
 {{ end }}

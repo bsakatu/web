@@ -6,7 +6,8 @@ draft: false
 markup: "mmark"
 ---
 
-## そもそも AX キーボードとは?
+## そもそも AX キーボードとは
+
 ネット上にあんまり資料がないのですが、こんなものです（ちなみに私自身は実物を触ったことも見たこともありません……）。
 
 <blockquote cite="http://d.hatena.ne.jp/keyword/AX%A5%AD%A1%BC%A5%DC%A1%BC%A5%C9">
@@ -24,7 +25,7 @@ markup: "mmark"
 配列を見れば分かりますが、通常の JIS 配列（106キー）との違いは以下の通り。ざっくり言ってしまうと記号類が概ね US 配列と同じになっている、US 配列と JIS 配列の中間のような存在。
 
 - 大半の記号配列が US 配列と同じ
-- 「¥|」「\」は JIS 配列と同様の配置（※ただし `Shift + \ ` は `|` であるので実質同じキーが2個あることになる）
+- 「¥|」「\」は JIS 配列と同様の配置（※ただし `Shift + \` は `|` であるので実質同じキーが2個あることになる）
 - 「`~」は「'"」の右に配置
 - 「Ctrl」と「Caps Lock」が逆
 - 「F1」の左が「AX」（「半角全角/漢字」ではない）
@@ -35,7 +36,8 @@ markup: "mmark"
 
 この配列がスタンダードになっていれば現代の色々な苦労はもっと減ったはず……、と思ったけど一部 US 配列と同一配置でスキャンコードを異なるものにしていたりもするから、これはこれで面倒を引き起こしそう。
 
-## どうやってこの配列を使うか?
+## どうやってこの配列を使うか
+
 下記レジストリを表の通りに書き換えれば AX 配列となる（[参考サイト](http://www.atmarkit.co.jp/ait/articles/0001/26/news001.html "Windowsで右Altキーに［漢字］キーを割り当てる方法（AXキーボード設定を利用する方法）：Tech TIPS - ＠IT")）。なお下表で指定している `kbdax2.dll` は特に弄っていなければ標準で Windows のシステムフォルダに入っている。レガシーなファイルがいまだに入っているこういうところは Windows さすがだなと思います。
 
 Registry path: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters`
@@ -49,14 +51,13 @@ Registry path: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Pa
 
 ただしこのままだと JIS 配列には存在するけど AX 配列には存在しないキーが正常に使えないので、スキャンコードの入れ替えや変更をする必要がある。詳細はスキャンコードマップの書き換えで[別記事](Scancode Map による Scancode の変更)を書いてあるのでそちらを参照のこと。
 
-
 ## スキャンコードマップの書き換え
 
 よく、左 Ctrl キーと CapsLock キーの入れ替えや、Esc キーと 半角全角キーとの入れ替えに使うレジストリの書き換えです。[詳細は別途書いてある](/doc/scancode-map/)のでそちらを参照して下さい。
 
-
 【極力 JIS 配列と揃えるマップ】
-```
+
+```registry
 Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
@@ -90,6 +91,7 @@ Windows Registry Editor Version 5.00
 以下、問題点の話など結構長いのでとにかく設定が欲しい人は[ページ最後](#設定の適用)まで飛ばした方が賢明です。
 
 ## 問題点
+
 さてこの方法、大抵は問題ないですが問題が発生するケースもあります。
 
 1. 同じキーのようで挙動が違うキーを使うケース
@@ -104,12 +106,13 @@ Windows Registry Editor Version 5.00
 
 というわけで、AX 配列を上手く使おうとする場合は、上記の問題点を解決するか関わらないようにして使っていく必要があります。まあがんばってください。ちなみにわたしはまさに DvorakJ を使っているのでスクリプト書き換えが色々大変だと分かったので別の手段に乗り換えました。そのネタはまた別途書きます。
 
-
 ## 「英数カナ」キーの挙動
+
 前述したスキャンコードマップでは JIS 配列の「カタカナひらがな」キーと近いキーとして AX 配列の「英数カナ」キーを割り当てています。しかし軽く書いてはいますが、実は微妙に挙動が異なります。その挙動の違いというのが、このキーを使う人には結構悩ましいものになっています（あまりいないとは思いますが……）。以下にそれぞれの定義部分を載せます。
 
-【AX 配列「英数カナ」キー挙動定義の一部 ([kbdax2.c](https://www.google.com/search?q=%22kbdax2.c%22 ""kbdax2.c" - Google 検索"))】
-```C
+【AX 配列「英数カナ」キー挙動定義の一部 ([kbdax2.c](https://www.google.com/search?q=%22kbdax2.c%22 '"kbdax2.c" - Google 検索'))】
+
+```c
         VK_DBE_KATAKANA,      // Base Vk
         KBDNLS_TYPE_TOGGLE,   // NLSFEProcType
         KBDNLS_INDEX_NORMAL,  // NLSFEProcCurrent
@@ -127,7 +130,8 @@ Windows Registry Editor Version 5.00
 ```
 
 【JIS 配列「カタカナひらがな」キー挙動定義の一部 ([kbd106.c](https://github.com/Microsoft/Windows-driver-samples/blob/65196cb16bfcf7b3ebc6cc52032fd7a0bb7d6691/input/layout/fe_kbds/jpn/106/kbd106.c#L523-L536))】
-```C
+
+```c
         VK_DBE_HIRAGANA,     // Base Vk
         KBDNLS_TYPE_TOGGLE,  // NLSFEProcType
         KBDNLS_INDEX_NORMAL, // NLSFEProcCurrent
@@ -165,8 +169,8 @@ Windows Registry Editor Version 5.00
 ---
 
 ## 設定の適用
+
 今まで説明した設定適用のためにレジストリファイルを置いておきます。併せて元に戻すファイルも。
 
 - [AX_layout.reg](https://gist.github.com/bsakatu/fccc375610b903a3a4c8d8bb3a6f832f/raw/08becdfd9194ccc7feff95a5c50a36c9ec0732e1/AX_layout.reg):  AX 配列化設定
 - [JIS_layout.reg](https://gist.github.com/bsakatu/fccc375610b903a3a4c8d8bb3a6f832f/raw/08becdfd9194ccc7feff95a5c50a36c9ec0732e1/JIS_layout.reg): JIS 配列に戻す設定
-

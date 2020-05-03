@@ -8,7 +8,7 @@ markup: "mmark"
 
 Windows 標準のキーボード配列設定は下記のレジストリで設定されています。この設定は PS/2 キーボードや <abbr title="Universal Serial Bus">USB</abbr> キーボードを問わずにその <abbr title="Personal Computer">PC</abbr> に接続される全てのキーボードに反映されます。
 
-| Name                      | Type        | Value (日本語標準)   |
+| Name                      | Type        | Value (日本語標準) |
 | ----                      | ----        | ----               |
 | `LayerDriverJPN`          | `REG_SZ`    | `kbd106.dll`       |
 | `OverrideKeyboardType`    | `REG_DWORD` | `7`                |
@@ -21,7 +21,7 @@ Table: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters
 2. レジストリエディタで `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\HID` の下のキーを確認すると、 `VID_***` のようなキーがたくさんぶら下がっているはずです。この中から、先ほど調べた値に一致するキーの下にぶら下がる `Device Parameters` キーを開きます。（前述した値で言うと、`VID_CB10&PID_1156&MI_00` キー下に `8&278408A0&0&0000` キーがあり、さらにその下に `Device Parameters` キーがある）。
 3. `Device Parameters` キーには既定のエントリ以外は何も存在しない場合が多いです。作成または編集するエントリは以下の通り（値は US 配列に設定する例）。
 
-| Name                      | Type        | Value (US 配列)    |
+| Name                      | Type        | Value (US 配列)   |
 | ----                      | ----        | ----              |
 | `KeyboardTypeOverride`    | `REG_DWORD` | `4`               |
 | `KeyboardSubtypeOverride` | `REG_DWORD` | `0`               |
