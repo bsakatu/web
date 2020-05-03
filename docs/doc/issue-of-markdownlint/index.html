@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+  <head>
+    
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Markdownlint で遭遇しているトラベルのメモ | capyBaral</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/syntax.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">/home/capybaral</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/">~/home</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">~/categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">~/tags</a>
+      </li>
+      
+
+      
+      
+      <li class="pull-right">
+        <a href="/index.xml">~/subscribe</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+</header>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">Markdownlint で遭遇しているトラベルのメモ</span></h1>
+
+<h2 class="date">2020/05/04</h2>
+<p class="terms">
+  
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <p>このサイトや会社のメモ書きをするにあたって遭遇してすんなり解決していないトラブル各種をメモしておく。</p>
+<ul>
+<li>code block 内でスペースのみの行に <a href="https://github.com/DavidAnson/markdownlint/blob/v0.20.2/doc/Rules.md#md009---trailing-spaces">MD009 - Trailing spaces</a> が該当してしまう
+<ul>
+<li>例:  diff を貼り付けた場合、変更箇所前後にある空行はスペース1文字の行になるので、これが「行末のスペースが 0 または 2 個ではない」と判定されてしまう</li>
+<li>対策: 当該 code block 前後に MD009 の無効化・有効化コメントを挿入（html ファイルにはそのコメントは出力されないので、まあ妥協）</li>
+<li>そもそも code block 内部がどうなっていようが markdown としては関係ないはずで、なんでここでエラーを出してくるのか理解できない</li>
+</ul>
+</li>
+<li>値としてダブルクォーテーションを含む <code>title</code> 属性を含めたリンク記法で、URL 文字列が <a href="https://github.com/DavidAnson/markdownlint/blob/v0.20.2/doc/Rules.md#md034---bare-url-used">MD034 - Bare URL used</a> に該当してしまう
+<ul>
+<li>例: <code>[Google](https://www.google.com &quot;&quot;hoge&quot;&quot;)</code> → <code>&lt;a href=&quot;https://www.google.com&quot; title=&quot;&amp;quot;hoge&amp;quot;&quot;&gt;Google&lt;/a&gt;</code></li>
+<li>対策
+<ul>
+<li><code>title</code> 属性の値をシングルクォーテーションで囲う（エラーも出ず正常に出力もされるが、書式としてシングルクォーテーションが許容されているという記述は何処にも見当たらないので、いつ動作しなくなるか分からない）</li>
+<li>当該箇所だけ Hugo の文字実体参照への置換を停止し、ダブルクォーテーションは　文字実体参照として自分で入力する（属性値内は parser がダブルクォーテーションやアンパサンドなどを文字実体参照に置換してくれているが、この機能のせいで手動で文字実体参照を記載すると記法の先頭に来るアンパサンドが <code>&amp;amp;</code> に置換されてしまい、意図した表示にならない）</li>
+</ul>
+</li>
+<li>そもそもリンクの記法で内部にそのままダブルクォーテーションを含んでよいのかよくわからないので正解がなんだかよく分からない。<code>title</code> 属性にダブルクォーテーション入れることなんて早々あるわけではないからみんなあんまり困って無さそう。なぜこういう変な問題ばっかりに出くわしてしまうのか。</li>
+</ul>
+</li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      <hr/>
+      Copyright &copy; 2020 B-SAKATU
+      <a href="https://twitter.com/bsakatu">Twitter</a> | 
+      <a href="https://www.hatena.ne.jp/B-SAKATU/">Hatena</a> | 
+      <a href="https://github.com/bsakatu">GitHub</a>
+    </footer>
+  </body>
+</html>
+

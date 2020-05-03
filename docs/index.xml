@@ -8,10 +8,19 @@
     <language>ja-jp</language>
     <managingEditor>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</managingEditor>
     <webMaster>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</webMaster>
-    <lastBuildDate>Sat, 02 May 2020 13:49:52 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 04 May 2020 01:00:00 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Markdownlint で遭遇しているトラベルのメモ</title>
+      <link>/doc/issue-of-markdownlint/</link>
+      <pubDate>Mon, 04 May 2020 01:00:00 +0900</pubDate>
+      <author>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</author>
+      <guid>/doc/issue-of-markdownlint/</guid>
+      <description>このサイトや会社のメモ書きをするにあたって遭遇してすんなり解決していないトラブル各種をメモしておく。 code block 内でスペースのみの行に MD009 - Trailing spaces が該当</description>
+    </item>
     
     <item>
       <title>USB-PD テスターを買った話</title>
