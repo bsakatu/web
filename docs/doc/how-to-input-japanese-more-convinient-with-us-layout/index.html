@@ -8,6 +8,7 @@
     <title>Windows 日本語入力環境で US 配列をより使いやすくする | capyBaral</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/syntax.css" />
     <link rel="stylesheet" href="/css/theme-override.css">
     
     <header>
@@ -99,7 +100,7 @@
 
 <p>ここで、AX 配列を使うやり方は<a href="/doc/ax-layout-on-windows/" title="AX キーボードの配列を現行の Windows で使う">別記事</a>を書いているのでそちらを参照して下さい。今回の記事では JIS 配列を改造する手法について解説していきます。</p>
 
-<h2 id="どこをいじるのか">どこをいじるのか?</h2>
+<h2 id="どこをいじるのか">どこをいじるのか</h2>
 
 <p>レジストリを弄ります。見るべきは3つのエントリで、それらは標準では以下のようになっているはずです。</p>
 
@@ -139,7 +140,7 @@
 
 <p>この中の <code>LayerDriverJPN</code> というエントリで指定されている <code>kbd106.dll</code> がキーボードから入力された内容を最終的に OS 内の仮想キーコードへと変換する変換表になっています。これを望む変換表が書かれたファイルに指定を変更してあげれば所望の動作をしてくれるようになります。たとえば純粋な US 配列であれば <code>kbdus.dll</code> というファイルがあるのでそれを指定します。これらの変換表を含む定義ファイルは <code>C:\Windows\System32</code> フォルダに格納されています。見てみると分かりますが、他にも色々な定義ファイル (<code>kbd***.dll</code>) があります。気になる方は覗いてみるとよいです。</p>
 
-<h2 id="ところでスキャンコードとか仮想キーコードとは何か">ところでスキャンコードとか仮想キーコードとは何か?</h2>
+<h2 id="ところでスキャンコードとか仮想キーコードとは何か">ところでスキャンコードとか仮想キーコードとは何か</h2>
 
 <p>※知っている人は飛ばしてもらって構わない内容です。本当はこれだけで記事書いてもよかったけど時間がなかった（力尽きた）。</p>
 
@@ -176,213 +177,217 @@
 <li>プロジェクトのプロパティを開いて、<code>構成のプロパティ → 全般 → ターゲット名</code>を <code>kbd106_us</code> に変更。</li>
 <li><code>kbd106_us.c</code> に以下の変更を適用する（<code>patch</code> 等で適当にやって下さい。解説は省きます）</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#f92672">--- kbd106.c
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+++ kbd106_us.c
-</span><span style="color:#a6e22e"></span><span style="color:#75715e">@@ -28,14 +28,7 @@
-</span><span style="color:#75715e"></span>     T10, T11, T12, T13, T14, T15, T16, T17,
+
+<!-- markdownlint-disable MD009 -->
+<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gd">--- kbd106.c
+</span><span class="gd"></span><span class="gi">+++ kbd106_us.c
+</span><span class="gi"></span><span class="gu">@@ -28,14 +28,7 @@
+</span><span class="gu"></span>     T10, T11, T12, T13, T14, T15, T16, T17,
      T18, T19, T1A, T1B, T1C, T1D, T1E, T1F,
      T20, T21, T22, T23, T24, T25, T26, T27,
-<span style="color:#f92672">-    T28,
-</span><span style="color:#f92672">-
-</span><span style="color:#f92672">-    /*
-</span><span style="color:#f92672">-     * Hankaku/Zenkaku/Kanji key must have KBDSPECIAL bit set (NLS key)
-</span><span style="color:#f92672">-     */
-</span><span style="color:#f92672">-    T29 | KBDSPECIAL,
-</span><span style="color:#f92672">-
-</span><span style="color:#f92672">-              T2A, T2B, T2C, T2D, T2E, T2F,
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    T28, T29, T2A, T2B, T2C, T2D, T2E, T2F,
-</span><span style="color:#a6e22e"></span>     T30, T31, T32, T33, T34, T35,
+<span class="gd">-    T28,
+</span><span class="gd">-
+</span><span class="gd">-    /*
+</span><span class="gd">-     * Hankaku/Zenkaku/Kanji key must have KBDSPECIAL bit set (NLS key)
+</span><span class="gd">-     */
+</span><span class="gd">-    T29 | KBDSPECIAL,
+</span><span class="gd">-
+</span><span class="gd">-              T2A, T2B, T2C, T2D, T2E, T2F,
+</span><span class="gd"></span><span class="gi">+    T28, T29, T2A, T2B, T2C, T2D, T2E, T2F,
+</span><span class="gi"></span>     T30, T31, T32, T33, T34, T35,
  
      /*
-<span style="color:#75715e">@@ -48,14 +48,7 @@
-</span><span style="color:#75715e"></span>      */
+<span class="gu">@@ -48,14 +48,7 @@
+</span><span class="gu"></span>      */
      T37 | KBDMULTIVK,
  
-<span style="color:#f92672">-    T38, T39,
-</span><span style="color:#f92672">-
-</span><span style="color:#f92672">-    /*
-</span><span style="color:#f92672">-     * Alphanumeric/CapsLock key must have KBDSPECIAL bit set (NLS key)
-</span><span style="color:#f92672">-     */
-</span><span style="color:#f92672">-    T3A | KBDSPECIAL,
-</span><span style="color:#f92672">-
-</span><span style="color:#f92672">-                   T3B, T3C, T3D, T3E, T3F,
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    T38, T39, T3A, T3B, T3C, T3D, T3E, T3F,
-</span><span style="color:#a6e22e"></span>     T40, T41, T42, T43, T44,
+<span class="gd">-    T38, T39,
+</span><span class="gd">-
+</span><span class="gd">-    /*
+</span><span class="gd">-     * Alphanumeric/CapsLock key must have KBDSPECIAL bit set (NLS key)
+</span><span class="gd">-     */
+</span><span class="gd">-    T3A | KBDSPECIAL,
+</span><span class="gd">-
+</span><span class="gd">-                   T3B, T3C, T3D, T3E, T3F,
+</span><span class="gd"></span><span class="gi">+    T38, T39, T3A, T3B, T3C, T3D, T3E, T3F,
+</span><span class="gi"></span>     T40, T41, T42, T43, T44,
  
      /*
-<span style="color:#75715e">@@ -87,7 +73,13 @@
-</span><span style="color:#75715e"></span>     T53 | KBDNUMPAD | KBDSPECIAL,   // Numpad . (Del),
+<span class="gu">@@ -87,7 +73,13 @@
+</span><span class="gu"></span>     T53 | KBDNUMPAD | KBDSPECIAL,   // Numpad . (Del),
  
      T54, T55, T56, T57, T58, T59, T5A, T5B,
-<span style="color:#f92672">-    T5C, T5D, T5E, T5F, T60, T61, T62, T63,
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+
-</span><span style="color:#a6e22e">+    /*
-</span><span style="color:#a6e22e">+     * Hankaku/Zenkaku/Kanji key must have KBDSPECIAL bit set (NLS key)
-</span><span style="color:#a6e22e">+     */
-</span><span style="color:#a6e22e">+    T5C | KBDSPECIAL,
-</span><span style="color:#a6e22e">+
-</span><span style="color:#a6e22e">+         T5D, T5E, T5F, T60, T61, T62, T63,
-</span><span style="color:#a6e22e"></span>     T64, T65, T66, T67, T68, T69, T6A, T6B,
+<span class="gd">-    T5C, T5D, T5E, T5F, T60, T61, T62, T63,
+</span><span class="gd"></span><span class="gi">+
+</span><span class="gi">+    /*
+</span><span class="gi">+     * Hankaku/Zenkaku/Kanji key must have KBDSPECIAL bit set (NLS key)
+</span><span class="gi">+     */
+</span><span class="gi">+    T5C | KBDSPECIAL,
+</span><span class="gi">+
+</span><span class="gi">+         T5D, T5E, T5F, T60, T61, T62, T63,
+</span><span class="gi"></span>     T64, T65, T66, T67, T68, T69, T6A, T6B,
      T6C, T6D, T6E, T6F,
  
-<span style="color:#75715e">@@ -237,14 +230,14 @@
-</span><span style="color:#75715e"></span> static ALLOC_SECTION_LDATA VK_TO_WCHARS4 aVkToWch4[] = {
+<span class="gu">@@ -237,14 +230,14 @@
+</span><span class="gu"></span> static ALLOC_SECTION_LDATA VK_TO_WCHARS4 aVkToWch4[] = {
      //                               |          |   SHIFT  |  KANA  | K+SHFT |
      //                               |          |==========|========|========|
-<span style="color:#f92672">-    {&#39;0&#39;          ,          KANALOK ,&#39;0&#39;       ,WCH_NONE  ,WCH_WA  ,WCH_WO  },
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    {&#39;0&#39;          ,          KANALOK ,&#39;0&#39;       ,&#39;)&#39;       ,WCH_WA  ,WCH_WO  },
-</span><span style="color:#a6e22e"></span>     {&#39;1&#39;          ,          KANALOK ,&#39;1&#39;       ,&#39;!&#39;       ,WCH_NU  ,WCH_NU  },
+<span class="gd">-    {&#39;0&#39;          ,          KANALOK ,&#39;0&#39;       ,WCH_NONE  ,WCH_WA  ,WCH_WO  },
+</span><span class="gd"></span><span class="gi">+    {&#39;0&#39;          ,          KANALOK ,&#39;0&#39;       ,&#39;)&#39;       ,WCH_WA  ,WCH_WO  },
+</span><span class="gi"></span>     {&#39;1&#39;          ,          KANALOK ,&#39;1&#39;       ,&#39;!&#39;       ,WCH_NU  ,WCH_NU  },
      {&#39;3&#39;          ,          KANALOK ,&#39;3&#39;       ,&#39;#&#39;       ,WCH_A   ,WCH_AA  },
      {&#39;4&#39;          ,          KANALOK ,&#39;4&#39;       ,&#39;$&#39;       ,WCH_U   ,WCH_UU  },
      {&#39;5&#39;          ,          KANALOK ,&#39;5&#39;       ,&#39;%&#39;       ,WCH_E   ,WCH_EE  },
-<span style="color:#f92672">-    {&#39;7&#39;          ,          KANALOK ,&#39;7&#39;       ,0x27      ,WCH_YA  ,WCH_YAA },
-</span><span style="color:#f92672">-    {&#39;8&#39;          ,          KANALOK ,&#39;8&#39;       ,&#39;(&#39;       ,WCH_YU  ,WCH_YUU },
-</span><span style="color:#f92672">-    {&#39;9&#39;          ,          KANALOK ,&#39;9&#39;       ,&#39;)&#39;       ,WCH_YO  ,WCH_YOO },
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    {&#39;7&#39;          ,          KANALOK ,&#39;7&#39;       ,&#39;&amp;&#39;       ,WCH_YA  ,WCH_YAA },
-</span><span style="color:#a6e22e">+    {&#39;8&#39;          ,          KANALOK ,&#39;8&#39;       ,&#39;*&#39;       ,WCH_YU  ,WCH_YUU },
-</span><span style="color:#a6e22e">+    {&#39;9&#39;          ,          KANALOK ,&#39;9&#39;       ,&#39;(&#39;       ,WCH_YO  ,WCH_YOO },
-</span><span style="color:#a6e22e"></span>     {&#39;A&#39;          , CAPLOK | KANALOK ,&#39;a&#39;       ,&#39;A&#39;       ,WCH_TI  ,WCH_TI  },
+<span class="gd">-    {&#39;7&#39;          ,          KANALOK ,&#39;7&#39;       ,0x27      ,WCH_YA  ,WCH_YAA },
+</span><span class="gd">-    {&#39;8&#39;          ,          KANALOK ,&#39;8&#39;       ,&#39;(&#39;       ,WCH_YU  ,WCH_YUU },
+</span><span class="gd">-    {&#39;9&#39;          ,          KANALOK ,&#39;9&#39;       ,&#39;)&#39;       ,WCH_YO  ,WCH_YOO },
+</span><span class="gd"></span><span class="gi">+    {&#39;7&#39;          ,          KANALOK ,&#39;7&#39;       ,&#39;&amp;&#39;       ,WCH_YA  ,WCH_YAA },
+</span><span class="gi">+    {&#39;8&#39;          ,          KANALOK ,&#39;8&#39;       ,&#39;*&#39;       ,WCH_YU  ,WCH_YUU },
+</span><span class="gi">+    {&#39;9&#39;          ,          KANALOK ,&#39;9&#39;       ,&#39;(&#39;       ,WCH_YO  ,WCH_YOO },
+</span><span class="gi"></span>     {&#39;A&#39;          , CAPLOK | KANALOK ,&#39;a&#39;       ,&#39;A&#39;       ,WCH_TI  ,WCH_TI  },
      {&#39;B&#39;          , CAPLOK | KANALOK ,&#39;b&#39;       ,&#39;B&#39;       ,WCH_KO  ,WCH_KO  },
      {&#39;C&#39;          , CAPLOK | KANALOK ,&#39;c&#39;       ,&#39;C&#39;       ,WCH_SO  ,WCH_SO  },
-<span style="color:#75715e">@@ -271,14 +264,14 @@
-</span><span style="color:#75715e"></span>     {&#39;X&#39;          , CAPLOK | KANALOK ,&#39;x&#39;       ,&#39;X&#39;       ,WCH_SA  ,WCH_SA  },
+<span class="gu">@@ -271,14 +264,14 @@
+</span><span class="gu"></span>     {&#39;X&#39;          , CAPLOK | KANALOK ,&#39;x&#39;       ,&#39;X&#39;       ,WCH_SA  ,WCH_SA  },
      {&#39;Y&#39;          , CAPLOK | KANALOK ,&#39;y&#39;       ,&#39;Y&#39;       ,WCH_NN  ,WCH_NN  },
      {&#39;Z&#39;          , CAPLOK | KANALOK ,&#39;z&#39;       ,&#39;Z&#39;       ,WCH_TU  ,WCH_TUU },
-<span style="color:#f92672">-    {VK_OEM_1     ,          KANALOK ,&#39;:&#39;       ,&#39;*&#39;       ,WCH_KE  ,WCH_KE  },
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    {VK_OEM_1     ,          KANALOK ,&#39;;&#39;       ,&#39;:&#39;       ,WCH_RE  ,WCH_RE  },
-</span><span style="color:#a6e22e"></span>     {VK_OEM_2     ,          KANALOK ,&#39;/&#39;       ,&#39;?&#39;       ,WCH_ME  ,WCH_MD  },
-<span style="color:#f92672">-    {VK_OEM_3     ,          KANALOK ,&#39;@&#39;       ,&#39;`&#39;       ,WCH_VS  ,WCH_VS  },
-</span><span style="color:#f92672">-    {VK_OEM_7     ,          KANALOK ,&#39;^&#39;       ,&#39;~&#39;       ,WCH_HE  ,WCH_HE  },
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    {VK_OEM_3     ,          KANALOK ,&#39;`&#39;       ,&#39;~&#39;       ,WCH_RO  ,WCH_RO  },
-</span><span style="color:#a6e22e">+    {VK_OEM_7     ,          KANALOK ,0x27      ,&#39;&#34;&#39;       ,WCH_KE  ,WCH_KE  },
-</span><span style="color:#a6e22e"></span>     {VK_OEM_8     , 0                ,WCH_NONE  ,WCH_NONE  ,WCH_NONE,WCH_NONE},
+<span class="gd">-    {VK_OEM_1     ,          KANALOK ,&#39;:&#39;       ,&#39;*&#39;       ,WCH_KE  ,WCH_KE  },
+</span><span class="gd"></span><span class="gi">+    {VK_OEM_1     ,          KANALOK ,&#39;;&#39;       ,&#39;:&#39;       ,WCH_RE  ,WCH_RE  },
+</span><span class="gi"></span>     {VK_OEM_2     ,          KANALOK ,&#39;/&#39;       ,&#39;?&#39;       ,WCH_ME  ,WCH_MD  },
+<span class="gd">-    {VK_OEM_3     ,          KANALOK ,&#39;@&#39;       ,&#39;`&#39;       ,WCH_VS  ,WCH_VS  },
+</span><span class="gd">-    {VK_OEM_7     ,          KANALOK ,&#39;^&#39;       ,&#39;~&#39;       ,WCH_HE  ,WCH_HE  },
+</span><span class="gd"></span><span class="gi">+    {VK_OEM_3     ,          KANALOK ,&#39;`&#39;       ,&#39;~&#39;       ,WCH_RO  ,WCH_RO  },
+</span><span class="gi">+    {VK_OEM_7     ,          KANALOK ,0x27      ,&#39;&#34;&#39;       ,WCH_KE  ,WCH_KE  },
+</span><span class="gi"></span>     {VK_OEM_8     , 0                ,WCH_NONE  ,WCH_NONE  ,WCH_NONE,WCH_NONE},
      {VK_OEM_COMMA ,          KANALOK ,&#39;,&#39;       ,&#39;&lt;&#39;       ,WCH_NE  ,WCH_IC  },
      {VK_OEM_PERIOD,          KANALOK ,&#39;.&#39;       ,&#39;&gt;&#39;       ,WCH_RU  ,WCH_IP  },
-<span style="color:#f92672">-    {VK_OEM_PLUS  ,          KANALOK ,&#39;;&#39;       ,&#39;+&#39;       ,WCH_RE  ,WCH_RE  },
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    {VK_OEM_PLUS  ,          KANALOK ,&#39;=&#39;       ,&#39;+&#39;       ,WCH_HE  ,WCH_HE  },
-</span><span style="color:#a6e22e"></span>     {VK_TAB       , 0                ,&#39;\t&#39;      ,&#39;\t&#39;      ,&#39;\t&#39;    ,&#39;\t&#39;    },
+<span class="gd">-    {VK_OEM_PLUS  ,          KANALOK ,&#39;;&#39;       ,&#39;+&#39;       ,WCH_RE  ,WCH_RE  },
+</span><span class="gd"></span><span class="gi">+    {VK_OEM_PLUS  ,          KANALOK ,&#39;=&#39;       ,&#39;+&#39;       ,WCH_HE  ,WCH_HE  },
+</span><span class="gi"></span>     {VK_TAB       , 0                ,&#39;\t&#39;      ,&#39;\t&#39;      ,&#39;\t&#39;    ,&#39;\t&#39;    },
      {VK_ADD       , 0                ,&#39;+&#39;       ,&#39;+&#39;       ,&#39;+&#39;     ,&#39;+&#39;     },
      {VK_DECIMAL   , 0                ,&#39;.&#39;       ,&#39;.&#39;       ,&#39;.&#39;     ,&#39;.&#39;     },
-<span style="color:#75715e">@@ -294,10 +287,10 @@
-</span><span style="color:#75715e"></span>     {VK_BACK      , 0       ,&#39;\b&#39;      ,&#39;\b&#39;      ,&#39;\b&#39;    ,&#39;\b&#39;    , 0x7f      , 0x7f      },
+<span class="gu">@@ -294,10 +287,10 @@
+</span><span class="gu"></span>     {VK_BACK      , 0       ,&#39;\b&#39;      ,&#39;\b&#39;      ,&#39;\b&#39;    ,&#39;\b&#39;    , 0x7f      , 0x7f      },
      {VK_CANCEL    , 0       ,0x03      ,0x03      ,0x03    ,0x03    , 0x03      , 0x03      },
      {VK_ESCAPE    , 0       ,0x1b      ,0x1b      ,0x1b    ,0x1b    , 0x1b      , 0x1b      },
-<span style="color:#f92672">-    {VK_OEM_4     , KANALOK ,&#39;[&#39;       ,&#39;{&#39;       ,WCH_SVS ,WCH_OB  , 0x1b      , 0x1b      },
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    {VK_OEM_4     , KANALOK ,&#39;[&#39;       ,&#39;{&#39;       ,WCH_VS  ,WCH_OB  , 0x1b      , 0x1b      },
-</span><span style="color:#a6e22e"></span>     {VK_OEM_5     , KANALOK ,&#39;\\&#39;      ,&#39;|&#39;       ,WCH_PS  ,WCH_PS  , 0x1c      , 0x1c      },
+<span class="gd">-    {VK_OEM_4     , KANALOK ,&#39;[&#39;       ,&#39;{&#39;       ,WCH_SVS ,WCH_OB  , 0x1b      , 0x1b      },
+</span><span class="gd"></span><span class="gi">+    {VK_OEM_4     , KANALOK ,&#39;[&#39;       ,&#39;{&#39;       ,WCH_VS  ,WCH_OB  , 0x1b      , 0x1b      },
+</span><span class="gi"></span>     {VK_OEM_5     , KANALOK ,&#39;\\&#39;      ,&#39;|&#39;       ,WCH_PS  ,WCH_PS  , 0x1c      , 0x1c      },
      {VK_OEM_102   , KANALOK ,&#39;\\&#39;      ,&#39;_&#39;       ,WCH_RO  ,WCH_RO  , 0x1c      , 0x1c      },
-<span style="color:#f92672">-    {VK_OEM_6     , KANALOK ,&#39;]&#39;       ,&#39;}&#39;       ,WCH_MU  ,WCH_CB  , 0x1d      , 0x1d      },
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    {VK_OEM_6     , KANALOK ,&#39;]&#39;       ,&#39;}&#39;       ,WCH_SVS ,WCH_CB  , 0x1d      , 0x1d      },
-</span><span style="color:#a6e22e"></span>     {VK_RETURN    , 0       ,&#39;\r&#39;      ,&#39;\r&#39;      ,&#39;\r&#39;    ,&#39;\r&#39;    , &#39;\n&#39;      , &#39;\n&#39;      },
+<span class="gd">-    {VK_OEM_6     , KANALOK ,&#39;]&#39;       ,&#39;}&#39;       ,WCH_MU  ,WCH_CB  , 0x1d      , 0x1d      },
+</span><span class="gd"></span><span class="gi">+    {VK_OEM_6     , KANALOK ,&#39;]&#39;       ,&#39;}&#39;       ,WCH_SVS ,WCH_CB  , 0x1d      , 0x1d      },
+</span><span class="gi"></span>     {VK_RETURN    , 0       ,&#39;\r&#39;      ,&#39;\r&#39;      ,&#39;\r&#39;    ,&#39;\r&#39;    , &#39;\n&#39;      , &#39;\n&#39;      },
      {VK_SPACE     , 0       ,&#39; &#39;       ,&#39; &#39;       ,&#39; &#39;     ,&#39; &#39;     , 0x20      , 0x20      },
      {0            , 0       ,0         ,0         ,0       ,0       , 0         , 0         }
-<span style="color:#75715e">@@ -306,9 +299,9 @@
-</span><span style="color:#75715e"></span> static ALLOC_SECTION_LDATA VK_TO_WCHARS8 aVkToWch8[] = {
+<span class="gu">@@ -306,9 +299,9 @@
+</span><span class="gu"></span> static ALLOC_SECTION_LDATA VK_TO_WCHARS8 aVkToWch8[] = {
      //                      |          |   SHIFT  |  KANA  | K+SHFT |  CONTROL  |  K+CTRL   | SHFT+CTRL |K+SHFT+CTRL|
      //                      |          |==========|========|========|===========|===========|===========|===========|
-<span style="color:#f92672">-    {&#39;2&#39;          , KANALOK ,&#39;2&#39;       ,&#39;&#34;&#39;       ,WCH_HU  ,WCH_HU  , WCH_NONE  , WCH_NONE  , 0x00      , 0x00      },
-</span><span style="color:#f92672">-    {&#39;6&#39;          , KANALOK ,&#39;6&#39;       ,&#39;&amp;&#39;       ,WCH_O   ,WCH_OO  , WCH_NONE  , WCH_NONE  , 0x1e      , 0x1e      },
-</span><span style="color:#f92672">-    {VK_OEM_MINUS , KANALOK ,&#39;-&#39;       ,&#39;=&#39;       ,WCH_HO  ,WCH_HO  , WCH_NONE  , WCH_NONE  , 0x1f      , 0x1f      },
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    {&#39;2&#39;          , KANALOK ,&#39;2&#39;       ,&#39;@&#39;       ,WCH_HU  ,WCH_HU  , WCH_NONE  , WCH_NONE  , 0x00      , 0x00      },
-</span><span style="color:#a6e22e">+    {&#39;6&#39;          , KANALOK ,&#39;6&#39;       ,&#39;^&#39;       ,WCH_O   ,WCH_OO  , WCH_NONE  , WCH_NONE  , 0x1e      , 0x1e      },
-</span><span style="color:#a6e22e">+    {VK_OEM_MINUS , KANALOK ,&#39;-&#39;       ,&#39;_&#39;       ,WCH_HO  ,WCH_HO  , WCH_NONE  , WCH_NONE  , 0x1f      , 0x1f      },
-</span><span style="color:#a6e22e"></span>     {0            , 0       ,0         ,0         ,0       ,0       , 0         , 0         , 0         , 0         }
+<span class="gd">-    {&#39;2&#39;          , KANALOK ,&#39;2&#39;       ,&#39;&#34;&#39;       ,WCH_HU  ,WCH_HU  , WCH_NONE  , WCH_NONE  , 0x00      , 0x00      },
+</span><span class="gd">-    {&#39;6&#39;          , KANALOK ,&#39;6&#39;       ,&#39;&amp;&#39;       ,WCH_O   ,WCH_OO  , WCH_NONE  , WCH_NONE  , 0x1e      , 0x1e      },
+</span><span class="gd">-    {VK_OEM_MINUS , KANALOK ,&#39;-&#39;       ,&#39;=&#39;       ,WCH_HO  ,WCH_HO  , WCH_NONE  , WCH_NONE  , 0x1f      , 0x1f      },
+</span><span class="gd"></span><span class="gi">+    {&#39;2&#39;          , KANALOK ,&#39;2&#39;       ,&#39;@&#39;       ,WCH_HU  ,WCH_HU  , WCH_NONE  , WCH_NONE  , 0x00      , 0x00      },
+</span><span class="gi">+    {&#39;6&#39;          , KANALOK ,&#39;6&#39;       ,&#39;^&#39;       ,WCH_O   ,WCH_OO  , WCH_NONE  , WCH_NONE  , 0x1e      , 0x1e      },
+</span><span class="gi">+    {VK_OEM_MINUS , KANALOK ,&#39;-&#39;       ,&#39;_&#39;       ,WCH_HO  ,WCH_HO  , WCH_NONE  , WCH_NONE  , 0x1f      , 0x1f      },
+</span><span class="gi"></span>     {0            , 0       ,0         ,0         ,0       ,0       , 0         , 0         , 0         , 0         }
  };
  
-<span style="color:#75715e">@@ -368,7 +360,6 @@
-</span><span style="color:#75715e"></span>     0x0f,    L&#34;Tab&#34;,
+<span class="gu">@@ -368,7 +360,6 @@
+</span><span class="gu"></span>     0x0f,    L&#34;Tab&#34;,
      0x1c,    L&#34;Enter&#34;,
      0x1d,    L&#34;Ctrl&#34;,
-<span style="color:#f92672">-    0x29,    (LPWSTR)SZ_KEY_NAME_HANKAKU_ZENKAKU,  // NLS Key
-</span><span style="color:#f92672"></span>     0x2a,    L&#34;Shift&#34;,
+<span class="gd">-    0x29,    (LPWSTR)SZ_KEY_NAME_HANKAKU_ZENKAKU,  // NLS Key
+</span><span class="gd"></span>     0x2a,    L&#34;Shift&#34;,
      0x36,    L&#34;Right Shift&#34;,
      0x37,    L&#34;Num *&#34;,
-<span style="color:#75715e">@@ -403,7 +394,8 @@
-</span><span style="color:#75715e"></span>     0x54,    L&#34;Sys Req&#34;,
+<span class="gu">@@ -403,7 +394,8 @@
+</span><span class="gu"></span>     0x54,    L&#34;Sys Req&#34;,
      0x57,    L&#34;F11&#34;,
      0x58,    L&#34;F12&#34;,
-<span style="color:#f92672">-    0x70,    (LPWSTR)SZ_KEY_NAME_HIRAGANA,
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    0x5c,    (LPWSTR)SZ_KEY_NAME_HANKAKU_ZENKAKU,  // NLS Key
-</span><span style="color:#a6e22e">+    0x70,    (LPWSTR)SZ_KEY_NAME_HIRAGANA,
-</span><span style="color:#a6e22e"></span>     0x79,    (LPWSTR)SZ_KEY_NAME_HENKAN,
+<span class="gd">-    0x70,    (LPWSTR)SZ_KEY_NAME_HIRAGANA,
+</span><span class="gd"></span><span class="gi">+    0x5c,    (LPWSTR)SZ_KEY_NAME_HANKAKU_ZENKAKU,  // NLS Key
+</span><span class="gi">+    0x70,    (LPWSTR)SZ_KEY_NAME_HIRAGANA,
+</span><span class="gi"></span>     0x79,    (LPWSTR)SZ_KEY_NAME_HENKAN,
      0x7b,    (LPWSTR)SZ_KEY_NAME_MUHENKAN,
      0x7C,    L&#34;F13&#34;,
-<span style="color:#75715e">@@ -479,7 +471,7 @@
-</span><span style="color:#75715e"></span>      * Type and subtype.
+<span class="gu">@@ -479,7 +471,7 @@
+</span><span class="gu"></span>      * Type and subtype.
       */
      KEYBOARD_TYPE_JAPAN,    // Japanese Keyboard Layout
-<span style="color:#f92672">-    MAKEWORD(MICROSOFT_KBD_106_TYPE, NLSKBD_OEM_MICROSOFT),
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+    MAKEWORD(MICROSOFT_KBD_AX_TYPE, NLSKBD_OEM_MICROSOFT),
-</span><span style="color:#a6e22e"></span> };
+<span class="gd">-    MAKEWORD(MICROSOFT_KBD_106_TYPE, NLSKBD_OEM_MICROSOFT),
+</span><span class="gd"></span><span class="gi">+    MAKEWORD(MICROSOFT_KBD_AX_TYPE, NLSKBD_OEM_MICROSOFT),
+</span><span class="gi"></span> };
  
  PKBDTABLES KbdLayerDescriptor(VOID)
 </code></pre></div>
+<!-- markdownlint-enable MD009 -->
+
 <p>これを適用すれば仮想キー毎の入力文字は US 配列と同等になりますが、これだけでは不十分で実際の配列も変更する必要があります。押したキーに対してどんな仮想キーを割り当てるかは別のファイルで定義されており、それは前述した GitHub のリポジトリにはない Windows <abbr title="Software Development Kit">SDK</abbr> の一部である <code>kbd.h</code> となります。保存場所は環境やバージョンに寄るのかもしれませんが、手元の環境ではこんな場所でした (Visual Studio のバージョンは 15.9.2, 同梱される Windows Driver Kit は 10.0.17740.1000)。</p>
 
 <p>Path: <code>C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\kbd.h</code></p>
 
 <p>このファイルを <code>106_us</code> フォルダにコピーし、以下の変更を適用します。その後プロジェクトの <code>Header Files</code> に追加します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#f92672">--- kbd.h (original)
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+++ kbd.h (modify)
-</span><span style="color:#a6e22e"></span><span style="color:#75715e">@@ -1240,7 +1240,7 @@
-</span><span style="color:#75715e"></span> #define T0A _EQ(           &#39;9&#39;                                                              )
+<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gd">--- kbd.h (original)
+</span><span class="gd"></span><span class="gi">+++ kbd.h (modify)
+</span><span class="gi"></span><span class="gu">@@ -1240,7 +1240,7 @@
+</span><span class="gu"></span> #define T0A _EQ(           &#39;9&#39;                                                              )
  #define T0B _EQ(           &#39;0&#39;                                                              )
  #define T0C _EQ(           OEM_MINUS                                                        )
-<span style="color:#f92672">-#define T0D _NE(OEM_7,     OEM_7,     OEM_PLUS,  OEM_PLUS,  OEM_PLUS,  OEM_PLUS,  OEM_PLUS  )
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+#define T0D _NE(OEM_7,     OEM_PLUS,  OEM_PLUS,  OEM_PLUS,  OEM_PLUS,  OEM_PLUS,  OEM_PLUS  )
-</span><span style="color:#a6e22e"></span> #define T0E _EQ(           BACK                                                             )
+<span class="gd">-#define T0D _NE(OEM_7,     OEM_7,     OEM_PLUS,  OEM_PLUS,  OEM_PLUS,  OEM_PLUS,  OEM_PLUS  )
+</span><span class="gd"></span><span class="gi">+#define T0D _NE(OEM_7,     OEM_PLUS,  OEM_PLUS,  OEM_PLUS,  OEM_PLUS,  OEM_PLUS,  OEM_PLUS  )
+</span><span class="gi"></span> #define T0E _EQ(           BACK                                                             )
  #define T0F _EQ(           TAB                                                              )
  #define T10 _EQ(           &#39;Q&#39;                                                              )
-<span style="color:#75715e">@@ -1253,8 +1253,8 @@
-</span><span style="color:#75715e"></span> #define T17 _EQ(           &#39;I&#39;                                                              )
+<span class="gu">@@ -1253,8 +1253,8 @@
+</span><span class="gu"></span> #define T17 _EQ(           &#39;I&#39;                                                              )
  #define T18 _EQ(           &#39;O&#39;                                                              )
  #define T19 _EQ(           &#39;P&#39;                                                              )
-<span style="color:#f92672">-#define T1A _NE(OEM_4,     OEM_3,     OEM_4,     OEM_4,     OEM_4,     OEM_4,     OEM_4     )
-</span><span style="color:#f92672">-#define T1B _NE(OEM_6,     OEM_4,     OEM_6,     OEM_6,     OEM_6,     OEM_6,     OEM_6     )
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+#define T1A _NE(OEM_4,     OEM_4,     OEM_4,     OEM_4,     OEM_4,     OEM_4,     OEM_4     )
-</span><span style="color:#a6e22e">+#define T1B _NE(OEM_6,     OEM_6,     OEM_6,     OEM_6,     OEM_6,     OEM_6,     OEM_6     )
-</span><span style="color:#a6e22e"></span> #define T1C _EQ(           RETURN                                                           )
+<span class="gd">-#define T1A _NE(OEM_4,     OEM_3,     OEM_4,     OEM_4,     OEM_4,     OEM_4,     OEM_4     )
+</span><span class="gd">-#define T1B _NE(OEM_6,     OEM_4,     OEM_6,     OEM_6,     OEM_6,     OEM_6,     OEM_6     )
+</span><span class="gd"></span><span class="gi">+#define T1A _NE(OEM_4,     OEM_4,     OEM_4,     OEM_4,     OEM_4,     OEM_4,     OEM_4     )
+</span><span class="gi">+#define T1B _NE(OEM_6,     OEM_6,     OEM_6,     OEM_6,     OEM_6,     OEM_6,     OEM_6     )
+</span><span class="gi"></span> #define T1C _EQ(           RETURN                                                           )
  #define T1D _EQ(           LCONTROL                                                         )
  #define T1E _EQ(           &#39;A&#39;                                                              )
-<span style="color:#75715e">@@ -1266,11 +1266,11 @@
-</span><span style="color:#75715e"></span> #define T24 _EQ(           &#39;J&#39;                                                              )
+<span class="gu">@@ -1266,11 +1266,11 @@
+</span><span class="gu"></span> #define T24 _EQ(           &#39;J&#39;                                                              )
  #define T25 _EQ(           &#39;K&#39;                                                              )
  #define T26 _EQ(           &#39;L&#39;                                                              )
-<span style="color:#f92672">-#define T27 _NE(OEM_PLUS,  OEM_PLUS,  OEM_1,     OEM_1,     OEM_1,     OEM_1,     OEM_1     )
-</span><span style="color:#f92672">-#define T28 _NE(OEM_1,     OEM_1,     OEM_7,     OEM_7,     OEM_7,     OEM_7,     OEM_7     )
-</span><span style="color:#f92672">-#define T29 _NE(OEM_3,     DBE_SBCSCHAR, OEM_3,  OEM_3,     OEM_3,     OEM_3,     OEM_3     )
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+#define T27 _NE(OEM_PLUS,  OEM_1,     OEM_1,     OEM_1,     OEM_1,     OEM_1,     OEM_1     )
-</span><span style="color:#a6e22e">+#define T28 _NE(OEM_1,     OEM_7,     OEM_7,     OEM_7,     OEM_7,     OEM_7,     OEM_7     )
-</span><span style="color:#a6e22e">+#define T29 _NE(OEM_3,     OEM_3,     OEM_3,     OEM_3,     OEM_3,     OEM_3,     OEM_3     )
-</span><span style="color:#a6e22e"></span> #define T2A _EQ(           LSHIFT                                                           )
-<span style="color:#f92672">-#define T2B _NE(OEM_5,     OEM_6,     OEM_5,     OEM_5,     OEM_5,     OEM_5,     OEM_5     )
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+#define T2B _NE(OEM_5,     OEM_5,     OEM_5,     OEM_5,     OEM_5,     OEM_5,     OEM_5     )
-</span><span style="color:#a6e22e"></span> #define T2C _EQ(           &#39;Z&#39;                                                              )
+<span class="gd">-#define T27 _NE(OEM_PLUS,  OEM_PLUS,  OEM_1,     OEM_1,     OEM_1,     OEM_1,     OEM_1     )
+</span><span class="gd">-#define T28 _NE(OEM_1,     OEM_1,     OEM_7,     OEM_7,     OEM_7,     OEM_7,     OEM_7     )
+</span><span class="gd">-#define T29 _NE(OEM_3,     DBE_SBCSCHAR, OEM_3,  OEM_3,     OEM_3,     OEM_3,     OEM_3     )
+</span><span class="gd"></span><span class="gi">+#define T27 _NE(OEM_PLUS,  OEM_1,     OEM_1,     OEM_1,     OEM_1,     OEM_1,     OEM_1     )
+</span><span class="gi">+#define T28 _NE(OEM_1,     OEM_7,     OEM_7,     OEM_7,     OEM_7,     OEM_7,     OEM_7     )
+</span><span class="gi">+#define T29 _NE(OEM_3,     OEM_3,     OEM_3,     OEM_3,     OEM_3,     OEM_3,     OEM_3     )
+</span><span class="gi"></span> #define T2A _EQ(           LSHIFT                                                           )
+<span class="gd">-#define T2B _NE(OEM_5,     OEM_6,     OEM_5,     OEM_5,     OEM_5,     OEM_5,     OEM_5     )
+</span><span class="gd"></span><span class="gi">+#define T2B _NE(OEM_5,     OEM_5,     OEM_5,     OEM_5,     OEM_5,     OEM_5,     OEM_5     )
+</span><span class="gi"></span> #define T2C _EQ(           &#39;Z&#39;                                                              )
  #define T2D _EQ(           &#39;X&#39;                                                              )
  #define T2E _EQ(           &#39;C&#39;                                                              )
-<span style="color:#75715e">@@ -1285,7 +1285,7 @@
-</span><span style="color:#75715e"></span> #define T37 _EQ(           MULTIPLY                                                         )
+<span class="gu">@@ -1285,7 +1285,7 @@
+</span><span class="gu"></span> #define T37 _EQ(           MULTIPLY                                                         )
  #define T38 _EQ(           LMENU                                                            )
  #define T39 _EQ(           &#39; &#39;                                                              )
-<span style="color:#f92672">-#define T3A _NE(DBE_ALPHANUMERIC,DBE_ALPHANUMERIC,CAPITAL,CAPITAL,CAPITAL,CAPITAL,CAPITAL   )
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+#define T3A _NE(DBE_ALPHANUMERIC,CAPITAL,CAPITAL,CAPITAL,CAPITAL,CAPITAL,CAPITAL   )
-</span><span style="color:#a6e22e"></span> #define T3B _EQ(           F1                                                               )
+<span class="gd">-#define T3A _NE(DBE_ALPHANUMERIC,DBE_ALPHANUMERIC,CAPITAL,CAPITAL,CAPITAL,CAPITAL,CAPITAL   )
+</span><span class="gd"></span><span class="gi">+#define T3A _NE(DBE_ALPHANUMERIC,CAPITAL,CAPITAL,CAPITAL,CAPITAL,CAPITAL,CAPITAL   )
+</span><span class="gi"></span> #define T3B _EQ(           F1                                                               )
  #define T3C _EQ(           F2                                                               )
  #define T3D _EQ(           F3                                                               )
-<span style="color:#75715e">@@ -1313,13 +1313,13 @@
-</span><span style="color:#75715e"></span> #define T53 _EQ(           DELETE                                                           )
+<span class="gu">@@ -1313,13 +1313,13 @@
+</span><span class="gu"></span> #define T53 _EQ(           DELETE                                                           )
  #define T54 _EQ(           SNAPSHOT                                                         )
  #define T55 _EQ(           _none_                                                           )
-<span style="color:#f92672">-#define T56 _NE(_none_,    _none_,    OEM_102,   OEM_102,   OEM_102,   OEM_102,   OEM_102   )
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+#define T56 _NE(_none_,    OEM_102,   OEM_102,   OEM_102,   OEM_102,   OEM_102,   OEM_102   )
-</span><span style="color:#a6e22e"></span> #define T57 _EQ(           F11                                                              )
+<span class="gd">-#define T56 _NE(_none_,    _none_,    OEM_102,   OEM_102,   OEM_102,   OEM_102,   OEM_102   )
+</span><span class="gd"></span><span class="gi">+#define T56 _NE(_none_,    OEM_102,   OEM_102,   OEM_102,   OEM_102,   OEM_102,   OEM_102   )
+</span><span class="gi"></span> #define T57 _EQ(           F11                                                              )
  #define T58 _EQ(           F12                                                              )
  #define T59 _EQ(           CLEAR                                                            )
  #define T5A _NE(NONAME,    NONAME,    NONCONVERT,OEM_WSCTRL,OEM_WSCTRL,OEM_WSCTRL,OEM_WSCTRL)
  #define T5B _NE(NONAME,    NONAME,    CONVERT,   OEM_FINISH,OEM_FINISH,OEM_FINISH,OEM_FINISH)
-<span style="color:#f92672">-#define T5C _NE(NONAME,    NONAME,    OEM_AX,    OEM_JUMP,  OEM_JUMP,  OEM_JUMP,  OEM_JUMP  )
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+#define T5C _NE(NONAME,    DBE_SBCSCHAR, OEM_AX,    OEM_JUMP,  OEM_JUMP,  OEM_JUMP,  OEM_JUMP  )
-</span><span style="color:#a6e22e"></span> #define T5D _EQ(           EREOF                                                            )
+<span class="gd">-#define T5C _NE(NONAME,    NONAME,    OEM_AX,    OEM_JUMP,  OEM_JUMP,  OEM_JUMP,  OEM_JUMP  )
+</span><span class="gd"></span><span class="gi">+#define T5C _NE(NONAME,    DBE_SBCSCHAR, OEM_AX,    OEM_JUMP,  OEM_JUMP,  OEM_JUMP,  OEM_JUMP  )
+</span><span class="gi"></span> #define T5D _EQ(           EREOF                                                            )
  #define T5E _NE(_none_,    _none_,    _none_,    OEM_BACKTAB,OEM_BACKTAB,OEM_BACKTAB,OEM_BACKTAB)
  #define T5F _NE(NONAME,    NONAME,    NONAME,    OEM_AUTO,  OEM_AUTO,  OEM_AUTO,  OEM_AUTO  )
 </code></pre></div>

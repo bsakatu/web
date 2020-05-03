@@ -8,6 +8,7 @@
     <title>AX キーボードの配列を現行の Windows で使う | capyBaral</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/syntax.css" />
     <link rel="stylesheet" href="/css/theme-override.css">
     
     <header>
@@ -68,7 +69,7 @@
 
 <div class="content-wrapper">
   <main>
-    <h2 id="そもそも-ax-キーボードとは">そもそも AX キーボードとは?</h2>
+    <h2 id="そもそも-ax-キーボードとは">そもそも AX キーボードとは</h2>
 
 <p>ネット上にあんまり資料がないのですが、こんなものです（ちなみに私自身は実物を触ったことも見たこともありません……）。</p>
 
@@ -100,7 +101,7 @@
 
 <p>この配列がスタンダードになっていれば現代の色々な苦労はもっと減ったはず……、と思ったけど一部 US 配列と同一配置でスキャンコードを異なるものにしていたりもするから、これはこれで面倒を引き起こしそう。</p>
 
-<h2 id="どうやってこの配列を使うか">どうやってこの配列を使うか?</h2>
+<h2 id="どうやってこの配列を使うか">どうやってこの配列を使うか</h2>
 
 <p>下記レジストリを表の通りに書き換えれば AX 配列となる（<a href="http://www.atmarkit.co.jp/ait/articles/0001/26/news001.html" title="Windowsで右Altキーに［漢字］キーを割り当てる方法（AXキーボード設定を利用する方法）：Tech TIPS - ＠IT">参考サイト</a>）。なお下表で指定している <code>kbdax2.dll</code> は特に弄っていなければ標準で Windows のシステムフォルダに入っている。レガシーなファイルがいまだに入っているこういうところは Windows さすがだなと思います。</p>
 
@@ -149,22 +150,22 @@
 <p>よく、左 Ctrl キーと CapsLock キーの入れ替えや、Esc キーと 半角全角キーとの入れ替えに使うレジストリの書き換えです。<a href="/doc/scancode-map/">詳細は別途書いてある</a>のでそちらを参照して下さい。</p>
 
 <p>【極力 JIS 配列と揃えるマップ】</p>
-<pre><code>Windows Registry Editor Version 5.00
+<div class="highlight"><pre class="chroma"><code class="language-registry" data-lang="registry">Windows Registry Editor Version 5.00
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
-&#34;Scancode Map&#34;=hex:00,00,00,00,\
-                   00,00,00,00,\
-                   0a,00,00,00,\
-                   1d,00,1d,e0,\
-                   38,00,38,e0,\
-                   1D,E0,70,00,\
-                   38,e0,29,00,\
-                   5b,00,79,00,\
-                   5a,00,7b,00,\
-                   29,00,2b,00,\
-                   2b,00,7d,00,\
-                   2b,00,73,00,\
-                   00,00,00,00</code></pre>
+<span class="k">[</span><span class="nb">HKEY_LOCAL_MACHINE</span><span class="k">\SYSTEM\CurrentControlSet\Control\Keyboard Layout]</span>
+<span class="na">&#34;Scancode Map&#34;</span><span class="o">=</span><span class="nv">hex</span><span class="p">:</span><span class="m">00,00,00,00,</span><span class="err">\</span>
+                   <span class="err">00,00,00,00,\</span>
+                   <span class="err">0a,00,00,00,\</span>
+                   <span class="err">1d,00,1d,e0,\</span>
+                   <span class="err">38,00,38,e0,\</span>
+                   <span class="err">1D,E0,70,00,\</span>
+                   <span class="err">38,e0,29,00,\</span>
+                   <span class="err">5b,00,79,00,\</span>
+                   <span class="err">5a,00,7b,00,\</span>
+                   <span class="err">29,00,2b,00,\</span>
+                   <span class="err">2b,00,7d,00,\</span>
+                   <span class="err">2b,00,73,00,\</span>
+                   <span class="err">00,00,00,00</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -256,35 +257,35 @@
 <p>前述したスキャンコードマップでは JIS 配列の「カタカナひらがな」キーと近いキーとして AX 配列の「英数カナ」キーを割り当てています。しかし軽く書いてはいますが、実は微妙に挙動が異なります。その挙動の違いというのが、このキーを使う人には結構悩ましいものになっています（あまりいないとは思いますが……）。以下にそれぞれの定義部分を載せます。</p>
 
 <p>【AX 配列「英数カナ」キー挙動定義の一部 (<a href="https://www.google.com/search?q=%22kbdax2.c%22" title="&quot;kbdax2.c&quot; - Google 検索">kbdax2.c</a>)】</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">        VK_DBE_KATAKANA,      <span style="color:#75715e">// Base Vk
-</span><span style="color:#75715e"></span>        KBDNLS_TYPE_TOGGLE,   <span style="color:#75715e">// NLSFEProcType
-</span><span style="color:#75715e"></span>        KBDNLS_INDEX_NORMAL,  <span style="color:#75715e">// NLSFEProcCurrent
-</span><span style="color:#75715e"></span>        <span style="color:#ae81ff">0x8</span>, <span style="color:#75715e">/* 00001000 */</span>   <span style="color:#75715e">// NLSFEProcSwitch
-</span><span style="color:#75715e"></span>        {                     <span style="color:#75715e">// NLSFEProc
-</span><span style="color:#75715e"></span>            {KBDNLS_KATAKANA,<span style="color:#ae81ff">0</span>},               <span style="color:#75715e">// Base
-</span><span style="color:#75715e"></span>            {KBDNLS_HIRAGANA,<span style="color:#ae81ff">0</span>},               <span style="color:#75715e">// Shift
-</span><span style="color:#75715e"></span>            {KBDNLS_ROMAN,<span style="color:#ae81ff">0</span>},                  <span style="color:#75715e">// Control
-</span><span style="color:#75715e"></span>            {KBDNLS_SEND_PARAM_VK,VK_KANA},    <span style="color:#75715e">// Shift+Control
-</span><span style="color:#75715e"></span>            {KBDNLS_ALPHANUM,<span style="color:#ae81ff">0</span>},               <span style="color:#75715e">// Alt
-</span><span style="color:#75715e"></span>            {KBDNLS_ALPHANUM,<span style="color:#ae81ff">0</span>},               <span style="color:#75715e">// Shift+Alt
-</span><span style="color:#75715e"></span>            {KBDNLS_ALPHANUM,<span style="color:#ae81ff">0</span>},               <span style="color:#75715e">// Control+Alt
-</span><span style="color:#75715e"></span>            {KBDNLS_ALPHANUM,<span style="color:#ae81ff">0</span>}                <span style="color:#75715e">// Shift+Control+Alt
-</span><span style="color:#75715e"></span>        },</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">        <span class="n">VK_DBE_KATAKANA</span><span class="p">,</span>      <span class="c1">// Base Vk
+</span><span class="c1"></span>        <span class="n">KBDNLS_TYPE_TOGGLE</span><span class="p">,</span>   <span class="c1">// NLSFEProcType
+</span><span class="c1"></span>        <span class="n">KBDNLS_INDEX_NORMAL</span><span class="p">,</span>  <span class="c1">// NLSFEProcCurrent
+</span><span class="c1"></span>        <span class="mh">0x8</span><span class="p">,</span> <span class="cm">/* 00001000 */</span>   <span class="c1">// NLSFEProcSwitch
+</span><span class="c1"></span>        <span class="p">{</span>                     <span class="c1">// NLSFEProc
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_KATAKANA</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>               <span class="c1">// Base
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_HIRAGANA</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>               <span class="c1">// Shift
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ROMAN</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>                  <span class="c1">// Control
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_SEND_PARAM_VK</span><span class="p">,</span><span class="n">VK_KANA</span><span class="p">},</span>    <span class="c1">// Shift+Control
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ALPHANUM</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>               <span class="c1">// Alt
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ALPHANUM</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>               <span class="c1">// Shift+Alt
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ALPHANUM</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>               <span class="c1">// Control+Alt
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ALPHANUM</span><span class="p">,</span><span class="mi">0</span><span class="p">}</span>                <span class="c1">// Shift+Control+Alt
+</span><span class="c1"></span>        <span class="p">},</span></code></pre></div>
 <p>【JIS 配列「カタカナひらがな」キー挙動定義の一部 (<a href="https://github.com/Microsoft/Windows-driver-samples/blob/65196cb16bfcf7b3ebc6cc52032fd7a0bb7d6691/input/layout/fe_kbds/jpn/106/kbd106.c#L523-L536">kbd106.c</a>)】</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">        VK_DBE_HIRAGANA,     <span style="color:#75715e">// Base Vk
-</span><span style="color:#75715e"></span>        KBDNLS_TYPE_TOGGLE,  <span style="color:#75715e">// NLSFEProcType
-</span><span style="color:#75715e"></span>        KBDNLS_INDEX_NORMAL, <span style="color:#75715e">// NLSFEProcCurrent
-</span><span style="color:#75715e"></span>        <span style="color:#ae81ff">0x08</span>, <span style="color:#75715e">/* 00001000 */</span> <span style="color:#75715e">// NLSFEProcSwitch
-</span><span style="color:#75715e"></span>        {                    <span style="color:#75715e">// NLSFEProc
-</span><span style="color:#75715e"></span>            {KBDNLS_HIRAGANA,<span style="color:#ae81ff">0</span>},             <span style="color:#75715e">// Base
-</span><span style="color:#75715e"></span>            {KBDNLS_KATAKANA,<span style="color:#ae81ff">0</span>},             <span style="color:#75715e">// Shift
-</span><span style="color:#75715e"></span>            {KBDNLS_HIRAGANA,<span style="color:#ae81ff">0</span>},             <span style="color:#75715e">// Control
-</span><span style="color:#75715e"></span>            {KBDNLS_SEND_PARAM_VK,VK_KANA},  <span style="color:#75715e">// Shift+Control
-</span><span style="color:#75715e"></span>            {KBDNLS_ROMAN,<span style="color:#ae81ff">0</span>},                <span style="color:#75715e">// Alt
-</span><span style="color:#75715e"></span>            {KBDNLS_ROMAN,<span style="color:#ae81ff">0</span>},                <span style="color:#75715e">// Shift+Alt
-</span><span style="color:#75715e"></span>            {KBDNLS_ROMAN,<span style="color:#ae81ff">0</span>},                <span style="color:#75715e">// Control+Alt
-</span><span style="color:#75715e"></span>            {KBDNLS_NOEVENT,<span style="color:#ae81ff">0</span>}               <span style="color:#75715e">// Shift+Control+Alt
-</span><span style="color:#75715e"></span>        },</code></pre></div>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">        <span class="n">VK_DBE_HIRAGANA</span><span class="p">,</span>     <span class="c1">// Base Vk
+</span><span class="c1"></span>        <span class="n">KBDNLS_TYPE_TOGGLE</span><span class="p">,</span>  <span class="c1">// NLSFEProcType
+</span><span class="c1"></span>        <span class="n">KBDNLS_INDEX_NORMAL</span><span class="p">,</span> <span class="c1">// NLSFEProcCurrent
+</span><span class="c1"></span>        <span class="mh">0x08</span><span class="p">,</span> <span class="cm">/* 00001000 */</span> <span class="c1">// NLSFEProcSwitch
+</span><span class="c1"></span>        <span class="p">{</span>                    <span class="c1">// NLSFEProc
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_HIRAGANA</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>             <span class="c1">// Base
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_KATAKANA</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>             <span class="c1">// Shift
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_HIRAGANA</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>             <span class="c1">// Control
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_SEND_PARAM_VK</span><span class="p">,</span><span class="n">VK_KANA</span><span class="p">},</span>  <span class="c1">// Shift+Control
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ROMAN</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>                <span class="c1">// Alt
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ROMAN</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>                <span class="c1">// Shift+Alt
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ROMAN</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>                <span class="c1">// Control+Alt
+</span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_NOEVENT</span><span class="p">,</span><span class="mi">0</span><span class="p">}</span>               <span class="c1">// Shift+Control+Alt
+</span><span class="c1"></span>        <span class="p">},</span></code></pre></div>
 <p>載せたコードの中に書かれている定義の説明は以下。</p>
 
 <table>
