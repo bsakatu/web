@@ -48,18 +48,18 @@ hasCJKLanguage = true
     [markup.goldmark.extensions]
       definitionList = true
       footnote = true
-      linkify = true
+      linkify = false
       strikethrough = true
       table = true
       taskList = true
-      typographer = true
+      typographer = false
     [markup.goldmark.parser]
       attribute = true
       autoHeadingID = true
       autoHeadingIDType = "github"
     [markup.goldmark.renderer]
       hardWraps = false
-      unsafe = false
+      unsafe = true
       xhtml = false
   [markup.highlight]
     codeFences = true
