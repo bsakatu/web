@@ -2,8 +2,6 @@
 title: "USB-PD テスターを買った話"
 date: 2020-05-02T13:49:52+09:00
 draft: false
-
-markup: "mmark"
 ---
 
 手持ちの機器に USB-PD を使う物がちょいちょい揃い始めたので、Aliexpress で 2 種類ほど買ってみた。
