@@ -1,6 +1,5 @@
 ---
 title: "初投稿（という名の三度目の正直）"
-slug: first-post
 date: 2018-11-01T01:44:00+09:00
 draft: false
 ---
