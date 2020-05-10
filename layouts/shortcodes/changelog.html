@@ -1,0 +1,9 @@
+<details id="changelog">
+  <summary>Changelog</summary>
+{{ $inner := .Inner -}}
+{{- $inner := replaceRE "(\\d{4})\\/(\\d{1,2})\\/(\\d{1,2})" "<time datetime=\"$1-$2-$3\">$1/$2/$3</time>" $inner -}}
+{{- $inner := ($inner | .Page.RenderString) -}}
+{{- $inner := replaceRE "(<[/]?dl>)" "  $1" $inner -}}
+{{- $inner := replaceRE "(<d[td]>)" "    $1" $inner -}}
+{{- $inner | .Page.RenderString -}}
+</details>

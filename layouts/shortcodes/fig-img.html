@@ -1,0 +1,47 @@
+{{- with .Get "org_license" -}}
+  {{- $.Scratch.Set "license" (split . " ") -}}
+  {{- if (index ($.Scratch.Get "license") 0) eq "CC" -}}
+    {{- $.Scratch.Set "org_license_link" "https://creativecommons.org/licenses/" -}}
+    {{- with (index ($.Scratch.Get "license") 1) -}}
+      {{- if or (eq . "BY") (eq . "BY-SA") (eq . "BY-ND") (eq . "BY-NC") (eq . "BY-NC-SA") (eq . "BY-NC-ND") -}}
+        {{- $.Scratch.Add "org_license_link" (print (lower (index ($.Scratch.Get "license") 1)) "/") -}}
+      {{- else if ne . "" -}}
+        {{- errorf "CC license type is wrong." -}}
+      {{- else -}}
+        {{- errorf "CC license type is NOT exists." -}}
+      {{- end -}}
+    {{- end -}}
+    {{- with (index ($.Scratch.Get "license") 2) -}}
+      {{- if or (eq . "1.0") (eq . "2.0") (eq . "2.1") (eq . "2.5") (eq . "3.0") (eq . "4.0") -}}
+        {{- $.Scratch.Add "org_license_link" (print . "/") -}}
+        {{- if (eq "2.1" .) and ((index ($.Scratch.Get "license") 3) ne "") -}}
+          {{- $.Scratch.Add "org_license_link" (print (lower (index ($.Scratch.Get "license") 3)) "/") -}}
+        {{- end -}}
+      {{- else -}}
+        {{- errorf "CC license version is WRONG." -}}
+      {{- end -}}
+    {{- else -}}
+      {{- errorf "CC license version is NOT exists." -}}
+    {{- end -}}
+  {{- end -}}
+{{- end }}
+<figure
+  {{- with .Get "id" }} id="{{ . }}"{{ end -}}
+  {{- with .Get "class" }} class="{{ . }}"{{ end -}}
+  ><!-- Closing figure tag -->
+  {{- if .Get "link" -}}
+  <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
+  {{- end }}
+  <img src="{{ .Get "src" }}"
+    {{- with .Get "alt" }} alt="{{ . }}"{{ end -}}
+    {{- with .Get "width" }} width="{{ . }}"{{ end -}}
+    {{- with .Get "height" }} height="{{ . }}"{{ end -}}
+  /> <!-- Closing img tag -->
+  {{- if .Get "link" }}</a>{{ end }}
+  {{ with .Get "caption" -}}
+    <figcaption>{{ . | markdownify }}</figcaption>
+  {{- end }}
+  {{ if .Get "org_link" -}}
+    <footer><small><a href="{{ .Get "org_link" }}">{{ .Get "org_title" }}</a> by <a href="{{ .Get "org_author_link" }}">{{ .Get "org_author" }}</a> / <a href="{{ $.Scratch.Get "org_license_link" }}" rel="license">{{ .Get "org_license" }}</a></small></footer>
+  {{- end }}
+</figure>
