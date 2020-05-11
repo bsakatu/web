@@ -1,6 +1,9 @@
 ---
 title: "なぜキーボードの US 配列を使うようになったか"
 date: 2018-12-08T17:18:28+09:00
+categories: [Input]
+tags: [keyboard, key-layout, about]
+toc: false
 draft: false
 ---
 

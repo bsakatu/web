@@ -1,6 +1,9 @@
 ---
 title: "Scancode Map による Scancode の変更"
 date: 2018-11-12T22:57:00+09:00
+categories: [Input]
+tags: [keyboard, key-layout, Windows]
+toc: false
 draft: false
 ---
 

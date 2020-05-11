@@ -71,3 +71,7 @@ hasCJKLanguage = true
     noClasses = false
     style = "manni"
     tabWidth = 4
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = true
+    startLevel = 2

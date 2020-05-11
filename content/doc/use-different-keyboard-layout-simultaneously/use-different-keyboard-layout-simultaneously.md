@@ -1,6 +1,9 @@
 ---
 title: "Windows で同時に複数のキーボード配列を使用する"
 date: 2018-12-11T00:24:00+09:00
+categories: [Input]
+tags: [keyboard, key-layout, Windows]
+toc: true
 draft: false
 
 markup: "mmark"

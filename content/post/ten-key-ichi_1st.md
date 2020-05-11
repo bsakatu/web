@@ -1,6 +1,9 @@
 ---
 title: "天下一キーボードわいわい会 Vol.1 に参加して"
 date: 2018-11-05T02:02:48+09:00
+categories: [Input]
+tags: [keyboard, meetup]
+toc: false
 draft: false
 ---
 

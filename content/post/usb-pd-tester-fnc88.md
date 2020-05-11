@@ -1,6 +1,9 @@
 ---
 title: "USB-PD テスターを買った話"
 date: 2020-05-02T13:49:52+09:00
+categories: [Hardware]
+tags: [tool, measurement, USB-PD]
+toc: false
 draft: false
 ---
 

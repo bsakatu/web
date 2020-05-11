@@ -1,6 +1,9 @@
 ---
 title: "Hugo で各ページ固有のスタイルシートを呼び出す"
 date: 2018-11-13T01:16:08+09:00
+categories: [Web]
+tags: [software, Hugo, HTML, CSS,]
+toc: false
 draft: false
 ---
 

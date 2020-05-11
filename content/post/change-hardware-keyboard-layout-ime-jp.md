@@ -1,6 +1,9 @@
 ---
 title: "ハードウェア キーボード レイアウトの変更"
 date: 2018-11-25T01:22:59+09:00
+categories: [Input]
+tags: [keyboard, key-layout, Windows]
+toc: false
 draft: false
 
 markup: "mmark"

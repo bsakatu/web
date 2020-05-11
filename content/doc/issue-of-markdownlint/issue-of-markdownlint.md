@@ -1,6 +1,9 @@
 ---
 title: "Markdownlint で遭遇しているトラベルのメモ"
 date: 2020-05-04T01:00:00+09:00
+categories: [Web]
+tags: [software, Markdown]
+toc: false
 draft: false
 ---
 
