@@ -5,8 +5,6 @@ categories: [Input]
 tags: [keyboard, key-layout, Windows]
 toc: false
 draft: false
-
-markup: "mmark"
 ---
 
 Windows 10 において、日本語 <abbr title="Input Method Editor">IME</abbr> のオプションに「ハードウェア キーボード レイアウト」という設定項目がある（ということを今日初めて知った……）。
@@ -17,12 +15,14 @@ Windows 10 において、日本語 <abbr title="Input Method Editor">IME</abbr>
 
 Registry path: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters`
 
+{{< table >}}
+Table: 「ハードウェア キーボード レイアウト」の変更によるレジストリの変化
 | 名前                       | 種類         | 日本語（106/109 キー） | 英語（101/102 キー） |
 | ----                      | ----        | ----               | ----              |
 | `LayerDriverJPN`          | `REG_SZ`    | `kbd106.dll`       | `kbd101.dll`      |
 | `OverrideKeyboardSubtype` | `REG_DWORD` | `2`                | `0`               |
 | `OverrideKeyboardType`    | `REG_DWORD` | `7`                | `7`               |
-Table: 「ハードウェア キーボード レイアウト」の変更によるレジストリの変化
+{{</ table >}}
 
 日本語キーボードと英語キーボードとをどうやって識別しているか軽く調べてみた結果、恐らく `LayerDriver JPN` エントリの値を見ているだけと思われる。`OverrideKeyboardType` などをいくら変更しても何も変わらなかったが、`LayerDriver JPN` をちょっとでも標準の `kbd106.dll` または `kbd106n.dll` から変更すると「英語キーボード」が勝手に選択されていた（オプション画面を閉じておいて再度開きに行けば反映されている）。この設定があれば、以前の Windows よりは楽に JIS 配列と US 配列の行き来が出来るようになるので、まあ少なくとも改善と考えていいと思われる。
 

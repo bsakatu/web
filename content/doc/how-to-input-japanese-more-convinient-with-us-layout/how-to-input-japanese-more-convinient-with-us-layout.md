@@ -4,9 +4,7 @@ date:  2018-12-11T00:25:00+09:00
 categories: [Input]
 tags: [keyboard, key-layout, Windows]
 toc: true
-draft: false 
-
-markup: "mmark"
+draft: false
 ---
 
 [自作キーボード #2 Advent Calendar 2018 11日目](https://adventar.org/calendars/2964#list-2018-12-11)の記事です。  
@@ -40,12 +38,14 @@ markup: "mmark"
 
 レジストリを弄ります。見るべきは3つのエントリで、それらは標準では以下のようになっているはずです。
 
+{{< table >}}
+Table: 【標準状態】 `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters`
 | Name                      | Type        | Value (JP default) |
 | ----                      | ----        | ----               |
 | `LayerDriverJPN`          | `REG_SZ`    | `kbd106.dll`       |
 | `OverrideKeyboardSubtype` | `REG_DWORD` | `2`                |
 | `OverrideKeyboardType`    | `REG_DWORD` | `7`                |
-Table: 【標準状態】 `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters`
+{{</ table >}}
 
 この中の `LayerDriverJPN` というエントリで指定されている `kbd106.dll` がキーボードから入力された内容を最終的に OS 内の仮想キーコードへと変換する変換表になっています。これを望む変換表が書かれたファイルに指定を変更してあげれば所望の動作をしてくれるようになります。たとえば純粋な US 配列であれば `kbdus.dll` というファイルがあるのでそれを指定します。これらの変換表を含む定義ファイルは `C:\Windows\System32` フォルダに格納されています。見てみると分かりますが、他にも色々な定義ファイル (`kbd***.dll`) があります。気になる方は覗いてみるとよいです。
 
@@ -325,12 +325,14 @@ Path: `C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\kbd.h`
 
 `106_us` フォルダに生成されるビルド後のフォルダやファイルの中から `kbd106_us.dll` をとりだし、これを `C:\Windows\System32` などのシステムフォルダにコピーし、レジストリを下記の通り編集し、再起動すれば設定は適用されているはずです
 
+{{< table >}}
+Table: 【設定適用後】 `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters`
 | Name                      | Type        | Value           |
 | ----                      | ----        | ----            |
 | `LayerDriverJPN`          | `REG_SZ`    | `kbd106_us.dll` |
 | `OverrideKeyboardSubtype` | `REG_DWORD` | `1`             |
 | `OverrideKeyboardType`    | `REG_DWORD` | `7`             |
-Table: 【設定適用後】 `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters`
+{{</ table >}}
 
 ちなみに `OverrideKeyboardIdentifier` は変更しません。特に設定に関与していないですし、`PCAT_106KEY` である意味あっているので。なおここで `OverrideKeyboardSubtype = 1` に変更していますが、これはこの改造配列以外の配列を同時に使えるようにするための配慮です。`kbd106_us.c` で `MICROSOFT_KBD_106_TYPE` を `MICROSOFT_KBD_AX_TYPE` に変更しているのもこれのためです。どういうことかと言うと、この配列を本来の `Subtype = 1` である AX 配列に上書きする形でシステムに設定しています。この設定は[キーボードの配列を複数共存させる場合](/doc/use-different-keyboard-layout-simultaneously/ "Windows で同時に複数のキーボード配列を使用する | capyBaral")に役に立つのですが、それはまた別の話なのでここではそうなんだ、とだけ思っておいて下さい。1 つの配列しか使わないのであれば特に関係ありません。
 

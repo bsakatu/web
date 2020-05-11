@@ -5,25 +5,32 @@ categories: [Input]
 tags: [keyboard, key-layout, Windows]
 toc: true
 draft: false
-
-markup: "mmark"
 ---
 
 ## そもそも AX キーボードとは
 
 ネット上にあんまり資料がないのですが、こんなものです（ちなみに私自身は実物を触ったことも見たこともありません……）。
 
-<blockquote cite="http://d.hatena.ne.jp/keyword/AX%A5%AD%A1%BC%A5%DC%A1%BC%A5%C9">
-  <p>IBM PC/AT互換機用MS-DOSを日本語化するための1方式、AX規格で採用されていた日本語キーボード。</p>
-  <p>現在日本語キーボードの主流となっている106/109配列と比較してより英語キーボードに近いレイアウトになっており、英数キーの配置が通称ASCII配列(106系はJIS配列準拠)である点や、日本語関連キーが少なくシンプルな操作が可能であり、スペースキー周りのレイアウトに余裕がある点、特殊キーの[AX]キーが存在する、などの特徴がある。</p>
+{{< blockquote cite="http://d.hatena.ne.jp/keyword/AX%A5%AD%A1%BC%A5%DC%A1%BC%A5%C9"
+               title="AXキーボードとは - はてなキーワード" >}}
+IBM PC/AT互換機用MS-DOSを日本語化するための1方式、AX規格で採用されていた日本語キーボード。
 
-  <footer><cite><a href="http://d.hatena.ne.jp/keyword/AX%A5%AD%A1%BC%A5%DC%A1%BC%A5%C9">AXキーボードとは - はてなキーワード</a></cite></footer>
-</blockquote>
+現在日本語キーボードの主流となっている106/109配列と比較してより英語キーボードに近いレイアウトになっており、英数キーの配置が通称ASCII配列(106系はJIS配列準拠)である点や、日本語関連キーが少なくシンプルな操作が可能であり、スペースキー周りのレイアウトに余裕がある点、特殊キーの[AX]キーが存在する、などの特徴がある。
+{{</ blockquote >}}
 
-<figure>
-  <a title="By Yes0song [CC BY-SA 3.0 ( https://creativecommons.org/licenses/by-sa/3.0 ) or GFDL ( http://www.gnu.org/copyleft/fdl.html )], from Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:KB_Japanese_AX_keyboard.svg"><img width="512" alt="KB Japanese AX keyboard" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/KB_Japanese_AX_keyboard.svg/800px-KB_Japanese_AX_keyboard.svg.png"></a>
-  <figcaption>AX キーボード配列</figcaption>
-</figure>
+{{< fig-img
+      src="/img/doc/KB_Japanese_AX_keyboard.svg"
+      width="800"
+      height="320"
+      alt="AX キーボード配列（詳細は以降説明）"
+      caption="AX キーボード配列"
+      org_link="https://commons.wikimedia.org/wiki/File:KB_Japanese_AX_keyboard.svg"
+      org_title="File:KB Japanese AX keyboard.svg"
+      org_author="Yes0song"
+      org_author_link="https://commons.wikimedia.org/wiki/User:Yes0song"
+      org_license="CC BY-SA 3.0"
+>}}
+（ところでこの画像、以前は Wikipedia のどこかしらのページに貼ってあった気がするのだが、今は作者のページ以外で使われていない模様。AX キーボードは説明すら需要がないか……。）
 
 配列を見れば分かりますが、通常の JIS 配列（106キー）との違いは以下の通り。ざっくり言ってしまうと記号類が概ね US 配列と同じになっている、US 配列と JIS 配列の中間のような存在。
 
@@ -163,7 +170,7 @@ Windows Registry Editor Version 5.00
 
 ここには載せていませんが、日本語キーボード固有のいくつかのキーは modifier との組合せで発生する仮想キーが異なります。今回のケースでは JIS 配列は「ひらがな」が、AX 配列は「カタカナ」がベースとなったキーになっていることが分かります。内部的にはどちらも「ひらがな」「カタカナ」等々が網羅されているので問題無さそうに見えますが、調べていたら一つ問題となる事例に当たりました。それは、MS-IME を使用しているケースです。
 
-{{< figure title="MS-IME のキー設定画面" src="/img/post/2018/key-config-window_MS-IME.png" width="532" height="567" >}}
+{{< fig-img caption="MS-IME のキー設定画面" src="/img/post/2018/key-config-window_MS-IME.png" width="532" height="567" >}}
 
 画像を見ると分かるように、<kbd>Shift</kbd> + <kbd>カタカナ</kbd>はありますが、<kbd>Shift</kbd> + <kbd>ひらがな</kbd> がありません。しかし AX 配列では「ひらがな」は <kbd>カタカナ</kbd> を <kbd>Shift</kbd> 付きで入力して初めて認識されるので、実質的には <kbd>ひらがな</kbd> は <kbd>Shift</kbd> +  <kbd>ひらがな</kbd> の組み合せでしか存在出来ないということになります。それなのに MS-IME ではそのキー設定がそもそも存在しないため、このキーに対して機能を割り当てることができない、というのが問題となるケースの1つですです。仮にこのキーの動作を JIS 配列のそれに完全に合わせようとした場合、 AutoHotkey などのキー置換ソフトを用いる必要があります（別の話になるのでこの記事ではそれについては特に詳しくは触れません）。
 
