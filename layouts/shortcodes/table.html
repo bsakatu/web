@@ -1,4 +1,4 @@
-{{- $caption := (replaceRE "[\\s\\S]*\\n?Table: ([^\\n]*)\\n?[\\s\\S]*" "$1" .Inner) -}}
+{{- $caption := (replaceRE "[\\s\\S]*\\n?Table: ([^\\n]*)\\n?[\\s\\S]*" "$1" .Inner | .Page.RenderString) -}}
 {{- $table_temp := (.Inner | replaceRE "Table: .*\\n" "" | .Page.RenderString) -}}
 {{- $table_temp := replace $table_temp "<table>" "" -}}
 {{- $table_temp := print "<table>\n  <caption>" $caption "</caption>" $table_temp -}}
