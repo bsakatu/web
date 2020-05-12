@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ .Title }} | {{ .Site.Title }}</title>
+  <meta name="author" content="{{ .Site.Params.author }}" />
+  {{ .Hugo.Generator }}
+  <link rel="stylesheet" href="{{ "/css/bootstrap-reboot.css" | relURL }}" />
+  <link rel="stylesheet" href="{{ "/css/style.css" | relURL }}" />
+  <link rel="stylesheet" href="{{ "/css/syntax.css" | relURL }}" />
+  {{ range .Site.Params.custom_css -}}
+  <link rel="stylesheet" href="{{ . | absURL }}" />
+  {{- end }}
+  {{ if ne (print (.Resources.Match "custom.css")) "[]" -}}
+  <link rel="stylesheet" href="custom.css" />
+  {{- end }}
+
+</head>
+
+<body>

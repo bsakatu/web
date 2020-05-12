@@ -1,24 +1,31 @@
-{{ partial "header.html" . }}
+{{ partial "head.html" . }}
 
-<div class="content-wrapper">
-  {{if not .IsHome }}
+{{ partial "global-header.html" . }}
+<main>
+
+  <header>
+{{- if not .IsHome }}
     <h1>{{ .Title | markdownify }}</h1>
-  {{ else if .IsHome }}
+{{- else if .IsHome }}
     <h1>{{ .Site.Title }} - {{ .Site.Params.brand }}</h1>
-  {{ end }}
-  
-    {{ .Content }}
-  
-    <ul>
-       {{ $pages := .Site.RegularPages }}
-       {{ if .IsHome }}{{ $pages := .Site.RegularPages }}{{ end }}
-       {{ range (where $pages "Section" "!=" "") }}
-       <li>
-         <span class="date">{{ .Date.Format "2006/01/02" }}</span>
-         <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
-       </li>
-       {{ end }}
-     </ul>
-  </div>
-  {{ partial "footer.html" . }}
-  
+{{- end }}
+  </header>
+
+{{ .Content }}
+  <section>
+    <h2>Latest posts</h2>
+    <dl id="latest-posts">
+  {{- $pages := .Site.RegularPages -}}
+  {{- if .IsHome }}{{ $pages := .Site.RegularPages }}{{ end -}}
+  {{- range (where $pages "Section" "!=" "") }}
+      <div>
+        <dt><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006/01/02" }}</time></dt>
+        <dd><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></dd>
+      </div>
+  {{- end }}
+    </dl>
+  </section>
+
+</main>
+
+{{ partial "global-footer.html" . }}

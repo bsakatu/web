@@ -1,0 +1,23 @@
+  <header>
+    <nav>
+      <ul>
+        {{ $title := lower .Title -}}
+        {{- $section := lower .Section -}}
+        <li{{ if .IsHome }} class="current"{{ end }}>
+          <a href="{{ .Site.BaseURL }}">/home/{{ lower .Site.Title}}</a>
+        </li>
+        {{ range .Site.Menus.main -}}
+          {{- $name := lower .Name -}}
+        <li{{ if or (eq $name $title) (eq $section $name) (eq $title (pluralize $name)) }} class="current"{{ end }}>
+          <a href="{{ .URL }}">~/{{ lower .Name }}</a>
+        </li>
+        {{ end -}}
+        {{ range .Site.Menus.feed -}}
+          {{- $name := lower .Name -}}
+        <li>
+          <a href="{{ .URL }}">~/{{ lower .Name}}</a>
+        </li>
+        {{- end }}
+      </ul>
+    </nav>
+  </header>

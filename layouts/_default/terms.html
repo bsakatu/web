@@ -1,13 +1,12 @@
-{{ partial "header.html" . }}
+{{ partial "head.html" . }}
+
+{{ partial "global-header.html" . }}
 
 <h1>{{ .Title }}</h1>
 
 <ul class="terms">
-  {{ range .Data.Terms }}
-  <li>
-    <a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a> ({{ .Count }})
-  </li>
-  {{ end }}
+{{ range .Data.Terms }}  <li><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a> ({{ .Count }})</li>
+{{ end -}}
 </ul>
 
-{{ partial "footer.html" . }}
+{{ partial "global-footer.html" . }}

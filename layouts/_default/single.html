@@ -1,24 +1,59 @@
-{{ partial "header.html" . }}
-<div class="article-meta">
-<h1><span class="title">{{ .Title }}</span></h1>
-{{ with .Params.author }}<h2 class="author">{{ . }}</h2>{{ end }}
-{{ if .Params.date }}<h2 class="date">{{ .Date.Format "2006/01/02" }}</h2>{{ end }}
-<p class="terms">
-  {{ range $i := (slice "categories" "tags") }}
-  {{ with ($.Param $i) }}
-  {{ $i | title }}: {{ range $k := . }}<a href="{{ relURL (print "/" $i "/" $k | urlize) }}">{{$k}}</a> {{ end }}
-  {{ end }}
-  {{ end }}
-</p>
-</div>
+{{ partial "head.html" . }}
 
-{{ if .Params.toc }}
+{{- partial "global-header.html" . }}
+
+<main>
+  <article>
+    <header>
+      <h1>{{ .Title }}</h1>
+      <dl id="doc-info">
+
+        {{ if .Params.date -}}
+        <div id="published-date">
+          <dt>Published</dt>
+          <dd><time datetime="{{ .Date.Format "2006-01-02T00:00:00+09:00" }}">{{ .Date.Format "2006/01/02 00:00" }}</time></dd>
+        </div>
+        {{- end }}
+        {{ if and (.Params.lastmod) (ne .Params.lastmod .Params.date) -}}
+        <div id="modified-date">
+          <dt>Modified</dt>
+          <dd><time datetime="{{ .Lastmod.Format "2006-01-01T00:00:00+09:00" }}">{{ .Lastmod.Format "2006/01/02 00:00" }}</time></dd>
+        </div>
+          {{- end }}
+        {{ range $i := (slice "categories" "tags") -}}
+          {{- with ($.Param $i) }}
+            {{- $idx_max := (len .) -}}
+        <div id="{{ singularize $i }}">
+          <dt>
+            {{- if eq $idx_max 1 -}}
+              {{- $i | singularize | title -}}
+            {{- else -}}
+              {{- $i | title -}}
+            {{- end -}}
+          </dt>
+            {{- range $k := . }}
+          <dd><a href="{{ relURL (print "/" $i "/" $k | urlize) }}">{{ $k }}</a></dd>
+            {{- end }}
+        </div>
+          {{- end -}}
+        {{ end }}
+
+      </dl>
+      {{ if and .Params.toc (ne .Params.markup "mmark") -}}
+      <details open id="toc">
+        <summary>Table of contents</summary>
 {{ .TableOfContents }}
-{{ end }}
-<div class="content-wrapper">
-  <main>
-    {{ .Content }}
-    <a href="/"> >> Home</a>
-  </main>
-</div>
-{{ partial "footer.html" . }}
+      </details>
+      {{- end }}
+
+    </header>
+
+{{ .Content }}
+
+    <footer>
+      <nav><a href="/"> >> Home</a></nav>
+    </footer>
+  </article>
+</main>
+
+{{ partial "global-footer.html" . }}
