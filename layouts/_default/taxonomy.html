@@ -1,0 +1,31 @@
+{{ partial "head.html" . }}
+
+{{ partial "global-header.html" . }}
+  <main id="taxonomy">
+
+    {{ $count := len .Data.Pages -}}
+    <header>
+      <h1>
+        {{- .Title | markdownify }} ({{ print $count -}}
+        {{- if gt $count 1 }} entries
+        {{- else }} entry
+        {{- end -}})
+      </h1>
+    </header>
+
+    <section>
+      <h2>Latest posts</h2>
+      <dl id="latest-posts">
+      {{- range .Data.Pages }}
+        <div>
+          <dt><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006/01/02" }}</time></dt>
+          <dd class="title"><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></dd>
+          <dd class="summary{{ if .Truncated }} truncated{{ end }}">{{ .Summary }}</dd>
+        </div>
+      {{- end }}
+      </dl>
+    </section>
+
+  </main>
+
+{{ partial "global-footer.html" . }}
