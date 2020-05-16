@@ -1,0 +1,27 @@
+<!--
+  name:  tag name
+  id:    id name
+  class: class name
+  box:   box type ("block" or "inline"; default = "block") 
+-->
+{{- $name := .Get "name" -}}
+{{- $id := .Get "id" | default "" -}}
+{{- $class := .Get "class" | default "" -}}
+{{- $box := .Get "box" | default "block" -}}
+{{- $attr := "" -}}
+
+{{- if (and (ne $box "block") (ne $box "inline")) -}}
+  {{- errorf "attribute of '$box = %q' is incorrect" $box -}}
+{{- end -}}
+
+{{- range (slice $id $class) -}}
+  {{- with $id -}}
+    {{- $attr := print " " . -}}
+  {{- end -}}
+{{- end -}}
+
+{{ print "<" $name $attr ">" | .Page.RenderString }}
+{{- if eq $box "block" }}
+{{ end -}}
+{{ .Inner | .Page.RenderString (dict "display" $box) -}}
+{{- print "</" $name ">" | .Page.RenderString }}
