@@ -57,6 +57,15 @@
     </item>
     
     <item>
+      <title>Scancode Map による Scancode の変更</title>
+      <link>/doc/scancode-map/</link>
+      <pubDate>Mon, 12 Nov 2018 22:57:00 +0900</pubDate>
+      
+      <guid>/doc/scancode-map/</guid>
+      <description>Scancode Map とは 基本的には Microsoft の公式資料 を読めば分かりますが、元々はキーボードが送出するスキャンコードがおかしかった場合にそれを訂正する設定をするため</description>
+    </item>
+    
+    <item>
       <title>天下一キーボードわいわい会 Vol.1 に参加して</title>
       <link>/post/2018/11/05/ten-key-ichi_1st/</link>
       <pubDate>Mon, 05 Nov 2018 02:02:48 +0900</pubDate>

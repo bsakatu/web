@@ -56,5 +56,14 @@
       <description>Windows 10 において、日本語 IME のオプションに「ハードウェア キーボード レイアウト」という設定項目がある（ということを今日初めて知った……）。 ハードウェ</description>
     </item>
     
+    <item>
+      <title>Scancode Map による Scancode の変更</title>
+      <link>/doc/scancode-map/</link>
+      <pubDate>Mon, 12 Nov 2018 22:57:00 +0900</pubDate>
+      
+      <guid>/doc/scancode-map/</guid>
+      <description>Scancode Map とは 基本的には Microsoft の公式資料 を読めば分かりますが、元々はキーボードが送出するスキャンコードがおかしかった場合にそれを訂正する設定をするため</description>
+    </item>
+    
   </channel>
 </rss>
