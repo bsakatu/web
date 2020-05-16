@@ -1,0 +1,25 @@
+{{ partial "head.html" . }}
+
+{{ partial "global-header.html" . }}
+  <main>
+
+    <header>
+      <h1>{{ .Title | markdownify }}</h1>
+    </header>
+
+  {{ .Content }}
+    <section>
+      <h2>Latest posts</h2>
+      <dl id="latest-posts">
+    {{- range .CurrentSection.Pages }}
+        <div>
+          <dt><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006/01/02" }}</time></dt>
+          <dd><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></dd>
+        </div>
+    {{- end }}
+      </dl>
+    </section>
+
+  </main>
+
+{{ partial "global-footer.html" . }}
