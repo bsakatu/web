@@ -1,165 +1,142 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
-  <head>
-    
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ハードウェア キーボード レイアウトの変更 | capyBaral</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/syntax.css" />
-    <link rel="stylesheet" href="/css/theme-override.css">
-    
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ハードウェア キーボード レイアウトの変更 | capyBaral</title>
+  <meta name="author" content="B-SAKATU" />
+  <meta name="generator" content="Hugo 0.69.2" />
+  <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/syntax.css" />
+  <link rel="stylesheet" href="/css/theme-override.css" />
+  
+
+</head>
+
+<body>  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">/home/capybaral</a>
+        </li>
+        <li>
+          <a href="/post/">~/zatsu</a>
+        </li>
+        <li>
+          <a href="/doc/">~/doc</a>
+        </li>
+        <li>
+          <a href="/categories/">~/categories</a>
+        </li>
+        <li>
+          <a href="/tags/">~/tags</a>
+        </li>
+        <li>
+          <a href="/index.xml">~/subscribe</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+
+<main>
+  <article>
     <header>
+      <h1>ハードウェア キーボード レイアウトの変更</h1>
+      <dl id="doc-info">
 
-  <nav>
-    <ul>
-      
-      
-      <li class="pull-left ">
-        <a href="/">/home/capybaral</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/">~/home</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/categories/">~/categories</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/tags/">~/tags</a>
-      </li>
+        <div id="published-date">
+          <dt>Published</dt>
+          <dd><time datetime="2018-11-25T00:00:00&#43;09:00">2018/11/25 00:00</time></dd>
+        </div>
+        
+        <div id="category">
+          <dt>Category</dt>
+          <dd><a href="/categories/input">Input</a></dd>
+        </div><div id="tag">
+          <dt>Tags</dt>
+          <dd><a href="/tags/keyboard">keyboard</a></dd>
+          <dd><a href="/tags/key-layout">key-layout</a></dd>
+          <dd><a href="/tags/windows">Windows</a></dd>
+        </div>
+
+      </dl>
       
 
-      
-      
-      <li class="pull-right">
-        <a href="/index.xml">~/subscribe</a>
-      </li>
-      
+    </header>
 
-    </ul>
-  </nav>
-</header>
-
-  </head>
-
-  <body>
-    <br/>
-
-<div class="article-meta">
-<h1><span class="title">ハードウェア キーボード レイアウトの変更</span></h1>
-
-<h2 class="date">2018/11/25</h2>
-<p class="terms">
-  
-  
-  
-  
-  
-</p>
-</div>
-
-
-<div class="content-wrapper">
-  <main>
-    <p>Windows 10 において、日本語 <abbr title="Input Method Editor">IME</abbr> のオプションに「ハードウェア キーボード レイアウト」という設定項目がある（ということを今日初めて知った……）。</p>
-
+<p>Windows 10 において、日本語 <abbr title="Input Method Editor">IME</abbr> のオプションに「ハードウェア キーボード レイアウト」という設定項目がある（ということを今日初めて知った……）。</p>
 <figure>
     <img src="/img/post/2018/change-hardware-keyboard-layout-ime-jp.png" width="880" height="792"/> <figcaption>
             <h4>ハードウェア キーボード レイアウト変更の設定画面</h4>
         </figcaption>
 </figure>
 
-
 <p>この設定では「日本語キーボード(106/109 キー)」と「英語キーボード(101/102 キー)」を選択出来る。これによって下記のレジストリが変化する。</p>
-
 <p>Registry path: <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></p>
-
 <table>
-<caption>
-「ハードウェア キーボード レイアウト」の変更によるレジストリの変化
-
-</caption>
-<thead>
-<tr>
-<th>名前</th>
-<th>種類</th>
-<th>日本語（106/109 キー）</th>
-<th>英語（101/102 キー）</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td><code>LayerDriverJPN</code></td>
-<td><code>REG_SZ</code></td>
-<td><code>kbd106.dll</code></td>
-<td><code>kbd101.dll</code></td>
-</tr>
-
-<tr>
-<td><code>OverrideKeyboardSubtype</code></td>
-<td><code>REG_DWORD</code></td>
-<td><code>2</code></td>
-<td><code>0</code></td>
-</tr>
-
-<tr>
-<td><code>OverrideKeyboardType</code></td>
-<td><code>REG_DWORD</code></td>
-<td><code>7</code></td>
-<td><code>7</code></td>
-</tr>
-</tbody>
+  <caption>「ハードウェア キーボード レイアウト」の変更によるレジストリの変化</caption>
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>種類</th>
+      <th>日本語（106/109 キー）</th>
+      <th>英語（101/102 キー）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>LayerDriverJPN</code></td>
+      <td><code>REG_SZ</code></td>
+      <td><code>kbd106.dll</code></td>
+      <td><code>kbd101.dll</code></td>
+    </tr>
+    <tr>
+      <td><code>OverrideKeyboardSubtype</code></td>
+      <td><code>REG_DWORD</code></td>
+      <td><code>2</code></td>
+      <td><code>0</code></td>
+    </tr>
+    <tr>
+      <td><code>OverrideKeyboardType</code></td>
+      <td><code>REG_DWORD</code></td>
+      <td><code>7</code></td>
+      <td><code>7</code></td>
+    </tr>
+  </tbody>
 </table>
-
 <p>日本語キーボードと英語キーボードとをどうやって識別しているか軽く調べてみた結果、恐らく <code>LayerDriver JPN</code> エントリの値を見ているだけと思われる。<code>OverrideKeyboardType</code> などをいくら変更しても何も変わらなかったが、<code>LayerDriver JPN</code> をちょっとでも標準の <code>kbd106.dll</code> または <code>kbd106n.dll</code> から変更すると「英語キーボード」が勝手に選択されていた（オプション画面を閉じておいて再度開きに行けば反映されている）。この設定があれば、以前の Windows よりは楽に JIS 配列と US 配列の行き来が出来るようになるので、まあ少なくとも改善と考えていいと思われる。</p>
-
 <p>この設定を調査している中で、最初の1回だけ日本語キーボード設定に戻したら <code>LayerDriver JPN</code> が <code>kbd106n.dll</code> になっていたのだが、あれは何だったのか……。その後再現せず。すっきりしないけどまあ、大差はないしどうせ使わないキーだし、ここで出来る設定変更は自分に関わりないし、面倒くさいので調査はここまで。</p>
 
-    <a href="/"> >> Home</a>
-  </main>
-</div>
+
     <footer>
-      
-<script>
-(function() {
-  function center_el(tagName) {
-    var tags = document.getElementsByTagName(tagName), i, tag;
-    for (i = 0; i < tags.length; i++) {
-      tag = tags[i];
-      var parent = tag.parentElement;
-      
-      if (parent.childNodes.length === 1) {
-        
-        if (parent.nodeName === 'A') {
-          parent = parent.parentElement;
-          if (parent.childNodes.length != 1) continue;
-        }
-        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
-      }
-    }
-  }
-  var tagNames = ['img', 'embed', 'object'];
-  for (var i = 0; i < tagNames.length; i++) {
-    center_el(tagNames[i]);
-  }
-})();
-</script>
-
-      <hr/>
-      Copyright &copy; 2020 B-SAKATU
-      <a href="https://twitter.com/bsakatu">Twitter</a> | 
-      <a href="https://www.hatena.ne.jp/B-SAKATU/">Hatena</a> | 
-      <a href="https://github.com/bsakatu">GitHub</a>
+      <nav><a href="/"> >> Home</a></nav>
     </footer>
-  </body>
-</html>
+  </article>
+</main>
 
+<footer>
+  <nav>
+    <ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/policy/">Policy</a></li>
+    </ul>
+  </nav>
+  <p>
+    <small>
+      Copyright © 2020 B-SAKATU 
+      <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+        <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
+        <img alt="BY" src="/img/license/by.svg" width="14" height="14" />
+        <img alt="NC" src="/img/license/nc.svg" width="14" height="14" />
+        <img alt="SA" src="/img/license/sa.svg" width="14" height="14" />
+      </a>
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>

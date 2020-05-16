@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Markdown on capyBaral</title>
+    <link>/tags/markdown/</link>
+    <description>Recent content in Markdown on capyBaral</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Mon, 04 May 2020 01:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Markdownlint で遭遇しているトラベルのメモ</title>
+      <link>/doc/issue-of-markdownlint/</link>
+      <pubDate>Mon, 04 May 2020 01:00:00 +0900</pubDate>
+      
+      <guid>/doc/issue-of-markdownlint/</guid>
+      <description>このサイトや会社のメモ書きをするにあたって遭遇してすんなり解決していないトラブル各種をメモしておく。 code block 内でスペースのみの行に MD009 - Trailing spaces が該当</description>
+    </item>
+    
+  </channel>
+</rss>

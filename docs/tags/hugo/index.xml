@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on capyBaral</title>
+    <link>/tags/hugo/</link>
+    <description>Recent content in Hugo on capyBaral</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Tue, 13 Nov 2018 01:16:08 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hugo で各ページ固有のスタイルシートを呼び出す</title>
+      <link>/post/2018/11/13/custom-css-for-individual-pages-on-hugo/</link>
+      <pubDate>Tue, 13 Nov 2018 01:16:08 +0900</pubDate>
+      
+      <guid>/post/2018/11/13/custom-css-for-individual-pages-on-hugo/</guid>
+      <description>Hugo で各ページ固有の CSS を適用したい場合にどうするか悩んだのでその備忘録。 このサイトでは現時点で blog 的なページは /post 以下、個別のしっかりした記事は /doc</description>
+    </item>
+    
+  </channel>
+</rss>

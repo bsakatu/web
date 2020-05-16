@@ -1,4 +1,4 @@
-/* @import url('https://rsms.me/inter/inter.css');
+@import url('https://rsms.me/inter/inter.css');
 html { font-family:
         'Inter',
         sans-serif,
@@ -14,27 +14,10 @@ html { font-family:
           'Segoe UI Emoji',
           'Segoe UI Symbol';
         }
-} */
-
-html {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    'Avenir Next',
-    Avenir,
-    'Segoe UI',
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif,
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol';
 }
 
-
 code {
-  /* font-family:
+  font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
@@ -43,7 +26,6 @@ code {
     sans-serif,
     "Apple Color Emoji",
     "Segoe UI Emoji",
-    "Segoe UI Symbol" */
-  font-family: monospace;
-  /* font-size: 85%; */
+    "Segoe UI Symbol"
+  font-size: 85%;
 }

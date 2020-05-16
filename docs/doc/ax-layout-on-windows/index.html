@@ -1,92 +1,103 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
-  <head>
-    
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AX キーボードの配列を現行の Windows で使う | capyBaral</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/syntax.css" />
-    <link rel="stylesheet" href="/css/theme-override.css">
-    
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AX キーボードの配列を現行の Windows で使う | capyBaral</title>
+  <meta name="author" content="B-SAKATU" />
+  <meta name="generator" content="Hugo 0.69.2" />
+  <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/syntax.css" />
+  <link rel="stylesheet" href="/css/theme-override.css" />
+  
+
+</head>
+
+<body>  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">/home/capybaral</a>
+        </li>
+        <li>
+          <a href="/post/">~/zatsu</a>
+        </li>
+        <li class="current">
+          <a href="/doc/">~/doc</a>
+        </li>
+        <li>
+          <a href="/categories/">~/categories</a>
+        </li>
+        <li>
+          <a href="/tags/">~/tags</a>
+        </li>
+        <li>
+          <a href="/index.xml">~/subscribe</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+
+<main>
+  <article>
     <header>
+      <h1>AX キーボードの配列を現行の Windows で使う</h1>
+      <dl id="doc-info">
 
-  <nav>
-    <ul>
-      
-      
-      <li class="pull-left ">
-        <a href="/">/home/capybaral</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/">~/home</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/categories/">~/categories</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/tags/">~/tags</a>
-      </li>
-      
+        <div id="published-date">
+          <dt>Published</dt>
+          <dd><time datetime="2018-12-11T00:00:00&#43;09:00">2018/12/11 00:00</time></dd>
+        </div>
+        
+        <div id="category">
+          <dt>Category</dt>
+          <dd><a href="/categories/input">Input</a></dd>
+        </div><div id="tag">
+          <dt>Tags</dt>
+          <dd><a href="/tags/keyboard">keyboard</a></dd>
+          <dd><a href="/tags/key-layout">key-layout</a></dd>
+          <dd><a href="/tags/windows">Windows</a></dd>
+        </div>
 
-      
-      
-      <li class="pull-right">
-        <a href="/index.xml">~/subscribe</a>
-      </li>
-      
+      </dl>
+      <details open id="toc">
+        <summary>Table of contents</summary>
+<nav id="TableOfContents">
+  <ol>
+    <li><a href="#そもそも-ax-キーボードとは">そもそも AX キーボードとは</a></li>
+    <li><a href="#どうやってこの配列を使うか">どうやってこの配列を使うか</a></li>
+    <li><a href="#スキャンコードマップの書き換え">スキャンコードマップの書き換え</a></li>
+    <li><a href="#問題点">問題点</a></li>
+    <li><a href="#英数カナキーの挙動">「英数カナ」キーの挙動</a></li>
+    <li><a href="#設定の適用">設定の適用</a></li>
+  </ol>
+</nav>
+      </details>
 
-    </ul>
-  </nav>
-</header>
+    </header>
 
-  </head>
-
-  <body>
-    <br/>
-
-<div class="article-meta">
-<h1><span class="title">AX キーボードの配列を現行の Windows で使う</span></h1>
-
-<h2 class="date">2018/12/11</h2>
-<p class="terms">
-  
-  
-  
-  
-  
-</p>
-</div>
-
-
-<div class="content-wrapper">
-  <main>
-    <h2 id="そもそも-ax-キーボードとは">そもそも AX キーボードとは</h2>
-
+<h2 id="そもそも-ax-キーボードとは">そもそも AX キーボードとは</h2>
 <p>ネット上にあんまり資料がないのですが、こんなものです（ちなみに私自身は実物を触ったことも見たこともありません……）。</p>
-
 <blockquote cite="http://d.hatena.ne.jp/keyword/AX%A5%AD%A1%BC%A5%DC%A1%BC%A5%C9">
   <p>IBM PC/AT互換機用MS-DOSを日本語化するための1方式、AX規格で採用されていた日本語キーボード。</p>
   <p>現在日本語キーボードの主流となっている106/109配列と比較してより英語キーボードに近いレイアウトになっており、英数キーの配置が通称ASCII配列(106系はJIS配列準拠)である点や、日本語関連キーが少なくシンプルな操作が可能であり、スペースキー周りのレイアウトに余裕がある点、特殊キーの[AX]キーが存在する、などの特徴がある。</p>
 
-  <footer><cite><a href="http://d.hatena.ne.jp/keyword/AX%A5%AD%A1%BC%A5%DC%A1%BC%A5%C9">AXキーボードとは - はてなキーワード</a></cite></footer>
+  <footer>via <cite><a href="http://d.hatena.ne.jp/keyword/AX%A5%AD%A1%BC%A5%DC%A1%BC%A5%C9">AXキーボードとは - はてなキーワード</a></cite></footer>
 </blockquote>
 
+<p>
 <figure>
-  <a title="By Yes0song [CC BY-SA 3.0 ( https://creativecommons.org/licenses/by-sa/3.0 ) or GFDL ( http://www.gnu.org/copyleft/fdl.html )], from Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:KB_Japanese_AX_keyboard.svg"><img width="512" alt="KB Japanese AX keyboard" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/KB_Japanese_AX_keyboard.svg/800px-KB_Japanese_AX_keyboard.svg.png"></a>
+  <img src="/img/doc/KB_Japanese_AX_keyboard.svg" alt="AX キーボード配列（詳細は以降説明）" width="800" height="320"/> 
   <figcaption>AX キーボード配列</figcaption>
+  <footer><small><a href="https://commons.wikimedia.org/wiki/File:KB_Japanese_AX_keyboard.svg">File:KB Japanese AX keyboard.svg</a> by <a href="https://commons.wikimedia.org/wiki/User:Yes0song">Yes0song</a> / <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">CC BY-SA 3.0</a></small></footer>
 </figure>
 
+（ところでこの画像、以前は Wikipedia のどこかしらのページに貼ってあった気がするのだが、今は作者のページ以外で使われていない模様。AX キーボードは説明すら需要がないか……。）</p>
 <p>配列を見れば分かりますが、通常の JIS 配列（106キー）との違いは以下の通り。ざっくり言ってしまうと記号類が概ね US 配列と同じになっている、US 配列と JIS 配列の中間のような存在。</p>
-
 <ul>
 <li>大半の記号配列が US 配列と同じ</li>
 <li>「¥|」「\」は JIS 配列と同様の配置（※ただし <code>Shift + \</code> は <code>|</code> であるので実質同じキーが2個あることになる）</li>
@@ -98,15 +109,10 @@
 <li>「右 Shift」の下が「英数カナ」</li>
 <li>「Win」キーや「App」キーは存在しない（※しかし Windows の定義ファイルにはしれっと入っているので JIS キーボードと同じ設定のまま使える）</li>
 </ul>
-
 <p>この配列がスタンダードになっていれば現代の色々な苦労はもっと減ったはず……、と思ったけど一部 US 配列と同一配置でスキャンコードを異なるものにしていたりもするから、これはこれで面倒を引き起こしそう。</p>
-
 <h2 id="どうやってこの配列を使うか">どうやってこの配列を使うか</h2>
-
 <p>下記レジストリを表の通りに書き換えれば AX 配列となる（<a href="http://www.atmarkit.co.jp/ait/articles/0001/26/news001.html" title="Windowsで右Altキーに［漢字］キーを割り当てる方法（AXキーボード設定を利用する方法）：Tech TIPS - ＠IT">参考サイト</a>）。なお下表で指定している <code>kbdax2.dll</code> は特に弄っていなければ標準で Windows のシステムフォルダに入っている。レガシーなファイルがいまだに入っているこういうところは Windows さすがだなと思います。</p>
-
 <p>Registry path: <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></p>
-
 <table>
 <thead>
 <tr>
@@ -115,26 +121,22 @@
 <th>data</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><code>LayerDriverJPN</code></td>
 <td><code>REG_SZ</code></td>
 <td><code>kbdax2.dll</code></td>
 </tr>
-
 <tr>
 <td><code>OverrideKeyboardIdentifier</code></td>
 <td><code>REG_SZ</code></td>
 <td><code>AX_105KEY</code></td>
 </tr>
-
 <tr>
 <td><code>OverrideKeyboardSubtype</code></td>
 <td><code>REG_DWORD</code></td>
 <td><code>1</code></td>
 </tr>
-
 <tr>
 <td><code>OverrideKeyboardType</code></td>
 <td><code>REG_DWORD</code></td>
@@ -142,13 +144,9 @@
 </tr>
 </tbody>
 </table>
-
-<p>ただしこのままだと JIS 配列には存在するけど AX 配列には存在しないキーが正常に使えないので、スキャンコードの入れ替えや変更をする必要がある。詳細はスキャンコードマップの書き換えで<a href="Scancode Map による Scancode の変更">別記事</a>を書いてあるのでそちらを参照のこと。</p>
-
+<p>ただしこのままだと JIS 配列には存在するけど AX 配列には存在しないキーが正常に使えないので、スキャンコードの入れ替えや変更をする必要がある。詳細はスキャンコードマップの書き換えで[別記事](Scancode Map による Scancode の変更)を書いてあるのでそちらを参照のこと。</p>
 <h2 id="スキャンコードマップの書き換え">スキャンコードマップの書き換え</h2>
-
 <p>よく、左 Ctrl キーと CapsLock キーの入れ替えや、Esc キーと 半角全角キーとの入れ替えに使うレジストリの書き換えです。<a href="/doc/scancode-map/">詳細は別途書いてある</a>のでそちらを参照して下さい。</p>
-
 <p>【極力 JIS 配列と揃えるマップ】</p>
 <div class="highlight"><pre class="chroma"><code class="language-registry" data-lang="registry">Windows Registry Editor Version 5.00
 
@@ -165,8 +163,8 @@
                    <span class="err">29,00,2b,00,\</span>
                    <span class="err">2b,00,7d,00,\</span>
                    <span class="err">2b,00,73,00,\</span>
-                   <span class="err">00,00,00,00</span></code></pre></div>
-<table>
+                   <span class="err">00,00,00,00</span>
+</code></pre></div><table>
 <thead>
 <tr>
 <th>Scancode (JIS -&gt; AX)</th>
@@ -174,56 +172,47 @@
 <th>Note</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>E0-1D -&gt; 1D</td>
 <td>英数カナ (AX) -&gt; Left Control</td>
 <td>※本来は Right Control にしたいが AX 配列には存在しないので Left で代替</td>
 </tr>
-
 <tr>
 <td>E0-38 -&gt; 38</td>
 <td>漢字 -&gt; Left Alt</td>
 <td>※本来は Right Alt にしたいが AX 配列には存在しないので Left で代替</td>
 </tr>
-
 <tr>
 <td>70 -&gt; E0-1D</td>
 <td>カタカナひらがな (JIS) -&gt;英数カナ (AX)</td>
 <td>※ほぼ同じキーだが内部的には挙動が異なるキー</td>
 </tr>
-
 <tr>
 <td>29 -&gt; E0-38</td>
 <td>ESC -&gt; 漢字 (AX)</td>
 <td>※半角全角キーに相当するキーはないが同様の動作が実現出来る漢字キーで代替</td>
 </tr>
-
 <tr>
 <td>79 -&gt; 5B</td>
 <td>変換 (JIS) -&gt; 変換 (AX)</td>
 <td></td>
 </tr>
-
 <tr>
 <td>7B -&gt; 5A</td>
 <td>無変換 (JIS) -&gt; 無変換 (AX)</td>
 <td></td>
 </tr>
-
 <tr>
 <td>2B -&gt; 29</td>
-<td>[{ -&gt; `~</td>
+<td>[{ -&gt; `~                               | |</td>
 <td></td>
 </tr>
-
 <tr>
 <td>7D -&gt; 2B</td>
 <td>¥| (JIS) -&gt; ¥| (AX)</td>
 <td></td>
 </tr>
-
 <tr>
 <td>73 -&gt; 2B</td>
 <td>\_ -&gt; ¥| (AX)</td>
@@ -231,31 +220,20 @@
 </tr>
 </tbody>
 </table>
-
-<p>以下、問題点の話など結構長いのでとにかく設定が欲しい人は<a href="#設定の適用">ページ最後</a>まで飛ばした方が賢明です。</p>
-
+<p>以下、問題点の話など結構長いのでとにかく設定が欲しい人は<a href="#%E8%A8%AD%E5%AE%9A%E3%81%AE%E9%81%A9%E7%94%A8">ページ最後</a>まで飛ばした方が賢明です。</p>
 <h2 id="問題点">問題点</h2>
-
 <p>さてこの方法、大抵は問題ないですが問題が発生するケースもあります。</p>
-
 <ol>
 <li>同じキーのようで挙動が違うキーを使うケース</li>
 <li>同じキーとして機能しているけど配列の違いによって生じるスキャンコードの違いが原因でスキャンコードからキー判定しているソフトが正常に動作しないケース</li>
 <li>日本語は JIS 配列と決め打ちで作られたソフトを使う際に本来の動作をしてくれないケース</li>
 </ol>
-
-<p>1個目のケースは特に<a href="#「英数カナ」キーの挙動">「英数カナ」キーの挙動について後述</a>しています。</p>
-
+<p>1個目のケースは特に<a href="#%E3%80%8C%E8%8B%B1%E6%95%B0%E3%82%AB%E3%83%8A%E3%80%8D%E3%82%AD%E3%83%BC%E3%81%AE%E6%8C%99%E5%8B%95">「英数カナ」キーの挙動について後述</a>しています。</p>
 <p>2個目のケースについては、ありがちなのが <kbd>無変換</kbd> と <kbd>変換</kbd> キーです。この2つは Windows がキーを処理した結果である仮想キーとしては同一ですが、キーボードから来る信号としてのスキャンコードが異なります。DvorakJ などはキー判定にこのスキャンコードを使用しているので、この2つのキーを用いて親指シフトなどをしようとすると正常に動作しません。その場合は内部のスクリプトの書き換えなどが必要になり、なかなか手間がかかります。</p>
-
 <p>3個目のケースについては、気づいたのはスクリーンキーボードが正常に動作しないというケースでした。文字系のキーは当然動作しますが、スキャンコードマップで書き換えている日本語固有キーなどは押しても反応がなく、動作を確認してみるとどうやら今までやったレジストリの設定にかかわらず JIS 配列として動作しているようでした。そのため、色々キーが変わっている AX 配列にしていると正しくキーが入力されない、というわけです。</p>
-
 <p>というわけで、AX 配列を上手く使おうとする場合は、上記の問題点を解決するか関わらないようにして使っていく必要があります。まあがんばってください。ちなみにわたしはまさに DvorakJ を使っているのでスクリプト書き換えが色々大変だと分かったので別の手段に乗り換えました。そのネタはまた別途書きます。</p>
-
 <h2 id="英数カナキーの挙動">「英数カナ」キーの挙動</h2>
-
 <p>前述したスキャンコードマップでは JIS 配列の「カタカナひらがな」キーと近いキーとして AX 配列の「英数カナ」キーを割り当てています。しかし軽く書いてはいますが、実は微妙に挙動が異なります。その挙動の違いというのが、このキーを使う人には結構悩ましいものになっています（あまりいないとは思いますが……）。以下にそれぞれの定義部分を載せます。</p>
-
 <p>【AX 配列「英数カナ」キー挙動定義の一部 (<a href="https://www.google.com/search?q=%22kbdax2.c%22" title="&quot;kbdax2.c&quot; - Google 検索">kbdax2.c</a>)】</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">        <span class="n">VK_DBE_KATAKANA</span><span class="p">,</span>      <span class="c1">// Base Vk
 </span><span class="c1"></span>        <span class="n">KBDNLS_TYPE_TOGGLE</span><span class="p">,</span>   <span class="c1">// NLSFEProcType
@@ -270,8 +248,8 @@
 </span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ALPHANUM</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>               <span class="c1">// Shift+Alt
 </span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ALPHANUM</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>               <span class="c1">// Control+Alt
 </span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ALPHANUM</span><span class="p">,</span><span class="mi">0</span><span class="p">}</span>                <span class="c1">// Shift+Control+Alt
-</span><span class="c1"></span>        <span class="p">},</span></code></pre></div>
-<p>【JIS 配列「カタカナひらがな」キー挙動定義の一部 (<a href="https://github.com/Microsoft/Windows-driver-samples/blob/65196cb16bfcf7b3ebc6cc52032fd7a0bb7d6691/input/layout/fe_kbds/jpn/106/kbd106.c#L523-L536">kbd106.c</a>)】</p>
+</span><span class="c1"></span>        <span class="p">},</span>
+</code></pre></div><p>【JIS 配列「カタカナひらがな」キー挙動定義の一部 (<a href="https://github.com/Microsoft/Windows-driver-samples/blob/65196cb16bfcf7b3ebc6cc52032fd7a0bb7d6691/input/layout/fe_kbds/jpn/106/kbd106.c#L523-L536">kbd106.c</a>)】</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">        <span class="n">VK_DBE_HIRAGANA</span><span class="p">,</span>     <span class="c1">// Base Vk
 </span><span class="c1"></span>        <span class="n">KBDNLS_TYPE_TOGGLE</span><span class="p">,</span>  <span class="c1">// NLSFEProcType
 </span><span class="c1"></span>        <span class="n">KBDNLS_INDEX_NORMAL</span><span class="p">,</span> <span class="c1">// NLSFEProcCurrent
@@ -285,9 +263,8 @@
 </span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ROMAN</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>                <span class="c1">// Shift+Alt
 </span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_ROMAN</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span>                <span class="c1">// Control+Alt
 </span><span class="c1"></span>            <span class="p">{</span><span class="n">KBDNLS_NOEVENT</span><span class="p">,</span><span class="mi">0</span><span class="p">}</span>               <span class="c1">// Shift+Control+Alt
-</span><span class="c1"></span>        <span class="p">},</span></code></pre></div>
-<p>載せたコードの中に書かれている定義の説明は以下。</p>
-
+</span><span class="c1"></span>        <span class="p">},</span>
+</code></pre></div><p>載せたコードの中に書かれている定義の説明は以下。</p>
 <table>
 <thead>
 <tr>
@@ -297,7 +274,6 @@
 <th>補足</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><code>KBDNLS_KATAKANA</code></td>
@@ -305,28 +281,24 @@
 <td>カタカナ</td>
 <td></td>
 </tr>
-
 <tr>
 <td><code>KBDNLS_HIRAGANA</code></td>
 <td><code>VK_DBE_HIRAGANA</code></td>
 <td>ひらがな</td>
 <td></td>
 </tr>
-
 <tr>
 <td><code>KBDNLS_ROMAN</code></td>
 <td><code>VK_DBE_ROMAN</code></td>
 <td>ローマ字</td>
 <td></td>
 </tr>
-
 <tr>
 <td><code>KBDNLS_SEND_PARAM_VK,VK_KANA</code></td>
 <td><code>VK_KANA</code></td>
 <td>カナ</td>
 <td>ローマ字入力とかな入力の入れ替えなどに使用</td>
 </tr>
-
 <tr>
 <td><code>KBDNLS_ALPHANUM,0</code></td>
 <td><code>VK_DBE_ALPHANUMERIC</code></td>
@@ -335,67 +307,50 @@
 </tr>
 </tbody>
 </table>
-
 <p>ここには載せていませんが、日本語キーボード固有のいくつかのキーは modifier との組合せで発生する仮想キーが異なります。今回のケースでは JIS 配列は「ひらがな」が、AX 配列は「カタカナ」がベースとなったキーになっていることが分かります。内部的にはどちらも「ひらがな」「カタカナ」等々が網羅されているので問題無さそうに見えますが、調べていたら一つ問題となる事例に当たりました。それは、MS-IME を使用しているケースです。</p>
 
 <figure>
-    <img src="/img/post/2018/key-config-window_MS-IME.png" width="532" height="567"/> <figcaption>
-            <h4>MS-IME のキー設定画面</h4>
-        </figcaption>
+  <img src="/img/post/2018/key-config-window_MS-IME.png" width="532" height="567"/> 
+  <figcaption>MS-IME のキー設定画面</figcaption>
+  
 </figure>
 
-
 <p>画像を見ると分かるように、<kbd>Shift</kbd> + <kbd>カタカナ</kbd>はありますが、<kbd>Shift</kbd> + <kbd>ひらがな</kbd> がありません。しかし AX 配列では「ひらがな」は <kbd>カタカナ</kbd> を <kbd>Shift</kbd> 付きで入力して初めて認識されるので、実質的には <kbd>ひらがな</kbd> は <kbd>Shift</kbd> +  <kbd>ひらがな</kbd> の組み合せでしか存在出来ないということになります。それなのに MS-IME ではそのキー設定がそもそも存在しないため、このキーに対して機能を割り当てることができない、というのが問題となるケースの1つですです。仮にこのキーの動作を JIS 配列のそれに完全に合わせようとした場合、 AutoHotkey などのキー置換ソフトを用いる必要があります（別の話になるのでこの記事ではそれについては特に詳しくは触れません）。</p>
-
 <p>ちなみに私は普段 Mac も Windows も（さらに iOS も）ATOK を使っていて、そこで使われるはずのこのキー（カナロックとして機能）は完全に無効化しているので、MS-IME での挙動はわざわざ調べていて初めてちゃんと知りました……。1つのキーにいくつも機能を仕込むという意味では、自作キーボードのレイヤーなどと近いものを感じます。</p>
-
 <hr>
-
 <h2 id="設定の適用">設定の適用</h2>
-
 <p>今まで説明した設定適用のためにレジストリファイルを置いておきます。併せて元に戻すファイルも。</p>
-
 <ul>
 <li><a href="https://gist.github.com/bsakatu/fccc375610b903a3a4c8d8bb3a6f832f/raw/08becdfd9194ccc7feff95a5c50a36c9ec0732e1/AX_layout.reg">AX_layout.reg</a>:  AX 配列化設定</li>
 <li><a href="https://gist.github.com/bsakatu/fccc375610b903a3a4c8d8bb3a6f832f/raw/08becdfd9194ccc7feff95a5c50a36c9ec0732e1/JIS_layout.reg">JIS_layout.reg</a>: JIS 配列に戻す設定</li>
 </ul>
 
-    <a href="/"> >> Home</a>
-  </main>
-</div>
+
     <footer>
-      
-<script>
-(function() {
-  function center_el(tagName) {
-    var tags = document.getElementsByTagName(tagName), i, tag;
-    for (i = 0; i < tags.length; i++) {
-      tag = tags[i];
-      var parent = tag.parentElement;
-      
-      if (parent.childNodes.length === 1) {
-        
-        if (parent.nodeName === 'A') {
-          parent = parent.parentElement;
-          if (parent.childNodes.length != 1) continue;
-        }
-        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
-      }
-    }
-  }
-  var tagNames = ['img', 'embed', 'object'];
-  for (var i = 0; i < tagNames.length; i++) {
-    center_el(tagNames[i]);
-  }
-})();
-</script>
-
-      <hr/>
-      Copyright &copy; 2020 B-SAKATU
-      <a href="https://twitter.com/bsakatu">Twitter</a> | 
-      <a href="https://www.hatena.ne.jp/B-SAKATU/">Hatena</a> | 
-      <a href="https://github.com/bsakatu">GitHub</a>
+      <nav><a href="/"> >> Home</a></nav>
     </footer>
-  </body>
-</html>
+  </article>
+</main>
 
+<footer>
+  <nav>
+    <ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/policy/">Policy</a></li>
+    </ul>
+  </nav>
+  <p>
+    <small>
+      Copyright © 2020 B-SAKATU 
+      <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+        <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
+        <img alt="BY" src="/img/license/by.svg" width="14" height="14" />
+        <img alt="NC" src="/img/license/nc.svg" width="14" height="14" />
+        <img alt="SA" src="/img/license/sa.svg" width="14" height="14" />
+      </a>
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>

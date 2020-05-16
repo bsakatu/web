@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>USB-PD on capyBaral</title>
+    <link>/tags/usb-pd/</link>
+    <description>Recent content in USB-PD on capyBaral</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Sat, 02 May 2020 13:49:52 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/usb-pd/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>USB-PD テスターを買った話</title>
+      <link>/post/2020/05/02/usb-pd-tester-fnc88/</link>
+      <pubDate>Sat, 02 May 2020 13:49:52 +0900</pubDate>
+      
+      <guid>/post/2020/05/02/usb-pd-tester-fnc88/</guid>
+      <description>手持ちの機器に USB-PD を使う物がちょいちょい揃い始めたので、Aliexpress で 2 種類ほど買ってみた。 RD TC66 製造: HANGZHOU RUIDENG TECHNOLOGY Co., LTD. のようだが公式サイトは</description>
+    </item>
+    
+  </channel>
+</rss>

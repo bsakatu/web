@@ -1,75 +1,75 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
-  <head>
-    
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hugo で各ページ固有のスタイルシートを呼び出す | capyBaral</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/syntax.css" />
-    <link rel="stylesheet" href="/css/theme-override.css">
-    
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hugo で各ページ固有のスタイルシートを呼び出す | capyBaral</title>
+  <meta name="author" content="B-SAKATU" />
+  <meta name="generator" content="Hugo 0.69.2" />
+  <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/syntax.css" />
+  <link rel="stylesheet" href="/css/theme-override.css" />
+  
+
+</head>
+
+<body>  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">/home/capybaral</a>
+        </li>
+        <li>
+          <a href="/post/">~/zatsu</a>
+        </li>
+        <li>
+          <a href="/doc/">~/doc</a>
+        </li>
+        <li>
+          <a href="/categories/">~/categories</a>
+        </li>
+        <li>
+          <a href="/tags/">~/tags</a>
+        </li>
+        <li>
+          <a href="/index.xml">~/subscribe</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+
+<main>
+  <article>
     <header>
+      <h1>Hugo で各ページ固有のスタイルシートを呼び出す</h1>
+      <dl id="doc-info">
 
-  <nav>
-    <ul>
-      
-      
-      <li class="pull-left ">
-        <a href="/">/home/capybaral</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/">~/home</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/categories/">~/categories</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/tags/">~/tags</a>
-      </li>
+        <div id="published-date">
+          <dt>Published</dt>
+          <dd><time datetime="2018-11-13T00:00:00&#43;09:00">2018/11/13 00:00</time></dd>
+        </div>
+        
+        <div id="category">
+          <dt>Category</dt>
+          <dd><a href="/categories/web">Web</a></dd>
+        </div><div id="tag">
+          <dt>Tags</dt>
+          <dd><a href="/tags/software">software</a></dd>
+          <dd><a href="/tags/hugo">Hugo</a></dd>
+          <dd><a href="/tags/html">HTML</a></dd>
+          <dd><a href="/tags/css">CSS</a></dd>
+        </div>
+
+      </dl>
       
 
-      
-      
-      <li class="pull-right">
-        <a href="/index.xml">~/subscribe</a>
-      </li>
-      
+    </header>
 
-    </ul>
-  </nav>
-</header>
-
-  </head>
-
-  <body>
-    <br/>
-
-<div class="article-meta">
-<h1><span class="title">Hugo で各ページ固有のスタイルシートを呼び出す</span></h1>
-
-<h2 class="date">2018/11/13</h2>
-<p class="terms">
-  
-  
-  
-  
-  
-</p>
-</div>
-
-
-<div class="content-wrapper">
-  <main>
-    <p><a href="https://gohugo.io/">Hugo</a> で各ページ固有の CSS を適用したい場合にどうするか悩んだのでその備忘録。</p>
+<p><a href="https://gohugo.io/">Hugo</a> で各ページ固有の CSS を適用したい場合にどうするか悩んだのでその備忘録。</p>
 <p>このサイトでは<time datetime="2018-11-13">現時点</time>で blog 的なページは <code>/post</code> 以下、個別のしっかりした記事は <code>/doc</code> 以下、というふうに分けている（つもり）。その中で /doc 以下の階層で個別のスタイルシートを適用したくなり、かつそれを記事ファイルと同じフォルダに置きたかったので、一工夫必要でした。</p>
 <p>まず記事の元となる <code>hoge.md</code> と個別スタイルの <code>custom.css</code> が <code>/doc/hoge/</code> フォルダにいるとします。ここでテンプレートの <code>header.html</code> のスタイルシートを呼び出しているあたりに下記のコードを追加します。</p>
 <div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="p">{{</span> <span class="k">if</span> <span class="nf">ne</span> <span class="p">(</span><span class="nf">print</span> <span class="p">(.</span><span class="nx">Resources</span><span class="p">.</span><span class="nx">Match</span> <span class="s">&#34;custom.css&#34;</span><span class="p">))</span> <span class="s">&#34;[]&#34;</span> <span class="p">}}</span>
@@ -78,42 +78,32 @@
 </code></pre></div><p><code>custom.css</code> が同階層に存在すれば <code>custom.css</code> を呼び出す HTML タグを挿入するという流れです。ここでしばらくはまったのが、まずどの関数で存在判定をするのか。結果としては <code>.Resources.Match &quot;hoge&quot;</code> だったわけですが、他にも <code>.Get</code> などの機能が似ていそうな関数がいくつかあって調べるのに時間がかかりました。<code>.Resources.Match</code> は指定されたファイル等が存在しない場合に空文字列を返します。これが <code>&quot;[]&quot;</code> でした。しかしこのままでは判定に失敗するので、 <code>.Resources.Match</code> を <code>print</code> でラップしてあげて文字列化し、無事判定に成功しました。</p>
 <p>ここまで書いて判定文字列 <code>&quot;[]&quot;</code> をダブルクォーテーションで囲わなければよかったような気もしますが面倒なので今回は無視します。<ins datetime="2020-05-04T00:33:00+09:00">やっぱり無理だったからこれで良し。</ins></p>
 
-    <a href="/"> >> Home</a>
-  </main>
-</div>
+
     <footer>
-      
-<script>
-(function() {
-  function center_el(tagName) {
-    var tags = document.getElementsByTagName(tagName), i, tag;
-    for (i = 0; i < tags.length; i++) {
-      tag = tags[i];
-      var parent = tag.parentElement;
-      
-      if (parent.childNodes.length === 1) {
-        
-        if (parent.nodeName === 'A') {
-          parent = parent.parentElement;
-          if (parent.childNodes.length != 1) continue;
-        }
-        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
-      }
-    }
-  }
-  var tagNames = ['img', 'embed', 'object'];
-  for (var i = 0; i < tagNames.length; i++) {
-    center_el(tagNames[i]);
-  }
-})();
-</script>
-
-      <hr/>
-      Copyright &copy; 2020 B-SAKATU
-      <a href="https://twitter.com/bsakatu">Twitter</a> | 
-      <a href="https://www.hatena.ne.jp/B-SAKATU/">Hatena</a> | 
-      <a href="https://github.com/bsakatu">GitHub</a>
+      <nav><a href="/"> >> Home</a></nav>
     </footer>
-  </body>
-</html>
+  </article>
+</main>
 
+<footer>
+  <nav>
+    <ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/policy/">Policy</a></li>
+    </ul>
+  </nav>
+  <p>
+    <small>
+      Copyright © 2020 B-SAKATU 
+      <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+        <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
+        <img alt="BY" src="/img/license/by.svg" width="14" height="14" />
+        <img alt="NC" src="/img/license/nc.svg" width="14" height="14" />
+        <img alt="SA" src="/img/license/sa.svg" width="14" height="14" />
+      </a>
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>

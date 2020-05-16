@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>misc on capyBaral</title>
+    <link>/tags/misc/</link>
+    <description>Recent content in misc on capyBaral</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Thu, 01 Nov 2018 01:44:00 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/misc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>初投稿（という名の三度目の正直）</title>
+      <link>/post/2018/11/01/first-post/</link>
+      <pubDate>Thu, 01 Nov 2018 01:44:00 +0900</pubDate>
+      
+      <guid>/post/2018/11/01/first-post/</guid>
+      <description>ドメイン取ってサイトを始めてからは初投稿ということで初投稿としておいた。 ブログ的なもの自体は今までにも、 Movable Type 3系をレン鯖において自分でテンプ</description>
+    </item>
+    
+  </channel>
+</rss>

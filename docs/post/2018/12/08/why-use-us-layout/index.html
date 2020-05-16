@@ -1,115 +1,104 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
-  <head>
-    
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>なぜキーボードの US 配列を使うようになったか | capyBaral</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/syntax.css" />
-    <link rel="stylesheet" href="/css/theme-override.css">
-    
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>なぜキーボードの US 配列を使うようになったか | capyBaral</title>
+  <meta name="author" content="B-SAKATU" />
+  <meta name="generator" content="Hugo 0.69.2" />
+  <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/syntax.css" />
+  <link rel="stylesheet" href="/css/theme-override.css" />
+  
+
+</head>
+
+<body>  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">/home/capybaral</a>
+        </li>
+        <li>
+          <a href="/post/">~/zatsu</a>
+        </li>
+        <li>
+          <a href="/doc/">~/doc</a>
+        </li>
+        <li>
+          <a href="/categories/">~/categories</a>
+        </li>
+        <li>
+          <a href="/tags/">~/tags</a>
+        </li>
+        <li>
+          <a href="/index.xml">~/subscribe</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+
+<main>
+  <article>
     <header>
+      <h1>なぜキーボードの US 配列を使うようになったか</h1>
+      <dl id="doc-info">
 
-  <nav>
-    <ul>
-      
-      
-      <li class="pull-left ">
-        <a href="/">/home/capybaral</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/">~/home</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/categories/">~/categories</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/tags/">~/tags</a>
-      </li>
+        <div id="published-date">
+          <dt>Published</dt>
+          <dd><time datetime="2018-12-08T00:00:00&#43;09:00">2018/12/08 00:00</time></dd>
+        </div>
+        
+        <div id="category">
+          <dt>Category</dt>
+          <dd><a href="/categories/input">Input</a></dd>
+        </div><div id="tag">
+          <dt>Tags</dt>
+          <dd><a href="/tags/keyboard">keyboard</a></dd>
+          <dd><a href="/tags/key-layout">key-layout</a></dd>
+          <dd><a href="/tags/about">about</a></dd>
+        </div>
+
+      </dl>
       
 
-      
-      
-      <li class="pull-right">
-        <a href="/index.xml">~/subscribe</a>
-      </li>
-      
+    </header>
 
-    </ul>
-  </nav>
-</header>
-
-  </head>
-
-  <body>
-    <br/>
-
-<div class="article-meta">
-<h1><span class="title">なぜキーボードの US 配列を使うようになったか</span></h1>
-
-<h2 class="date">2018/12/08</h2>
-<p class="terms">
-  
-  
-  
-  
-  
-</p>
-</div>
-
-
-<div class="content-wrapper">
-  <main>
-    <p>キーボードの配列で何を使うかは人それぞれであろうが、日本人であれば基本的にはいわゆる JIS 配列だろう。しかしプログラマーなどの一部の人々は英語圏の US 配列の方が使いやすいという。私も興味はあったものの、特に使うことのないまま今年まで生きてきたわけだが、ふとした理由でついに使うようになっなってしまった。</p>
+<p>キーボードの配列で何を使うかは人それぞれであろうが、日本人であれば基本的にはいわゆる JIS 配列だろう。しかしプログラマーなどの一部の人々は英語圏の US 配列の方が使いやすいという。私も興味はあったものの、特に使うことのないまま今年まで生きてきたわけだが、ふとした理由でついに使うようになっなってしまった。</p>
 <p>そもそものきっかけは、会社の PC で作るスクリプト管理用に Git を使おうとしたことだ。gnupack の cygwin で Git を使い始めてみたが、グラフィカルに表示するソフトは X Window System を入れる必要があり、インストールして無事使えたのだが、これがどうも起動すると入力言語を勝手に英語に切り替える不思議挙動をしてくれた。英語なので配列は当然 US 配列となる。言語を切り替えれば元に戻るのだが、だんだんそれも面倒くさくなってきたので US 配列を覚えてしまえば困らないよな? という思考に至ってしまい、かくもヘンテコな経緯で US 配列デビューすることと相成った。我ながら特殊なケース……。</p>
 <p>その後は別のページで解説する配列の変更などをしながら、日本語を打ちつつ US 配列を使いやすいように、あれこれやったりしながら今日に至る。</p>
 <p>US 配列を使ってもいいと思うに至るにはもう1つ理由があり、それは一部のソフトでは JIS 配列でのショートカットキーが不自然に並べになっていて気にくわなかったからである。ピンポイントに言ってしまうと例えば Adobe の Acrobat だ（Reader 含む）。このソフトの拡大縮小のショートカットキーは US 配列ではそれぞれ <kbd>Ctrl + =</kbd> と <kbd>Ctrl + -</kbd> なのだが、要は <kbd>Ctrl</kbd> キーと仮想キーの <code>VK_OEM_PLUS</code> と <code>VK_OEM_MINUS</code> を組み合わせているというわけだ。ある意味分かりやすい。しかしこれが JIS 配列の場合、キーボード上の <kbd>- =</kbd> キーの位置は同じだが <kbd>; +</kbd> キーの位置は <kbd>L</kbd> の右隣となるので、全く脈絡のない位置でイラッとする。この配置の不自然さは以前から気になっていたのもあり、US 配列デビューする自分の背中を押すことに繋がった。</p>
 
-    <a href="/"> >> Home</a>
-  </main>
-</div>
+
     <footer>
-      
-<script>
-(function() {
-  function center_el(tagName) {
-    var tags = document.getElementsByTagName(tagName), i, tag;
-    for (i = 0; i < tags.length; i++) {
-      tag = tags[i];
-      var parent = tag.parentElement;
-      
-      if (parent.childNodes.length === 1) {
-        
-        if (parent.nodeName === 'A') {
-          parent = parent.parentElement;
-          if (parent.childNodes.length != 1) continue;
-        }
-        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
-      }
-    }
-  }
-  var tagNames = ['img', 'embed', 'object'];
-  for (var i = 0; i < tagNames.length; i++) {
-    center_el(tagNames[i]);
-  }
-})();
-</script>
-
-      <hr/>
-      Copyright &copy; 2020 B-SAKATU
-      <a href="https://twitter.com/bsakatu">Twitter</a> | 
-      <a href="https://www.hatena.ne.jp/B-SAKATU/">Hatena</a> | 
-      <a href="https://github.com/bsakatu">GitHub</a>
+      <nav><a href="/"> >> Home</a></nav>
     </footer>
-  </body>
-</html>
+  </article>
+</main>
 
+<footer>
+  <nav>
+    <ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/policy/">Policy</a></li>
+    </ul>
+  </nav>
+  <p>
+    <small>
+      Copyright © 2020 B-SAKATU 
+      <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+        <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
+        <img alt="BY" src="/img/license/by.svg" width="14" height="14" />
+        <img alt="NC" src="/img/license/nc.svg" width="14" height="14" />
+        <img alt="SA" src="/img/license/sa.svg" width="14" height="14" />
+      </a>
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>

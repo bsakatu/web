@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>meetup on capyBaral</title>
+    <link>/tags/meetup/</link>
+    <description>Recent content in meetup on capyBaral</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Mon, 05 Nov 2018 02:02:48 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/meetup/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>天下一キーボードわいわい会 Vol.1 に参加して</title>
+      <link>/post/2018/11/05/ten-key-ichi_1st/</link>
+      <pubDate>Mon, 05 Nov 2018 02:02:48 +0900</pubDate>
+      
+      <guid>/post/2018/11/05/ten-key-ichi_1st/</guid>
+      <description>天下一キーボードわいわい会 Vol.1 に参加してきました。初の自作キーボードオンリーなイベントへの参加ということで、ボカロ系のオフ会なり即売会なりに行</description>
+    </item>
+    
+  </channel>
+</rss>

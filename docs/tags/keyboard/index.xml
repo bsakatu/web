@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>keyboard on capyBaral</title>
+    <link>/tags/keyboard/</link>
+    <description>Recent content in keyboard on capyBaral</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Tue, 11 Dec 2018 00:25:00 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/keyboard/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Windows 日本語入力環境で US 配列をより使いやすくする</title>
+      <link>/doc/how-to-input-japanese-more-convinient-with-us-layout/</link>
+      <pubDate>Tue, 11 Dec 2018 00:25:00 +0900</pubDate>
+      
+      <guid>/doc/how-to-input-japanese-more-convinient-with-us-layout/</guid>
+      <description>自作キーボード #2 Advent Calendar 2018 11日目の記事です。 昨日は鴨南蛮さん (@ralfdegen) の「今年1年の自作キーボード活動まとめ」でした。 ハードウェアやソフトウェア的につ</description>
+    </item>
+    
+    <item>
+      <title>Windows で同時に複数のキーボード配列を使用する</title>
+      <link>/doc/use-different-keyboard-layout-simultaneously/</link>
+      <pubDate>Tue, 11 Dec 2018 00:24:00 +0900</pubDate>
+      
+      <guid>/doc/use-different-keyboard-layout-simultaneously/</guid>
+      <description>Windows 標準のキーボード配列設定は下記のレジストリで設定されています。この設定は PS/2 キーボードや USB キーボードを問わずにその PC に接続される全てのキーボ</description>
+    </item>
+    
+    <item>
+      <title>AX キーボードの配列を現行の Windows で使う</title>
+      <link>/doc/ax-layout-on-windows/</link>
+      <pubDate>Tue, 11 Dec 2018 00:23:00 +0900</pubDate>
+      
+      <guid>/doc/ax-layout-on-windows/</guid>
+      <description>そもそも AX キーボードとは ネット上にあんまり資料がないのですが、こんなものです（ちなみに私自身は実物を触ったことも見たこともありません……）。</description>
+    </item>
+    
+    <item>
+      <title>なぜキーボードの US 配列を使うようになったか</title>
+      <link>/post/2018/12/08/why-use-us-layout/</link>
+      <pubDate>Sat, 08 Dec 2018 17:18:28 +0900</pubDate>
+      
+      <guid>/post/2018/12/08/why-use-us-layout/</guid>
+      <description>キーボードの配列で何を使うかは人それぞれであろうが、日本人であれば基本的にはいわゆる JIS 配列だろう。しかしプログラマーなどの一部の人々は英語圏</description>
+    </item>
+    
+    <item>
+      <title>ハードウェア キーボード レイアウトの変更</title>
+      <link>/post/2018/11/25/change-hardware-keyboard-layout-ime-jp/</link>
+      <pubDate>Sun, 25 Nov 2018 01:22:59 +0900</pubDate>
+      
+      <guid>/post/2018/11/25/change-hardware-keyboard-layout-ime-jp/</guid>
+      <description>Windows 10 において、日本語 IME のオプションに「ハードウェア キーボード レイアウト」という設定項目がある（ということを今日初めて知った……）。 ハードウェ</description>
+    </item>
+    
+    <item>
+      <title>天下一キーボードわいわい会 Vol.1 に参加して</title>
+      <link>/post/2018/11/05/ten-key-ichi_1st/</link>
+      <pubDate>Mon, 05 Nov 2018 02:02:48 +0900</pubDate>
+      
+      <guid>/post/2018/11/05/ten-key-ichi_1st/</guid>
+      <description>天下一キーボードわいわい会 Vol.1 に参加してきました。初の自作キーボードオンリーなイベントへの参加ということで、ボカロ系のオフ会なり即売会なりに行</description>
+    </item>
+    
+  </channel>
+</rss>

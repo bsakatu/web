@@ -1,173 +1,156 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
-  <head>
-    
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Windows 日本語入力環境で US 配列をより使いやすくする | capyBaral</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/syntax.css" />
-    <link rel="stylesheet" href="/css/theme-override.css">
-    
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Windows 日本語入力環境で US 配列をより使いやすくする | capyBaral</title>
+  <meta name="author" content="B-SAKATU" />
+  <meta name="generator" content="Hugo 0.69.2" />
+  <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/syntax.css" />
+  <link rel="stylesheet" href="/css/theme-override.css" />
+  
+
+</head>
+
+<body>  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">/home/capybaral</a>
+        </li>
+        <li>
+          <a href="/post/">~/zatsu</a>
+        </li>
+        <li class="current">
+          <a href="/doc/">~/doc</a>
+        </li>
+        <li>
+          <a href="/categories/">~/categories</a>
+        </li>
+        <li>
+          <a href="/tags/">~/tags</a>
+        </li>
+        <li>
+          <a href="/index.xml">~/subscribe</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+
+<main>
+  <article>
     <header>
+      <h1>Windows 日本語入力環境で US 配列をより使いやすくする</h1>
+      <dl id="doc-info">
 
-  <nav>
-    <ul>
-      
-      
-      <li class="pull-left ">
-        <a href="/">/home/capybaral</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/">~/home</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/categories/">~/categories</a>
-      </li>
-      
-      
-      <li class="pull-left ">
-        <a href="/tags/">~/tags</a>
-      </li>
-      
+        <div id="published-date">
+          <dt>Published</dt>
+          <dd><time datetime="2018-12-11T00:00:00&#43;09:00">2018/12/11 00:00</time></dd>
+        </div>
+        
+        <div id="category">
+          <dt>Category</dt>
+          <dd><a href="/categories/input">Input</a></dd>
+        </div><div id="tag">
+          <dt>Tags</dt>
+          <dd><a href="/tags/keyboard">keyboard</a></dd>
+          <dd><a href="/tags/key-layout">key-layout</a></dd>
+          <dd><a href="/tags/windows">Windows</a></dd>
+        </div>
 
-      
-      
-      <li class="pull-right">
-        <a href="/index.xml">~/subscribe</a>
-      </li>
-      
+      </dl>
+      <details open id="toc">
+        <summary>Table of contents</summary>
+<nav id="TableOfContents">
+  <ol>
+    <li><a href="#windows-日本語環境で-us-配列を使うには">Windows 日本語環境で US 配列を使うには</a></li>
+    <li><a href="#どこをいじるのか">どこをいじるのか</a></li>
+    <li><a href="#ところでスキャンコードとか仮想キーコードとは何か">ところでスキャンコードとか仮想キーコードとは何か</a></li>
+    <li><a href="#新たな-kbd106dll-を作る">新たな <code>kbd106.dll</code> を作る</a>
+      <ol>
+        <li><a href="#環境構築">環境構築</a></li>
+        <li><a href="#改造内容">改造内容</a></li>
+        <li><a href="#ビルド">ビルド</a></li>
+      </ol>
+    </li>
+    <li><a href="#設定適用">設定適用</a></li>
+    <li><a href="#欄外">欄外</a></li>
+  </ol>
+</nav>
+      </details>
 
-    </ul>
-  </nav>
-</header>
+    </header>
 
-  </head>
-
-  <body>
-    <br/>
-
-<div class="article-meta">
-<h1><span class="title">Windows 日本語入力環境で US 配列をより使いやすくする</span></h1>
-
-<h2 class="date">2018/12/11</h2>
-<p class="terms">
-  
-  
-  
-  
-  
-</p>
-</div>
-
-
-<div class="content-wrapper">
-  <main>
-    <p><a href="https://adventar.org/calendars/2964#list-2018-12-11">自作キーボード #2 Advent Calendar 2018 11日目</a>の記事です。<br>
+<p><a href="https://adventar.org/calendars/2964#list-2018-12-11">自作キーボード #2 Advent Calendar 2018 11日目</a>の記事です。<br>
 昨日は鴨南蛮さん (<a href="https://twitter.com/ralfdegen">@ralfdegen</a>) の「<a href="https://kamobanban.hateblo.jp/entry/2018/12/10/231150">今年1年の自作キーボード活動まとめ</a>」でした。</p>
-
 <p>ハードウェアやソフトウェア的につよつよな方がたくさんいらっしゃるので、しょぼしょぼしたネタでお茶を濁しておきます。残念ながら自作キーボードもキーキャップもキースイッチもケーブルも写真は一枚も出てきませんし <a href="https://github.com/qmk/qmk_firmware"><abbr title="Quantum Mechanical Keyboard">QMK</abbr></a> の話題もほぼありません!!! （わずかにあると言えばあるけど……）</p>
-
 <hr>
-
 <h2 id="windows-日本語環境で-us-配列を使うには">Windows 日本語環境で US 配列を使うには</h2>
-
-<p>日本語環境の Winodows の場合、一般的にはいわゆる <a href="https://ja.wikipedia.org/wiki/キー配列#109キーボード">JIS 配列</a>のキーボード使用していると思います。しかし興味や様々な事情や思想や宗教上の理由などにより、<a href="https://ja.wikipedia.org/wiki/キー配列#101キーボード">US 配列（ANSI 配列などとも）</a>を使ってみたい・使わなければならない人もいるはずです。また自作キーボード界隈であれば、キーボード、キーキャップ、ファームウェアなどが US 配列前提だったりするので、US 配列を避けて通るのはなかなか難しいでしょう。</p>
-
+<p>日本語環境の Winodows の場合、一般的にはいわゆる <a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%BC%E9%85%8D%E5%88%97#109%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89">JIS 配列</a>のキーボード使用していると思います。しかし興味や様々な事情や思想や宗教上の理由などにより、<a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%BC%E9%85%8D%E5%88%97#101%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89">US 配列（ANSI 配列などとも）</a>を使ってみたい・使わなければならない人もいるはずです。また自作キーボード界隈であれば、キーボード、キーキャップ、ファームウェアなどが US 配列前提だったりするので、US 配列を避けて通るのはなかなか難しいでしょう。</p>
 <p>さて例えば、JIS キーボードを使っている人が US 配列に乗り換える第 1 歩としては、ハード環境は JIS キーボードのまま US 配列が使えればお手軽でしょう。実現するにはいくつかの方法でがありますが、例えば簡単な方法としては以下に挙げるような方法をとることになるかもしれません。</p>
-
 <ul>
 <li><a href="https://bsakatu.net/post/2018/11/25/change-hardware-keyboard-layout-ime-jp/">ハードウェア キーボード レイアウトの変更で英語キーボードを選択する</a></li>
 <li>入力言語を英語 (QWERTY) にする</li>
 <li>キー置換ソフト (DvorakJ 等) などで配列を入れ替える</li>
 <li>QMK などを搭載したキーボードで配列を英語 (QWERTY) 風にする</li>
 </ul>
-
 <p>ただこれら方法で配列を変更した場合、当然ながら前者の2パターンでは US 配列のキーボードとして動作することになるので、日本語環境固有のキー（無変換、変換、等々）が使えなくなってしまいます。それで困らない方もいるとは思いますが、困る人も当然いるでしょう。またソフトウェア上のキー置換で実現した場合、ソフトによるのかもしれませんが、私の使っている DvorakJ （親指シフトなどの配列変更などに用いるキー置換ソフト）では入力文字の置き換えは出来ても、ショートカットキーの置き換えが実現出来ず、不完全でした（問題ない人もいる? ようなので環境に寄るのかもしれませんが）。QMK で実現した場合は、前述したキー置換とほとんど同じく、記号類のショートカットキーが置き換えられていない、これまた不完全です。</p>
-
 <p>上記の問題を回避しつつ US 配列を使う方法は、現実的かつ私が知っている方法としては次の2通りがあります（他にあったらどなたか教えて欲しい）。</p>
-
 <ul>
 <li>微調整した AX 配列を使う</li>
 <li>改造版 JIS 配列を使う</li>
 </ul>
-
 <p>ここで、AX 配列を使うやり方は<a href="/doc/ax-layout-on-windows/" title="AX キーボードの配列を現行の Windows で使う">別記事</a>を書いているのでそちらを参照して下さい。今回の記事では JIS 配列を改造する手法について解説していきます。</p>
-
 <h2 id="どこをいじるのか">どこをいじるのか</h2>
-
 <p>レジストリを弄ります。見るべきは3つのエントリで、それらは標準では以下のようになっているはずです。</p>
-
 <table>
-<caption>
-【標準状態】 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code>
-
-</caption>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Value (JP default)</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td><code>LayerDriverJPN</code></td>
-<td><code>REG_SZ</code></td>
-<td><code>kbd106.dll</code></td>
-</tr>
-
-<tr>
-<td><code>OverrideKeyboardSubtype</code></td>
-<td><code>REG_DWORD</code></td>
-<td><code>2</code></td>
-</tr>
-
-<tr>
-<td><code>OverrideKeyboardType</code></td>
-<td><code>REG_DWORD</code></td>
-<td><code>7</code></td>
-</tr>
-</tbody>
+  <caption>【標準状態】 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Value (JP default)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>LayerDriverJPN</code></td>
+      <td><code>REG_SZ</code></td>
+      <td><code>kbd106.dll</code></td>
+    </tr>
+    <tr>
+      <td><code>OverrideKeyboardSubtype</code></td>
+      <td><code>REG_DWORD</code></td>
+      <td><code>2</code></td>
+    </tr>
+    <tr>
+      <td><code>OverrideKeyboardType</code></td>
+      <td><code>REG_DWORD</code></td>
+      <td><code>7</code></td>
+    </tr>
+  </tbody>
 </table>
-
 <p>この中の <code>LayerDriverJPN</code> というエントリで指定されている <code>kbd106.dll</code> がキーボードから入力された内容を最終的に OS 内の仮想キーコードへと変換する変換表になっています。これを望む変換表が書かれたファイルに指定を変更してあげれば所望の動作をしてくれるようになります。たとえば純粋な US 配列であれば <code>kbdus.dll</code> というファイルがあるのでそれを指定します。これらの変換表を含む定義ファイルは <code>C:\Windows\System32</code> フォルダに格納されています。見てみると分かりますが、他にも色々な定義ファイル (<code>kbd***.dll</code>) があります。気になる方は覗いてみるとよいです。</p>
-
 <h2 id="ところでスキャンコードとか仮想キーコードとは何か">ところでスキャンコードとか仮想キーコードとは何か</h2>
-
 <p>※知っている人は飛ばしてもらって構わない内容です。本当はこれだけで記事書いてもよかったけど時間がなかった（力尽きた）。</p>
-
-<p>今ではほとんど見ることもなくなった PS/2 キーボード、これのキーを押したときに PC に送信されるコードが<a href="https://ja.wikipedia.org/wiki/スキャンコード">スキャンコード</a>です（リファレンスは「OADG テクニカルリファレンス」でググって下さいとだけ言っておきます）。これはキーボードの配列によってどの位置はどのコード、という風に定義されているので、JIS 配列のキーボードだろうが US 配列のキーボードだろうが、同じ位置のキーを押すと同じキーコードが送信されます。このスキャンコードを受け取って Windows 内部で用いる<a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/virtual-key-codes">仮想キーコード</a>へと変換するための設定が、まさに前述した <code>kbd106.dll</code> などになります。</p>
-
+<p>今ではほとんど見ることもなくなった PS/2 キーボード、これのキーを押したときに PC に送信されるコードが<a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89">スキャンコード</a>です（リファレンスは「OADG テクニカルリファレンス」でググって下さいとだけ言っておきます）。これはキーボードの配列によってどの位置はどのコード、という風に定義されているので、JIS 配列のキーボードだろうが US 配列のキーボードだろうが、同じ位置のキーを押すと同じキーコードが送信されます。このスキャンコードを受け取って Windows 内部で用いる<a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/virtual-key-codes">仮想キーコード</a>へと変換するための設定が、まさに前述した <code>kbd106.dll</code> などになります。</p>
 <p>ちなみに現在一般的に使われている USB 接続のキーボードはもう一段階増えていて、<a href="https://www.usb.org/document-library/hid-usage-tables-112">HID Usage ID</a> (※リンク先にある PDF の 53 ページ以降参照)という、これまた似たようなキー毎にコードを割り当てたものを PC に送信する。この後の処理は根拠になる資料が見つからないので多分に想像ですが、<code>C:\Windows\System32\hid.dll</code> 内部や <a href="https://download.microsoft.com/download/1/6/1/161ba512-40e2-4cc9-843a-923143f3456c/translate.pdf">Microsoft の資料</a>を見ると、Usage ID から Scancode への変換表が存在するので、PS/2 キーボードに一手間加えて Usage ID → スキャンコード → 仮想キーコード、という流れで入力文字を処理しているのだと思われます。ちなみに macOS はそう言う資料を全然見つけられていないのでさっぱり分かりません。Usage ID から直接仮想キーのようなものを生成しているんじゃないかと想像はしていますが。</p>
-
 <h2 id="新たな-kbd106dll-を作る">新たな <code>kbd106.dll</code> を作る</h2>
-
 <p>さて本筋に戻ります。今回弄りたい <code>kbd106.dll</code> ですが、Microsoft が<a href="https://github.com/Microsoft/Windows-driver-samples/tree/master/input/layout/fe_kbds/jpn/106">ソースを GitHub で公開している</a>ので弄り放題です。以前は <abbr title="Windows Driver Kit">WDK</abbr> に同梱されていたのでダウンロードしてインストールして、と多少の手間がかかったのですが、今は Web で簡単に見られるようになりました。
 （※ちなみに OS に含まれる <code>kbd106.dll</code> を直接バイナリ編集してしまうことも出来るのですが、それはライセンス的にグレーなのでここではまっとうな方法だけ書いておきます。一応バイナリエディタであれすればごにょごにょ。）</p>
-
 <p>以下、Windows のメジャーバージョンは 10 であると仮定して書きます。7 や 8 系はそれぞれに適した WDK をインストールして、以降で説明するソース編集をして dll を生成すれば同じく実現可能です。7, 8 系は所持していないので未確認（持っていたけど 10 にアップグレードしてしまった）。</p>
-
 <h3 id="環境構築">環境構築</h3>
-
 <p>簡単に見られるとは言っても dll ファイルをコンバイルする必要があるので、下記リンク先の Microsoft が公開している手順に従って環境をセットアップする必要があります。とは言ってもたいしてやることはなく、Visual Studio Community 2017 （<time datetime="2018-12-11">2018/12/11</time> 時点）をインストールし、その後上記の GitHub リポジトリを clone するだけです。GitHub へのアクセスはVisual Studio 用の GitHub 拡張機能をインストールするとよいでしょう。</p>
-
 <p><a href="https://docs.microsoft.com/ja-jp/windows-hardware/drivers/download-the-wdk">Windows Driver Kit (WDK) のダウンロードします。 | Microsoft Docs</a><br>
 （※タイトルが変なのは Microsoft が悪い）</p>
-
 <h3 id="改造内容">改造内容</h3>
-
 <p>ちなみに <code>kbd106.dll</code> の改造自体は<a href="https://ku6.jp/report/80.html" title="HHKBをAXキーボードレイアウトで使っているFF14プレイヤーの話 : 傾き指向プログラミング">他に紹介している記事</a>があったりするのですが、その内容が入力される見かけの文字を変えることしか考えておらず、仮想キーコードはそのままという内容でした。これだとショートカットキーがいくつかおかしな事になります。</p>
-
 <p>さて環境が作れたので編集に入っていきます。ちょっと煩雑なのでずらずら書いていきます。なおやり方は私の自己流なのでビルド出来れば方法は問いません（ほぼ備忘録）。</p>
-
 <ol>
 <li>ソースのフォルダを開く。GitHub 拡張機能でダウンロードした場合、そのデータはユーザーフォルダに作成される <code>source</code> フォルダに保存されます。キー配列関係のファイルは <code>C:\Users\hoge\source\repos\Microsoft\Windows-driver-samples\input\layout</code> にまとまっています。</li>
 <li>上記フォルダ下の <code>.\fe_kbds\jpn\106</code> のフォルダを複製して <code>106_us</code> とでもリネームする。</li>
@@ -177,7 +160,6 @@
 <li>プロジェクトのプロパティを開いて、<code>構成のプロパティ → 全般 → ターゲット名</code>を <code>kbd106_us</code> に変更。</li>
 <li><code>kbd106_us.c</code> に以下の変更を適用する（<code>patch</code> 等で適当にやって下さい。解説は省きます）</li>
 </ol>
-
 <!-- markdownlint-disable MD009 -->
 <div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gd">--- kbd106.c
 </span><span class="gd"></span><span class="gi">+++ kbd106_us.c
@@ -319,13 +301,9 @@
 </span><span class="gi"></span> };
  
  PKBDTABLES KbdLayerDescriptor(VOID)
-</code></pre></div>
-<!-- markdownlint-enable MD009 -->
-
+</code></pre></div><!-- markdownlint-enable MD009 -->
 <p>これを適用すれば仮想キー毎の入力文字は US 配列と同等になりますが、これだけでは不十分で実際の配列も変更する必要があります。押したキーに対してどんな仮想キーを割り当てるかは別のファイルで定義されており、それは前述した GitHub のリポジトリにはない Windows <abbr title="Software Development Kit">SDK</abbr> の一部である <code>kbd.h</code> となります。保存場所は環境やバージョンに寄るのかもしれませんが、手元の環境ではこんな場所でした (Visual Studio のバージョンは 15.9.2, 同梱される Windows Driver Kit は 10.0.17740.1000)。</p>
-
 <p>Path: <code>C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\kbd.h</code></p>
-
 <p>このファイルを <code>106_us</code> フォルダにコピーし、以下の変更を適用します。その後プロジェクトの <code>Header Files</code> に追加します。</p>
 <div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gd">--- kbd.h (original)
 </span><span class="gd"></span><span class="gi">+++ kbd.h (modify)
@@ -390,122 +368,86 @@
 </span><span class="gi"></span> #define T5D _EQ(           EREOF                                                            )
  #define T5E _NE(_none_,    _none_,    _none_,    OEM_BACKTAB,OEM_BACKTAB,OEM_BACKTAB,OEM_BACKTAB)
  #define T5F _NE(NONAME,    NONAME,    NONAME,    OEM_AUTO,  OEM_AUTO,  OEM_AUTO,  OEM_AUTO  )
-</code></pre></div>
-<p>変更点をまとめると下記の通り。</p>
-
+</code></pre></div><p>変更点をまとめると下記の通り。</p>
 <ul>
 <li>下記以外: JIS 配列のスキャンコードと仮想キーコードの対応をUS 配列の定義に合わせて変更</li>
 <li><code>scancode = 0x3A</code>: JIS 配列の <kbd>英数 CapsLock</kbd> から US 配列の <kbd>CapsLock</kbd> へ変更</li>
 <li><code>scancode = 0x5C</code>: <code>VK_NONAME</code> で無指定になっているところに <code>VK_DBE_DBCSCHAR</code> (<kbd>半角全角</kbd>) を割り当て（※本来の位置は <code>VK_OEM_3</code> に明け渡しているため）</li>
 </ul>
-
 <p><kbd>CapsLock</kbd> については、日本語版の <kbd>英数 CapsLock</kbd> の挙動が好きではない・弄りにくくて不便なので US 配列仕様のシンプル動作版に変更（こうすると AutoHotkey で <kbd>Ctrl</kbd> ↔ <kbd>CapsLock</kbd> というやりたいのにやれない設定を適用出来るようになる）。<kbd>半角全角</kbd>については、<code>scancode = 0x5C</code> がスキャンコードとしては US 配列にも JIS 配列にも定義がないですが、Windows の設定としては USB HID の &quot;Keyboard International6 (<code>0x8C</code>)&quot; が変換元として定義されており、またどうやら PC-98 のテンキーカンマ用だったものの当然現在では限りなく使用されないはずのものなので、好きに使います。</p>
-
 <p>なおよく見ると分かりますが、<code>VK_OEM_5</code> (<kbd>\|</kbd>) が2つ存在しています。JIS 配列における <kbd>¥|</kbd> と <kbd>]}</kbd> の位置です。ここは好みや使用環境に寄るところもあるので、各自で好きに弄ってもらった方がいいと思いそのままにしてあります。あんまり弄りすぎると QMK や DvorakJ などで配列を作るときに苦労すると思うので、そういうツールを使う方々は程々に……。</p>
-
 <h3 id="ビルド">ビルド</h3>
-
 <p>さて、これで改造版 <code>kbd106.dll</code> を作成する準備は整いました。</p>
-
 <ol>
 <li>ビルドの構成を <code>Debug</code> から <code>Release</code> に変更し、プラットフォームは適用したい環境を選択し、ビルドする。</li>
 <li>ソースフォルダにフォルダが作られビルドしたファイル等々が生成されているはず。</li>
 </ol>
-
 <h2 id="設定適用">設定適用</h2>
-
 <p>ついに dll ファイルが完成したので設定適用していきます。</p>
-
 <p><code>106_us</code> フォルダに生成されるビルド後のフォルダやファイルの中から <code>kbd106_us.dll</code> をとりだし、これを <code>C:\Windows\System32</code> などのシステムフォルダにコピーし、レジストリを下記の通り編集し、再起動すれば設定は適用されているはずです</p>
-
 <table>
-<caption>
-【設定適用後】 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code>
-
-</caption>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Value</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td><code>LayerDriverJPN</code></td>
-<td><code>REG_SZ</code></td>
-<td><code>kbd106_us.dll</code></td>
-</tr>
-
-<tr>
-<td><code>OverrideKeyboardSubtype</code></td>
-<td><code>REG_DWORD</code></td>
-<td><code>1</code></td>
-</tr>
-
-<tr>
-<td><code>OverrideKeyboardType</code></td>
-<td><code>REG_DWORD</code></td>
-<td><code>7</code></td>
-</tr>
-</tbody>
+  <caption>【設定適用後】 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>LayerDriverJPN</code></td>
+      <td><code>REG_SZ</code></td>
+      <td><code>kbd106_us.dll</code></td>
+    </tr>
+    <tr>
+      <td><code>OverrideKeyboardSubtype</code></td>
+      <td><code>REG_DWORD</code></td>
+      <td><code>1</code></td>
+    </tr>
+    <tr>
+      <td><code>OverrideKeyboardType</code></td>
+      <td><code>REG_DWORD</code></td>
+      <td><code>7</code></td>
+    </tr>
+  </tbody>
 </table>
-
 <p>ちなみに <code>OverrideKeyboardIdentifier</code> は変更しません。特に設定に関与していないですし、<code>PCAT_106KEY</code> である意味あっているので。なおここで <code>OverrideKeyboardSubtype = 1</code> に変更していますが、これはこの改造配列以外の配列を同時に使えるようにするための配慮です。<code>kbd106_us.c</code> で <code>MICROSOFT_KBD_106_TYPE</code> を <code>MICROSOFT_KBD_AX_TYPE</code> に変更しているのもこれのためです。どういうことかと言うと、この配列を本来の <code>Subtype = 1</code> である AX 配列に上書きする形でシステムに設定しています。この設定は<a href="/doc/use-different-keyboard-layout-simultaneously/" title="Windows で同時に複数のキーボード配列を使用する | capyBaral">キーボードの配列を複数共存させる場合</a>に役に立つのですが、それはまた別の話なのでここではそうなんだ、とだけ思っておいて下さい。1 つの配列しか使わないのであれば特に関係ありません。</p>
-
 <p>さて、再起動が完了すればあとは動作確認です。メモ帳などで一通り打ってみて問題ないか確認し、できれば <a href="http://kts.sakaiweb.com/keymill.html" title="KT Software - Keymill">Keymill</a> などのスキャンコードと仮想キーコードを確認出来るソフトでテストするとよいでしょう。スキャンコードと仮想キーコードの対応を変えたキーの動作確認には特に。</p>
-
 <p>そういえば 32 bit 版のことをすっかり忘れていましたが、必要な場合は 32 bit 用にビルドして <code>C:\Windows\SysWOW64</code> に放り込めばいいと思います。これがないと動かないケースがあるのかいまいちちゃんと調べていませんが、今後ますます 32 bit のソフトウェアを使うことは減っていくのであんまり必要ないかも……。</p>
-
 <p>というわけで、これで動作すれば今回の改造は完了です。この改造方法はわりとどうにでもなるので、さらなるオレオレ配列を作るなりして遊んでみてもいいでしょう。よく分からない場合はメールなり Twitter なりで質問して下さい。コメント欄はまだ作っていないので……。</p>
-
 <h2 id="欄外">欄外</h2>
-
 <p>この記事をアドカレのネタとして採用するのかは自分の中でもわりと迷いがありました。しかし、自作キーボードで一般的に流通するキーキャップの文字（レジェンド）が基本的に US 配列を前提とし、その他の配列はオプションかそもそも無い、という状況であるのは覆すことの出来ない事実なので、もっと日本人が気軽に US 配列を使えれば日本での自作キーボード界の発展にほんのわずかばかりでも貢献出来るんじゃないか、と自分に言い聞かせて書いてみました。まあ半分は自分の備忘録なんですけど。</p>
-
 <hr>
-
 <p>明日の<a href="https://adventar.org/calendars/2964#list-2018-12-12">自作キーボード #2 Advent Calendar 2018 12日目の記事</a>は <a href="https://github.com/hinastory">hinastory さん</a>による「気が付いたら本棚がキーボード棚に変わっていた話」の予定です。</p>
-
 <p>この記事は Fortitude60 (Switch: Aliaz, Gateron silent red [lubed]; Keycap: MDA Big Bang) で書きました。</p>
 
-    <a href="/"> >> Home</a>
-  </main>
-</div>
+
     <footer>
-      
-<script>
-(function() {
-  function center_el(tagName) {
-    var tags = document.getElementsByTagName(tagName), i, tag;
-    for (i = 0; i < tags.length; i++) {
-      tag = tags[i];
-      var parent = tag.parentElement;
-      
-      if (parent.childNodes.length === 1) {
-        
-        if (parent.nodeName === 'A') {
-          parent = parent.parentElement;
-          if (parent.childNodes.length != 1) continue;
-        }
-        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
-      }
-    }
-  }
-  var tagNames = ['img', 'embed', 'object'];
-  for (var i = 0; i < tagNames.length; i++) {
-    center_el(tagNames[i]);
-  }
-})();
-</script>
-
-      <hr/>
-      Copyright &copy; 2020 B-SAKATU
-      <a href="https://twitter.com/bsakatu">Twitter</a> | 
-      <a href="https://www.hatena.ne.jp/B-SAKATU/">Hatena</a> | 
-      <a href="https://github.com/bsakatu">GitHub</a>
+      <nav><a href="/"> >> Home</a></nav>
     </footer>
-  </body>
-</html>
+  </article>
+</main>
 
+<footer>
+  <nav>
+    <ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/policy/">Policy</a></li>
+    </ul>
+  </nav>
+  <p>
+    <small>
+      Copyright © 2020 B-SAKATU 
+      <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+        <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
+        <img alt="BY" src="/img/license/by.svg" width="14" height="14" />
+        <img alt="NC" src="/img/license/nc.svg" width="14" height="14" />
+        <img alt="SA" src="/img/license/sa.svg" width="14" height="14" />
+      </a>
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>

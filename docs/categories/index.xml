@@ -6,11 +6,46 @@
     <description>Recent content in Categories on capyBaral</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <managingEditor>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</managingEditor>
-    <webMaster>bsakatu.bleu.blanc.rouge@gmail.com (B-SAKATU)</webMaster>
+    <lastBuildDate>Mon, 04 May 2020 01:00:00 +0900</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Web</title>
+      <link>/categories/web/</link>
+      <pubDate>Mon, 04 May 2020 01:00:00 +0900</pubDate>
+      
+      <guid>/categories/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hardware</title>
+      <link>/categories/hardware/</link>
+      <pubDate>Sat, 02 May 2020 13:49:52 +0900</pubDate>
+      
+      <guid>/categories/hardware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Input</title>
+      <link>/categories/input/</link>
+      <pubDate>Tue, 11 Dec 2018 00:25:00 +0900</pubDate>
+      
+      <guid>/categories/input/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>General</title>
+      <link>/categories/general/</link>
+      <pubDate>Thu, 01 Nov 2018 01:44:00 +0900</pubDate>
+      
+      <guid>/categories/general/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
