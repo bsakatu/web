@@ -1,0 +1,30 @@
+{{ partial "head.html" . }}
+
+{{ partial "global-header.html" . }}
+  <main>
+
+    <header>
+  {{- if not .IsHome }}
+      <h1>{{ .Title | markdownify }}</h1>
+  {{- else if .IsHome }}
+      <h1>{{ .Site.Title }} - {{ .Site.Params.brand }}</h1>
+  {{- end }}
+    </header>
+
+{{ .Content }}
+    <section>
+      <h2>Latest posts (tag: about)</h2>
+      <dl id="latest-posts">
+    {{- $pages := (index .Site.Taxonomies.tags "about") -}}
+    {{- range $pages }}
+        <div>
+          <dt><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006/01/02" }}</time></dt>
+          <dd><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></dd>
+        </div>
+    {{- end }}
+      </dl>
+    </section>
+
+  </main>
+
+{{ partial "global-footer.html" . }}
