@@ -13,28 +13,34 @@ hasCJKLanguage = true
 
 [permalinks]
     post = "/post/:year/:month/:day/:filename/"
-    doc = "/doc/:filename/"
+    doc = "/:sections/:filename/"
+    top = "/:"
 [author]
     name = "B-SAKATU"
-    email = "bsakatu.bleu.blanc.rouge@gmail.com"
+    email = ""
 [[menu.main]]
-    name = "Home"
-    url = "/"
+    name = "Zatsu"
+    url = "/post/"
     weight = 1
+[[menu.main]]
+    name = "Doc"
+    url = "/doc/"
+    weight = 2
 [[menu.main]]
     name = "Categories"
     url = "/categories/"
-    weight = 2
+    weight = 3
 [[menu.main]]
     name = "Tags"
     url = "/tags/"
-    weight = 3
+    weight = 4
 [[menu.feed]]
     name = "Subscribe"
     url = "/index.xml"
 
 [params]
     brand = "bsakatu.net"
+    author = "B-SAKATU"
     description = ""
     copyrighthtml = "Copyright &copy; 2020 B-SAKATU"
     footer = ""
