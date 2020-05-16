@@ -1,31 +1,31 @@
 {{ partial "head.html" . }}
 
 {{ partial "global-header.html" . }}
-<main>
+  <main>
 
-  <header>
-{{- if not .IsHome }}
-    <h1>{{ .Title | markdownify }}</h1>
-{{- else if .IsHome }}
-    <h1>{{ .Site.Title }} - {{ .Site.Params.brand }}</h1>
-{{- end }}
-  </header>
-
-{{ .Content }}
-  <section>
-    <h2>Latest posts</h2>
-    <dl id="latest-posts">
-  {{- $pages := .Site.RegularPages -}}
-  {{- if .IsHome }}{{ $pages := .Site.RegularPages }}{{ end -}}
-  {{- range (where $pages "Section" "!=" "") }}
-      <div>
-        <dt><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006/01/02" }}</time></dt>
-        <dd><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></dd>
-      </div>
+    <header>
+  {{- if not .IsHome }}
+      <h1>{{ .Title | markdownify }}</h1>
+  {{- else if .IsHome }}
+      <h1>{{ .Site.Title }} - {{ .Site.Params.brand }}</h1>
   {{- end }}
-    </dl>
-  </section>
+    </header>
 
-</main>
+  {{ .Content }}
+    <section>
+      <h2>Latest posts</h2>
+      <dl id="latest-posts">
+    {{- $pages := .Site.RegularPages -}}
+    {{- if .IsHome }}{{ $pages := .Site.RegularPages }}{{ end -}}
+    {{- range (where $pages "Section" "!=" "") }}
+        <div>
+          <dt><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006/01/02" }}</time></dt>
+          <dd><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></dd>
+        </div>
+    {{- end }}
+      </dl>
+    </section>
+
+  </main>
 
 {{ partial "global-footer.html" . }}
