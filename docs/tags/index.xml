@@ -6,10 +6,46 @@
     <description>Recent content in Tags on capyBaral</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Mon, 04 May 2020 01:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 17 May 2020 18:58:00 +0900</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSS</title>
+      <link>/tags/css/</link>
+      <pubDate>Sun, 17 May 2020 18:58:00 +0900</pubDate>
+      
+      <guid>/tags/css/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTML</title>
+      <link>/tags/html/</link>
+      <pubDate>Sun, 17 May 2020 18:58:00 +0900</pubDate>
+      
+      <guid>/tags/html/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>/tags/hugo/</link>
+      <pubDate>Sun, 17 May 2020 18:58:00 +0900</pubDate>
+      
+      <guid>/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>site</title>
+      <link>/tags/site/</link>
+      <pubDate>Sun, 17 May 2020 18:58:00 +0900</pubDate>
+      
+      <guid>/tags/site/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Markdown</title>
@@ -89,33 +125,6 @@
       <pubDate>Sat, 08 Dec 2018 17:18:28 +0900</pubDate>
       
       <guid>/tags/about/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CSS</title>
-      <link>/tags/css/</link>
-      <pubDate>Tue, 13 Nov 2018 01:16:08 +0900</pubDate>
-      
-      <guid>/tags/css/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>HTML</title>
-      <link>/tags/html/</link>
-      <pubDate>Tue, 13 Nov 2018 01:16:08 +0900</pubDate>
-      
-      <guid>/tags/html/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>/tags/hugo/</link>
-      <pubDate>Tue, 13 Nov 2018 01:16:08 +0900</pubDate>
-      
-      <guid>/tags/hugo/</guid>
       <description></description>
     </item>
     

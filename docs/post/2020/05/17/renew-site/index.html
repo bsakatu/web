@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>サイトを刷新 | capyBaral</title>
+  <meta name="author" content="B-SAKATU" />
+  <meta name="generator" content="Hugo 0.69.2" />
+  <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/syntax.css" />
+  <link rel="stylesheet" href="/css/theme-override.css" />
+  
+
+</head>
+
+<body>  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">/capybaral</a>
+        </li>
+        <li>
+          <a href="/post/">~/zatsu</a>
+        </li>
+        <li>
+          <a href="/doc/">~/doc</a>
+        </li>
+        <li>
+          <a href="/categories/">~/categories</a>
+        </li>
+        <li>
+          <a href="/tags/">~/tags</a>
+        </li>
+        <li>
+          <a href="/index.xml">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
+              <title>feed</title>
+              <circle cx="68" cy="189" r="24" />
+              <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
+              <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+
+<main>
+  <article>
+    <header>
+      <h1>サイトを刷新</h1>
+      <dl id="doc-info">
+
+        <div id="published-date">
+          <dt>Published</dt>
+          <dd><time datetime="2020-05-17T00:00:00&#43;09:00">2020/05/17 00:00</time></dd>
+        </div>
+        
+        <div id="category">
+          <dt>Category</dt>
+          <dd><a href="/categories/web">Web</a></dd>
+        </div><div id="tag">
+          <dt>Tags</dt>
+          <dd><a href="/tags/site">site</a></dd>
+          <dd><a href="/tags/hugo">Hugo</a></dd>
+          <dd><a href="/tags/html">HTML</a></dd>
+          <dd><a href="/tags/css">CSS</a></dd>
+        </div>
+
+      </dl>
+      
+
+    </header>
+
+<p><a href="/post/2020/05/02/usb-pd-tester-fnc88/">USB テスターを買った話</a>を書きたくて久々（約1年半ぶり）にこのサイトに記事を書いたついでに色々見ていたら <abbr title="Golden Week">GW</abbr> に突入してしまったのもあり幸か不幸か重い腰が上がってしまいサイトの大改修に手をつけてしまった。4月末からやっているので3週間くらいやっている……。我ながらこりすぎである。いつものこと。</p>
+<ul>
+<li>テーマとして使っていた <a href="https://themes.gohugo.io/hugo-classic/">Hugo - Classic</a> の HTML が色々気に入らなさすぎたので、自分の思う極力最良なマークアップとなるように修正、というかほぼ全書き換え</li>
+<li>CSS も大改修
+<ul>
+<li>リセットをしていなかったので、今風なリセット兼デフォルトスタイルとして <a href="https://github.com/twbs/bootstrap/blob/master/dist/css/bootstrap-reboot.css"><code>bootstrap-reboot.css</code></a> を導入</li>
+<li>code block のシンタックスハイライトをスタイル直書き方式から class 方式へ変更</li>
+<li>スマホ対応を多少進めた</li>
+</ul>
+</li>
+<li>とりあえず見られればいいという考えで放置していた不十分な箇所を色々手入れ
+<ul>
+<li>カテゴリやタグを使う</li>
+<li>目次を使えるようにする</li>
+<li>ライセンス (CC BY-NC-SA 4.0 にした)</li>
+<li>等々</li>
+</ul>
+</li>
+<li>WIP
+<ul>
+<li>複数階層用のテンプレート等の対応</li>
+<li>各ページへのリンク貼りが不十分な点を改良</li>
+<li>まだざっくりな CSS を整理（適宜分割）</li>
+<li>キーボード関係の記事をいい感じにまとめる（とくに自作ーボード）</li>
+</ul>
+</li>
+</ul>
+<p>こんなに真面目に HTML と CSS に触ったのはたぶんブログを自分で運用していた十数年前以来だったので、HTML 4.01, XHTML 1.0/1.1, CSS 2.1 の頃で止まってしまっていた頭の知識を更新しながらの作業となってなかなか大変だった。とはいえ、その十数年前に良いマークアップとスタイルで多ブラウザ対応するのに苦しんだ経験を思うと、その頃はまだ草案状態だったために実装すらなく思い描くも使えなかった数々の CSS セレクタやプロパティ、色々便利になった HTML5 の要素、などなど使えるようになり相当やりやすくなっていたので、そこまで苦ではなかった、と思う。以前はブラウザ毎の微妙な仕様とかバグとか実装不足とか（主に IE とか IE とか IE）に合わせてやっていたので、そういう作業がないのもとても楽。IE はもう絶対確認しないぞ。</p>
+
+
+    <footer>
+      <nav><a href="/"> >> Home</a></nav>
+    </footer>
+  </article>
+</main>
+
+<footer>
+  <nav>
+    <ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/policy/">Policy</a></li>
+    </ul>
+  </nav>
+  <p>
+    <small>
+      Copyright © 2020 B-SAKATU 
+      <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+        <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
+        <img alt="BY" src="/img/license/by.svg" width="14" height="14" />
+        <img alt="NC" src="/img/license/nc.svg" width="14" height="14" />
+        <img alt="SA" src="/img/license/sa.svg" width="14" height="14" />
+      </a>
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>

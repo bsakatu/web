@@ -6,10 +6,19 @@
     <description>Recent content in Web on capyBaral</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Mon, 04 May 2020 01:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 17 May 2020 18:58:00 +0900</lastBuildDate>
     
 	<atom:link href="/categories/web/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>サイトを刷新</title>
+      <link>/post/2020/05/17/renew-site/</link>
+      <pubDate>Sun, 17 May 2020 18:58:00 +0900</pubDate>
+      
+      <guid>/post/2020/05/17/renew-site/</guid>
+      <description>USB テスターを買った話を書きたくて久々（約1年半ぶり）にこのサイトに記事を書いたついでに色々見ていたら GW に突入してしまったのもあり幸か不幸か重</description>
+    </item>
     
     <item>
       <title>Markdownlint で遭遇しているトラベルのメモ</title>
