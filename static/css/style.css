@@ -51,14 +51,14 @@ kbd, samp, code {
 pre code { background: none; }
 
 /** images, tables, misc. **/
-img,
-iframe,
-video {
+article img,
+article iframe,
+article video {
   max-width: 100%;
   height: auto;
 }
 @media only screen and (max-width: 900px) {
-  img {
+  article img {
     width: 100%;
     height: auto;
   }
@@ -114,6 +114,16 @@ tbody > tr:nth-child(even) {
 }
 
 /* Global Header */
+@media only screen and (max-width: 340px) {
+  body > header {
+    font-size: 0.9rem;
+  }
+}
+@media only screen and (min-width: 341px) and (max-width: 400px) {
+  body > header {
+    font-size: 0.95rem;
+  }
+}
 body > header {
   margin-bottom: 1rem;
   background: #3d55c1;
@@ -125,6 +135,7 @@ body > header a {
 }
 body > header > nav > ul {
   display: flex;
+  flex-wrap: wrap;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -132,8 +143,16 @@ body > header > nav > ul {
 body > header > nav > ul > li {
   margin: 0 0.5rem;
 }
+@media only screen and (max-width: 400px) {
+  body > header > nav > ul > li {
+    margin: 0 0.25em;
+  }
+}
 body > header > nav > ul > li:last-child {
   margin-left: auto;
+}
+body > header > nav > ul > li:last-child svg {
+  fill: currentColor;
 }
 body > header > nav > ul > li > a:hover {
   color: #fff;
@@ -148,7 +167,8 @@ body > footer > nav {
   font-size: 0.8rem;
 }
 body > footer > nav > ul {
-  margin-bottom: 0;
+  margin: 0;
+  padding: 0;
 }
 body > footer > nav > ul > li {
   display: inline-block;
@@ -162,6 +182,8 @@ body > footer a[rel="license"] {
   padding-left: 0.5em;
 }
 body > footer a[rel="license"] > img {
+  width: 14px;
+  height: 14px;
   vertical-align: -.175em;
 }
 
@@ -249,10 +271,12 @@ dl#latest-posts > div{
   margin: 0.5em 0;
 }
 dl#latest-posts > div > dt {
-  width: 6em;
+  width: 5.5em;
   vertical-align: bottom;
 }
 dl#latest-posts > div > dd {
+  box-sizing: border-box;
+  width: calc(100% - 7rem);
   margin-left: 1rem;
 }
 
