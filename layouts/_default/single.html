@@ -51,7 +51,9 @@
 
     </header>
 
+    <section>
 {{ .Content }}
+    </section>
 
 {{ if eq .File.Dir "about/" -}}
   {{- $.Scratch.Set "latest-posts" (index .Site.Taxonomies.tags "about") -}}
