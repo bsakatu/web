@@ -11,43 +11,45 @@
   <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/syntax.css" />
-  <link rel="stylesheet" href="/css/theme-override.css" />
   
+  
+  <link rel="alternate" type="application/rss+xml" href="/index.xml" title="capyBaral" />
 
 </head>
 
-<body>  <header>
-    <nav>
-      <ul>
-        <li>
-          <a href="/">/capybaral</a>
-        </li>
-        <li>
-          <a href="/post/">~/zatsu</a>
-        </li>
-        <li>
-          <a href="/doc/">~/doc</a>
-        </li>
-        <li>
-          <a href="/categories/">~/categories</a>
-        </li>
-        <li>
-          <a href="/tags/">~/tags</a>
-        </li>
-        <li>
-          <a href="/index.xml">
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
-              <title>feed</title>
-              <circle cx="68" cy="189" r="24" />
-              <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
-              <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+<body>
 
+<header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/">/capybaral</a>
+      </li>
+      <li>
+        <a href="/post/">~/zatsu</a>
+      </li>
+      <li>
+        <a href="/doc/">~/doc</a>
+      </li>
+      <li>
+        <a href="/categories/">~/categories</a>
+      </li>
+      <li>
+        <a href="/tags/">~/tags</a>
+      </li>
+      <li>
+        <a href="/index.xml">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
+            <title>feed</title>
+            <circle cx="68" cy="189" r="24" />
+            <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
+            <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
 
 <main>
   <article>
@@ -75,10 +77,14 @@
 
     </header>
 
+    <section>
 <p>キーボードの配列で何を使うかは人それぞれであろうが、日本人であれば基本的にはいわゆる JIS 配列だろう。しかしプログラマーなどの一部の人々は英語圏の US 配列の方が使いやすいという。私も興味はあったものの、特に使うことのないまま今年まで生きてきたわけだが、ふとした理由でついに使うようになっなってしまった。</p>
 <p>そもそものきっかけは、会社の PC で作るスクリプト管理用に Git を使おうとしたことだ。gnupack の cygwin で Git を使い始めてみたが、グラフィカルに表示するソフトは X Window System を入れる必要があり、インストールして無事使えたのだが、これがどうも起動すると入力言語を勝手に英語に切り替える不思議挙動をしてくれた。英語なので配列は当然 US 配列となる。言語を切り替えれば元に戻るのだが、だんだんそれも面倒くさくなってきたので US 配列を覚えてしまえば困らないよな? という思考に至ってしまい、かくもヘンテコな経緯で US 配列デビューすることと相成った。我ながら特殊なケース……。</p>
 <p>その後は別のページで解説する配列の変更などをしながら、日本語を打ちつつ US 配列を使いやすいように、あれこれやったりしながら今日に至る。</p>
 <p>US 配列を使ってもいいと思うに至るにはもう1つ理由があり、それは一部のソフトでは JIS 配列でのショートカットキーが不自然に並べになっていて気にくわなかったからである。ピンポイントに言ってしまうと例えば Adobe の Acrobat だ（Reader 含む）。このソフトの拡大縮小のショートカットキーは US 配列ではそれぞれ <kbd>Ctrl + =</kbd> と <kbd>Ctrl + -</kbd> なのだが、要は <kbd>Ctrl</kbd> キーと仮想キーの <code>VK_OEM_PLUS</code> と <code>VK_OEM_MINUS</code> を組み合わせているというわけだ。ある意味分かりやすい。しかしこれが JIS 配列の場合、キーボード上の <kbd>- =</kbd> キーの位置は同じだが <kbd>; +</kbd> キーの位置は <kbd>L</kbd> の右隣となるので、全く脈絡のない位置でイラッとする。この配置の不自然さは以前から気になっていたのもあり、US 配列デビューする自分の背中を押すことに繋がった。</p>
+
+    </section>
+
 
 
     <footer>
@@ -95,8 +101,7 @@
     </ul>
   </nav>
   <p>
-    <small>
-      Copyright © 2020 B-SAKATU 
+    <small>© B-SAKATU 2018 
       <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
         <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
         <img alt="BY" src="/img/license/by.svg" width="14" height="14" />

@@ -11,43 +11,45 @@
   <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/syntax.css" />
-  <link rel="stylesheet" href="/css/theme-override.css" />
   
+  
+  <link rel="alternate" type="application/rss+xml" href="/index.xml" title="capyBaral" />
 
 </head>
 
-<body>  <header>
-    <nav>
-      <ul>
-        <li>
-          <a href="/">/capybaral</a>
-        </li>
-        <li>
-          <a href="/post/">~/zatsu</a>
-        </li>
-        <li>
-          <a href="/doc/">~/doc</a>
-        </li>
-        <li>
-          <a href="/categories/">~/categories</a>
-        </li>
-        <li>
-          <a href="/tags/">~/tags</a>
-        </li>
-        <li>
-          <a href="/index.xml">
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
-              <title>feed</title>
-              <circle cx="68" cy="189" r="24" />
-              <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
-              <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+<body>
 
+<header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/">/capybaral</a>
+      </li>
+      <li>
+        <a href="/post/">~/zatsu</a>
+      </li>
+      <li>
+        <a href="/doc/">~/doc</a>
+      </li>
+      <li>
+        <a href="/categories/">~/categories</a>
+      </li>
+      <li>
+        <a href="/tags/">~/tags</a>
+      </li>
+      <li>
+        <a href="/index.xml">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
+            <title>feed</title>
+            <circle cx="68" cy="189" r="24" />
+            <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
+            <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
 
 <main>
   <article>
@@ -76,6 +78,7 @@
 
     </header>
 
+    <section>
 <p><a href="https://gohugo.io/">Hugo</a> で各ページ固有の CSS を適用したい場合にどうするか悩んだのでその備忘録。</p>
 <p>このサイトでは<time datetime="2018-11-13">現時点</time>で blog 的なページは <code>/post</code> 以下、個別のしっかりした記事は <code>/doc</code> 以下、というふうに分けている（つもり）。その中で /doc 以下の階層で個別のスタイルシートを適用したくなり、かつそれを記事ファイルと同じフォルダに置きたかったので、一工夫必要でした。</p>
 <p>まず記事の元となる <code>hoge.md</code> と個別スタイルの <code>custom.css</code> が <code>/doc/hoge/</code> フォルダにいるとします。ここでテンプレートの <code>header.html</code> のスタイルシートを呼び出しているあたりに下記のコードを追加します。</p>
@@ -84,6 +87,9 @@
 <span class="p">{{</span> <span class="nx">end</span> <span class="p">}}</span>
 </code></pre></div><p><code>custom.css</code> が同階層に存在すれば <code>custom.css</code> を呼び出す HTML タグを挿入するという流れです。ここでしばらくはまったのが、まずどの関数で存在判定をするのか。結果としては <code>.Resources.Match &quot;hoge&quot;</code> だったわけですが、他にも <code>.Get</code> などの機能が似ていそうな関数がいくつかあって調べるのに時間がかかりました。<code>.Resources.Match</code> は指定されたファイル等が存在しない場合に空文字列を返します。これが <code>&quot;[]&quot;</code> でした。しかしこのままでは判定に失敗するので、 <code>.Resources.Match</code> を <code>print</code> でラップしてあげて文字列化し、無事判定に成功しました。</p>
 <p>ここまで書いて判定文字列 <code>&quot;[]&quot;</code> をダブルクォーテーションで囲わなければよかったような気もしますが面倒なので今回は無視します。<ins datetime="2020-05-04T00:33:00+09:00">やっぱり無理だったからこれで良し。</ins></p>
+
+    </section>
+
 
 
     <footer>
@@ -100,8 +106,7 @@
     </ul>
   </nav>
   <p>
-    <small>
-      Copyright © 2020 B-SAKATU 
+    <small>© B-SAKATU 2018 
       <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
         <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
         <img alt="BY" src="/img/license/by.svg" width="14" height="14" />

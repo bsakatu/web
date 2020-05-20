@@ -11,43 +11,45 @@
   <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/syntax.css" />
-  <link rel="stylesheet" href="/css/theme-override.css" />
   
+  
+  <link rel="alternate" type="application/rss+xml" href="/index.xml" title="capyBaral" />
 
 </head>
 
-<body>  <header>
-    <nav>
-      <ul>
-        <li>
-          <a href="/">/capybaral</a>
-        </li>
-        <li>
-          <a href="/post/">~/zatsu</a>
-        </li>
-        <li class="current">
-          <a href="/doc/">~/doc</a>
-        </li>
-        <li>
-          <a href="/categories/">~/categories</a>
-        </li>
-        <li>
-          <a href="/tags/">~/tags</a>
-        </li>
-        <li>
-          <a href="/index.xml">
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
-              <title>feed</title>
-              <circle cx="68" cy="189" r="24" />
-              <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
-              <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+<body>
 
+<header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/">/capybaral</a>
+      </li>
+      <li>
+        <a href="/post/">~/zatsu</a>
+      </li>
+      <li class="current">
+        <a href="/doc/">~/doc</a>
+      </li>
+      <li>
+        <a href="/categories/">~/categories</a>
+      </li>
+      <li>
+        <a href="/tags/">~/tags</a>
+      </li>
+      <li>
+        <a href="/index.xml">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
+            <title>feed</title>
+            <circle cx="68" cy="189" r="24" />
+            <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
+            <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
 
 <main>
   <article>
@@ -75,6 +77,7 @@
 
     </header>
 
+    <section>
 <h2 id="scancode-map-とは">Scancode Map とは</h2>
 <p>基本的には Microsoft の<a title="Keyboard and mouse class drivers - Windows drivers | Microsoft Docs" href="https://docs.microsoft.com/en-us/windows-hardware/drivers/hid/keyboard-and-mouse-class-drivers#scan-code-mapper-for-keyboards">公式資料</a> を読めば分かりますが、元々はキーボードが送出するスキャンコードがおかしかった場合にそれを訂正する設定をするために作られたようです。現在では左 Ctrl キーと CapsLock キーの入れ替えや、Esc キーと 半角全角キーとの入れ替えに使うのがメインだと思いますが……。</p>
 <p>ちなみにスキャンコードについては自分で資料を整理してまとめを作っていましたが作ろうとしていたもの以上にしっかりしたページを見つけてしまったので今回はそれを載せておきます。すごい資料です。</p>
@@ -179,6 +182,9 @@
 
 <p>ちなみにとあるキーを無効化したい場合は、置き換え後のキーを定義する部分を <code>0000</code> （レジストリファイル内なら <code>00,00</code>）と指定すれば可能です。なお、使用中の配列データ内に損際しないスキャンコードを割り当てることは出来ない。例えば、US 配列で日本語配列固有のキーを定義してもそもそも US 配列の定義にそれらのキーがそもそも存在しないので指定しても動作しない。</p>
 
+    </section>
+
+
 
     <footer>
       <nav><a href="/"> >> Home</a></nav>
@@ -194,8 +200,7 @@
     </ul>
   </nav>
   <p>
-    <small>
-      Copyright © 2020 B-SAKATU 
+    <small>© B-SAKATU 2018 
       <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
         <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
         <img alt="BY" src="/img/license/by.svg" width="14" height="14" />

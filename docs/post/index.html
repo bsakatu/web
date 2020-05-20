@@ -11,87 +11,99 @@
   <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/syntax.css" />
-  <link rel="stylesheet" href="/css/theme-override.css" />
   
+  
+  <link rel="alternate" type="application/rss+xml" href="/index.xml" title="capyBaral" />
 
 </head>
 
 <body>
 
+<header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/">/capybaral</a>
+      </li>
+      <li>
+        <a href="/post/">~/zatsu</a>
+      </li>
+      <li>
+        <a href="/doc/">~/doc</a>
+      </li>
+      <li>
+        <a href="/categories/">~/categories</a>
+      </li>
+      <li>
+        <a href="/tags/">~/tags</a>
+      </li>
+      <li>
+        <a href="/index.xml">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
+            <title>feed</title>
+            <circle cx="68" cy="189" r="24" />
+            <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
+            <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
   <header>
-    <nav>
-      <ul>
-        <li>
-          <a href="/">/capybaral</a>
-        </li>
-        <li>
-          <a href="/post/">~/zatsu</a>
-        </li>
-        <li>
-          <a href="/doc/">~/doc</a>
-        </li>
-        <li>
-          <a href="/categories/">~/categories</a>
-        </li>
-        <li>
-          <a href="/tags/">~/tags</a>
-        </li>
-        <li>
-          <a href="/index.xml">
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
-              <title>feed</title>
-              <circle cx="68" cy="189" r="24" />
-              <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
-              <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <h1>Posts</h1>
   </header>
 
-  <main>
+  <section>
 
-    <header>
-      <h1>Posts</h1>
-    </header>
 
-  
-    <section>
-      <h2>Latest posts</h2>
-      <dl id="latest-posts">
-        <div>
-          <dt><time datetime="2020-05-17">2020/05/17</time></dt>
-          <dd><a href="/post/2020/05/17/renew-site/">サイトを刷新</a></dd>
-        </div>
-        <div>
-          <dt><time datetime="2020-05-02">2020/05/02</time></dt>
-          <dd><a href="/post/2020/05/02/usb-pd-tester-fnc88/">USB-PD テスターを買った話</a></dd>
-        </div>
-        <div>
-          <dt><time datetime="2018-12-08">2018/12/08</time></dt>
-          <dd><a href="/post/2018/12/08/why-use-us-layout/">なぜキーボードの US 配列を使うようになったか</a></dd>
-        </div>
-        <div>
-          <dt><time datetime="2018-11-25">2018/11/25</time></dt>
-          <dd><a href="/post/2018/11/25/change-hardware-keyboard-layout-ime-jp/">ハードウェア キーボード レイアウトの変更</a></dd>
-        </div>
-        <div>
-          <dt><time datetime="2018-11-13">2018/11/13</time></dt>
-          <dd><a href="/post/2018/11/13/custom-css-for-individual-pages-on-hugo/">Hugo で各ページ固有のスタイルシートを呼び出す</a></dd>
-        </div>
-        <div>
-          <dt><time datetime="2018-11-05">2018/11/05</time></dt>
-          <dd><a href="/post/2018/11/05/ten-key-ichi_1st/">天下一キーボードわいわい会 Vol.1 に参加して</a></dd>
-        </div>
-        <div>
-          <dt><time datetime="2018-11-01">2018/11/01</time></dt>
-          <dd><a href="/post/2018/11/01/first-post/">初投稿（という名の三度目の正直）</a></dd>
-        </div>
-      </dl>
-    </section>
+  </section>
 
-  </main>
+  <section>
+    <h2 id="latest-posts">Latest posts</h2>
+    <dl>
+      <div>
+        <dt><time datetime="2020-05-17">2020/05/17</time></dt>
+        <dd><a href="/post/2020/05/17/renew-site/">サイトを刷新</a></dd>
+        
+      </div>
+      <div>
+        <dt><time datetime="2020-05-02">2020/05/02</time></dt>
+        <dd><a href="/post/2020/05/02/usb-pd-tester-fnc88/">USB-PD テスターを買った話</a></dd>
+        
+      </div>
+      <div>
+        <dt><time datetime="2018-12-08">2018/12/08</time></dt>
+        <dd><a href="/post/2018/12/08/why-use-us-layout/">なぜキーボードの US 配列を使うようになったか</a></dd>
+        
+      </div>
+      <div>
+        <dt><time datetime="2018-11-25">2018/11/25</time></dt>
+        <dd><a href="/post/2018/11/25/change-hardware-keyboard-layout-ime-jp/">ハードウェア キーボード レイアウトの変更</a></dd>
+        
+      </div>
+      <div>
+        <dt><time datetime="2018-11-13">2018/11/13</time></dt>
+        <dd><a href="/post/2018/11/13/custom-css-for-individual-pages-on-hugo/">Hugo で各ページ固有のスタイルシートを呼び出す</a></dd>
+        
+      </div>
+      <div>
+        <dt><time datetime="2018-11-05">2018/11/05</time></dt>
+        <dd><a href="/post/2018/11/05/ten-key-ichi_1st/">天下一キーボードわいわい会 Vol.1 に参加して</a></dd>
+        
+      </div>
+      <div>
+        <dt><time datetime="2018-11-01">2018/11/01</time></dt>
+        <dd><a href="/post/2018/11/01/first-post/">初投稿（という名の三度目の正直）</a></dd>
+        
+      </div>
+    </dl>
+  </section>
+
+</main>
 
 <footer>
   <nav>
@@ -101,8 +113,7 @@
     </ul>
   </nav>
   <p>
-    <small>
-      Copyright © 2020 B-SAKATU 
+    <small>© B-SAKATU 2018-2020 
       <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
         <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
         <img alt="BY" src="/img/license/by.svg" width="14" height="14" />
