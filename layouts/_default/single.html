@@ -1,7 +1,10 @@
-{{ partial "head.html" . }}
+{{ define "doc_custom_css" -}}
+  {{- if ne (print (.Resources.Match "custom.css")) "[]" -}}
+  <link rel="stylesheet" href="custom.css" />
+  {{- end -}}
+{{- end }}
 
-{{- partial "global-header.html" . }}
-
+{{ define "main" -}}
 <main>
   <article>
     <header>
@@ -19,7 +22,7 @@
           <dt>Modified</dt>
           <dd><time datetime="{{ .Lastmod.Format "2006-01-01T00:00:00+09:00" }}">{{ .Lastmod.Format "2006/01/02 00:00" }}</time></dd>
         </div>
-          {{- end }}
+        {{- end }}
         {{ range $i := (slice "categories" "tags") -}}
           {{- with ($.Param $i) }}
             {{- $idx_max := (len .) -}}
@@ -50,10 +53,14 @@
 
 {{ .Content }}
 
+{{ if eq .File.Dir "about/" -}}
+  {{- $.Scratch.Set "latest-posts" (index .Site.Taxonomies.tags "about") -}}
+  {{- partial "latest-posts.html" . -}}
+{{- end }}
+
     <footer>
       <nav><a href="/"> >> Home</a></nav>
     </footer>
   </article>
 </main>
-
-{{ partial "global-footer.html" . }}
+{{- end }}

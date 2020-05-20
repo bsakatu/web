@@ -1,0 +1,14 @@
+  <section>
+    <h2 id="latest-posts">Latest posts{{ if eq .File.Dir "about/"}} (tag: about){{ end }}</h2>
+    <dl>
+  {{- range $.Scratch.Get "latest-posts" }}
+      <div>
+        <dt><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006/01/02" }}</time></dt>
+        <dd><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></dd>
+        {{ if eq $.Kind "taxonomy" -}}
+        <dd class="summary{{ if .Truncated }} truncated{{ end }}">{{ .Summary }}</dd>
+        {{- end }}
+      </div>
+  {{- end }}
+    </dl>
+  </section>

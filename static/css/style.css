@@ -261,41 +261,44 @@ main > article > footer {
 }
 
 /* List page */
-dl#latest-posts {
+#latest-posts + dl {
   margin-left: 1rem;
 }
-dl#latest-posts > div{
+#latest-posts + dl > div{
   display: flex;
   flex-wrap: wrap;
   /* height: 1.5em; */
   margin: 0.5em 0;
 }
-dl#latest-posts > div > dt {
+#latest-posts + dl > div > dt {
   width: 5.5em;
   vertical-align: bottom;
 }
-dl#latest-posts > div > dd {
+#latest-posts + dl > div > dd {
   box-sizing: border-box;
   width: calc(100% - 7rem);
   margin-left: 1rem;
 }
 
 /* Taxonomy page */
-#taxonomy dl#latest-posts > div > dd.summary {
+#taxonomy #latest-posts + dl > div > dd.summary {
   width: 100%;
   margin-left: 3rem;
 }
-#taxonomy dl#latest-posts > div > dd.summary.truncated::after {
+#taxonomy #latest-posts + dl > div > dd.summary.truncated::after {
   content: "..."
 }
 
 /* Document Main */
-main > article > h2,h3,h4,h5,h6 {
+main > article > section > h2,h3,h4,h5,h6 {
   margin-top: 1em;
   padding-left: 0.25em;
   border-bottom: 1px solid #3d55c1;
   border-left: 0.2em solid #3d55c1;
 }
+
+/* About */
+
 
 /** Changelog - Document Main **/
 #changelog {

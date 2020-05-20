@@ -1,31 +1,29 @@
-{{ partial "head.html" . }}
+{{ define "main" -}}
 
-{{ partial "global-header.html" . }}
-  <main>
+<main>
 
-    <header>
-  {{- if not .IsHome }}
-      <h1>{{ .Title | markdownify }}</h1>
-  {{- else if .IsHome }}
-      <h1>{{ .Site.Title }} - {{ .Site.Params.brand }}</h1>
-  {{- end }}
-    </header>
+  <header>
+{{- if not .IsHome }}
+    <h1>{{ .Title | markdownify }}</h1>
+{{- else if .IsHome }}
+    <h1>{{ .Site.Title }} - {{ .Site.Params.brand }}</h1>
+{{- end }}
+  </header>
 
-  {{ .Content }}
-    <section>
-      <h2>Latest posts</h2>
-      <dl id="latest-posts">
-    {{- $pages := .Site.RegularPages -}}
-    {{- if .IsHome }}{{ $pages := .Site.RegularPages }}{{ end -}}
-    {{- range (where $pages "Section" "!=" "") }}
-        <div>
-          <dt><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006/01/02" }}</time></dt>
-          <dd><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></dd>
-        </div>
-    {{- end }}
-      </dl>
-    </section>
+  <section>
+{{ .Content }}
+  </section>
 
-  </main>
+{{- with .File -}}{{- $.Scratch.Set "fileDir" .Dir -}}{{- end -}}
+{{- if eq ($.Scratch.Get "fileDir") "about/" -}}
+  {{- $.Scratch.Set "latest-posts" (index .Site.Taxonomies.tags "about") -}}
+{{ else if eq .Kind "section" -}}
+  {{- $.Scratch.Set "latest-posts" .CurrentSection.Pages -}}
+{{- else -}}
+  {{- $.Scratch.Set "latest-posts" .Site.RegularPages -}}
+{{- end }}
+{{ partial "latest-posts.html" . }}
 
-{{ partial "global-footer.html" . }}
+</main>
+
+{{- end }}

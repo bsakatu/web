@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ .Title }} | {{ .Site.Title }}</title>
+  <meta name="author" content="{{ .Site.Params.author }}" />
+  {{ hugo.Generator }}
+  <link rel="stylesheet" href="{{ "/css/bootstrap-reboot.css" | relURL }}" />
+  <link rel="stylesheet" href="{{ "/css/style.css" | relURL }}" />
+  <link rel="stylesheet" href="{{ "/css/syntax.css" | relURL }}" />
+  <!-- {{ range .Site.Params.custom_css -}}
+    {{- if (fileExists .) -}}
+  <link rel="stylesheet" href="{{ . | absURL }}" />
+    {{- end -}}
+  {{- end }} -->
+  {{ block "doc_custom_css" . }}{{ end }}
+  {{ with .Site.Home.OutputFormats.Get "rss" -}}
+    {{- printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML -}}
+  {{- end }}
+
+</head>
+
+<body>
+
+{{ block "header" . -}}
+<header>
+  <nav>
+    <ul>
+      {{ $title := lower .Title -}}
+      {{- $section := lower .Section -}}
+      <li{{ if .IsHome }} class="current"{{ end }}>
+        <a href="{{ .Site.BaseURL }}">/{{ lower .Site.Title}}</a>
+      </li>
+      {{ range .Site.Menus.main -}}
+        {{- $name := lower .Name -}}
+      <li{{ if or (eq $name $title) (eq $section $name) (eq $title (pluralize $name)) }} class="current"{{ end }}>
+        <a href="{{ .URL }}">~/{{ lower .Name }}</a>
+      </li>
+      {{ end -}}
+      {{ range .Site.Menus.feed -}}
+        {{- $name := lower .Name -}}
+      <li>
+        <a href="{{ .URL }}">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
+            <title>feed</title>
+            <circle cx="68" cy="189" r="24" />
+            <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
+            <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
+          </svg>
+        </a>
+      </li>
+      {{- end }}
+    </ul>
+  </nav>
+</header>
+{{- end }}
+
+{{ block "main" . }}{{ end }}
+
+{{ block "footer" . -}}
+<footer>
+  <nav>
+    <ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/policy/">Policy</a></li>
+    </ul>
+  </nav>
+  <p>
+    <small>
+      {{- if .IsPage  -}}
+        {{- $.Scratch.Set "year" (.PublishDate.Format "2006") -}}
+        {{- if ne .PublishDate .Lastmod -}}
+          {{- $.Scratch.Add "year" (printf "-%s" (.Lastmod.Format "2006")) -}}
+        {{- end -}}
+      {{- else  -}}
+        {{- $.Scratch.Set "year" (printf "%s-%s" (.Site.Params.firstpostdate.Format "2006") (now.Format "2006")) -}}
+      {{- end -}}
+      {{ printf "%s %s %s" .Site.Params.copyrightHTML .Site.Params.author ($.Scratch.Get "year") | markdownify -}}
+      {{- print " " }}
+      <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+        <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
+        <img alt="BY" src="/img/license/by.svg" width="14" height="14" />
+        <img alt="NC" src="/img/license/nc.svg" width="14" height="14" />
+        <img alt="SA" src="/img/license/sa.svg" width="14" height="14" />
+      </a>
+    </small>
+  </p>
+</footer>
+{{- end }}
+
+</body>
+</html>

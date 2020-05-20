@@ -1,12 +1,9 @@
-{{ partial "head.html" . }}
-
-{{ partial "global-header.html" . }}
+{{ define "main" -}}
 
 <h1>{{ .Title }}</h1>
-
-<ul class="terms">
+<ul id="terms">
 {{ range .Data.Terms }}  <li><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a> ({{ .Count }})</li>
 {{ end -}}
 </ul>
 
-{{ partial "global-footer.html" . }}
+{{- end }}
