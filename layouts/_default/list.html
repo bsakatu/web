@@ -11,10 +11,11 @@
   </header>
 
   <section>
+
 {{ .Content }}
   </section>
 
-{{- with .File -}}{{- $.Scratch.Set "fileDir" .Dir -}}{{- end -}}
+{{ with .File -}}{{- $.Scratch.Set "fileDir" .Dir -}}{{- end -}}
 {{- if eq ($.Scratch.Get "fileDir") "about/" -}}
   {{- $.Scratch.Set "latest-posts" (index .Site.Taxonomies.tags "about") -}}
 {{ else if eq .Kind "section" -}}
@@ -22,7 +23,7 @@
 {{- else -}}
   {{- $.Scratch.Set "latest-posts" .Site.RegularPages -}}
 {{- end }}
-{{ partial "latest-posts.html" . }}
+{{- partial "latest-posts.html" . }}
 
 </main>
 
