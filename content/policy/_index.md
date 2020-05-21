@@ -7,7 +7,7 @@ draft: false
 
 ## 著作権
 
-本サイトの著作物の利用は <abbr title="Creative Commons Attribution-NonCommercial-ShareAlike 4.0">CC BY-NC-SA 4.0</abbr> (クリエイティブ・コモンズ・ライセンス　表示 - 非営利 - 継承 4.0) によるものとする。商用利用は応相談（いないだろうが）。
+本サイトの著作物の利用は <abbr title="Creative Commons Attribution-NonCommercial-ShareAlike 4.0">CC BY-NC-SA 4.0</abbr> (クリエイティブ・コモンズ・ライセンス　表示 - 非営利 - 継承 4.0) によるものとする。商用利用は応相談（いないだろうが）。もちろん引用の範疇での使用はそちらのルールに従うこと。
 
 ## 無保証
 
