@@ -113,6 +113,67 @@ tbody > tr:nth-child(even) {
   background: #eee;
 }
 
+/* ins & del */
+section > ins,
+article > ins,
+section > del,
+section > del {
+  display: block;
+  margin-bottom: 1em;
+  border: 0 dashed #ccc;
+  border-width: 1px 0;
+}
+section > ins,
+article > ins {
+  text-decoration: none;
+}
+section > ins pre *,
+article > ins pre * {
+  display: inline-block;
+}
+ins::before {
+  content: "<追記>";
+  font-size: 0.8em;
+  white-space: pre;
+}
+ins::after {
+  content: "</追記>";
+  font-size: 0.8em;
+  white-space: pre;
+}
+ins[datetime]::before {
+  content: "<追記 [" attr(datetime) "]>: ";
+}
+section > ins[datetime]::before,
+article > ins[datetime]::before {
+  content: "<追記 [" attr(datetime) "]>\A";
+}
+
+del::before {
+  content: "<削除>";
+  font-size: 0.8em;
+  white-space: pre;
+}
+del::after {
+  content: "</削除>";
+  font-size: 0.8em;
+  white-space: pre;
+}
+del[datetime]::before {
+  content: "<削除 [" attr(datetime) "]>: ";
+}
+section > del[datetime]::before,
+article > del[datetime]::before {
+  content: "<削除 [" attr(datetime) "]>\A";
+}
+section > del::before,
+section > del::after,
+article > del::before,
+article > del::after {
+  display: inline-block;
+  width: 100%;
+}
+
 /* Global Header */
 @media only screen and (max-width: 340px) {
   body > header {
