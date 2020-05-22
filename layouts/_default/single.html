@@ -1,5 +1,5 @@
 {{ define "doc_custom_css" -}}
-  {{- if ne (print (.Resources.Match "custom.css")) "[]" -}}
+  {{- if ne (.Resources.Match "custom.css") nil -}}
   <link rel="stylesheet" href="custom.css" />
   {{- end -}}
 {{- end }}
