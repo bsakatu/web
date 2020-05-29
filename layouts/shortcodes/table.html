@@ -1,9 +1,172 @@
-{{- $caption := (replaceRE "[\\s\\S]*\\n?Table: ([^\\n]*)\\n?[\\s\\S]*" "$1" .Inner | .Page.RenderString) -}}
-{{- $table_temp := (.Inner | replaceRE "Table: .*\\n" "" | .Page.RenderString) -}}
-{{- $table_temp := replace $table_temp "<table>" "" -}}
-{{- $table_temp := print "<table>\n  <caption>" $caption "</caption>" $table_temp -}}
-{{- $table_temp := replaceRE "(</?(?:thead|tbody)>)" "  $1" $table_temp -}}
-{{- $table_temp := replaceRE "(</?(?:tr)>)" "    $1" $table_temp -}}
-{{- $table_temp := replaceRE "(<(?:th|td)>)" "      $1" $table_temp -}}
-{{- $table_temp := replaceRE "\\n$" "" $table_temp -}}
-{{- $table_temp | .Page.RenderString -}}
+{{- $debug := false -}}
+
+{{- $rows := replaceRE "([\\s\\S]*)\\n?(?:[Cc]aption|[Tt]able):\\s+[^\\n]*\\n?([\\s\\S]*)" "$1$2" .Inner -}}
+{{- $rows := $rows | findRE "([^|\n]*\\|)+" -}}
+
+{{- $.Scratch.Set "temp_rowspans" slice -}}
+{{- $.Scratch.Set "temp_colspan" slice -}}
+{{- $.Scratch.Set "head_end" false -}}
+{{- $.Scratch.Set "head_border_index" 0 -}}
+
+{{- range $row_idx, $row := $rows -}}
+  {{- $temp_cell_values := (findRE "([^|]|\\s)*" $row) -}}
+  {{- $temp_cell_values := (first (sub (len $temp_cell_values) 2) (after 1 $temp_cell_values)) -}}
+  {{- $.Scratch.Add "cell_values" (slice $temp_cell_values) -}}
+  {{- if ne ($.Scratch.Get "head_end") -}}
+    {{- if (findRE "^[-|:\\s]+$" $row) -}}
+      {{- $.Scratch.Set "head_end" true -}}
+      {{- $.Scratch.Set "head_border_index" $row_idx -}}
+    {{- else -}}
+      <!-- get colspan -->
+      {{- $pipes := findRE "\\|+" $row -}}
+      {{- range $idx, $pipe := (after 1 $pipes) -}}
+        {{- $span_len := len (findRE "\\|" $pipe) -}}
+        {{- if eq $span_len 1 -}}
+          {{- $.Scratch.Add "temp_colspan" (slice 1) -}}
+        {{- else if gt $span_len 1 -}}
+          {{- $.Scratch.Add "temp_colspan" (slice $span_len) -}}
+          {{- range seq (sub $span_len 1) -}}
+            {{- $.Scratch.Add "temp_colspan" (slice 0) -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $.Scratch.Add "colspans" (slice ($.Scratch.Get "temp_colspan")) -}}
+      {{- $.Scratch.Delete "temp_colspan" -}}
+
+      <!-- get rowspan 1/2 -->
+      {{- $cols := findRE "[^|\n]*\\|" $row -}}
+      {{- range $col_idx, $col := (after 1 $cols) -}}
+        {{- $col_value := $col | replaceRE "\\s+([^|\\s]+)\\s+\\|" "$1" -}}
+        {{- if ne $col_value "^^" -}}
+          {{- $.Scratch.Add "temp_rowspans" (slice 1) -}}
+        {{- else if eq $col_value "^^" -}}
+          {{- $.Scratch.Add "temp_rowspans" (slice 0) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $.Scratch.Add "rowspans" (slice ($.Scratch.Get "temp_rowspans")) -}}
+      {{- $.Scratch.Set "temp_rowspans" slice -}}
+
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $head_border_index := $.Scratch.Get "head_border_index" -}}
+{{- $cell_values := $.Scratch.Get "cell_values" -}}
+{{- $rowspans := $.Scratch.Get "rowspans" -}}
+{{- $colspans := $.Scratch.Get "colspans" -}}
+{{- $row_idx_max := (sub (len $rowspans) 1) -}}
+{{- $col_idx_max := (sub (len (index $colspans 0)) 1) -}}
+{{- $.Scratch.Set "temp_rowspan" 1 -}}
+{{- $.Scratch.Set "temp_rowspan_calc" slice -}}
+{{- $.Scratch.Set "stop_next" false -}}
+
+{{- if $debug -}}
+  {{- print "sum_colspan: {" (add $col_idx_max 1) "}" $colspans -}}
+  {{- "<br>" | markdownify -}}
+  {{- print "sum_rowspan: {" (add $row_idx_max 1) "}" $rowspans -}}
+  {{- "<br>" | markdownify -}}
+{{- end -}}
+
+<!-- get rowspan 2/2 -->
+{{- range $c := seq 0 $col_idx_max -}}
+  {{- range $r := seq 0 $row_idx_max -}}
+    {{- if lt $r $head_border_index -}}
+      {{- $.Scratch.Set "stop_next" false -}}
+      {{- if eq 1 (index (index $rowspans $r) $c) -}}
+        {{- if lt $r $row_idx_max -}}
+          {{- range seq (add $r 1) $row_idx_max -}}
+            {{- if and (eq 0 (index (index $rowspans .) $c)) (not ($.Scratch.Get "stop_next")) -}}
+              {{- $.Scratch.Add "temp_rowspan" 1 -}}
+            {{- else -}}
+              {{- $.Scratch.Set "stop_next" true -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- $.Scratch.Add "temp_rowspan_calc" ($.Scratch.Get "temp_rowspan") -}}
+        {{- $.Scratch.Set "temp_rowspan" 1 -}}
+      {{- else if eq 0 (index (index $rowspans $r) $c) -}}
+        {{- $.Scratch.Add "temp_rowspan_calc" (0) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $.Scratch.Add "rowspans_calc" (slice ($.Scratch.Get "temp_rowspan_calc")) -}}
+  {{- $.Scratch.Set "temp_rowspan_calc" slice -}}
+{{- end -}}
+
+{{- $rowspans_calc := $.Scratch.Get "rowspans_calc" -}}
+{{- $.Scratch.Set "temp_sum_colspan" 0 -}}
+{{- $.Scratch.Set "temp_sum_colspan_pre" 0 -}}
+
+{{- if $debug -}}
+  {{- printf "%v" $rowspans_calc -}}
+  {{- "<br>" | markdownify -}}
+{{- end -}}
+
+<!-- make thead and error check -->
+{{- $.Scratch.Set "thead" "<thead>\n" -}}
+{{- range $r := seq 0 (sub $head_border_index 1) -}}
+  {{- $.Scratch.Add "thead" "<tr>\n" -}}
+  {{- range $c := seq 0 $col_idx_max -}}
+    {{- $rowspan := (index (index $rowspans_calc $c) $r) -}}
+    {{- $colspan := (index (index $colspans $r) $c) -}}
+    {{- $.Scratch.Add "temp_sum_colspan" $colspan -}}
+    {{- if or (and (gt $colspan 1) (or (eq $rowspan 0) (gt $rowspan 1))) (and (or (eq $colspan 0) (gt $colspan 1)) (gt $rowspan 1))  -}}
+      {{- $msg := "rowspan and colspan setting are conflicted.\n[r,c] = [%d,%d]\n$colspan = %d\n$rowspan = %d\n%v\n%v" -}}
+      {{- errorf $msg $r $c $colspan $rowspan (first $head_border_index $colspans) $rowspans_calc -}}
+    {{- end -}}
+    {{- if eq $rowspan 0 -}}
+      {{- $.Scratch.Add "thead" "<!-- rowspan -->\n" -}}
+    {{- else if eq $colspan 0 -}}
+      {{- $.Scratch.Add "thead" "<!-- colspan -->\n" -}}
+    {{- else -}}
+      {{- $attr_rowspan := cond (ge $rowspan 2) (printf " rowspan=\"%d\"" $rowspan) "" -}}
+      {{- $attr_colspan := cond (ge $colspan 2) (printf " colspan=\"%d\"" $colspan) "" -}}
+      {{- $cell_value := (index (index $cell_values $r) $c) -}}
+      {{- $cell_value := $cell_value | replaceRE "^\\s*(.*?)\\s+$" "$1" -}}
+      {{- $.Scratch.Add "thead" (printf "<td%v%v>%v</td>\n" $attr_rowspan $attr_colspan ($cell_value | markdownify)) -}}
+      {{- $temp_head_spans := "" -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $.Scratch.Add "thead" "</tr>\n" -}}
+  {{- if and (gt $r 0) (ne ($.Scratch.Get "temp_sum_colspan") ($.Scratch.Get "temp_sum_colspan_pre")) -}}
+    {{- errorf "col number of each cols are not equal. (row = %d)" $r -}}
+  {{- end -}}
+  {{- $.Scratch.Set "temp_sum_colspan_pre" ($.Scratch.Get "temp_sum_colspan") -}}
+  {{- $.Scratch.Set "temp_sum_colspan" 0 -}}
+{{- end -}}
+{{- $.Scratch.Add "thead" "</thead>\n" -}}
+{{- $thead := $.Scratch.Get "thead" -}}
+
+<!-- make tbody -->
+{{- $.Scratch.Add "tbody" "<tbody>\n" -}}
+{{- range $r := seq (add $head_border_index 1) (sub (len $rows) 1) -}}
+  {{- $.Scratch.Add "tbody" "<tr>\n" -}}
+  {{- range $c := seq 0 $col_idx_max -}}
+    {{- $cell_value := (index (index $cell_values $r) $c) -}}
+    {{- $cell_value := replaceRE "^\\s*(.*?)\\s+$" "$1" $cell_value -}}
+    {{- $.Scratch.Add "tbody" (printf "<td>%v</td>\n" ($cell_value | markdownify)) -}}
+  {{- end -}}
+  {{- $.Scratch.Add "tbody" "</tr>\n" -}}
+{{- end -}}
+{{- $.Scratch.Add "tbody" "</tbody>\n" -}}
+{{- $tbody := $.Scratch.Get "tbody" -}}
+
+<!-- get and make caption -->
+{{- $caption := replaceRE "[\\s\\S]*\\n?(?:[Cc]aption|[Tt]able):\\s+([^\\n]+)\\n?[\\s\\S]*" "$1" .Inner -}}
+{{- if eq $caption .Inner -}}
+  {{- $.Scratch.Set "caption" "" -}}
+{{- end -}}
+{{- if ne ($.Scratch.Get "caption") "" -}}
+  {{- $.Scratch.Set "caption" (printf "<caption>%v</caption>\n" ($caption | .Page.RenderString)) -}}
+{{- end -}}
+{{- $caption := $.Scratch.Get "caption" -}}
+
+<!-- get and make attribution -->
+{{- $id := .Get "id" -}}
+{{- $id := cond (ne $id "") (printf " id=\"%v\"" $id) ""}}
+
+{{- $class := .Get "class" -}}
+{{- $class := cond (ne $class "") (printf " class=\"%v\"" $class) ""}}
+
+<!-- render table -->
+{{- printf "<table%v%v>\n%v%v%v</table>\n" $id $class $caption $thead $tbody | .Page.RenderString -}}
