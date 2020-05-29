@@ -1,0 +1,9 @@
+{{- $first_whitespace := index (findRE "[\\s\\n]*" .Inner) 0 -}}
+<del
+  {{- with .Get "cite" }} cite="{{ . }}"{{ end -}}
+  {{- with .Get "datetime" }} datetime="{{ . }}"{{ end -}}
+  ><!-- End of opening tag -->
+{{- $first_whitespace -}}
+{{ .Inner | .Page.RenderString -}}
+{{- $first_whitespace -}}
+</del>
