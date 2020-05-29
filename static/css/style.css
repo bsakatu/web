@@ -91,7 +91,7 @@ table {
   border-bottom: 1px solid #666;
 }
 table > caption::before {
-  content: "Table:";
+  content: "Table: ";
 }
 table > caption {
   caption-side: top;
