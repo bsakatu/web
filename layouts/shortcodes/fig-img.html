@@ -1,6 +1,6 @@
 {{- with .Get "org_license" -}}
   {{- $.Scratch.Set "license" (split . " ") -}}
-  {{- if (index ($.Scratch.Get "license") 0) eq "CC" -}}
+  {{- if eq (index ($.Scratch.Get "license") 0) "CC" -}}
     {{- $.Scratch.Set "org_license_link" "https://creativecommons.org/licenses/" -}}
     {{- with (index ($.Scratch.Get "license") 1) -}}
       {{- if or (eq . "BY") (eq . "BY-SA") (eq . "BY-ND") (eq . "BY-NC") (eq . "BY-NC-SA") (eq . "BY-NC-ND") -}}
@@ -14,7 +14,7 @@
     {{- with (index ($.Scratch.Get "license") 2) -}}
       {{- if or (eq . "1.0") (eq . "2.0") (eq . "2.1") (eq . "2.5") (eq . "3.0") (eq . "4.0") -}}
         {{- $.Scratch.Add "org_license_link" (print . "/") -}}
-        {{- if (eq "2.1" .) and ((index ($.Scratch.Get "license") 3) ne "") -}}
+        {{- if and (eq "2.1" .) (ne (index ($.Scratch.Get "license") 3) "") -}}
           {{- $.Scratch.Add "org_license_link" (print (lower (index ($.Scratch.Get "license") 3)) "/") -}}
         {{- end -}}
       {{- else -}}
