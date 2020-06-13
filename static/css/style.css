@@ -37,14 +37,14 @@ abbr::after {
 
 /** code **/
 pre {
-  font-size: 0.9rem;
+  font-size: 0.9em;
   border: 1px solid #ddd;
   background: #f8f8f8;
   padding: 1em;
   overflow-x: auto;
 }
 kbd, samp, code {
-  font-size: 0.9rem;
+  font-size: 0.9em;
   word-break: break-all;
   background: #f9f9f9;
 }
@@ -101,12 +101,14 @@ table > caption {
   text-align: center;
   color: #000;
 }
+table > thead {
+  border-bottom: 1px solid #666
+}
 table > thead > tr > th,
 table > tbody > tr > td {
   padding: 0 0.5em;
 }
 table > thead > tr > th {
-  border-bottom: 1px solid #666;
   text-align: center;
 }
 tbody > tr:nth-child(even) {
@@ -366,12 +368,15 @@ main > article > section > h2,h3,h4,h5,h6 {
   font-size: 0.9rem;
 }
 #changelog > dl {
-  --changelog_date_width: 6em;
+  --changelog_date_width: 7em;
   display: flex;
   flex-wrap: wrap;
 }
 #changelog > dl > dt {
   width: var(--changelog_date_width);
+}
+#changelog > dl > dt:after {
+  content: ":";
 }
 #changelog > dl > dd {
   width: calc(100% - var(--changelog_date_width));
