@@ -1,11 +1,20 @@
 ---
 title: "Scancode Map による Scancode の変更"
 date: 2018-11-12T22:57:00+09:00
+lastmod: 2020-06-13T22:21:00+09:00
 categories: [Input]
 tags: [keyboard, key-layout, Windows]
-toc: false
+toc: true
 draft: false
 ---
+
+{{< changelog >}}
+2020/06/13
+: <kbd>LControl</kbd> &lt;-&gt; <kbd>CapsLock</kbd> の入れ替え説明表で `0x001D` と `0x003A` が逆になっていたのを修正
+
+2018/11/12
+: 初版
+{{</ changelog >}}
 
 ## Scancode Map とは
 
@@ -44,8 +53,8 @@ Registry path:  `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard La
 | 0x00000000 | Header: Version. Set to all zeroes.              |
 | 0x00000000 | Header: Flags Set to all zeroes.                 |
 | 0x00000003 | Three entries in the map (including null entry). |
-| 0x1D003A00 | Left Control -> CapsLock (0x003A -> 0x001D)      |
-| 0x3A001D00 | CapsLock -> Left Control (0x001D -> 0x003A)      |
+| 0x1D003A00 | Left Control -> CapsLock (0x001D -> 0x003A)      |
+| 0x3A001D00 | CapsLock -> Left Control (0x003A -> 0x001D)      |
 | 0x00000000 | Null terminator.                                 |
 
 レジストリファイルでは以下のように書けます。改行はしなくてもいいですが見やすいので入れています。
