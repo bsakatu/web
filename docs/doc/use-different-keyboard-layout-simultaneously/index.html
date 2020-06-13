@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Windows で同時に複数のキーボード配列を使用する | capyBaral</title>
   <meta name="author" content="B-SAKATU" />
-  <meta name="generator" content="Hugo 0.69.2" />
+  <meta name="generator" content="Hugo 0.71.1" />
   <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/syntax.css" />
@@ -82,100 +82,109 @@
 
     <section>
 <p>Windows 標準のキーボード配列設定は下記のレジストリで設定されています。この設定は PS/2 キーボードや <abbr title="Universal Serial Bus">USB</abbr> キーボードを問わずにその <abbr title="Personal Computer">PC</abbr> に接続される全てのキーボードに反映されます。</p>
-<table>
-  <caption><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></caption>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Value (日本語標準)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>LayerDriverJPN</code></td>
-      <td><code>REG_SZ</code></td>
-      <td><code>kbd106.dll</code></td>
-    </tr>
-    <tr>
-      <td><code>OverrideKeyboardType</code></td>
-      <td><code>REG_DWORD</code></td>
-      <td><code>7</code></td>
-    </tr>
-    <tr>
-      <td><code>OverrideKeyboardSubtype</code></td>
-      <td><code>REG_DWORD</code></td>
-      <td><code>2</code></td>
-    </tr>
-  </tbody>
+
+
+<table id="<nil>" class="<nil>">
+<caption><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></caption>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Value (日本語標準)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LayerDriverJPN</code></td>
+<td><code>REG_SZ</code></td>
+<td><code>kbd106.dll</code></td>
+</tr>
+<tr>
+<td><code>OverrideKeyboardType</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>7</code></td>
+</tr>
+<tr>
+<td><code>OverrideKeyboardSubtype</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>2</code></td>
+</tr>
+</tbody>
 </table>
+
 <p>しかしこれをキーボード毎に別の配列にする方法も存在します。ただし、調べた限りでは <abbr title="Human Interface Device">HID</abbr> 接続のキーボードにたいしてのみ有効、かつその設定をしたときの接続 USB ポート使用時限定、です。なお Bluetooth キーボードは手持ちがなく検証していないので不明（HID デバイスだからできるはず……）。</p>
 <ol>
 <li>まずデバイスマネージャーを開いて、配列をシステム標準から変更したいキーボードを選択し、<code>プロパティ → 詳細 → プロパティ</code> <code>デバイス インスタンス パス</code> を選択します。ここで出てくる値をメモします(例えば <code>HID\VID_CB10&amp;PID_1156&amp;MI_00\8&amp;278408A0&amp;0&amp;0000</code> のような値)。</li>
 <li>レジストリエディタで <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\HID</code> の下のキーを確認すると、 <code>VID_***</code> のようなキーがたくさんぶら下がっているはずです。この中から、先ほど調べた値に一致するキーの下にぶら下がる <code>Device Parameters</code> キーを開きます。（前述した値で言うと、<code>VID_CB10&amp;PID_1156&amp;MI_00</code> キー下に <code>8&amp;278408A0&amp;0&amp;0000</code> キーがあり、さらにその下に <code>Device Parameters</code> キーがある）。</li>
 <li><code>Device Parameters</code> キーには既定のエントリ以外は何も存在しない場合が多いです。作成または編集するエントリは以下の通り（値は US 配列に設定する例）。</li>
 </ol>
-<table>
-  <caption><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\HID\VID_***\****\Device Parameters</code></caption>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Value (US 配列)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>KeyboardTypeOverride</code></td>
-      <td><code>REG_DWORD</code></td>
-      <td><code>4</code></td>
-    </tr>
-    <tr>
-      <td><code>KeyboardSubtypeOverride</code></td>
-      <td><code>REG_DWORD</code></td>
-      <td><code>0</code></td>
-    </tr>
-  </tbody>
+
+
+<table id="<nil>" class="<nil>">
+<caption><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\HID\VID_***\****\Device Parameters</code></caption>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Value (US 配列)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KeyboardTypeOverride</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td><code>KeyboardSubtypeOverride</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>0</code></td>
+</tr>
+</tbody>
 </table>
+
 <p>注意点としては、システム標準のキーボード配列設定では <code>OverrideKeyboardType</code> となっているのに対して、各 HID での設定では <code>KeyboardTypeOverride</code> となり <em>Override</em> の位置が前後逆になっているという点があります。システム的には両者は別の意味を持っているというのは何となく推測していますが、特に確証はありません。またこのレジストリキーでは、<code>LayerDriver JPN</code> は効果ありませんので設定不要です。</p>
 <p>上記エントリの2つの値の組み合わせによって決められる配列の定義ファイルがあります。その組み合わせはいくつかありますが、日本語を使うユーザーなら基本的には以下の組み合わせで事足りるかと（他にも日本語配列定義 dll はありますが、実用外なので今回は触れません）。なお下記で記載する「日本語用 US 配列」というのは、US 配列キーボードを日本語ユーザーが使うための設定が施された配列なので、かぎりなく純粋な US 配列と同じ設定です（つまり日本語固有キーは使えない）。</p>
-<table>
-  <caption>配列毎の <code>Type</code>, <code>Subtype</code>, dll</caption>
-  <thead>
-    <tr>
-      <th>配列名</th>
-      <th><code>KeyboardTypeOverride</code></th>
-      <th><code>KeyboardSubtypeOverride</code></th>
-      <th>配列定義 dll</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>US 配列</td>
-      <td><code>4</code></td>
-      <td><code>0</code></td>
-      <td><code>kbdus.dll</code></td>
-    </tr>
-    <tr>
-      <td>日本語用 US 配列</td>
-      <td><code>7</code></td>
-      <td><code>0</code></td>
-      <td><code>kbd101.dll</code></td>
-    </tr>
-    <tr>
-      <td>AX 配列</td>
-      <td><code>7</code></td>
-      <td><code>1</code></td>
-      <td><code>kbdax2.dll</code></td>
-    </tr>
-    <tr>
-      <td>JIS 配列</td>
-      <td><code>7</code></td>
-      <td><code>2</code></td>
-      <td><code>kbd106.dll</code></td>
-    </tr>
-  </tbody>
+
+
+<table id="<nil>" class="<nil>">
+<caption>配列毎の <code>Type</code>, <code>Subtype</code>, dll</caption>
+<thead>
+<tr>
+<th>配列名</th>
+<th><code>KeyboardTypeOverride</code></th>
+<th><code>KeyboardSubtypeOverride</code></th>
+<th>配列定義 dll</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>US 配列</td>
+<td><code>4</code></td>
+<td><code>0</code></td>
+<td><code>kbdus.dll</code></td>
+</tr>
+<tr>
+<td>日本語用 US 配列</td>
+<td><code>7</code></td>
+<td><code>0</code></td>
+<td><code>kbd101.dll</code></td>
+</tr>
+<tr>
+<td>AX 配列</td>
+<td><code>7</code></td>
+<td><code>1</code></td>
+<td><code>kbdax2.dll</code></td>
+</tr>
+<tr>
+<td>JIS 配列</td>
+<td><code>7</code></td>
+<td><code>2</code></td>
+<td><code>kbd106.dll</code></td>
+</tr>
+</tbody>
 </table>
+
 <p>ただし、システムの標準設定（本記事冒頭にあるレジストリエントリ）を書き換えている場合、そこで指定した値の組み合わせは <code>LayerDriver JPN</code> エントリに指定した配列定義ファイルで上書きされています。例えば、JIS 配列 ( <code>OverrideKeyboardType = 7</code>, <code>OverrideKeyboardSubtype = 2</code> ) に対して自分で別の定義ファイルを割り当てている場合、本来の JIS 配列 (<code>kbd106.dll</code>) を使うことはできません。2つの値の組み合わせに対して標準でどの配列定義ファイルを読み込むか、という設定がどこに定義されているのか分かればあるいは、というところなのですが今のところ私は知らないので、誰か知っていれば教えて下さい……。</p>
 <p>ちなみに PS/2 キーボードもデバイス別に設定できるか試してみましたが、こちらはだめでした。残念。試したのは <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\ACPI</code> 以下を USB キーボードと同じ要領で。デバイスインスタンスパスとかはあるんですけどね。</p>
 

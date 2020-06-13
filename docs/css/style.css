@@ -37,14 +37,14 @@ abbr::after {
 
 /** code **/
 pre {
-  font-size: 0.9rem;
+  font-size: 0.9em;
   border: 1px solid #ddd;
   background: #f8f8f8;
   padding: 1em;
   overflow-x: auto;
 }
 kbd, samp, code {
-  font-size: 0.9rem;
+  font-size: 0.9em;
   word-break: break-all;
   background: #f9f9f9;
 }
@@ -91,7 +91,7 @@ table {
   border-bottom: 1px solid #666;
 }
 table > caption::before {
-  content: "Table:";
+  content: "Table: ";
 }
 table > caption {
   caption-side: top;
@@ -101,16 +101,79 @@ table > caption {
   text-align: center;
   color: #000;
 }
+table > thead {
+  border-bottom: 1px solid #666
+}
 table > thead > tr > th,
 table > tbody > tr > td {
   padding: 0 0.5em;
 }
 table > thead > tr > th {
-  border-bottom: 1px solid #666;
   text-align: center;
 }
 tbody > tr:nth-child(even) {
   background: #eee;
+}
+
+/* ins & del */
+section > ins,
+article > ins,
+section > del,
+section > del {
+  display: block;
+  margin-bottom: 1em;
+  border: 0 dashed #ccc;
+  border-width: 1px 0;
+}
+section > ins,
+article > ins {
+  text-decoration: none;
+}
+section > ins pre *,
+article > ins pre * {
+  display: inline-block;
+}
+ins::before {
+  content: "<追記>";
+  font-size: 0.8em;
+  white-space: pre;
+}
+ins::after {
+  content: "</追記>";
+  font-size: 0.8em;
+  white-space: pre;
+}
+ins[datetime]::before {
+  content: "<追記 [" attr(datetime) "]>: ";
+}
+section > ins[datetime]::before,
+article > ins[datetime]::before {
+  content: "<追記 [" attr(datetime) "]>\A";
+}
+
+del::before {
+  content: "<削除>";
+  font-size: 0.8em;
+  white-space: pre;
+}
+del::after {
+  content: "</削除>";
+  font-size: 0.8em;
+  white-space: pre;
+}
+del[datetime]::before {
+  content: "<削除 [" attr(datetime) "]>: ";
+}
+section > del[datetime]::before,
+article > del[datetime]::before {
+  content: "<削除 [" attr(datetime) "]>\A";
+}
+section > del::before,
+section > del::after,
+article > del::before,
+article > del::after {
+  display: inline-block;
+  width: 100%;
 }
 
 /* Global Header */
@@ -305,12 +368,15 @@ main > article > section > h2,h3,h4,h5,h6 {
   font-size: 0.9rem;
 }
 #changelog > dl {
-  --changelog_date_width: 6em;
+  --changelog_date_width: 7em;
   display: flex;
   flex-wrap: wrap;
 }
 #changelog > dl > dt {
   width: var(--changelog_date_width);
+}
+#changelog > dl > dt:after {
+  content: ":";
 }
 #changelog > dl > dd {
   width: calc(100% - var(--changelog_date_width));

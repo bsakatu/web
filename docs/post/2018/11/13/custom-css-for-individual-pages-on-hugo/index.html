@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hugo で各ページ固有のスタイルシートを呼び出す | capyBaral</title>
   <meta name="author" content="B-SAKATU" />
-  <meta name="generator" content="Hugo 0.69.2" />
+  <meta name="generator" content="Hugo 0.71.1" />
   <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/syntax.css" />
@@ -86,7 +86,15 @@
 <span class="p">&lt;</span><span class="nx">link</span> <span class="nx">rel</span><span class="p">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="nx">href</span><span class="p">=</span><span class="s">&#34;custom.css&#34;</span> <span class="o">/</span><span class="p">&gt;</span>
 <span class="p">{{</span> <span class="nx">end</span> <span class="p">}}</span>
 </code></pre></div><p><code>custom.css</code> が同階層に存在すれば <code>custom.css</code> を呼び出す HTML タグを挿入するという流れです。ここでしばらくはまったのが、まずどの関数で存在判定をするのか。結果としては <code>.Resources.Match &quot;hoge&quot;</code> だったわけですが、他にも <code>.Get</code> などの機能が似ていそうな関数がいくつかあって調べるのに時間がかかりました。<code>.Resources.Match</code> は指定されたファイル等が存在しない場合に空文字列を返します。これが <code>&quot;[]&quot;</code> でした。しかしこのままでは判定に失敗するので、 <code>.Resources.Match</code> を <code>print</code> でラップしてあげて文字列化し、無事判定に成功しました。</p>
-<p>ここまで書いて判定文字列 <code>&quot;[]&quot;</code> をダブルクォーテーションで囲わなければよかったような気もしますが面倒なので今回は無視します。<ins datetime="2020-05-04T00:33:00+09:00">やっぱり無理だったからこれで良し。</ins></p>
+<p>ここまで書いて判定文字列 <code>&quot;[]&quot;</code> をダブルクォーテーションで囲わなければよかったような気もしますが面倒なので今回は無視します。
+<ins datetime="2020-05-04T00:33:00&#43;09:00">やっぱり無理だったからこれで良し。</ins></p>
+<ins datetime="2020-05-22T21:00:00&#43;09:00">
+<p>空の array は <code>nil</code> で表現できるようなので結局こうなった。すっきり。</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="p">{{</span><span class="o">-</span> <span class="k">if</span> <span class="nf">ne</span> <span class="p">(.</span><span class="nx">Resources</span><span class="p">.</span><span class="nx">Match</span> <span class="s">&#34;custom.css&#34;</span><span class="p">)</span> <span class="kc">nil</span> <span class="o">-</span><span class="p">}}</span>
+<span class="p">&lt;</span><span class="nx">link</span> <span class="nx">rel</span><span class="p">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="nx">href</span><span class="p">=</span><span class="s">&#34;custom.css&#34;</span> <span class="o">/</span><span class="p">&gt;</span>
+<span class="p">{{</span><span class="o">-</span> <span class="nx">end</span> <span class="o">-</span><span class="p">}}</span>
+</code></pre></div>
+</ins>
 
     </section>
 

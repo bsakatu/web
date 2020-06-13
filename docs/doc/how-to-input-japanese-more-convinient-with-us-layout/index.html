@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Windows 日本語入力環境で US 配列をより使いやすくする | capyBaral</title>
   <meta name="author" content="B-SAKATU" />
-  <meta name="generator" content="Hugo 0.69.2" />
+  <meta name="generator" content="Hugo 0.71.1" />
   <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/syntax.css" />
@@ -118,33 +118,36 @@
 <p>ここで、AX 配列を使うやり方は<a href="/doc/ax-layout-on-windows/" title="AX キーボードの配列を現行の Windows で使う">別記事</a>を書いているのでそちらを参照して下さい。今回の記事では JIS 配列を改造する手法について解説していきます。</p>
 <h2 id="どこをいじるのか">どこをいじるのか</h2>
 <p>レジストリを弄ります。見るべきは3つのエントリで、それらは標準では以下のようになっているはずです。</p>
-<table>
-  <caption>【標準状態】 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></caption>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Value (JP default)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>LayerDriverJPN</code></td>
-      <td><code>REG_SZ</code></td>
-      <td><code>kbd106.dll</code></td>
-    </tr>
-    <tr>
-      <td><code>OverrideKeyboardSubtype</code></td>
-      <td><code>REG_DWORD</code></td>
-      <td><code>2</code></td>
-    </tr>
-    <tr>
-      <td><code>OverrideKeyboardType</code></td>
-      <td><code>REG_DWORD</code></td>
-      <td><code>7</code></td>
-    </tr>
-  </tbody>
+
+
+<table id="<nil>" class="<nil>">
+<caption>【標準状態】 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></caption>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Value (JP default)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LayerDriverJPN</code></td>
+<td><code>REG_SZ</code></td>
+<td><code>kbd106.dll</code></td>
+</tr>
+<tr>
+<td><code>OverrideKeyboardSubtype</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>2</code></td>
+</tr>
+<tr>
+<td><code>OverrideKeyboardType</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>7</code></td>
+</tr>
+</tbody>
 </table>
+
 <p>この中の <code>LayerDriverJPN</code> というエントリで指定されている <code>kbd106.dll</code> がキーボードから入力された内容を最終的に OS 内の仮想キーコードへと変換する変換表になっています。これを望む変換表が書かれたファイルに指定を変更してあげれば所望の動作をしてくれるようになります。たとえば純粋な US 配列であれば <code>kbdus.dll</code> というファイルがあるのでそれを指定します。これらの変換表を含む定義ファイルは <code>C:\Windows\System32</code> フォルダに格納されています。見てみると分かりますが、他にも色々な定義ファイル (<code>kbd***.dll</code>) があります。気になる方は覗いてみるとよいです。</p>
 <h2 id="ところでスキャンコードとか仮想キーコードとは何か">ところでスキャンコードとか仮想キーコードとは何か</h2>
 <p>※知っている人は飛ばしてもらって構わない内容です。本当はこれだけで記事書いてもよかったけど時間がなかった（力尽きた）。</p>
@@ -395,33 +398,36 @@
 <h2 id="設定適用">設定適用</h2>
 <p>ついに dll ファイルが完成したので設定適用していきます。</p>
 <p><code>106_us</code> フォルダに生成されるビルド後のフォルダやファイルの中から <code>kbd106_us.dll</code> をとりだし、これを <code>C:\Windows\System32</code> などのシステムフォルダにコピーし、レジストリを下記の通り編集し、再起動すれば設定は適用されているはずです</p>
-<table>
-  <caption>【設定適用後】 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></caption>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>LayerDriverJPN</code></td>
-      <td><code>REG_SZ</code></td>
-      <td><code>kbd106_us.dll</code></td>
-    </tr>
-    <tr>
-      <td><code>OverrideKeyboardSubtype</code></td>
-      <td><code>REG_DWORD</code></td>
-      <td><code>1</code></td>
-    </tr>
-    <tr>
-      <td><code>OverrideKeyboardType</code></td>
-      <td><code>REG_DWORD</code></td>
-      <td><code>7</code></td>
-    </tr>
-  </tbody>
+
+
+<table id="<nil>" class="<nil>">
+<caption>【設定適用後】 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></caption>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LayerDriverJPN</code></td>
+<td><code>REG_SZ</code></td>
+<td><code>kbd106_us.dll</code></td>
+</tr>
+<tr>
+<td><code>OverrideKeyboardSubtype</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>OverrideKeyboardType</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>7</code></td>
+</tr>
+</tbody>
 </table>
+
 <p>ちなみに <code>OverrideKeyboardIdentifier</code> は変更しません。特に設定に関与していないですし、<code>PCAT_106KEY</code> である意味あっているので。なおここで <code>OverrideKeyboardSubtype = 1</code> に変更していますが、これはこの改造配列以外の配列を同時に使えるようにするための配慮です。<code>kbd106_us.c</code> で <code>MICROSOFT_KBD_106_TYPE</code> を <code>MICROSOFT_KBD_AX_TYPE</code> に変更しているのもこれのためです。どういうことかと言うと、この配列を本来の <code>Subtype = 1</code> である AX 配列に上書きする形でシステムに設定しています。この設定は<a href="/doc/use-different-keyboard-layout-simultaneously/" title="Windows で同時に複数のキーボード配列を使用する | capyBaral">キーボードの配列を複数共存させる場合</a>に役に立つのですが、それはまた別の話なのでここではそうなんだ、とだけ思っておいて下さい。1 つの配列しか使わないのであれば特に関係ありません。</p>
 <p>さて、再起動が完了すればあとは動作確認です。メモ帳などで一通り打ってみて問題ないか確認し、できれば <a href="http://kts.sakaiweb.com/keymill.html" title="KT Software - Keymill">Keymill</a> などのスキャンコードと仮想キーコードを確認出来るソフトでテストするとよいでしょう。スキャンコードと仮想キーコードの対応を変えたキーの動作確認には特に。</p>
 <p>そういえば 32 bit 版のことをすっかり忘れていましたが、必要な場合は 32 bit 用にビルドして <code>C:\Windows\SysWOW64</code> に放り込めばいいと思います。これがないと動かないケースがあるのかいまいちちゃんと調べていませんが、今後ますます 32 bit のソフトウェアを使うことは減っていくのであんまり必要ないかも……。</p>

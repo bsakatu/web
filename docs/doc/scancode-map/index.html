@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Scancode Map による Scancode の変更 | capyBaral</title>
   <meta name="author" content="B-SAKATU" />
-  <meta name="generator" content="Hugo 0.69.2" />
+  <meta name="generator" content="Hugo 0.71.1" />
   <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/syntax.css" />
@@ -61,7 +61,10 @@
           <dt>Published</dt>
           <dd><time datetime="2018-11-12T00:00:00&#43;09:00">2018/11/12 00:00</time></dd>
         </div>
-        
+        <div id="modified-date">
+          <dt>Modified</dt>
+          <dd><time datetime="2020-06-06T00:00:00&#43;09:00">2020/06/13 00:00</time></dd>
+        </div>
         <div id="category">
           <dt>Category</dt>
           <dd><a href="/categories/input">Input</a></dd>
@@ -73,11 +76,28 @@
         </div>
 
       </dl>
-      
+      <details open id="toc">
+        <summary>Table of contents</summary>
+<nav id="TableOfContents">
+  <ol>
+    <li><a href="#scancode-map-とは">Scancode Map とは</a></li>
+    <li><a href="#書き換え方法">書き換え方法</a></li>
+  </ol>
+</nav>
+      </details>
 
     </header>
 
     <section>
+<details id="changelog">
+  <summary>Changelog</summary>
+  <dl>
+    <dt><time datetime="2020-06-13">2020/06/13</time></dt>
+    <dd><kbd>LControl</kbd> &lt;-&gt; <kbd>CapsLock</kbd> の入れ替え説明表で <code>0x001D</code> と <code>0x003A</code> が逆になっていたのを修正</dd>
+    <dt><time datetime="2018-11-12">2018/11/12</time></dt>
+    <dd>初版</dd>
+  </dl>
+</details>
 <h2 id="scancode-map-とは">Scancode Map とは</h2>
 <p>基本的には Microsoft の<a title="Keyboard and mouse class drivers - Windows drivers | Microsoft Docs" href="https://docs.microsoft.com/en-us/windows-hardware/drivers/hid/keyboard-and-mouse-class-drivers#scan-code-mapper-for-keyboards">公式資料</a> を読めば分かりますが、元々はキーボードが送出するスキャンコードがおかしかった場合にそれを訂正する設定をするために作られたようです。現在では左 Ctrl キーと CapsLock キーの入れ替えや、Esc キーと 半角全角キーとの入れ替えに使うのがメインだと思いますが……。</p>
 <p>ちなみにスキャンコードについては自分で資料を整理してまとめを作っていましたが作ろうとしていたもの以上にしっかりしたページを見つけてしまったので今回はそれを載せておきます。すごい資料です。</p>
@@ -155,11 +175,11 @@
 </tr>
 <tr>
 <td>0x1D003A00</td>
-<td>Left Control -&gt; CapsLock (0x003A -&gt; 0x001D)</td>
+<td>Left Control -&gt; CapsLock (0x001D -&gt; 0x003A)</td>
 </tr>
 <tr>
 <td>0x3A001D00</td>
-<td>CapsLock -&gt; Left Control (0x001D -&gt; 0x003A)</td>
+<td>CapsLock -&gt; Left Control (0x003A -&gt; 0x001D)</td>
 </tr>
 <tr>
 <td>0x00000000</td>
@@ -200,7 +220,7 @@
     </ul>
   </nav>
   <p>
-    <small>© B-SAKATU 2018 
+    <small>© B-SAKATU 2018-2020 
       <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
         <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
         <img alt="BY" src="/img/license/by.svg" width="14" height="14" />

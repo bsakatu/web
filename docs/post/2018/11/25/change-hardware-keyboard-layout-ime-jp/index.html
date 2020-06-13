@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ハードウェア キーボード レイアウトの変更 | capyBaral</title>
   <meta name="author" content="B-SAKATU" />
-  <meta name="generator" content="Hugo 0.69.2" />
+  <meta name="generator" content="Hugo 0.71.1" />
   <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/syntax.css" />
@@ -87,37 +87,40 @@
 
 <p>この設定では「日本語キーボード(106/109 キー)」と「英語キーボード(101/102 キー)」を選択出来る。これによって下記のレジストリが変化する。</p>
 <p>Registry path: <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters</code></p>
-<table>
-  <caption>「ハードウェア キーボード レイアウト」の変更によるレジストリの変化</caption>
-  <thead>
-    <tr>
-      <th>名前</th>
-      <th>種類</th>
-      <th>日本語（106/109 キー）</th>
-      <th>英語（101/102 キー）</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>LayerDriverJPN</code></td>
-      <td><code>REG_SZ</code></td>
-      <td><code>kbd106.dll</code></td>
-      <td><code>kbd101.dll</code></td>
-    </tr>
-    <tr>
-      <td><code>OverrideKeyboardSubtype</code></td>
-      <td><code>REG_DWORD</code></td>
-      <td><code>2</code></td>
-      <td><code>0</code></td>
-    </tr>
-    <tr>
-      <td><code>OverrideKeyboardType</code></td>
-      <td><code>REG_DWORD</code></td>
-      <td><code>7</code></td>
-      <td><code>7</code></td>
-    </tr>
-  </tbody>
+
+
+<table id="<nil>" class="<nil>">
+<caption>「ハードウェア キーボード レイアウト」の変更によるレジストリの変化</caption>
+<thead>
+<tr>
+<th>名前</th>
+<th>種類</th>
+<th>日本語（106/109 キー）</th>
+<th>英語（101/102 キー）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LayerDriverJPN</code></td>
+<td><code>REG_SZ</code></td>
+<td><code>kbd106.dll</code></td>
+<td><code>kbd101.dll</code></td>
+</tr>
+<tr>
+<td><code>OverrideKeyboardSubtype</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>2</code></td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>OverrideKeyboardType</code></td>
+<td><code>REG_DWORD</code></td>
+<td><code>7</code></td>
+<td><code>7</code></td>
+</tr>
+</tbody>
 </table>
+
 <p>日本語キーボードと英語キーボードとをどうやって識別しているか軽く調べてみた結果、恐らく <code>LayerDriver JPN</code> エントリの値を見ているだけと思われる。<code>OverrideKeyboardType</code> などをいくら変更しても何も変わらなかったが、<code>LayerDriver JPN</code> をちょっとでも標準の <code>kbd106.dll</code> または <code>kbd106n.dll</code> から変更すると「英語キーボード」が勝手に選択されていた（オプション画面を閉じておいて再度開きに行けば反映されている）。この設定があれば、以前の Windows よりは楽に JIS 配列と US 配列の行き来が出来るようになるので、まあ少なくとも改善と考えていいと思われる。</p>
 <p>この設定を調査している中で、最初の1回だけ日本語キーボード設定に戻したら <code>LayerDriver JPN</code> が <code>kbd106n.dll</code> になっていたのだが、あれは何だったのか……。その後再現せず。すっきりしないけどまあ、大差はないしどうせ使わないキーだし、ここで出来る設定変更は自分に関わりないし、面倒くさいので調査はここまで。</p>
 
