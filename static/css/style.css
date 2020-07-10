@@ -17,7 +17,8 @@
 body {
   max-width: 60rem;
   margin: auto;
-}
+  counter-reset: figures tables;
+ }
 
 /** link **/
 a {
@@ -66,6 +67,10 @@ article video {
 figure {
   text-align: center;
 }
+figcaption::before {
+  counter-increment: figures;
+  content: "Figure " counter(figures) ": ";
+}
 
 /** content sectioning **/
 main {
@@ -77,10 +82,21 @@ blockquote {
   border-left: 5px solid #ccc;
   padding: 0.2em 1em;
 }
+blockquote > footer {
+  text-align: right;
+  font-size: 0.8em;
+}
+blockquote > footer > cite::before {
+  content: "via: ";
+  font-style: normal; 
+}
 
 /** list **/
 dt {
   font-weight: normal;
+}
+dd {
+  margin-left: 2em;
 }
 
 /** table **/
@@ -91,7 +107,8 @@ table {
   border-bottom: 1px solid #666;
 }
 table > caption::before {
-  content: "Table: ";
+  counter-increment: tables;
+  content: "Table " counter(tables) ": ";
 }
 table > caption {
   caption-side: top;
