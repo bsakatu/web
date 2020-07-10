@@ -1,0 +1,4253 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>主要キーレイアウトのキーとその Scancode まとめ | capyBaral</title>
+  <meta name="author" content="B-SAKATU" />
+  <meta name="generator" content="Hugo 0.71.1" />
+  <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/syntax.css" />
+  
+  <link rel="stylesheet" href="custom.css" />
+  <link rel="alternate" type="application/rss+xml" href="/index.xml" title="capyBaral" />
+
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/">/capybaral</a>
+      </li>
+      <li>
+        <a href="/post/">~/zatsu</a>
+      </li>
+      <li class="current">
+        <a href="/doc/">~/doc</a>
+      </li>
+      <li>
+        <a href="/categories/">~/categories</a>
+      </li>
+      <li>
+        <a href="/tags/">~/tags</a>
+      </li>
+      <li>
+        <a href="/index.xml">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
+            <title>feed</title>
+            <circle cx="68" cy="189" r="24" />
+            <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
+            <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <article>
+    <header>
+      <h1>主要キーレイアウトのキーとその Scancode まとめ</h1>
+      <dl id="doc-info">
+
+        <div id="published-date">
+          <dt>Published</dt>
+          <dd><time datetime="2020-07-10T00:00:00&#43;09:00">2020/07/10 00:00</time></dd>
+        </div>
+        
+        <div id="category">
+          <dt>Category</dt>
+          <dd><a href="/categories/input">Input</a></dd>
+        </div><div id="tag">
+          <dt>Tags</dt>
+          <dd><a href="/tags/keyboard">keyboard</a></dd>
+          <dd><a href="/tags/key-layout">key-layout</a></dd>
+          <dd><a href="/tags/windows">Windows</a></dd>
+        </div>
+
+      </dl>
+      <details open id="toc">
+        <summary>Table of contents</summary>
+<nav id="TableOfContents">
+  <ol>
+    <li><a href="#summary">概要</a></li>
+    <li><a href="#key-layouts-vs-scancode">各キーレイアウトとスキャンコード</a>
+      <ol>
+        <li><a href="#note1-some-special-keys">*1: 一部の特殊キー（<kbd>KP-/</kbd>, <kbd>PrintScreen</kbd>, <kbd>Pause</kbd> キーを除く）</a></li>
+        <li><a href="#note2-KP-slash-key">*2: <kbd>KP-/</kbd> キー</a></li>
+        <li><a href="#note3-printscreen-key">*3: <kbd>PrintScreen</kbd> キー</a></li>
+        <li><a href="#note4-pause-key">*4: <kbd>Pause</kbd> キー</a></li>
+      </ol>
+    </li>
+    <li><a href="#key-layouts-vs-key-location-number">各キーレイアウトとキー位置番号</a></li>
+    <li><a href="#reference">参考資料</a></li>
+  </ol>
+</nav>
+      </details>
+
+    </header>
+
+    <section>
+<h2 id="summary">概要</h2>
+<p>PS/2 キーボードの scancode を、その起源となるらしいいわゆる XT とか 83 キーボードから、昨今日本で一般的ないわゆる JIS とか 109 キーボードまで、Scancode set 1,2,3 とともに1つの表にまとめた。
+一部特殊なキーは別の表でも説明している。各キーレイアウトの No. は元となる仕様書で定義されるキー位置番号であり、それぞれ本文書後半にて引用した画像にて画像でも示す。</p>
+<h2 id="key-layouts-vs-scancode">各キーレイアウトとスキャンコード</h2>
+
+
+<table id="scancode-list" class="">
+<caption>Keys of Major Layouts and Scancode set 1,2,3</caption>
+<thead>
+<tr>
+<th rowspan="3">ID</th>
+<th colspan="21">Key</th>
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<th colspan="2">Scancode Set 1</th>
+<!-- colspan -->
+<th colspan="2">Scancode Set 2</th>
+<!-- colspan -->
+<th colspan="3">Scancode Set 3</th>
+<!-- colspan -->
+<!-- colspan -->
+<th rowspan="3">note</th>
+</tr>
+<tr>
+<!-- rowspan -->
+<th colspan="3">5150, XT (83)</th>
+<!-- colspan -->
+<!-- colspan -->
+<th colspan="3">AT (84)</th>
+<!-- colspan -->
+<!-- colspan -->
+<th colspan="3">ANSI (101/104)</th>
+<!-- colspan -->
+<!-- colspan -->
+<th colspan="4">AX</th>
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<th colspan="4">ISO (102/105)</th>
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<th colspan="4">JIS (106/109)</th>
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<th rowspan="2">Make</th>
+<th rowspan="2">Break</th>
+<th rowspan="2">Make</th>
+<th rowspan="2">Break</th>
+<th rowspan="2">Make</th>
+<th rowspan="2">Break</th>
+<th rowspan="2">Key State</th>
+<!-- rowspan -->
+</tr>
+<tr>
+<!-- rowspan -->
+<th>No.</th>
+<th>base</th>
+<th>shift</th>
+<th>No.</th>
+<th>base</th>
+<th>shift</th>
+<th>No.</th>
+<th>base</th>
+<th>shift</th>
+<th>No.</th>
+<th>base</th>
+<th>shift</th>
+<th>diff</th>
+<th>No.</th>
+<th>base</th>
+<th>shift</th>
+<th>diff</th>
+<th>No.</th>
+<th>base</th>
+<th>shift</th>
+<th>diff</th>
+<!-- rowspan -->
+<!-- rowspan -->
+<!-- rowspan -->
+<!-- rowspan -->
+<!-- rowspan -->
+<!-- rowspan -->
+<!-- rowspan -->
+<!-- rowspan -->
+</tr>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td><kbd>Esc</kbd></td>
+<td></td>
+<td>90</td>
+<td><kbd>Esc</kbd></td>
+<td></td>
+<td>110</td>
+<td><kbd>Esc</kbd></td>
+<td></td>
+<td>110</td>
+<td><kbd>Esc</kbd></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td><kbd>Esc</kbd></td>
+<td></td>
+<td></td>
+<td>110</td>
+<td><kbd>Esc</kbd></td>
+<td></td>
+<td></td>
+<td><code>01</code></td>
+<td><code>81</code></td>
+<td><code>76</code></td>
+<td><code>F0 76</code></td>
+<td><code>08</code></td>
+<td><code>F0 08</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td><kbd>1</kbd></td>
+<td><kbd>!</kbd></td>
+<td>2</td>
+<td><kbd>1</kbd></td>
+<td><kbd>!</kbd></td>
+<td>2</td>
+<td><kbd>1</kbd></td>
+<td><kbd>!</kbd></td>
+<td>2</td>
+<td><kbd>1</kbd></td>
+<td><kbd>!</kbd></td>
+<td></td>
+<td>2</td>
+<td><kbd>1</kbd></td>
+<td><kbd>!</kbd></td>
+<td></td>
+<td>2</td>
+<td><kbd>1</kbd></td>
+<td><kbd>!</kbd></td>
+<td></td>
+<td><code>02</code></td>
+<td><code>82</code></td>
+<td><code>16</code></td>
+<td><code>F0 16</code></td>
+<td><code>16</code></td>
+<td><code>F0 16</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td><kbd>2</kbd></td>
+<td><kbd>@</kbd></td>
+<td>3</td>
+<td><kbd>2</kbd></td>
+<td><kbd>@</kbd></td>
+<td>3</td>
+<td><kbd>2</kbd></td>
+<td><kbd>@</kbd></td>
+<td>3</td>
+<td><kbd>2</kbd></td>
+<td><kbd>&quot;</kbd></td>
+<td>✓</td>
+<td>3</td>
+<td><kbd>2</kbd></td>
+<td><kbd>@</kbd></td>
+<td></td>
+<td>3</td>
+<td><kbd>2</kbd></td>
+<td><kbd>&quot;</kbd></td>
+<td>✓</td>
+<td><code>03</code></td>
+<td><code>83</code></td>
+<td><code>1E</code></td>
+<td><code>F0 1E</code></td>
+<td><code>1E</code></td>
+<td><code>F0 1E</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td><kbd>3</kbd></td>
+<td><kbd>#</kbd></td>
+<td>4</td>
+<td><kbd>3</kbd></td>
+<td><kbd>#</kbd></td>
+<td>4</td>
+<td><kbd>3</kbd></td>
+<td><kbd>#</kbd></td>
+<td>4</td>
+<td><kbd>3</kbd></td>
+<td><kbd>£</kbd></td>
+<td>✓</td>
+<td>4</td>
+<td><kbd>3</kbd></td>
+<td><kbd>#</kbd></td>
+<td></td>
+<td>4</td>
+<td><kbd>3</kbd></td>
+<td><kbd>#</kbd></td>
+<td></td>
+<td><code>04</code></td>
+<td><code>84</code></td>
+<td><code>26</code></td>
+<td><code>F0 26</code></td>
+<td><code>26</code></td>
+<td><code>F0 26</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td><kbd>4</kbd></td>
+<td><kbd>$</kbd></td>
+<td>5</td>
+<td><kbd>4</kbd></td>
+<td><kbd>$</kbd></td>
+<td>5</td>
+<td><kbd>4</kbd></td>
+<td><kbd>$</kbd></td>
+<td>5</td>
+<td><kbd>4</kbd></td>
+<td><kbd>$</kbd></td>
+<td></td>
+<td>5</td>
+<td><kbd>4</kbd></td>
+<td><kbd>$</kbd></td>
+<td></td>
+<td>5</td>
+<td><kbd>4</kbd></td>
+<td><kbd>$</kbd></td>
+<td></td>
+<td><code>05</code></td>
+<td><code>85</code></td>
+<td><code>25</code></td>
+<td><code>F0 25</code></td>
+<td><code>25</code></td>
+<td><code>F0 25</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td><kbd>5</kbd></td>
+<td><kbd>%</kbd></td>
+<td>6</td>
+<td><kbd>5</kbd></td>
+<td><kbd>%</kbd></td>
+<td>6</td>
+<td><kbd>5</kbd></td>
+<td><kbd>%</kbd></td>
+<td>6</td>
+<td><kbd>5</kbd></td>
+<td><kbd>%</kbd></td>
+<td></td>
+<td>6</td>
+<td><kbd>5</kbd></td>
+<td><kbd>%</kbd></td>
+<td></td>
+<td>6</td>
+<td><kbd>5</kbd></td>
+<td><kbd>%</kbd></td>
+<td></td>
+<td><code>06</code></td>
+<td><code>86</code></td>
+<td><code>2E</code></td>
+<td><code>F0 2E</code></td>
+<td><code>2E</code></td>
+<td><code>F0 2E</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td><kbd>6</kbd></td>
+<td><kbd>^</kbd></td>
+<td>7</td>
+<td><kbd>6</kbd></td>
+<td><kbd>^</kbd></td>
+<td>7</td>
+<td><kbd>6</kbd></td>
+<td><kbd>^</kbd></td>
+<td>7</td>
+<td><kbd>6</kbd></td>
+<td><kbd>^</kbd></td>
+<td></td>
+<td>7</td>
+<td><kbd>6</kbd></td>
+<td><kbd>^</kbd></td>
+<td></td>
+<td>7</td>
+<td><kbd>6</kbd></td>
+<td><kbd>&amp;</kbd></td>
+<td>✓</td>
+<td><code>07</code></td>
+<td><code>87</code></td>
+<td><code>36</code></td>
+<td><code>F0 36</code></td>
+<td><code>36</code></td>
+<td><code>F0 36</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td><kbd>7</kbd></td>
+<td><kbd>&amp;</kbd></td>
+<td>8</td>
+<td><kbd>7</kbd></td>
+<td><kbd>&amp;</kbd></td>
+<td>8</td>
+<td><kbd>7</kbd></td>
+<td><kbd>&amp;</kbd></td>
+<td>8</td>
+<td><kbd>7</kbd></td>
+<td><kbd>&amp;</kbd></td>
+<td></td>
+<td>8</td>
+<td><kbd>7</kbd></td>
+<td><kbd>&amp;</kbd></td>
+<td></td>
+<td>8</td>
+<td><kbd>7</kbd></td>
+<td><kbd>*</kbd></td>
+<td>✓</td>
+<td><code>08</code></td>
+<td><code>88</code></td>
+<td><code>3d</code></td>
+<td><code>F0 3d</code></td>
+<td><code>3d</code></td>
+<td><code>F0 3d</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>9</td>
+<td><kbd>8</kbd></td>
+<td><kbd>*</kbd></td>
+<td>9</td>
+<td><kbd>8</kbd></td>
+<td><kbd>*</kbd></td>
+<td>9</td>
+<td><kbd>8</kbd></td>
+<td><kbd>*</kbd></td>
+<td>9</td>
+<td><kbd>8</kbd></td>
+<td><kbd>*</kbd></td>
+<td></td>
+<td>9</td>
+<td><kbd>8</kbd></td>
+<td><kbd>*</kbd></td>
+<td></td>
+<td>9</td>
+<td><kbd>8</kbd></td>
+<td><kbd>(</kbd></td>
+<td>✓</td>
+<td><code>09</code></td>
+<td><code>89</code></td>
+<td><code>3E</code></td>
+<td><code>F0 3E</code></td>
+<td><code>3E</code></td>
+<td><code>F0 3E</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>10</td>
+<td><kbd>9</kbd></td>
+<td><kbd>(</kbd></td>
+<td>10</td>
+<td><kbd>9</kbd></td>
+<td><kbd>(</kbd></td>
+<td>10</td>
+<td><kbd>9</kbd></td>
+<td><kbd>(</kbd></td>
+<td>10</td>
+<td><kbd>9</kbd></td>
+<td><kbd>(</kbd></td>
+<td></td>
+<td>10</td>
+<td><kbd>9</kbd></td>
+<td><kbd>(</kbd></td>
+<td></td>
+<td>10</td>
+<td><kbd>9</kbd></td>
+<td><kbd>)</kbd></td>
+<td>✓</td>
+<td><code>0A</code></td>
+<td><code>8A</code></td>
+<td><code>46</code></td>
+<td><code>F0 46</code></td>
+<td><code>46</code></td>
+<td><code>F0 46</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td>11</td>
+<td><kbd>0</kbd></td>
+<td><kbd>)</kbd></td>
+<td>11</td>
+<td><kbd>0</kbd></td>
+<td><kbd>)</kbd></td>
+<td>11</td>
+<td><kbd>0</kbd></td>
+<td><kbd>)</kbd></td>
+<td>11</td>
+<td><kbd>0</kbd></td>
+<td><kbd>)</kbd></td>
+<td></td>
+<td>11</td>
+<td><kbd>0</kbd></td>
+<td><kbd>)</kbd></td>
+<td></td>
+<td>11</td>
+<td><kbd>0</kbd></td>
+<td></td>
+<td>✓</td>
+<td><code>0B</code></td>
+<td><code>8B</code></td>
+<td><code>45</code></td>
+<td><code>F0 45</code></td>
+<td><code>45</code></td>
+<td><code>F0 45</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>12</td>
+<td><kbd>-</kbd></td>
+<td><kbd>_</kbd></td>
+<td>12</td>
+<td><kbd>-</kbd></td>
+<td><kbd>_</kbd></td>
+<td>12</td>
+<td><kbd>-</kbd></td>
+<td><kbd>_</kbd></td>
+<td>12</td>
+<td><kbd>-</kbd></td>
+<td><kbd>_</kbd></td>
+<td></td>
+<td>12</td>
+<td><kbd>-</kbd></td>
+<td><kbd>_</kbd></td>
+<td></td>
+<td>12</td>
+<td><kbd>-</kbd></td>
+<td><kbd>=</kbd></td>
+<td>✓</td>
+<td><code>0C</code></td>
+<td><code>8C</code></td>
+<td><code>4E</code></td>
+<td><code>F0 4E</code></td>
+<td><code>4E</code></td>
+<td><code>F0 4E</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>13</td>
+<td>13</td>
+<td><kbd>=</kbd></td>
+<td><kbd>+</kbd></td>
+<td>13</td>
+<td><kbd>=</kbd></td>
+<td><kbd>+</kbd></td>
+<td>13</td>
+<td><kbd>=</kbd></td>
+<td><kbd>+</kbd></td>
+<td>13</td>
+<td><kbd>=</kbd></td>
+<td><kbd>+</kbd></td>
+<td></td>
+<td>13</td>
+<td><kbd>=</kbd></td>
+<td><kbd>+</kbd></td>
+<td></td>
+<td>13</td>
+<td><kbd>^</kbd></td>
+<td><kbd>~</kbd></td>
+<td>✓</td>
+<td><code>0D</code></td>
+<td><code>8D</code></td>
+<td><code>55</code></td>
+<td><code>F0 55</code></td>
+<td><code>55</code></td>
+<td><code>F0 55</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>14</td>
+<td><kbd>Backspace</kbd></td>
+<td></td>
+<td>15</td>
+<td><kbd>Backspace</kbd></td>
+<td></td>
+<td>15</td>
+<td><kbd>Backspace</kbd></td>
+<td></td>
+<td>15</td>
+<td><kbd>Backspace</kbd></td>
+<td></td>
+<td></td>
+<td>15</td>
+<td><kbd>Backspace</kbd></td>
+<td></td>
+<td></td>
+<td>15</td>
+<td><kbd>Backspace</kbd></td>
+<td></td>
+<td></td>
+<td><code>0E</code></td>
+<td><code>8E</code></td>
+<td><code>66</code></td>
+<td><code>F0 66</code></td>
+<td><code>66</code></td>
+<td><code>F0 66</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td>15</td>
+<td><kbd>Tab</kbd></td>
+<td></td>
+<td>16</td>
+<td><kbd>Tab</kbd></td>
+<td></td>
+<td>16</td>
+<td><kbd>Tab</kbd></td>
+<td></td>
+<td>16</td>
+<td><kbd>Tab</kbd></td>
+<td></td>
+<td></td>
+<td>16</td>
+<td><kbd>Tab</kbd></td>
+<td></td>
+<td></td>
+<td>16</td>
+<td><kbd>Tab</kbd></td>
+<td></td>
+<td></td>
+<td><code>0F</code></td>
+<td><code>8F</code></td>
+<td><code>0D</code></td>
+<td><code>F0 0D</code></td>
+<td><code>0D</code></td>
+<td><code>F0 0D</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>16</td>
+<td>16</td>
+<td><kbd>Q</kbd></td>
+<td></td>
+<td>17</td>
+<td><kbd>Q</kbd></td>
+<td></td>
+<td>17</td>
+<td><kbd>Q</kbd></td>
+<td></td>
+<td>17</td>
+<td><kbd>Q</kbd></td>
+<td></td>
+<td></td>
+<td>17</td>
+<td><kbd>Q</kbd></td>
+<td></td>
+<td></td>
+<td>17</td>
+<td><kbd>Q</kbd></td>
+<td></td>
+<td></td>
+<td><code>10</code></td>
+<td><code>90</code></td>
+<td><code>15</code></td>
+<td><code>F0 15</code></td>
+<td><code>15</code></td>
+<td><code>F0 15</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>17</td>
+<td>17</td>
+<td><kbd>W</kbd></td>
+<td></td>
+<td>18</td>
+<td><kbd>W</kbd></td>
+<td></td>
+<td>18</td>
+<td><kbd>W</kbd></td>
+<td></td>
+<td>18</td>
+<td><kbd>W</kbd></td>
+<td></td>
+<td></td>
+<td>18</td>
+<td><kbd>W</kbd></td>
+<td></td>
+<td></td>
+<td>18</td>
+<td><kbd>W</kbd></td>
+<td></td>
+<td></td>
+<td><code>11</code></td>
+<td><code>91</code></td>
+<td><code>1D</code></td>
+<td><code>F0 1D</code></td>
+<td><code>1D</code></td>
+<td><code>F0 1D</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>18</td>
+<td>18</td>
+<td><kbd>E</kbd></td>
+<td></td>
+<td>19</td>
+<td><kbd>E</kbd></td>
+<td></td>
+<td>19</td>
+<td><kbd>E</kbd></td>
+<td></td>
+<td>19</td>
+<td><kbd>E</kbd></td>
+<td></td>
+<td></td>
+<td>19</td>
+<td><kbd>E</kbd></td>
+<td></td>
+<td></td>
+<td>19</td>
+<td><kbd>E</kbd></td>
+<td></td>
+<td></td>
+<td><code>12</code></td>
+<td><code>92</code></td>
+<td><code>24</code></td>
+<td><code>F0 24</code></td>
+<td><code>24</code></td>
+<td><code>F0 24</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>19</td>
+<td>19</td>
+<td><kbd>R</kbd></td>
+<td></td>
+<td>20</td>
+<td><kbd>R</kbd></td>
+<td></td>
+<td>20</td>
+<td><kbd>R</kbd></td>
+<td></td>
+<td>20</td>
+<td><kbd>R</kbd></td>
+<td></td>
+<td></td>
+<td>20</td>
+<td><kbd>R</kbd></td>
+<td></td>
+<td></td>
+<td>20</td>
+<td><kbd>R</kbd></td>
+<td></td>
+<td></td>
+<td><code>13</code></td>
+<td><code>93</code></td>
+<td><code>2D</code></td>
+<td><code>F0 2D</code></td>
+<td><code>2D</code></td>
+<td><code>F0 2D</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>20</td>
+<td>20</td>
+<td><kbd>T</kbd></td>
+<td></td>
+<td>21</td>
+<td><kbd>T</kbd></td>
+<td></td>
+<td>21</td>
+<td><kbd>T</kbd></td>
+<td></td>
+<td>21</td>
+<td><kbd>T</kbd></td>
+<td></td>
+<td></td>
+<td>21</td>
+<td><kbd>T</kbd></td>
+<td></td>
+<td></td>
+<td>21</td>
+<td><kbd>T</kbd></td>
+<td></td>
+<td></td>
+<td><code>14</code></td>
+<td><code>94</code></td>
+<td><code>2C</code></td>
+<td><code>F0 2C</code></td>
+<td><code>2C</code></td>
+<td><code>F0 2C</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>21</td>
+<td>21</td>
+<td><kbd>Y</kbd></td>
+<td></td>
+<td>22</td>
+<td><kbd>Y</kbd></td>
+<td></td>
+<td>22</td>
+<td><kbd>Y</kbd></td>
+<td></td>
+<td>22</td>
+<td><kbd>Y</kbd></td>
+<td></td>
+<td></td>
+<td>22</td>
+<td><kbd>Y</kbd></td>
+<td></td>
+<td></td>
+<td>22</td>
+<td><kbd>Y</kbd></td>
+<td></td>
+<td></td>
+<td><code>15</code></td>
+<td><code>95</code></td>
+<td><code>35</code></td>
+<td><code>F0 35</code></td>
+<td><code>35</code></td>
+<td><code>F0 35</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>22</td>
+<td>22</td>
+<td><kbd>U</kbd></td>
+<td></td>
+<td>23</td>
+<td><kbd>U</kbd></td>
+<td></td>
+<td>23</td>
+<td><kbd>U</kbd></td>
+<td></td>
+<td>23</td>
+<td><kbd>U</kbd></td>
+<td></td>
+<td></td>
+<td>23</td>
+<td><kbd>U</kbd></td>
+<td></td>
+<td></td>
+<td>23</td>
+<td><kbd>U</kbd></td>
+<td></td>
+<td></td>
+<td><code>16</code></td>
+<td><code>96</code></td>
+<td><code>3C</code></td>
+<td><code>F0 3C</code></td>
+<td><code>3C</code></td>
+<td><code>F0 3C</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>23</td>
+<td>23</td>
+<td><kbd>I</kbd></td>
+<td></td>
+<td>24</td>
+<td><kbd>I</kbd></td>
+<td></td>
+<td>24</td>
+<td><kbd>I</kbd></td>
+<td></td>
+<td>24</td>
+<td><kbd>I</kbd></td>
+<td></td>
+<td></td>
+<td>24</td>
+<td><kbd>I</kbd></td>
+<td></td>
+<td></td>
+<td>24</td>
+<td><kbd>I</kbd></td>
+<td></td>
+<td></td>
+<td><code>17</code></td>
+<td><code>97</code></td>
+<td><code>43</code></td>
+<td><code>F0 43</code></td>
+<td><code>43</code></td>
+<td><code>F0 43</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>24</td>
+<td>24</td>
+<td><kbd>O</kbd></td>
+<td></td>
+<td>25</td>
+<td><kbd>O</kbd></td>
+<td></td>
+<td>25</td>
+<td><kbd>O</kbd></td>
+<td></td>
+<td>25</td>
+<td><kbd>O</kbd></td>
+<td></td>
+<td></td>
+<td>25</td>
+<td><kbd>O</kbd></td>
+<td></td>
+<td></td>
+<td>25</td>
+<td><kbd>O</kbd></td>
+<td></td>
+<td></td>
+<td><code>18</code></td>
+<td><code>98</code></td>
+<td><code>44</code></td>
+<td><code>F0 44</code></td>
+<td><code>44</code></td>
+<td><code>F0 44</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>25</td>
+<td>25</td>
+<td><kbd>P</kbd></td>
+<td></td>
+<td>26</td>
+<td><kbd>P</kbd></td>
+<td></td>
+<td>26</td>
+<td><kbd>P</kbd></td>
+<td></td>
+<td>26</td>
+<td><kbd>P</kbd></td>
+<td></td>
+<td></td>
+<td>26</td>
+<td><kbd>P</kbd></td>
+<td></td>
+<td></td>
+<td>26</td>
+<td><kbd>P</kbd></td>
+<td></td>
+<td></td>
+<td><code>19</code></td>
+<td><code>99</code></td>
+<td><code>4D</code></td>
+<td><code>F0 4D</code></td>
+<td><code>4D</code></td>
+<td><code>F0 4D</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>26</td>
+<td>26</td>
+<td><kbd>{</kbd></td>
+<td><kbd>[</kbd></td>
+<td>27</td>
+<td><kbd>{</kbd></td>
+<td><kbd>[</kbd></td>
+<td>27</td>
+<td><kbd>{</kbd></td>
+<td><kbd>[</kbd></td>
+<td>27</td>
+<td><kbd>{</kbd></td>
+<td><kbd>[</kbd></td>
+<td></td>
+<td>27</td>
+<td><kbd>{</kbd></td>
+<td><kbd>[</kbd></td>
+<td></td>
+<td>27</td>
+<td><kbd>@</kbd></td>
+<td><kbd>`</kbd></td>
+<td>✓</td>
+<td><code>1A</code></td>
+<td><code>9A</code></td>
+<td><code>54</code></td>
+<td><code>F0 54</code></td>
+<td><code>54</code></td>
+<td><code>F0 54</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>27</td>
+<td>27</td>
+<td><kbd>}</kbd></td>
+<td><kbd>]</kbd></td>
+<td>28</td>
+<td><kbd>}</kbd></td>
+<td><kbd>]</kbd></td>
+<td>28</td>
+<td><kbd>}</kbd></td>
+<td><kbd>]</kbd></td>
+<td>28</td>
+<td><kbd>}</kbd></td>
+<td><kbd>]</kbd></td>
+<td></td>
+<td>28</td>
+<td><kbd>}</kbd></td>
+<td><kbd>]</kbd></td>
+<td></td>
+<td>28</td>
+<td><kbd>{</kbd></td>
+<td><kbd>[</kbd></td>
+<td>✓</td>
+<td><code>1B</code></td>
+<td><code>9B</code></td>
+<td><code>5B</code></td>
+<td><code>F0 5B</code></td>
+<td><code>5B</code></td>
+<td><code>F0 5B</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>28</td>
+<td>28</td>
+<td><kbd>Enter</kbd></td>
+<td></td>
+<td>43</td>
+<td><kbd>Enter</kbd></td>
+<td></td>
+<td>43</td>
+<td><kbd>Enter</kbd></td>
+<td></td>
+<td>43</td>
+<td><kbd>Enter</kbd></td>
+<td></td>
+<td></td>
+<td>43</td>
+<td><kbd>Enter</kbd></td>
+<td></td>
+<td></td>
+<td>43</td>
+<td><kbd>Enter</kbd></td>
+<td></td>
+<td></td>
+<td><code>1C</code></td>
+<td><code>9C</code></td>
+<td><code>5A</code></td>
+<td><code>F0 5A</code></td>
+<td><code>5A</code></td>
+<td><code>F0 5A</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>29</td>
+<td>29</td>
+<td><kbd>LCtrl</kbd></td>
+<td></td>
+<td>30</td>
+<td><kbd>LCtrl</kbd></td>
+<td></td>
+<td>58</td>
+<td><kbd>LCtrl</kbd></td>
+<td></td>
+<td>58</td>
+<td><kbd>LCtrl</kbd></td>
+<td></td>
+<td></td>
+<td>30</td>
+<td><kbd>LCtrl</kbd></td>
+<td></td>
+<td></td>
+<td>58</td>
+<td><kbd>LCtrl</kbd></td>
+<td></td>
+<td></td>
+<td><code>1D</code></td>
+<td><code>9D</code></td>
+<td><code>14</code></td>
+<td><code>F0 14</code></td>
+<td><code>11</code></td>
+<td><code>F0 11</code></td>
+<td>Make/Break</td>
+<td></td>
+</tr>
+<tr>
+<td>30</td>
+<td>30</td>
+<td><kbd>A</kbd></td>
+<td></td>
+<td>31</td>
+<td><kbd>A</kbd></td>
+<td></td>
+<td>31</td>
+<td><kbd>A</kbd></td>
+<td></td>
+<td>31</td>
+<td><kbd>A</kbd></td>
+<td></td>
+<td></td>
+<td>31</td>
+<td><kbd>A</kbd></td>
+<td></td>
+<td></td>
+<td>31</td>
+<td><kbd>A</kbd></td>
+<td></td>
+<td></td>
+<td><code>1E</code></td>
+<td><code>9E</code></td>
+<td><code>1C</code></td>
+<td><code>F0 1C</code></td>
+<td><code>1C</code></td>
+<td><code>F0 1C</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>31</td>
+<td>31</td>
+<td><kbd>S</kbd></td>
+<td></td>
+<td>32</td>
+<td><kbd>S</kbd></td>
+<td></td>
+<td>32</td>
+<td><kbd>S</kbd></td>
+<td></td>
+<td>32</td>
+<td><kbd>S</kbd></td>
+<td></td>
+<td></td>
+<td>32</td>
+<td><kbd>S</kbd></td>
+<td></td>
+<td></td>
+<td>32</td>
+<td><kbd>S</kbd></td>
+<td></td>
+<td></td>
+<td><code>1F</code></td>
+<td><code>9F</code></td>
+<td><code>1B</code></td>
+<td><code>F0 1B</code></td>
+<td><code>1B</code></td>
+<td><code>F0 1B</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>32</td>
+<td>32</td>
+<td><kbd>D</kbd></td>
+<td></td>
+<td>33</td>
+<td><kbd>D</kbd></td>
+<td></td>
+<td>33</td>
+<td><kbd>D</kbd></td>
+<td></td>
+<td>33</td>
+<td><kbd>D</kbd></td>
+<td></td>
+<td></td>
+<td>33</td>
+<td><kbd>D</kbd></td>
+<td></td>
+<td></td>
+<td>33</td>
+<td><kbd>D</kbd></td>
+<td></td>
+<td></td>
+<td><code>20</code></td>
+<td><code>A0</code></td>
+<td><code>23</code></td>
+<td><code>F0 23</code></td>
+<td><code>23</code></td>
+<td><code>F0 23</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>33</td>
+<td>33</td>
+<td><kbd>F</kbd></td>
+<td></td>
+<td>34</td>
+<td><kbd>F</kbd></td>
+<td></td>
+<td>34</td>
+<td><kbd>F</kbd></td>
+<td></td>
+<td>34</td>
+<td><kbd>F</kbd></td>
+<td></td>
+<td></td>
+<td>34</td>
+<td><kbd>F</kbd></td>
+<td></td>
+<td></td>
+<td>34</td>
+<td><kbd>F</kbd></td>
+<td></td>
+<td></td>
+<td><code>21</code></td>
+<td><code>A1</code></td>
+<td><code>2B</code></td>
+<td><code>F0 2B</code></td>
+<td><code>2B</code></td>
+<td><code>F0 2B</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>34</td>
+<td>34</td>
+<td><kbd>G</kbd></td>
+<td></td>
+<td>35</td>
+<td><kbd>G</kbd></td>
+<td></td>
+<td>35</td>
+<td><kbd>G</kbd></td>
+<td></td>
+<td>35</td>
+<td><kbd>G</kbd></td>
+<td></td>
+<td></td>
+<td>35</td>
+<td><kbd>G</kbd></td>
+<td></td>
+<td></td>
+<td>35</td>
+<td><kbd>G</kbd></td>
+<td></td>
+<td></td>
+<td><code>22</code></td>
+<td><code>A2</code></td>
+<td><code>34</code></td>
+<td><code>F0 34</code></td>
+<td><code>34</code></td>
+<td><code>F0 34</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>35</td>
+<td>35</td>
+<td><kbd>H</kbd></td>
+<td></td>
+<td>36</td>
+<td><kbd>H</kbd></td>
+<td></td>
+<td>36</td>
+<td><kbd>H</kbd></td>
+<td></td>
+<td>36</td>
+<td><kbd>H</kbd></td>
+<td></td>
+<td></td>
+<td>36</td>
+<td><kbd>H</kbd></td>
+<td></td>
+<td></td>
+<td>36</td>
+<td><kbd>H</kbd></td>
+<td></td>
+<td></td>
+<td><code>23</code></td>
+<td><code>A3</code></td>
+<td><code>33</code></td>
+<td><code>F0 33</code></td>
+<td><code>33</code></td>
+<td><code>F0 33</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>36</td>
+<td>36</td>
+<td><kbd>J</kbd></td>
+<td></td>
+<td>37</td>
+<td><kbd>J</kbd></td>
+<td></td>
+<td>37</td>
+<td><kbd>J</kbd></td>
+<td></td>
+<td>37</td>
+<td><kbd>J</kbd></td>
+<td></td>
+<td></td>
+<td>37</td>
+<td><kbd>J</kbd></td>
+<td></td>
+<td></td>
+<td>37</td>
+<td><kbd>J</kbd></td>
+<td></td>
+<td></td>
+<td><code>24</code></td>
+<td><code>A4</code></td>
+<td><code>3B</code></td>
+<td><code>F0 3B</code></td>
+<td><code>3B</code></td>
+<td><code>F0 3B</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>37</td>
+<td>37</td>
+<td><kbd>K</kbd></td>
+<td></td>
+<td>38</td>
+<td><kbd>K</kbd></td>
+<td></td>
+<td>38</td>
+<td><kbd>K</kbd></td>
+<td></td>
+<td>38</td>
+<td><kbd>K</kbd></td>
+<td></td>
+<td></td>
+<td>38</td>
+<td><kbd>K</kbd></td>
+<td></td>
+<td></td>
+<td>38</td>
+<td><kbd>K</kbd></td>
+<td></td>
+<td></td>
+<td><code>25</code></td>
+<td><code>A5</code></td>
+<td><code>42</code></td>
+<td><code>F0 42</code></td>
+<td><code>42</code></td>
+<td><code>F0 42</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>38</td>
+<td>38</td>
+<td><kbd>L</kbd></td>
+<td></td>
+<td>39</td>
+<td><kbd>L</kbd></td>
+<td></td>
+<td>39</td>
+<td><kbd>L</kbd></td>
+<td></td>
+<td>39</td>
+<td><kbd>L</kbd></td>
+<td></td>
+<td></td>
+<td>39</td>
+<td><kbd>L</kbd></td>
+<td></td>
+<td></td>
+<td>39</td>
+<td><kbd>L</kbd></td>
+<td></td>
+<td></td>
+<td><code>26</code></td>
+<td><code>A6</code></td>
+<td><code>4B</code></td>
+<td><code>F0 4B</code></td>
+<td><code>4B</code></td>
+<td><code>F0 4B</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>39</td>
+<td>39</td>
+<td><kbd>;</kbd></td>
+<td><kbd>:</kbd></td>
+<td>40</td>
+<td><kbd>;</kbd></td>
+<td><kbd>:</kbd></td>
+<td>40</td>
+<td><kbd>;</kbd></td>
+<td><kbd>:</kbd></td>
+<td>40</td>
+<td><kbd>;</kbd></td>
+<td><kbd>:</kbd></td>
+<td></td>
+<td>40</td>
+<td><kbd>;</kbd></td>
+<td><kbd>:</kbd></td>
+<td></td>
+<td>40</td>
+<td><kbd>;</kbd></td>
+<td><kbd>+</kbd></td>
+<td>✓</td>
+<td><code>27</code></td>
+<td><code>A7</code></td>
+<td><code>4C</code></td>
+<td><code>F0 4C</code></td>
+<td><code>4C</code></td>
+<td><code>F0 4C</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>40</td>
+<td>40</td>
+<td><kbd>'</kbd></td>
+<td><kbd>&quot;</kbd></td>
+<td>41</td>
+<td><kbd>'</kbd></td>
+<td><kbd>&quot;</kbd></td>
+<td>41</td>
+<td><kbd>'</kbd></td>
+<td><kbd>&quot;</kbd></td>
+<td>41</td>
+<td><kbd>'</kbd></td>
+<td><kbd>@</kbd></td>
+<td>✓</td>
+<td>41</td>
+<td><kbd>'</kbd></td>
+<td><kbd>&quot;</kbd></td>
+<td></td>
+<td>41</td>
+<td><kbd>:</kbd></td>
+<td><kbd>*</kbd></td>
+<td>✓</td>
+<td><code>28</code></td>
+<td><code>A8</code></td>
+<td><code>52</code></td>
+<td><code>F0 52</code></td>
+<td><code>52</code></td>
+<td><code>F0 52</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>41</td>
+<td>41</td>
+<td><kbd>`</kbd></td>
+<td><kbd>~</kbd></td>
+<td>1</td>
+<td><kbd>`</kbd></td>
+<td><kbd>~</kbd></td>
+<td>1</td>
+<td><kbd>`</kbd></td>
+<td><kbd>~</kbd></td>
+<td>1</td>
+<td><kbd>`</kbd></td>
+<td><kbd>¬</kbd></td>
+<td>✓</td>
+<td>42</td>
+<td><kbd>`</kbd></td>
+<td><kbd>~</kbd></td>
+<td></td>
+<td>1</td>
+<td><kbd>Hankaku / Zenkaku</kbd></td>
+<td></td>
+<td>✓</td>
+<td><code>29</code></td>
+<td><code>A9</code></td>
+<td><code>0E</code></td>
+<td><code>F0 0E</code></td>
+<td><code>0E</code></td>
+<td><code>F0 0E</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>42</td>
+<td>42</td>
+<td><kbd>LShift</kbd></td>
+<td></td>
+<td>44</td>
+<td><kbd>LShift</kbd></td>
+<td></td>
+<td>44</td>
+<td><kbd>LShift</kbd></td>
+<td></td>
+<td>44</td>
+<td><kbd>LShift</kbd></td>
+<td></td>
+<td></td>
+<td>44</td>
+<td><kbd>LShift</kbd></td>
+<td></td>
+<td></td>
+<td>44</td>
+<td><kbd>LShift</kbd></td>
+<td></td>
+<td></td>
+<td><code>2A</code></td>
+<td><code>AA</code></td>
+<td><code>12</code></td>
+<td><code>F0 12</code></td>
+<td><code>12</code></td>
+<td><code>F0 12</code></td>
+<td>Make/Break</td>
+<td></td>
+</tr>
+<tr>
+<td>43</td>
+<td>43</td>
+<td><kbd>\</kbd></td>
+<td><kbd>|</kbd></td>
+<td>45</td>
+<td><kbd>\</kbd></td>
+<td><kbd>|</kbd></td>
+<td>29</td>
+<td><kbd>\</kbd></td>
+<td><kbd>|</kbd></td>
+<td>42</td>
+<td><kbd>#</kbd></td>
+<td><kbd>~</kbd></td>
+<td>✓</td>
+<td>14</td>
+<td><kbd>¥</kbd></td>
+<td><kbd>|</kbd></td>
+<td>✓</td>
+<td>42</td>
+<td><kbd>}</kbd></td>
+<td><kbd>]</kbd></td>
+<td>✓</td>
+<td><code>2B</code></td>
+<td><code>AB</code></td>
+<td><code>5D</code></td>
+<td><code>F0 5D</code></td>
+<td><code>5C</code></td>
+<td><code>F0 5C</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>44</td>
+<td>44</td>
+<td><kbd>Z</kbd></td>
+<td></td>
+<td>46</td>
+<td><kbd>Z</kbd></td>
+<td></td>
+<td>46</td>
+<td><kbd>Z</kbd></td>
+<td></td>
+<td>46</td>
+<td><kbd>Z</kbd></td>
+<td></td>
+<td></td>
+<td>46</td>
+<td><kbd>Z</kbd></td>
+<td></td>
+<td></td>
+<td>46</td>
+<td><kbd>Z</kbd></td>
+<td></td>
+<td></td>
+<td><code>2C</code></td>
+<td><code>AC</code></td>
+<td><code>1A</code></td>
+<td><code>F0 1A</code></td>
+<td><code>1A</code></td>
+<td><code>F0 1A</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>45</td>
+<td>45</td>
+<td><kbd>X</kbd></td>
+<td></td>
+<td>47</td>
+<td><kbd>X</kbd></td>
+<td></td>
+<td>47</td>
+<td><kbd>X</kbd></td>
+<td></td>
+<td>47</td>
+<td><kbd>X</kbd></td>
+<td></td>
+<td></td>
+<td>47</td>
+<td><kbd>X</kbd></td>
+<td></td>
+<td></td>
+<td>47</td>
+<td><kbd>X</kbd></td>
+<td></td>
+<td></td>
+<td><code>2D</code></td>
+<td><code>AD</code></td>
+<td><code>22</code></td>
+<td><code>F0 22</code></td>
+<td><code>22</code></td>
+<td><code>F0 22</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>46</td>
+<td>46</td>
+<td><kbd>C</kbd></td>
+<td></td>
+<td>48</td>
+<td><kbd>C</kbd></td>
+<td></td>
+<td>48</td>
+<td><kbd>C</kbd></td>
+<td></td>
+<td>48</td>
+<td><kbd>C</kbd></td>
+<td></td>
+<td></td>
+<td>48</td>
+<td><kbd>C</kbd></td>
+<td></td>
+<td></td>
+<td>48</td>
+<td><kbd>C</kbd></td>
+<td></td>
+<td></td>
+<td><code>2E</code></td>
+<td><code>AE</code></td>
+<td><code>21</code></td>
+<td><code>F0 21</code></td>
+<td><code>21</code></td>
+<td><code>F0 21</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>47</td>
+<td>47</td>
+<td><kbd>V</kbd></td>
+<td></td>
+<td>49</td>
+<td><kbd>V</kbd></td>
+<td></td>
+<td>49</td>
+<td><kbd>V</kbd></td>
+<td></td>
+<td>49</td>
+<td><kbd>V</kbd></td>
+<td></td>
+<td></td>
+<td>49</td>
+<td><kbd>V</kbd></td>
+<td></td>
+<td></td>
+<td>49</td>
+<td><kbd>V</kbd></td>
+<td></td>
+<td></td>
+<td><code>2F</code></td>
+<td><code>AF</code></td>
+<td><code>2A</code></td>
+<td><code>F0 2A</code></td>
+<td><code>2A</code></td>
+<td><code>F0 2A</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>48</td>
+<td>48</td>
+<td><kbd>B</kbd></td>
+<td></td>
+<td>50</td>
+<td><kbd>B</kbd></td>
+<td></td>
+<td>50</td>
+<td><kbd>B</kbd></td>
+<td></td>
+<td>50</td>
+<td><kbd>B</kbd></td>
+<td></td>
+<td></td>
+<td>50</td>
+<td><kbd>B</kbd></td>
+<td></td>
+<td></td>
+<td>50</td>
+<td><kbd>B</kbd></td>
+<td></td>
+<td></td>
+<td><code>30</code></td>
+<td><code>B0</code></td>
+<td><code>32</code></td>
+<td><code>F0 32</code></td>
+<td><code>32</code></td>
+<td><code>F0 32</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>49</td>
+<td>49</td>
+<td><kbd>N</kbd></td>
+<td></td>
+<td>51</td>
+<td><kbd>N</kbd></td>
+<td></td>
+<td>51</td>
+<td><kbd>N</kbd></td>
+<td></td>
+<td>51</td>
+<td><kbd>N</kbd></td>
+<td></td>
+<td></td>
+<td>51</td>
+<td><kbd>N</kbd></td>
+<td></td>
+<td></td>
+<td>51</td>
+<td><kbd>N</kbd></td>
+<td></td>
+<td></td>
+<td><code>31</code></td>
+<td><code>B1</code></td>
+<td><code>31</code></td>
+<td><code>F0 31</code></td>
+<td><code>31</code></td>
+<td><code>F0 31</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>50</td>
+<td>50</td>
+<td><kbd>M</kbd></td>
+<td></td>
+<td>52</td>
+<td><kbd>M</kbd></td>
+<td></td>
+<td>52</td>
+<td><kbd>M</kbd></td>
+<td></td>
+<td>52</td>
+<td><kbd>M</kbd></td>
+<td></td>
+<td></td>
+<td>52</td>
+<td><kbd>M</kbd></td>
+<td></td>
+<td></td>
+<td>52</td>
+<td><kbd>M</kbd></td>
+<td></td>
+<td></td>
+<td><code>32</code></td>
+<td><code>B2</code></td>
+<td><code>3A</code></td>
+<td><code>F0 3A</code></td>
+<td><code>3A</code></td>
+<td><code>F0 3A</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>51</td>
+<td>51</td>
+<td><kbd>,</kbd></td>
+<td><kbd>&lt;</kbd></td>
+<td>53</td>
+<td><kbd>,</kbd></td>
+<td><kbd>&lt;</kbd></td>
+<td>53</td>
+<td><kbd>,</kbd></td>
+<td><kbd>&lt;</kbd></td>
+<td>53</td>
+<td><kbd>,</kbd></td>
+<td><kbd>&lt;</kbd></td>
+<td></td>
+<td>53</td>
+<td><kbd>,</kbd></td>
+<td><kbd>&lt;</kbd></td>
+<td></td>
+<td>53</td>
+<td><kbd>,</kbd></td>
+<td><kbd>&lt;</kbd></td>
+<td></td>
+<td><code>33</code></td>
+<td><code>B3</code></td>
+<td><code>41</code></td>
+<td><code>F0 41</code></td>
+<td><code>41</code></td>
+<td><code>F0 41</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>52</td>
+<td>52</td>
+<td><kbd>.</kbd></td>
+<td><kbd>&gt;</kbd></td>
+<td>54</td>
+<td><kbd>.</kbd></td>
+<td><kbd>&gt;</kbd></td>
+<td>54</td>
+<td><kbd>.</kbd></td>
+<td><kbd>&gt;</kbd></td>
+<td>54</td>
+<td><kbd>.</kbd></td>
+<td><kbd>&gt;</kbd></td>
+<td></td>
+<td>54</td>
+<td><kbd>.</kbd></td>
+<td><kbd>&gt;</kbd></td>
+<td></td>
+<td>54</td>
+<td><kbd>.</kbd></td>
+<td><kbd>&gt;</kbd></td>
+<td></td>
+<td><code>34</code></td>
+<td><code>B4</code></td>
+<td><code>49</code></td>
+<td><code>F0 49</code></td>
+<td><code>49</code></td>
+<td><code>F0 49</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>53</td>
+<td>53</td>
+<td><kbd>/</kbd></td>
+<td><kbd>?</kbd></td>
+<td>55</td>
+<td><kbd>/</kbd></td>
+<td><kbd>?</kbd></td>
+<td>55</td>
+<td><kbd>/</kbd></td>
+<td><kbd>?</kbd></td>
+<td>55</td>
+<td><kbd>/</kbd></td>
+<td><kbd>?</kbd></td>
+<td></td>
+<td>55</td>
+<td><kbd>/</kbd></td>
+<td><kbd>?</kbd></td>
+<td></td>
+<td>55</td>
+<td><kbd>/</kbd></td>
+<td><kbd>?</kbd></td>
+<td></td>
+<td><code>35</code></td>
+<td><code>B5</code></td>
+<td><code>4A</code></td>
+<td><code>F0 4A</code></td>
+<td><code>4A</code></td>
+<td><code>F0 4A</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>54</td>
+<td>54</td>
+<td><kbd>RShift</kbd></td>
+<td></td>
+<td>57</td>
+<td><kbd>RShift</kbd></td>
+<td></td>
+<td>57</td>
+<td><kbd>RShift</kbd></td>
+<td></td>
+<td>57</td>
+<td><kbd>RShift</kbd></td>
+<td></td>
+<td></td>
+<td>57</td>
+<td><kbd>RShift</kbd></td>
+<td></td>
+<td></td>
+<td>57</td>
+<td><kbd>RShift</kbd></td>
+<td></td>
+<td></td>
+<td><code>36</code></td>
+<td><code>B6</code></td>
+<td><code>59</code></td>
+<td><code>F0 59</code></td>
+<td><code>59</code></td>
+<td><code>F0 59</code></td>
+<td>Make/Break</td>
+<td></td>
+</tr>
+<tr>
+<td>55</td>
+<td>55</td>
+<td><kbd>KP-*</kbd></td>
+<td></td>
+<td>106</td>
+<td><kbd>KP-*</kbd></td>
+<td></td>
+<td>100</td>
+<td><kbd>KP-*</kbd></td>
+<td></td>
+<td>100</td>
+<td><kbd>KP-*</kbd></td>
+<td></td>
+<td></td>
+<td>100</td>
+<td><kbd>KP-*</kbd></td>
+<td></td>
+<td></td>
+<td>100</td>
+<td><kbd>KP-*</kbd></td>
+<td></td>
+<td></td>
+<td><code>37</code></td>
+<td><code>B7</code></td>
+<td><code>7C</code></td>
+<td><code>F0 7C</code></td>
+<td><code>7E</code></td>
+<td><code>F0 7E</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>56</td>
+<td>56</td>
+<td><kbd>LAlt</kbd></td>
+<td></td>
+<td>58</td>
+<td><kbd>LAlt</kbd></td>
+<td></td>
+<td>60</td>
+<td><kbd>LAlt</kbd></td>
+<td></td>
+<td>60</td>
+<td><kbd>LAlt</kbd></td>
+<td></td>
+<td></td>
+<td>60</td>
+<td><kbd>LAlt</kbd></td>
+<td></td>
+<td></td>
+<td>60</td>
+<td><kbd>LAlt</kbd></td>
+<td></td>
+<td></td>
+<td><code>38</code></td>
+<td><code>B8</code></td>
+<td><code>11</code></td>
+<td><code>F0 11</code></td>
+<td><code>19</code></td>
+<td><code>F0 19</code></td>
+<td>Make/Break</td>
+<td></td>
+</tr>
+<tr>
+<td>57</td>
+<td>57</td>
+<td><kbd>space</kbd></td>
+<td></td>
+<td>61</td>
+<td><kbd>space</kbd></td>
+<td></td>
+<td>61</td>
+<td><kbd>space</kbd></td>
+<td></td>
+<td>61</td>
+<td><kbd>space</kbd></td>
+<td></td>
+<td></td>
+<td>61</td>
+<td><kbd>space</kbd></td>
+<td></td>
+<td></td>
+<td>61</td>
+<td><kbd>space</kbd></td>
+<td></td>
+<td></td>
+<td><code>39</code></td>
+<td><code>B9</code></td>
+<td><code>29</code></td>
+<td><code>F0 29</code></td>
+<td><code>29</code></td>
+<td><code>F0 29</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>58</td>
+<td>58</td>
+<td><kbd>CapsLock</kbd></td>
+<td></td>
+<td>64</td>
+<td><kbd>CapsLock</kbd></td>
+<td></td>
+<td>30</td>
+<td><kbd>CapsLock</kbd></td>
+<td></td>
+<td>30</td>
+<td><kbd>CapsLock</kbd></td>
+<td></td>
+<td></td>
+<td>58</td>
+<td><kbd>CapsLock</kbd></td>
+<td></td>
+<td></td>
+<td>30</td>
+<td><kbd>Eisu / CapsLock</kbd></td>
+<td></td>
+<td>✓</td>
+<td><code>3A</code></td>
+<td><code>BA</code></td>
+<td><code>58</code></td>
+<td><code>F0 58</code></td>
+<td><code>14</code></td>
+<td><code>F0 14</code></td>
+<td>Make/Break</td>
+<td></td>
+</tr>
+<tr>
+<td>59</td>
+<td>59</td>
+<td><kbd>F1</kbd></td>
+<td></td>
+<td>70</td>
+<td><kbd>F1</kbd></td>
+<td></td>
+<td>112</td>
+<td><kbd>F1</kbd></td>
+<td></td>
+<td>112</td>
+<td><kbd>F1</kbd></td>
+<td></td>
+<td></td>
+<td>112</td>
+<td><kbd>F1</kbd></td>
+<td></td>
+<td></td>
+<td>112</td>
+<td><kbd>F1</kbd></td>
+<td></td>
+<td></td>
+<td><code>3B</code></td>
+<td><code>BB</code></td>
+<td><code>05</code></td>
+<td><code>F0 05</code></td>
+<td><code>07</code></td>
+<td><code>F0 07</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>60</td>
+<td>60</td>
+<td><kbd>F2</kbd></td>
+<td></td>
+<td>65</td>
+<td><kbd>F2</kbd></td>
+<td></td>
+<td>113</td>
+<td><kbd>F2</kbd></td>
+<td></td>
+<td>113</td>
+<td><kbd>F2</kbd></td>
+<td></td>
+<td></td>
+<td>113</td>
+<td><kbd>F2</kbd></td>
+<td></td>
+<td></td>
+<td>113</td>
+<td><kbd>F2</kbd></td>
+<td></td>
+<td></td>
+<td><code>3C</code></td>
+<td><code>BC</code></td>
+<td><code>06</code></td>
+<td><code>F0 06</code></td>
+<td><code>0F</code></td>
+<td><code>F0 0F</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>61</td>
+<td>61</td>
+<td><kbd>F3</kbd></td>
+<td></td>
+<td>71</td>
+<td><kbd>F3</kbd></td>
+<td></td>
+<td>114</td>
+<td><kbd>F3</kbd></td>
+<td></td>
+<td>114</td>
+<td><kbd>F3</kbd></td>
+<td></td>
+<td></td>
+<td>114</td>
+<td><kbd>F3</kbd></td>
+<td></td>
+<td></td>
+<td>114</td>
+<td><kbd>F3</kbd></td>
+<td></td>
+<td></td>
+<td><code>3D</code></td>
+<td><code>BD</code></td>
+<td><code>04</code></td>
+<td><code>F0 04</code></td>
+<td><code>17</code></td>
+<td><code>F0 17</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>62</td>
+<td>62</td>
+<td><kbd>F4</kbd></td>
+<td></td>
+<td>66</td>
+<td><kbd>F4</kbd></td>
+<td></td>
+<td>115</td>
+<td><kbd>F4</kbd></td>
+<td></td>
+<td>115</td>
+<td><kbd>F4</kbd></td>
+<td></td>
+<td></td>
+<td>115</td>
+<td><kbd>F4</kbd></td>
+<td></td>
+<td></td>
+<td>115</td>
+<td><kbd>F4</kbd></td>
+<td></td>
+<td></td>
+<td><code>3E</code></td>
+<td><code>BE</code></td>
+<td><code>0C</code></td>
+<td><code>F0 0C</code></td>
+<td><code>1F</code></td>
+<td><code>F0 1F</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>63</td>
+<td>63</td>
+<td><kbd>F5</kbd></td>
+<td></td>
+<td>72</td>
+<td><kbd>F5</kbd></td>
+<td></td>
+<td>116</td>
+<td><kbd>F5</kbd></td>
+<td></td>
+<td>116</td>
+<td><kbd>F5</kbd></td>
+<td></td>
+<td></td>
+<td>116</td>
+<td><kbd>F5</kbd></td>
+<td></td>
+<td></td>
+<td>116</td>
+<td><kbd>F5</kbd></td>
+<td></td>
+<td></td>
+<td><code>3F</code></td>
+<td><code>BF</code></td>
+<td><code>03</code></td>
+<td><code>F0 03</code></td>
+<td><code>27</code></td>
+<td><code>F0 27</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>64</td>
+<td>64</td>
+<td><kbd>F6</kbd></td>
+<td></td>
+<td>67</td>
+<td><kbd>F6</kbd></td>
+<td></td>
+<td>117</td>
+<td><kbd>F6</kbd></td>
+<td></td>
+<td>117</td>
+<td><kbd>F6</kbd></td>
+<td></td>
+<td></td>
+<td>117</td>
+<td><kbd>F6</kbd></td>
+<td></td>
+<td></td>
+<td>117</td>
+<td><kbd>F6</kbd></td>
+<td></td>
+<td></td>
+<td><code>40</code></td>
+<td><code>C0</code></td>
+<td><code>0B</code></td>
+<td><code>F0 0B</code></td>
+<td><code>2F</code></td>
+<td><code>F0 2F</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>65</td>
+<td>65</td>
+<td><kbd>F7</kbd></td>
+<td></td>
+<td>73</td>
+<td><kbd>F7</kbd></td>
+<td></td>
+<td>118</td>
+<td><kbd>F7</kbd></td>
+<td></td>
+<td>118</td>
+<td><kbd>F7</kbd></td>
+<td></td>
+<td></td>
+<td>118</td>
+<td><kbd>F7</kbd></td>
+<td></td>
+<td></td>
+<td>118</td>
+<td><kbd>F7</kbd></td>
+<td></td>
+<td></td>
+<td><code>41</code></td>
+<td><code>C1</code></td>
+<td><code>83</code></td>
+<td><code>F0 83</code></td>
+<td><code>37</code></td>
+<td><code>F0 37</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>66</td>
+<td>66</td>
+<td><kbd>F8</kbd></td>
+<td></td>
+<td>68</td>
+<td><kbd>F8</kbd></td>
+<td></td>
+<td>119</td>
+<td><kbd>F8</kbd></td>
+<td></td>
+<td>119</td>
+<td><kbd>F8</kbd></td>
+<td></td>
+<td></td>
+<td>119</td>
+<td><kbd>F8</kbd></td>
+<td></td>
+<td></td>
+<td>119</td>
+<td><kbd>F8</kbd></td>
+<td></td>
+<td></td>
+<td><code>42</code></td>
+<td><code>C2</code></td>
+<td><code>0A</code></td>
+<td><code>F0 0A</code></td>
+<td><code>3F</code></td>
+<td><code>F0 3F</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>67</td>
+<td>67</td>
+<td><kbd>F9</kbd></td>
+<td></td>
+<td>74</td>
+<td><kbd>F9</kbd></td>
+<td></td>
+<td>120</td>
+<td><kbd>F9</kbd></td>
+<td></td>
+<td>120</td>
+<td><kbd>F9</kbd></td>
+<td></td>
+<td></td>
+<td>120</td>
+<td><kbd>F9</kbd></td>
+<td></td>
+<td></td>
+<td>120</td>
+<td><kbd>F9</kbd></td>
+<td></td>
+<td></td>
+<td><code>43</code></td>
+<td><code>C3</code></td>
+<td><code>01</code></td>
+<td><code>F0 01</code></td>
+<td><code>47</code></td>
+<td><code>F0 47</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>68</td>
+<td>68</td>
+<td><kbd>F10</kbd></td>
+<td></td>
+<td>69</td>
+<td><kbd>F10</kbd></td>
+<td></td>
+<td>121</td>
+<td><kbd>F10</kbd></td>
+<td></td>
+<td>121</td>
+<td><kbd>F10</kbd></td>
+<td></td>
+<td></td>
+<td>121</td>
+<td><kbd>F10</kbd></td>
+<td></td>
+<td></td>
+<td>121</td>
+<td><kbd>F10</kbd></td>
+<td></td>
+<td></td>
+<td><code>44</code></td>
+<td><code>C4</code></td>
+<td><code>09</code></td>
+<td><code>F0 09</code></td>
+<td><code>4F</code></td>
+<td><code>F0 4F</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>69</td>
+<td>69</td>
+<td><kbd>NumLock</kbd></td>
+<td></td>
+<td>95</td>
+<td><kbd>NumLock</kbd></td>
+<td></td>
+<td>90</td>
+<td><kbd>NumLock</kbd></td>
+<td></td>
+<td>90</td>
+<td><kbd>NumLock</kbd></td>
+<td></td>
+<td></td>
+<td>90</td>
+<td><kbd>NumLock</kbd></td>
+<td></td>
+<td></td>
+<td>90</td>
+<td><kbd>NumLock</kbd></td>
+<td></td>
+<td></td>
+<td><code>45</code></td>
+<td><code>C5</code></td>
+<td><code>77</code></td>
+<td><code>F0 77</code></td>
+<td><code>76</code></td>
+<td><code>F0 76</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>70</td>
+<td>70</td>
+<td><kbd>ScrollLock</kbd></td>
+<td></td>
+<td>100</td>
+<td><kbd>ScrollLock</kbd></td>
+<td></td>
+<td>125</td>
+<td><kbd>ScrollLock</kbd></td>
+<td></td>
+<td>125</td>
+<td><kbd>ScrollLock</kbd></td>
+<td></td>
+<td></td>
+<td>125</td>
+<td><kbd>ScrollLock</kbd></td>
+<td></td>
+<td></td>
+<td>125</td>
+<td><kbd>ScrollLock</kbd></td>
+<td></td>
+<td></td>
+<td><code>46</code></td>
+<td><code>C6</code></td>
+<td><code>7E</code></td>
+<td><code>F0 7E</code></td>
+<td><code>5F</code></td>
+<td><code>F0 5F</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>71</td>
+<td>71</td>
+<td><kbd>KP-7 / Home</kbd></td>
+<td></td>
+<td>91</td>
+<td><kbd>KP-7 / Home</kbd></td>
+<td></td>
+<td>91</td>
+<td><kbd>KP-7 / Home</kbd></td>
+<td></td>
+<td>91</td>
+<td><kbd>KP-7 / Home</kbd></td>
+<td></td>
+<td></td>
+<td>91</td>
+<td><kbd>KP-7 / Home</kbd></td>
+<td></td>
+<td></td>
+<td>91</td>
+<td><kbd>KP-7 / Home</kbd></td>
+<td></td>
+<td></td>
+<td><code>47</code></td>
+<td><code>C7</code></td>
+<td><code>6C</code></td>
+<td><code>F0 6C</code></td>
+<td><code>6C</code></td>
+<td><code>F0 6C</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>72</td>
+<td>72</td>
+<td><kbd>KP-8 / Up</kbd></td>
+<td></td>
+<td>96</td>
+<td><kbd>KP-8 / Up</kbd></td>
+<td></td>
+<td>96</td>
+<td><kbd>KP-8 / Up</kbd></td>
+<td></td>
+<td>96</td>
+<td><kbd>KP-8 / Up</kbd></td>
+<td></td>
+<td></td>
+<td>96</td>
+<td><kbd>KP-8 / Up</kbd></td>
+<td></td>
+<td></td>
+<td>96</td>
+<td><kbd>KP-8 / Up</kbd></td>
+<td></td>
+<td></td>
+<td><code>48</code></td>
+<td><code>C8</code></td>
+<td><code>75</code></td>
+<td><code>F0 75</code></td>
+<td><code>75</code></td>
+<td><code>F0 75</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>73</td>
+<td>73</td>
+<td><kbd>KP-9 / PgUp</kbd></td>
+<td></td>
+<td>101</td>
+<td><kbd>KP-9 / PgUp</kbd></td>
+<td></td>
+<td>101</td>
+<td><kbd>KP-9 / PgUp</kbd></td>
+<td></td>
+<td>101</td>
+<td><kbd>KP-9 / PgUp</kbd></td>
+<td></td>
+<td></td>
+<td>101</td>
+<td><kbd>KP-9 / PgUp</kbd></td>
+<td></td>
+<td></td>
+<td>101</td>
+<td><kbd>KP-9 / PgUp</kbd></td>
+<td></td>
+<td></td>
+<td><code>49</code></td>
+<td><code>C9</code></td>
+<td><code>7D</code></td>
+<td><code>F0 7D</code></td>
+<td><code>7E</code></td>
+<td><code>F0 7E</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>74</td>
+<td>74</td>
+<td><kbd>KP--</kbd></td>
+<td></td>
+<td>107</td>
+<td><kbd>KP--</kbd></td>
+<td></td>
+<td>105</td>
+<td><kbd>KP--</kbd></td>
+<td></td>
+<td>105</td>
+<td><kbd>KP--</kbd></td>
+<td></td>
+<td></td>
+<td>105</td>
+<td><kbd>KP--</kbd></td>
+<td></td>
+<td></td>
+<td>105</td>
+<td><kbd>KP--</kbd></td>
+<td></td>
+<td></td>
+<td><code>4A</code></td>
+<td><code>CA</code></td>
+<td><code>7B</code></td>
+<td><code>F0 7B</code></td>
+<td><code>84</code></td>
+<td><code>F0 84</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>75</td>
+<td>75</td>
+<td><kbd>KP-4 / Left</kbd></td>
+<td></td>
+<td>92</td>
+<td><kbd>KP-4 / Left</kbd></td>
+<td></td>
+<td>92</td>
+<td><kbd>KP-4 / Left</kbd></td>
+<td></td>
+<td>92</td>
+<td><kbd>KP-4 / Left</kbd></td>
+<td></td>
+<td></td>
+<td>92</td>
+<td><kbd>KP-4 / Left</kbd></td>
+<td></td>
+<td></td>
+<td>92</td>
+<td><kbd>KP-4 / Left</kbd></td>
+<td></td>
+<td></td>
+<td><code>4B</code></td>
+<td><code>CB</code></td>
+<td><code>6B</code></td>
+<td><code>F0 6B</code></td>
+<td><code>6B</code></td>
+<td><code>F0 6B</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>76</td>
+<td>76</td>
+<td><kbd>KP-5</kbd></td>
+<td></td>
+<td>97</td>
+<td><kbd>KP-5</kbd></td>
+<td></td>
+<td>97</td>
+<td><kbd>KP-5</kbd></td>
+<td></td>
+<td>97</td>
+<td><kbd>KP-5</kbd></td>
+<td></td>
+<td></td>
+<td>97</td>
+<td><kbd>KP-5</kbd></td>
+<td></td>
+<td></td>
+<td>97</td>
+<td><kbd>KP-5</kbd></td>
+<td></td>
+<td></td>
+<td><code>4C</code></td>
+<td><code>CC</code></td>
+<td><code>73</code></td>
+<td><code>F0 73</code></td>
+<td><code>73</code></td>
+<td><code>F0 73</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>77</td>
+<td>77</td>
+<td><kbd>KP-6 / Right</kbd></td>
+<td></td>
+<td>102</td>
+<td><kbd>KP-6 / Right</kbd></td>
+<td></td>
+<td>102</td>
+<td><kbd>KP-6 / Right</kbd></td>
+<td></td>
+<td>102</td>
+<td><kbd>KP-6 / Right</kbd></td>
+<td></td>
+<td></td>
+<td>102</td>
+<td><kbd>KP-6 / Right</kbd></td>
+<td></td>
+<td></td>
+<td>102</td>
+<td><kbd>KP-6 / Right</kbd></td>
+<td></td>
+<td></td>
+<td><code>4D</code></td>
+<td><code>CD</code></td>
+<td><code>74</code></td>
+<td><code>F0 74</code></td>
+<td><code>74</code></td>
+<td><code>F0 74</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>78</td>
+<td>78</td>
+<td><kbd>KP-+</kbd></td>
+<td></td>
+<td>108</td>
+<td><kbd>KP-+</kbd></td>
+<td></td>
+<td>106</td>
+<td><kbd>KP-+</kbd></td>
+<td></td>
+<td>106</td>
+<td><kbd>KP-+</kbd></td>
+<td></td>
+<td></td>
+<td>106</td>
+<td><kbd>KP-+</kbd></td>
+<td></td>
+<td></td>
+<td>106</td>
+<td><kbd>KP-+</kbd></td>
+<td></td>
+<td></td>
+<td><code>4E</code></td>
+<td><code>CE</code></td>
+<td><code>79</code></td>
+<td><code>F0 79</code></td>
+<td><code>7C</code></td>
+<td><code>F0 7C</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>79</td>
+<td>79</td>
+<td><kbd>KP-1 / End</kbd></td>
+<td></td>
+<td>93</td>
+<td><kbd>KP-1 / End</kbd></td>
+<td></td>
+<td>93</td>
+<td><kbd>KP-1 / End</kbd></td>
+<td></td>
+<td>93</td>
+<td><kbd>KP-1 / End</kbd></td>
+<td></td>
+<td></td>
+<td>93</td>
+<td><kbd>KP-1 / End</kbd></td>
+<td></td>
+<td></td>
+<td>93</td>
+<td><kbd>KP-1 / End</kbd></td>
+<td></td>
+<td></td>
+<td><code>4F</code></td>
+<td><code>CF</code></td>
+<td><code>69</code></td>
+<td><code>F0 69</code></td>
+<td><code>69</code></td>
+<td><code>F0 69</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>80</td>
+<td>80</td>
+<td><kbd>KP-2 / Down</kbd></td>
+<td></td>
+<td>98</td>
+<td><kbd>KP-2 / Down</kbd></td>
+<td></td>
+<td>98</td>
+<td><kbd>KP-2 / Down</kbd></td>
+<td></td>
+<td>98</td>
+<td><kbd>KP-2 / Down</kbd></td>
+<td></td>
+<td></td>
+<td>98</td>
+<td><kbd>KP-2 / Down</kbd></td>
+<td></td>
+<td></td>
+<td>98</td>
+<td><kbd>KP-2 / Down</kbd></td>
+<td></td>
+<td></td>
+<td><code>50</code></td>
+<td><code>D0</code></td>
+<td><code>72</code></td>
+<td><code>F0 72</code></td>
+<td><code>72</code></td>
+<td><code>F0 72</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>81</td>
+<td>81</td>
+<td><kbd>KP-3 / PgDn</kbd></td>
+<td></td>
+<td>103</td>
+<td><kbd>KP-3 / PgDn</kbd></td>
+<td></td>
+<td>103</td>
+<td><kbd>KP-3 / PgDn</kbd></td>
+<td></td>
+<td>103</td>
+<td><kbd>KP-3 / PgDn</kbd></td>
+<td></td>
+<td></td>
+<td>103</td>
+<td><kbd>KP-3 / PgDn</kbd></td>
+<td></td>
+<td></td>
+<td>103</td>
+<td><kbd>KP-3 / PgDn</kbd></td>
+<td></td>
+<td></td>
+<td><code>51</code></td>
+<td><code>D1</code></td>
+<td><code>7A</code></td>
+<td><code>F0 7A</code></td>
+<td><code>7A</code></td>
+<td><code>F0 7A</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>82</td>
+<td>82</td>
+<td><kbd>KP-0 / Ins</kbd></td>
+<td></td>
+<td>99</td>
+<td><kbd>KP-0 / Ins</kbd></td>
+<td></td>
+<td>99</td>
+<td><kbd>KP-0 / Ins</kbd></td>
+<td></td>
+<td>99</td>
+<td><kbd>KP-0 / Ins</kbd></td>
+<td></td>
+<td></td>
+<td>99</td>
+<td><kbd>KP-0 / Ins</kbd></td>
+<td></td>
+<td></td>
+<td>99</td>
+<td><kbd>KP-0 / Ins</kbd></td>
+<td></td>
+<td></td>
+<td><code>52</code></td>
+<td><code>D2</code></td>
+<td><code>70</code></td>
+<td><code>F0 70</code></td>
+<td><code>70</code></td>
+<td><code>F0 70</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>83</td>
+<td>83</td>
+<td><kbd>KP-. / Del</kbd></td>
+<td></td>
+<td>104</td>
+<td><kbd>KP-. / Del</kbd></td>
+<td></td>
+<td>104</td>
+<td><kbd>KP-. / Del</kbd></td>
+<td></td>
+<td>104</td>
+<td><kbd>KP-. / Del</kbd></td>
+<td></td>
+<td></td>
+<td>104</td>
+<td><kbd>KP-. / Del</kbd></td>
+<td></td>
+<td></td>
+<td>104</td>
+<td><kbd>KP-. / Del</kbd></td>
+<td></td>
+<td></td>
+<td><code>53</code></td>
+<td><code>D3</code></td>
+<td><code>71</code></td>
+<td><code>F0 71</code></td>
+<td><code>71</code></td>
+<td><code>F0 71</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>84</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>105</td>
+<td><kbd>SysReq</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td><code>54</code></td>
+<td><code>D4</code></td>
+<td><code>7B</code></td>
+<td><code>F0 7B</code></td>
+<td><code>84</code></td>
+<td><code>F0 84</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>85</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>45</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>45</td>
+<td><kbd>\</kbd></td>
+<td><kbd>|</kbd></td>
+<td>✓</td>
+<td>56</td>
+<td><kbd>\</kbd></td>
+<td><kbd>|</kbd></td>
+<td>✓</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td><code>56</code></td>
+<td><code>D6</code></td>
+<td><code>61</code></td>
+<td><code>F0 61</code></td>
+<td><code>13</code></td>
+<td><code>F0 13</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>86</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>122</td>
+<td><kbd>F11</kbd></td>
+<td></td>
+<td>122</td>
+<td><kbd>F11</kbd></td>
+<td></td>
+<td></td>
+<td>122</td>
+<td><kbd>F11</kbd></td>
+<td></td>
+<td></td>
+<td>122</td>
+<td><kbd>F11</kbd></td>
+<td></td>
+<td></td>
+<td><code>57</code></td>
+<td><code>D7</code></td>
+<td><code>78</code></td>
+<td><code>F0 78</code></td>
+<td><code>56</code></td>
+<td><code>F0 56</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>87</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>123</td>
+<td><kbd>F12</kbd></td>
+<td></td>
+<td>123</td>
+<td><kbd>F12</kbd></td>
+<td></td>
+<td></td>
+<td>123</td>
+<td><kbd>F12</kbd></td>
+<td></td>
+<td></td>
+<td>123</td>
+<td><kbd>F12</kbd></td>
+<td></td>
+<td></td>
+<td><code>58</code></td>
+<td><code>D8</code></td>
+<td><code>07</code></td>
+<td><code>F0 07</code></td>
+<td><code>5E</code></td>
+<td><code>F0 5E</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>88</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>70</td>
+<td><kbd>Nonconvert</kbd></td>
+<td></td>
+<td>✓</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td><code>5A</code></td>
+<td><code>DA</code></td>
+<td><code>17</code></td>
+<td><code>F0 17</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>89</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>71</td>
+<td><kbd>Convert</kbd></td>
+<td></td>
+<td>✓</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td><code>5B</code></td>
+<td><code>DB</code></td>
+<td><code>1F</code></td>
+<td><code>F0 1F</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>90</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>133</td>
+<td><kbd>Hira / Kana</kbd></td>
+<td></td>
+<td>✓</td>
+<td><code>70</code></td>
+<td><code>F0</code></td>
+<td><code>13</code></td>
+<td><code>F0 13</code></td>
+<td><code>87</code></td>
+<td><code>F0 87</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>91</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>56</td>
+<td><kbd>\</kbd></td>
+<td><kbd>_</kbd></td>
+<td>✓</td>
+<td><code>73</code></td>
+<td><code>F3</code></td>
+<td><code>51</code></td>
+<td><code>F0 51</code></td>
+<td><code>51</code></td>
+<td><code>F0 51</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>92</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>132</td>
+<td><kbd>Convert</kbd></td>
+<td></td>
+<td>✓</td>
+<td><code>79</code></td>
+<td><code>F9</code></td>
+<td><code>64</code></td>
+<td><code>F0 64</code></td>
+<td><code>86</code></td>
+<td><code>F0 86</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>93</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>131</td>
+<td><kbd>Nonconvert</kbd></td>
+<td></td>
+<td>✓</td>
+<td><code>7B</code></td>
+<td><code>FB</code></td>
+<td><code>67</code></td>
+<td><code>F0 67</code></td>
+<td><code>85</code></td>
+<td><code>F0 85</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>94</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td></td>
+<td>14</td>
+<td><kbd>¥</kbd></td>
+<td><kbd>|</kbd></td>
+<td>✓</td>
+<td><code>7D</code></td>
+<td><code>FD</code></td>
+<td><code>6A</code></td>
+<td><code>F0 6A</code></td>
+<td><code>5D</code></td>
+<td><code>F0 5D</code></td>
+<td>Typematic</td>
+<td></td>
+</tr>
+<tr>
+<td>95</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>108</td>
+<td><kbd>KP-Enter</kbd></td>
+<td></td>
+<td>108</td>
+<td><kbd>KP-Enter</kbd></td>
+<td></td>
+<td></td>
+<td>108</td>
+<td><kbd>KP-Enter</kbd></td>
+<td></td>
+<td></td>
+<td>108</td>
+<td><kbd>KP-Enter</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 1C</code></td>
+<td><code>E0 9C</code></td>
+<td><code>E0 5A</code></td>
+<td><code>E0 F0 5A</code></td>
+<td><code>79</code></td>
+<td><code>F0 79</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>96</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>64</td>
+<td><kbd>RCtrl</kbd></td>
+<td></td>
+<td>64</td>
+<td><kbd>RCtrl</kbd></td>
+<td></td>
+<td></td>
+<td>64</td>
+<td><kbd>Eisu/Kana</kbd></td>
+<td></td>
+<td>✓</td>
+<td>64</td>
+<td><kbd>RCtrl</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 1D</code></td>
+<td><code>E0 9D</code></td>
+<td><code>E0 14</code></td>
+<td><code>E0 F0 14</code></td>
+<td><code>58</code></td>
+<td><code>F0 58</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>\</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>124</td>
+<td><kbd>PrtScr</kbd></td>
+<td></td>
+<td>124</td>
+<td><kbd>PrtScr</kbd></td>
+<td></td>
+<td></td>
+<td>124</td>
+<td><kbd>PrtScr</kbd></td>
+<td></td>
+<td></td>
+<td>124</td>
+<td><kbd>PrtScr</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 2A<wbr> E0 37</code></td>
+<td><code>E0 B7<wbr> E0 AA</code></td>
+<td><code>E0 12<wbr> E0 7C</code></td>
+<td><code>E0 F0 7C<wbr> E0 F0 12</code></td>
+<td><code>57</code></td>
+<td><code>F0 57</code></td>
+<td>Make only</td>
+<td><a href="#note3-printscreen-key">*3</a></td>
+</tr>
+<tr>
+<td>98</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>95</td>
+<td><kbd>KP-/</kbd></td>
+<td></td>
+<td>95</td>
+<td><kbd>KP-/</kbd></td>
+<td></td>
+<td></td>
+<td>95</td>
+<td><kbd>KP-/</kbd></td>
+<td></td>
+<td></td>
+<td>95</td>
+<td><kbd>KP-/</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 35</code></td>
+<td><code>E0 B5</code></td>
+<td><code>E0 4A</code></td>
+<td><code>E0 F0 4A</code></td>
+<td><code>77</code></td>
+<td><code>F0 77</code></td>
+<td>Make only</td>
+<td><a href="#note2-KP-slash-key">*2</a></td>
+</tr>
+<tr>
+<td>99</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>62</td>
+<td><kbd>RAlt</kbd></td>
+<td></td>
+<td>62</td>
+<td><kbd>Alt Gr</kbd></td>
+<td></td>
+<td>✓</td>
+<td>62</td>
+<td><kbd>Kanji</kbd></td>
+<td></td>
+<td>✓</td>
+<td>62</td>
+<td><kbd>RAlt</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 38</code></td>
+<td><code>E0 B8</code></td>
+<td><code>E0 11</code></td>
+<td><code>E0 F0 11</code></td>
+<td><code>39</code></td>
+<td><code>F0 39</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>100</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>80</td>
+<td><kbd>Home</kbd></td>
+<td></td>
+<td>80</td>
+<td><kbd>Home</kbd></td>
+<td></td>
+<td></td>
+<td>80</td>
+<td><kbd>Home</kbd></td>
+<td></td>
+<td></td>
+<td>80</td>
+<td><kbd>Home</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 47</code></td>
+<td><code>E0 C7</code></td>
+<td><code>E0 6C</code></td>
+<td><code>E0 F0 6C</code></td>
+<td><code>6E</code></td>
+<td><code>F0 6E</code></td>
+<td>Make only</td>
+<td><a href="#note1-some-special-keys">*1</a></td>
+</tr>
+<tr>
+<td>101</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>83</td>
+<td><kbd>Up</kbd></td>
+<td></td>
+<td>83</td>
+<td><kbd>Up</kbd></td>
+<td></td>
+<td></td>
+<td>83</td>
+<td><kbd>Up</kbd></td>
+<td></td>
+<td></td>
+<td>83</td>
+<td><kbd>Up</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 48</code></td>
+<td><code>E0 C8</code></td>
+<td><code>E0 75</code></td>
+<td><code>E0 F0 75</code></td>
+<td><code>63</code></td>
+<td><code>F0 63</code></td>
+<td>Typematic</td>
+<td><a href="#note1-some-special-keys">*1</a></td>
+</tr>
+<tr>
+<td>102</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>85</td>
+<td><kbd>PgUp</kbd></td>
+<td></td>
+<td>85</td>
+<td><kbd>PgUp</kbd></td>
+<td></td>
+<td></td>
+<td>85</td>
+<td><kbd>PgUp</kbd></td>
+<td></td>
+<td></td>
+<td>85</td>
+<td><kbd>PgUp</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 49</code></td>
+<td><code>E0 C9</code></td>
+<td><code>E0 7D</code></td>
+<td><code>E0 F0 7D</code></td>
+<td><code>6F</code></td>
+<td><code>F0 6F</code></td>
+<td>Make only</td>
+<td><a href="#note1-some-special-keys">*1</a></td>
+</tr>
+<tr>
+<td>103</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>79</td>
+<td><kbd>Left</kbd></td>
+<td></td>
+<td>79</td>
+<td><kbd>Left</kbd></td>
+<td></td>
+<td></td>
+<td>79</td>
+<td><kbd>Left</kbd></td>
+<td></td>
+<td></td>
+<td>79</td>
+<td><kbd>Left</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 4B</code></td>
+<td><code>E0 CB</code></td>
+<td><code>E0 6B</code></td>
+<td><code>E0 F0 6B</code></td>
+<td><code>61</code></td>
+<td><code>F0 61</code></td>
+<td>Typematic</td>
+<td><a href="#note1-some-special-keys">*1</a></td>
+</tr>
+<tr>
+<td>104</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>89</td>
+<td><kbd>Right</kbd></td>
+<td></td>
+<td>89</td>
+<td><kbd>Right</kbd></td>
+<td></td>
+<td></td>
+<td>89</td>
+<td><kbd>Right</kbd></td>
+<td></td>
+<td></td>
+<td>89</td>
+<td><kbd>Right</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 4D</code></td>
+<td><code>E0 CD</code></td>
+<td><code>E0 74</code></td>
+<td><code>E0 F0 74</code></td>
+<td><code>6A</code></td>
+<td><code>F0 6A</code></td>
+<td>Typematic</td>
+<td><a href="#note1-some-special-keys">*1</a></td>
+</tr>
+<tr>
+<td>105</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>81</td>
+<td><kbd>End</kbd></td>
+<td></td>
+<td>81</td>
+<td><kbd>End</kbd></td>
+<td></td>
+<td></td>
+<td>81</td>
+<td><kbd>End</kbd></td>
+<td></td>
+<td></td>
+<td>81</td>
+<td><kbd>End</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 4F</code></td>
+<td><code>E0 CF</code></td>
+<td><code>E0 69</code></td>
+<td><code>E0 F0 69</code></td>
+<td><code>65</code></td>
+<td><code>F0 65</code></td>
+<td>Make only</td>
+<td><a href="#note1-some-special-keys">*1</a></td>
+</tr>
+<tr>
+<td>106</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>84</td>
+<td><kbd>Down</kbd></td>
+<td></td>
+<td>84</td>
+<td><kbd>Down</kbd></td>
+<td></td>
+<td></td>
+<td>84</td>
+<td><kbd>Down</kbd></td>
+<td></td>
+<td></td>
+<td>84</td>
+<td><kbd>Down</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 50</code></td>
+<td><code>E0 D0</code></td>
+<td><code>E0 72</code></td>
+<td><code>E0 F0 72</code></td>
+<td><code>60</code></td>
+<td><code>F0 60</code></td>
+<td>Typematic</td>
+<td><a href="#note1-some-special-keys">*1</a></td>
+</tr>
+<tr>
+<td>107</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>86</td>
+<td><kbd>PgDn</kbd></td>
+<td></td>
+<td>86</td>
+<td><kbd>PgDn</kbd></td>
+<td></td>
+<td></td>
+<td>86</td>
+<td><kbd>PgDn</kbd></td>
+<td></td>
+<td></td>
+<td>86</td>
+<td><kbd>PgDn</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 51</code></td>
+<td><code>E0 D1</code></td>
+<td><code>E0 7A</code></td>
+<td><code>E0 F0 7A</code></td>
+<td><code>6D</code></td>
+<td><code>F0 6d</code></td>
+<td>Make only</td>
+<td><a href="#note1-some-special-keys">*1</a></td>
+</tr>
+<tr>
+<td>108</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>75</td>
+<td><kbd>Insert</kbd></td>
+<td></td>
+<td>75</td>
+<td><kbd>Insert</kbd></td>
+<td></td>
+<td></td>
+<td>75</td>
+<td><kbd>Insert</kbd></td>
+<td></td>
+<td></td>
+<td>75</td>
+<td><kbd>Insert</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 52</code></td>
+<td><code>E0 D2</code></td>
+<td><code>E0 70</code></td>
+<td><code>E0 F0 70</code></td>
+<td><code>67</code></td>
+<td><code>F0 67</code></td>
+<td>Make only</td>
+<td><a href="#note1-some-special-keys">*1</a></td>
+</tr>
+<tr>
+<td>109</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>76</td>
+<td><kbd>Delete</kbd></td>
+<td></td>
+<td>76</td>
+<td><kbd>Delete</kbd></td>
+<td></td>
+<td></td>
+<td>76</td>
+<td><kbd>Delete</kbd></td>
+<td></td>
+<td></td>
+<td>76</td>
+<td><kbd>Delete</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 53</code></td>
+<td><code>E0 D3</code></td>
+<td><code>E0 71</code></td>
+<td><code>E0 F0 71</code></td>
+<td><code>64</code></td>
+<td><code>F0 64</code></td>
+<td>Typematic</td>
+<td><a href="#note1-some-special-keys">*1</a></td>
+</tr>
+<tr>
+<td>110</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>Add 1</td>
+<td><kbd>LWin</kbd></td>
+<td></td>
+<td>Add 1</td>
+<td><kbd>LWin</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>✓</td>
+<td>Add 1</td>
+<td><kbd>LWin</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 5B</code></td>
+<td><code>E0 DB</code></td>
+<td><code>E0 1F</code></td>
+<td><code>E0 F0 1F</code></td>
+<td><code>8B</code></td>
+<td><code>F0 8B</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>111</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>Add 2</td>
+<td><kbd>RWin</kbd></td>
+<td></td>
+<td>Add 2</td>
+<td><kbd>RWin</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>✓</td>
+<td>Add 2</td>
+<td><kbd>RWin</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 5C</code></td>
+<td><code>E0 DC</code></td>
+<td><code>E0 27</code></td>
+<td><code>E0 F0 27</code></td>
+<td><code>8C</code></td>
+<td><code>F0 8C</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>112</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>Add 3</td>
+<td><kbd>Menu</kbd></td>
+<td></td>
+<td>Add 3</td>
+<td><kbd>Menu</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>✓</td>
+<td>Add 3</td>
+<td><kbd>Menu</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 5D</code></td>
+<td><code>E0 DD</code></td>
+<td><code>E0 2F</code></td>
+<td><code>E0 F0 2F</code></td>
+<td><code>8D</code></td>
+<td><code>F0 8D</code></td>
+<td>Make only</td>
+<td></td>
+</tr>
+<tr>
+<td>113</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>Power</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>Power</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>✓</td>
+<td>-</td>
+<td><kbd>Power</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 5E</code></td>
+<td><code>E0 DF</code></td>
+<td><code>E0 37</code></td>
+<td><code>E0 F0 37</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>114</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>Sleep</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>Sleep</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>✓</td>
+<td>-</td>
+<td><kbd>Sleep</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 5F</code></td>
+<td><code>E0 DE</code></td>
+<td><code>E0 3F</code></td>
+<td><code>E0 F0 3F</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>115</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>Wake</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>Wake</kbd></td>
+<td></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>✓</td>
+<td>-</td>
+<td><kbd>Wake</kbd></td>
+<td></td>
+<td></td>
+<td><code>E0 63</code></td>
+<td><code>E0 E3</code></td>
+<td><code>E0 5E</code></td>
+<td><code>E0 F0 5E</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>116</td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>-</td>
+<td><kbd>N/A</kbd></td>
+<td></td>
+<td>126</td>
+<td><kbd>Pause</kbd></td>
+<td></td>
+<td>126</td>
+<td><kbd>Pause</kbd></td>
+<td></td>
+<td></td>
+<td>126</td>
+<td><kbd>Pause</kbd></td>
+<td></td>
+<td></td>
+<td>126</td>
+<td><kbd>Pause</kbd></td>
+<td></td>
+<td></td>
+<td><code>E1 1D 45<wbr> E1 9D C5</code></td>
+<td>-</td>
+<td><code>E1 14 77<wbr> E1 F0 14 F0 77</code></td>
+<td>-</td>
+<td><code>62</code></td>
+<td><code>F0 62</code></td>
+<td>Make only</td>
+<td><a href="#note4-pause-key">*4</a></td>
+</tr>
+</tbody>
+</table>
+
+<p>Note 列に <a href="#note1-some-special-keys">*1</a>, <a href="#note2-KP-slash-key">*2</a>, <a href="#note3-printscreen-key">*3</a>, <a href="#note4-pause-key">*4</a> が記載されているキーについては、Scancode set 1, 2 が歴史的経緯により特殊な構成となっているため、別途下記で解説する。
+なお Scancode set 3 についてはそのような経緯はあまりないらしくすっきりした構成となっている。元々 IBM 3270 PC や一部のワークステーションのキーボードで使われていたようだが、あまり使われず今日ではほぼ気にしなくていい存在の模様。
+一次資料が全然見つからないのでふんわりとした説明で濁しておく。</p>
+<h3 id="note1-some-special-keys">*1: 一部の特殊キー（<kbd>KP-/</kbd>, <kbd>PrintScreen</kbd>, <kbd>Pause</kbd> キーを除く）</h3>
+<p>Scancode (set 1) が <code>E0 47</code>, <code>E0 48</code>, <code>E0 49</code>, <code>E0 4B</code>, <code>E0 4D</code>, <code>E0 4F</code>, <code>E0 50</code>, <code>E0 51</code>, <code>E0 52</code>, <code>E0 53</code>, つまり <kbd>Home</kbd>, <kbd>Up</kbd>, <kbd>PgUp</kbd>, <kbd>Left</kbd>, <kbd>Right</kbd>, <kbd>End</kbd>, <kbd>Down</kbd>, <kbd>PgDn</kbd>, <kbd>Insert</kbd>, <kbd>Delete</kbd> のキーについては元々テンキーで <code>Num Lock</code> オフ時に発生するキーのため、<code>Shift</code> や <code>Num Lock</code> もしくはその両方の組み合わせでの scancode が特殊になっている。
+なお参考資料には、<kbd>Shift</kbd> キーを両方押した場合、左右の scancode が送られるとある(<q title="IBM Personal Computer Hardware Reference Library TECHNICAL REFERENCE PN 6183355 Revised Edition (Mar. 1986), page 4-52">If both Shift keys are down, both sets of codes are sent with the other scan code.</q>)が、左右の順序までは記載されていないので、基本となる左が先だろうと推測した上で下記表は書いてある。
+もしかしたら右側が先かもしれないし、どちらが先でもよいのかもしれないし、正解は分からずじまい。たぶん後者な気がするが、正解分かる方は教えてほしい……。</p>
+
+
+<table>
+<caption>Special key state of some keys</caption>
+<thead>
+<tr>
+<th>Key State</th>
+<th>Make scancode pattern</th>
+<th>Break scancode pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base Case, Shift+Num Lock</td>
+<td><code>Base Make</code></td>
+<td><code>Base Break</code></td>
+</tr>
+<tr>
+<td>Shift Case (Left or Right)</td>
+<td><code>E0</code> + <code>Shift Break</code> + <code>Base Make</code></td>
+<td><code>Base Break</code> + <code>E0</code> + <code>Shift Make</code></td>
+</tr>
+<tr>
+<td>Shift Case (Both)</td>
+<td><code>E0</code> + <code>Left Shift Break</code> + <code>E0</code> + <code>Right Shift Break</code> + <code>Base Make</code></td>
+<td><code>Base Break</code> + <code>E0</code> + <code>Left Shift Make</code> + <code>E0</code> + <code>Right Shift Make</code></td>
+</tr>
+<tr>
+<td>Num Lock on</td>
+<td><code>E0</code> + <code>Shift Make</code> + <code>Base Make</code></td>
+<td><code>Base Break</code> + <code>E0</code> + <code>Shift Make</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="note2-KP-slash-key">*2: <kbd>KP-/</kbd> キー</h3>
+<p><code>Num Lock</code> に関係しないテンキーである <kbd>KP-/</kbd> も特殊な scancode となっている。ただし <code>Num Lock</code> が関係しないので Base と Shift の2パターンのみ。
+こちらも左右の <kbd>Shift</kbd> を同時に押している場合の scancode については前項と同様。</p>
+
+
+<table>
+<caption>Special key state of <kbd>KP-/</kbd></caption>
+<thead>
+<tr>
+<th>Key State</th>
+<th>Make scancode pattern</th>
+<th>Break scancode pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base Case</td>
+<td><code>Base Make</code></td>
+<td><code>Base Break</code></td>
+</tr>
+<tr>
+<td>Shift Case (Left or Right)</td>
+<td><code>E0</code> + <code>Shift Break</code> + <code>Base Make</code></td>
+<td><code>Base Break</code> + <code>E0</code> + <code>Shift Make</code></td>
+</tr>
+<tr>
+<td>Shift Case (Both)</td>
+<td><code>E0</code> + <code>Left Shift Break</code> + <code>E0</code> + <code>Right Shift Break</code> + <code>Base Make</code></td>
+<td><code>Base Break</code> + <code>E0</code> + <code>Left Shift Make</code> + <code>E0</code> + <code>Right Shift Make</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="note3-printscreen-key">*3: <kbd>PrintScreen</kbd> キー</h3>
+<p>Table 1 に示したとおり、<kbd>PrintScreen</kbd> キーの scancode は Base Case が特殊になっている。これはこのキーの成り立ちに由来する。
+Table 1 や Figure 1 で示すとおり、5150, XT の 83 キーボードでは <kbd>PrintScreen</kbd> は <kbd>KP-*</kbd> の Shift Case に割り当てられたキーだった。
+そのため Base Case が普通の Shift Case のような scancode になってしまっている。逆に、Shift Case は prefix の <code>E0</code> がついただけの普通の scancode になっている。
+ただし Alt Case は全く異なり、<kbd>SysReq</kbd> の scancode が発生する仕様となっている。
+<kbd>SysReq</kbd> キーは AT (84) キーボードで単独のキーとして追加されているが、101 や 102 キーボードでは単独のキーとしては存在しなくなり、<kbd>PrintScreen</kbd> キーと合体することになった。
+オーソドックスなキーボードであれば、キーキャップの手前側などに &quot;SysReq&quot; などと印字されており、それはこのキーコンビネーションで使えることに由来する。
+以下の Table 3 に上記をまとめる。ややこしいので実際の scancode も併記する。</p>
+
+
+<table>
+<caption>Special key state of <kbd>PrintScreen</kbd></caption>
+<thead>
+<tr>
+<th rowspan="3">Key State</th>
+<th colspan="2">Scancode pattern</th>
+<!-- colspan -->
+<th colspan="4">Actual scancode</th>
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+</tr>
+<tr>
+<!-- rowspan -->
+<th rowspan="2">Make</th>
+<th rowspan="2">Break</th>
+<th colspan="2">Set 1</th>
+<!-- colspan -->
+<th colspan="2">Set 2</th>
+<!-- colspan -->
+</tr>
+<tr>
+<!-- rowspan -->
+<!-- rowspan -->
+<!-- rowspan -->
+<th>Make</th>
+<th>Break</th>
+<th>Make</th>
+<th>Break</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base Case</td>
+<td><code>E0</code> + <code>Shift Make</code> + <code>E0</code> + <code>KP-* Base Make</code></td>
+<td><code>E0</code> + <code>KP-* Base Break</code> + <code>E0</code> + <code>Shift Break</code></td>
+<td><code>E0 2A<wbr> E0 37</code></td>
+<td><code>E0 B7<wbr> E0 AA</code></td>
+<td><code>E0 12<wbr> E0 7C</code></td>
+<td><code>E0 F0 7C<wbr> E0 F0 12</code></td>
+</tr>
+<tr>
+<td>Shift Case</td>
+<td><code>E0</code> + <code>KP-* Base Make</code></td>
+<td><code>E0</code> + <code>KP-* Base Break</code></td>
+<td><code>E0 37</code></td>
+<td><code>E0 B7</code>         i</td>
+<td><code>E0 7C</code></td>
+<td><code>E0 F0 7C</code></td>
+</tr>
+<tr>
+<td>Alt Case</td>
+<td><code>SysReq Base Make</code></td>
+<td><code>SysReq Base Break</code></td>
+<td><code>54</code></td>
+<td><code>D4</code></td>
+<td><code>84</code></td>
+<td><code>F0 84</code></td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+  <dl>
+  <dt>System Request</dt>
+  <dd>When the System Request (Alt and Print Screen) key is pressed, ...</dd>
+  </dl>
+
+  <footer><cite>IBM Personal Computer Hardware Reference Library TECHNICAL REFERENCE PN 6183355 Revised Edition (Mar. 1986), page 4-72</cite></footer>
+</blockquote>
+
+<h3 id="note4-pause-key">*4: <kbd>Pause</kbd> キー</h3>
+<p><kbd>Pause</kbd> キーについては、標準的なキーボードであれば <kbd>Pause</kbd> と <kbd>Break</kbd> がセットで印字されており、scancode としてもこの2つのキーを定義している。
+こちらも Table 1 に示したとおり、大変特殊な scancode になっている。
+これは <kbd>Pause</kbd> も <kbd>Break</kbd> も当初（5150, XT, AT の 83/84 キーボードの頃、つまり 101 キーボード等の現代の一般的な配列以前の頃）は存在せず、複数キーのコンビネーションで発生するキーだったため、単独の scancode を割り当てられていなかったからだ。
+キーコンビネーションとしては、<kbd>Pause</kbd> は <kbr>Ctrl</kbd>+<kbd>Num Lock</kbd> であるので、基本の scancode は prefix の <code>E1</code> をつけて <code>Make</code> と <code>Break</code> を一遍に発生するような仕様となっている（）。
+<kbd>Break</kbd> は元々 <kbd>Ctrl</kbd>+<kbd>ScrollLock</kbd> のキーコンビネーションで発生するキーだったので、Ctrl Case として定義されており、こちらも <code>Make</code> と <code>Break</code> を一遍に発生する仕様となっている。
+そのため、どちらの場合も物理的なキーとしての <code>Break</code> は発生しない、というか定義されていない。
+ちなみに上記仕様により、キーを押し続けてもそれを感知してもらえない。
+以下の Table 4 に上記をまとめる。こちらもややこしいので実際の scancode も併記する。</p>
+
+
+<table>
+<caption>Special key state of <kbd>Pause</kbd></caption>
+<thead>
+<tr>
+<th rowspan="2">Key State</th>
+<th rowspan="2">Make scancode pattern</th>
+<th colspan="2">Scancode</th>
+<!-- colspan -->
+</tr>
+<tr>
+<!-- rowspan -->
+<!-- rowspan -->
+<th>Set 1</th>
+<th>Set 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base Case</td>
+<td><code>E1</code> + <code>Left Ctrl Make</code> + <code>Num Lock Make</code> + <code>E1</code> + <code>Left Ctrl Break</code> + <code>Num Lock Break</code></td>
+<td><code>E1 1D 45<wbr> E1 9D C5</code></td>
+<td><code>E1 14 77<wbr> E1 F0 14 F0 77</code></td>
+</tr>
+<tr>
+<td>Ctrl Pressed</td>
+<td><code>E0</code> + <code>ScrollLock Make</code> + <code>E0</code> + <code>ScrollLock Break</code></td>
+<td><code>E0 46<wbr> E0 C6</code></td>
+<td><code>E0 7E<wbr> E0 F0 7E</code></td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+Ctrl: ... with the Scroll Lock key to cause the break function; and with the Num Lock key to cause the pause function.
+  <footer><cite>IBM Personal Computer Hardware Reference Library TECHNICAL REFERENCE PN 6183355 Revised Edition (Mar. 1986), page 4-70</cite></footer>
+</blockquote>
+
+<h2 id="key-layouts-vs-key-location-number">各キーレイアウトとキー位置番号</h2>
+
+<figure>
+  <blockquote>
+    <img src="./keylayout_5150,XT.png" width="907" height="249" />
+    <footer><cite>IBM Personal Computer Hardware Reference Library TECHNICAL REFERENCE PN 6025008 First Edition (Aug. 1981), page 2-16</cite></footer>
+  </blockquote>
+  <figcaption>IBM PC 5150, XT (83 keys) のキーボード配列</figcaption>
+</figure>
+
+
+<figure>
+  <blockquote>
+    <img src="./keylayout_AT.png" width="907" height="266" />
+    <footer><cite>IBM Personal Computer Hardware Reference Library TECHNICAL REFERENCE PN 1502494 First Edition (Mar. 1984), page 1-33</cite></footer>
+  </blockquote>
+  <figcaption>IBM PC AT (84 keys) のキーボード配列</figcaption>
+</figure>
+
+
+<figure>
+  <blockquote>
+    <img src="./keylayout_ANSI.png" width="907" height="308" />
+    <footer><cite>IBM Personal Computer Hardware Reference Library TECHNICAL REFERENCE PN 6183355 Revised Edition (Mar. 1986), page 4-65</cite></footer>
+  </blockquote>
+  <figcaption>ANSI (101 keys) のキーボード配列</figcaption>
+</figure>
+
+
+<figure>
+  <blockquote>
+    <img src="./keylayout_ISO_FR.png" width="907" height="309" />
+    <footer><cite>IBM Personal Computer Hardware Reference Library TECHNICAL REFERENCE PN 6183355 Revised Edition (Mar. 1986), page 4-75</cite></footer>
+  </blockquote>
+  <figcaption>ISO (102 keys) のキーボード配列</figcaption>
+</figure>
+
+
+<figure>
+  <blockquote>
+    <img src="./keylayout_AX.png" width="907" />
+    <footer><cite>OADG テクニカル・リファレンス（ハードウェア）第5版 (2000年9月) , page B-3</cite></footer>
+  </blockquote>
+  <figcaption>AX のキーボード配列</figcaption>
+</figure>
+
+
+<figure>
+  <blockquote>
+    <img src="./keylayout_JIS.svg" width="907" />
+    <footer><cite>OADG テクニカル・リファレンス（ハードウェア）第5版 (2000年9月) , page A-7</cite></footer>
+  </blockquote>
+  <figcaption>JIS (106,109 keys) のキーボード配列</figcaption>
+</figure>
+
+<h2 id="reference">参考資料</h2>
+<dl>
+<dt><a href="http://www.minuszerodegrees.net/manuals.htm#IBM">IBM Personal Computer Hardware Reference Library TECHNICAL REFERENCE PN 6025008 First Edition (Aug. 1981)</a></dt>
+<dd>IBM PC 5150 の仕様書</dd>
+<dt><a href="http://www.minuszerodegrees.net/manuals.htm#IBM">IBM Personal Computer Hardware Reference Library TECHNICAL REFERENCE PN 1502494 First Edition (Mar. 1984)</a></dt>
+<dd>IBM PC AT (5170) の仕様書（初版）</dd>
+<dt><a href="http://www.minuszerodegrees.net/manuals.htm#IBM">IBM Personal Computer Hardware Reference Library TECHNICAL REFERENCE PN 6183355 Revised Edition (Mar. 1986)</a></dt>
+<dd>IBM PC AT (5170) の仕様書（改訂版）</dd>
+<dt><a href="https://archive.org/details/OADG1991">OADG テクニカル・リファレンス（ハードウェア）第5版 (2000年9月)</a></dt>
+<dd>JIS 配列の基となる、というかそのものである OADG 109A 配列や AX 配列などが書かれた仕様書</dd>
+</dl>
+
+    </section>
+
+
+
+    <footer>
+      <nav><a href="/"> >> Home</a></nav>
+    </footer>
+  </article>
+</main>
+
+<footer>
+  <nav>
+    <ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/policy/">Policy</a></li>
+    </ul>
+  </nav>
+  <p>
+    <small>© B-SAKATU 2020 
+      <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+        <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
+        <img alt="BY" src="/img/license/by.svg" width="14" height="14" />
+        <img alt="NC" src="/img/license/nc.svg" width="14" height="14" />
+        <img alt="SA" src="/img/license/sa.svg" width="14" height="14" />
+      </a>
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>

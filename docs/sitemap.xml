@@ -3,23 +3,68 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/doc/</loc>
-    <lastmod>2020-06-13T22:21:00+09:00</lastmod>
+    <loc>/categories/</loc>
+    <lastmod>2020-07-10T23:01:27+09:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-06-13T22:21:00+09:00</lastmod>
+    <lastmod>2020-07-10T23:01:27+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/input/</loc>
+    <lastmod>2020-07-10T23:01:27+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/keyboard/</loc>
+    <lastmod>2020-07-10T23:01:27+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2020/07/10/oadg-technical-reference/</loc>
+    <lastmod>2020-07-10T23:01:27+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-07-10T23:01:27+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/reference/</loc>
+    <lastmod>2020-07-10T23:01:27+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-07-10T23:01:27+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/doc/</loc>
+    <lastmod>2020-07-10T20:47:10+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/key-layout/</loc>
+    <lastmod>2020-07-10T20:47:10+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/windows/</loc>
+    <lastmod>2020-07-10T20:47:10+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/doc/scancode/</loc>
+    <lastmod>2020-07-10T20:47:10+09:00</lastmod>
   </url>
   
   <url>
     <loc>/doc/keyboard/</loc>
     <lastmod>2020-05-17T21:06:49+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-06-13T22:21:00+09:00</lastmod>
   </url>
   
   <url>
@@ -38,18 +83,8 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2020-05-17T18:58:00+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/site/</loc>
     <lastmod>2020-05-17T18:58:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-06-13T22:21:00+09:00</lastmod>
   </url>
   
   <url>
@@ -110,26 +145,6 @@
   <url>
     <loc>/post/2020/05/02/usb-pd-tester-fnc88/</loc>
     <lastmod>2020-05-02T13:49:52+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/input/</loc>
-    <lastmod>2020-06-13T22:21:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/key-layout/</loc>
-    <lastmod>2020-06-13T22:21:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/keyboard/</loc>
-    <lastmod>2020-06-13T22:21:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/windows/</loc>
-    <lastmod>2020-06-13T22:21:00+09:00</lastmod>
   </url>
   
   <url>

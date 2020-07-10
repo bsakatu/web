@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>reference on capyBaral</title>
+    <link>/tags/reference/</link>
+    <description>Recent content in reference on capyBaral</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Fri, 10 Jul 2020 23:01:27 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/reference/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>OADG テクニカル・リファレンス</title>
+      <link>/post/2020/07/10/oadg-technical-reference/</link>
+      <pubDate>Fri, 10 Jul 2020 23:01:27 +0900</pubDate>
+      
+      <guid>/post/2020/07/10/oadg-technical-reference/</guid>
+      <description>スキャンコードとかをあれこれ調べるのに、日本語のキーボード配列やそれに付随する情報については OADG テクニカル・リファレンスを見る必要があったので</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -96,12 +96,12 @@
   <p>IBM PC/AT互換機用MS-DOSを日本語化するための1方式、AX規格で採用されていた日本語キーボード。</p>
   <p>現在日本語キーボードの主流となっている106/109配列と比較してより英語キーボードに近いレイアウトになっており、英数キーの配置が通称ASCII配列(106系はJIS配列準拠)である点や、日本語関連キーが少なくシンプルな操作が可能であり、スペースキー周りのレイアウトに余裕がある点、特殊キーの[AX]キーが存在する、などの特徴がある。</p>
 
-  <footer>via <cite><a href="http://d.hatena.ne.jp/keyword/AX%A5%AD%A1%BC%A5%DC%A1%BC%A5%C9">AXキーボードとは - はてなキーワード</a></cite></footer>
+  <footer><cite><a href="http://d.hatena.ne.jp/keyword/AX%A5%AD%A1%BC%A5%DC%A1%BC%A5%C9">AXキーボードとは - はてなキーワード</a></cite></footer>
 </blockquote>
 
 <p>
 <figure>
-  <img src="/img/doc/KB_Japanese_AX_keyboard.svg" alt="AX キーボード配列（詳細は以降説明）" width="800" height="320"/> 
+  <img src="/img/doc/KB_Japanese_AX_keyboard.svg" width="800" height="320" alt="AX キーボード配列（詳細は以降説明）" />
   <figcaption>AX キーボード配列</figcaption>
   <footer><small><a href="https://commons.wikimedia.org/wiki/File:KB_Japanese_AX_keyboard.svg">File:KB Japanese AX keyboard.svg</a> by <a href="https://commons.wikimedia.org/wiki/User:Yes0song">Yes0song</a> / <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">CC BY-SA 3.0</a></small></footer>
 </figure>
@@ -320,9 +320,8 @@
 <p>ここには載せていませんが、日本語キーボード固有のいくつかのキーは modifier との組合せで発生する仮想キーが異なります。今回のケースでは JIS 配列は「ひらがな」が、AX 配列は「カタカナ」がベースとなったキーになっていることが分かります。内部的にはどちらも「ひらがな」「カタカナ」等々が網羅されているので問題無さそうに見えますが、調べていたら一つ問題となる事例に当たりました。それは、MS-IME を使用しているケースです。</p>
 
 <figure>
-  <img src="/img/post/2018/key-config-window_MS-IME.png" width="532" height="567"/> 
+  <img src="/img/post/2018/key-config-window_MS-IME.png" width="532" height="567" />
   <figcaption>MS-IME のキー設定画面</figcaption>
-  
 </figure>
 
 <p>画像を見ると分かるように、<kbd>Shift</kbd> + <kbd>カタカナ</kbd>はありますが、<kbd>Shift</kbd> + <kbd>ひらがな</kbd> がありません。しかし AX 配列では「ひらがな」は <kbd>カタカナ</kbd> を <kbd>Shift</kbd> 付きで入力して初めて認識されるので、実質的には <kbd>ひらがな</kbd> は <kbd>Shift</kbd> +  <kbd>ひらがな</kbd> の組み合せでしか存在出来ないということになります。それなのに MS-IME ではそのキー設定がそもそも存在しないため、このキーに対して機能を割り当てることができない、というのが問題となるケースの1つですです。仮にこのキーの動作を JIS 配列のそれに完全に合わせようとした場合、 AutoHotkey などのキー置換ソフトを用いる必要があります（別の話になるのでこの記事ではそれについては特に詳しくは触れません）。</p>

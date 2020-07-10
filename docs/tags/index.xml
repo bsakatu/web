@@ -6,10 +6,46 @@
     <description>Recent content in Tags on capyBaral</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 17 May 2020 18:58:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jul 2020 23:01:27 +0900</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>keyboard</title>
+      <link>/tags/keyboard/</link>
+      <pubDate>Fri, 10 Jul 2020 23:01:27 +0900</pubDate>
+      
+      <guid>/tags/keyboard/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reference</title>
+      <link>/tags/reference/</link>
+      <pubDate>Fri, 10 Jul 2020 23:01:27 +0900</pubDate>
+      
+      <guid>/tags/reference/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>key-layout</title>
+      <link>/tags/key-layout/</link>
+      <pubDate>Fri, 10 Jul 2020 20:47:10 +0900</pubDate>
+      
+      <guid>/tags/key-layout/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>/tags/windows/</link>
+      <pubDate>Fri, 10 Jul 2020 20:47:10 +0900</pubDate>
+      
+      <guid>/tags/windows/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>CSS</title>
@@ -89,33 +125,6 @@
       <pubDate>Sat, 02 May 2020 13:49:52 +0900</pubDate>
       
       <guid>/tags/usb-pd/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>key-layout</title>
-      <link>/tags/key-layout/</link>
-      <pubDate>Tue, 11 Dec 2018 00:25:00 +0900</pubDate>
-      
-      <guid>/tags/key-layout/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>keyboard</title>
-      <link>/tags/keyboard/</link>
-      <pubDate>Tue, 11 Dec 2018 00:25:00 +0900</pubDate>
-      
-      <guid>/tags/keyboard/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Windows</title>
-      <link>/tags/windows/</link>
-      <pubDate>Tue, 11 Dec 2018 00:25:00 +0900</pubDate>
-      
-      <guid>/tags/windows/</guid>
       <description></description>
     </item>
     

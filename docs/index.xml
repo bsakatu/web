@@ -6,10 +6,28 @@
     <description>Recent content in Home on capyBaral</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 17 May 2020 21:06:49 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jul 2020 23:01:27 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OADG テクニカル・リファレンス</title>
+      <link>/post/2020/07/10/oadg-technical-reference/</link>
+      <pubDate>Fri, 10 Jul 2020 23:01:27 +0900</pubDate>
+      
+      <guid>/post/2020/07/10/oadg-technical-reference/</guid>
+      <description>スキャンコードとかをあれこれ調べるのに、日本語のキーボード配列やそれに付随する情報については OADG テクニカル・リファレンスを見る必要があったので</description>
+    </item>
+    
+    <item>
+      <title>主要キーレイアウトのキーとその Scancode まとめ</title>
+      <link>/doc/scancode/</link>
+      <pubDate>Fri, 10 Jul 2020 20:47:10 +0900</pubDate>
+      
+      <guid>/doc/scancode/</guid>
+      <description>概要 PS/2 キーボードの scancode を、その起源となるらしいいわゆる XT とか 83 キーボードから、昨今日本で一般的ないわゆる JIS とか 109 キーボードまで、Scancod</description>
+    </item>
     
     <item>
       <title>サイトを刷新</title>
