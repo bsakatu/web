@@ -1,0 +1,89 @@
+table > thead,
+table > tbody {
+  font-size: 0.75em;
+}
+
+table:not(#scancode-list) code {
+  white-space: normal;
+  word-break:  keep-all;
+}
+table:not(#scancode-list) td:nth-of-type(4) > code,
+table:not(#scancode-list) td:nth-of-type(5) > code,
+table:not(#scancode-list) td:nth-of-type(6) > code,
+table:not(#scancode-list) td:nth-of-type(7) > code {
+  white-space: pre-wrap;
+}
+
+@media only screen and (min-width: 60em) {
+  #scancode-list {
+    position: relative;
+    left: calc( -1 * (100vw - 60rem) / 2);
+  }
+  #scancode-list > caption {
+    position: relative;
+    left: calc( (100vw - 60rem) / 2);
+  }
+}
+
+#scancode-list > tbody > tr > td:nth-of-type(1),
+#scancode-list > tbody > tr > td:nth-of-type(2),
+#scancode-list > tbody > tr > td:nth-of-type(3),
+#scancode-list > tbody > tr > td:nth-of-type(4),
+#scancode-list > tbody > tr > td:nth-of-type(5),
+#scancode-list > tbody > tr > td:nth-of-type(6),
+#scancode-list > tbody > tr > td:nth-of-type(7),
+#scancode-list > tbody > tr > td:nth-of-type(8),
+#scancode-list > tbody > tr > td:nth-of-type(9),
+#scancode-list > tbody > tr > td:nth-of-type(10),
+#scancode-list > tbody > tr > td:nth-of-type(11),
+#scancode-list > tbody > tr > td:nth-of-type(12),
+#scancode-list > tbody > tr > td:nth-of-type(13),
+#scancode-list > tbody > tr > td:nth-of-type(15),
+#scancode-list > tbody > tr > td:nth-of-type(16),
+#scancode-list > tbody > tr > td:nth-of-type(17),
+#scancode-list > tbody > tr > td:nth-of-type(19),
+#scancode-list > tbody > tr > td:nth-of-type(20),
+#scancode-list > tbody > tr > td:nth-of-type(21) {
+  white-space: nowrap;
+}
+#scancode-list > tbody > tr > td:nth-of-type(14),
+#scancode-list > tbody > tr > td:nth-of-type(18),
+#scancode-list > tbody > tr > td:nth-of-type(22) {
+  font-size: 0.3em;
+}
+
+#scancode-list > tbody > tr > td:nth-child(5) ~ td {
+  width: 9em;
+}
+#scancode-list code {
+  white-space: nowrap;
+}
+
+#scancode-list > thead > tr:nth-of-type(1) > th:not(:first-of-type),
+#scancode-list > thead > tr:nth-of-type(2) > th:nth-of-type(1),
+#scancode-list > thead > tr:nth-of-type(2) > th:nth-of-type(2),
+#scancode-list > thead > tr:nth-of-type(2) > th:nth-of-type(3),
+#scancode-list > thead > tr:nth-of-type(2) > th:nth-of-type(4),
+#scancode-list > thead > tr:nth-of-type(2) > th:nth-of-type(5),
+#scancode-list > thead > tr:nth-of-type(2) > th:nth-of-type(6),
+#scancode-list > thead > tr:nth-of-type(2) > th:nth-of-type(7),
+#scancode-list > thead > tr:nth-of-type(2) > th:nth-of-type(9),
+#scancode-list > thead > tr:nth-of-type(2) > th:nth-of-type(11),
+#scancode-list > thead > tr:nth-of-type(3) > th:nth-of-type(1),
+#scancode-list > thead > tr:nth-of-type(3) > th:nth-of-type(4),
+#scancode-list > thead > tr:nth-of-type(3) > th:nth-of-type(7),
+#scancode-list > thead > tr:nth-of-type(3) > th:nth-of-type(10),
+#scancode-list > thead > tr:nth-of-type(3) > th:nth-of-type(14),
+#scancode-list > thead > tr:nth-of-type(3) > th:nth-of-type(18),
+#scancode-list > tbody > tr > td:nth-of-type(2),
+#scancode-list > tbody > tr > td:nth-of-type(5),
+#scancode-list > tbody > tr > td:nth-of-type(8),
+#scancode-list > tbody > tr > td:nth-of-type(11),
+#scancode-list > tbody > tr > td:nth-of-type(15),
+#scancode-list > tbody > tr > td:nth-of-type(19),
+#scancode-list > tbody > tr > td:nth-of-type(23),
+#scancode-list > tbody > tr > td:nth-of-type(25),
+#scancode-list > tbody > tr > td:nth-of-type(27),
+#scancode-list > tbody > tr > td:nth-of-type(30) {
+  border-left: 1px dashed #ccc;
+}
