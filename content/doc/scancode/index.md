@@ -8,6 +8,13 @@ draft: false
 
 ---
 
+{{< changelog >}}
+
+2020/07/10
+: 重要なリンク先が参考資料から抜けていたので追記
+
+{{</ changelog >}}
+
 ## 概要 {#summary}
 
 PS/2 キーボードの scancode を、その起源となるらしいいわゆる XT とか 83 キーボードから、昨今日本で一般的ないわゆる JIS とか 109 キーボードまで、Scancode set 1,2,3 とともに1つの表にまとめた。
@@ -285,3 +292,6 @@ Ctrl: ... with the Scroll Lock key to cause the break function; and with the Num
 
 [OADG テクニカル・リファレンス（ハードウェア）第5版 (2000年9月)](https://archive.org/details/OADG1991)
 : JIS 配列の基となる、というかそのものである OADG 109A 配列や AX 配列などが書かれた仕様書
+
+[Japanese Keyboard (layout and scancode)](http://hp.vector.co.jp/authors/VA003720/lpproj/others/kbdjpn.htm)
+: このページを作るきっかけ (?) となったページ。趣旨はこのページと非常に近く、scancode やキーボーとレイアウトについて細かくまとめてある。非常に詳しいので大抵はこのページで事足りると思われる。自分のまとめたい方向と異なるのもあり、自分でも似たようなページを作ることにした。そういう意味できっかけ。
