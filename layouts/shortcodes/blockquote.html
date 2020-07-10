@@ -1,4 +1,4 @@
-<blockquote cite="{{ .Get "cite" }}">
+<blockquote{{ with .Get "cite" }} cite="{{ . }}"{{ end }}>
 {{ .Inner | .Page.RenderString | replaceRE "(?m)^" "  " | .Page.RenderString }}
-  <footer>via <cite><a href="{{ .Get "cite" }}">{{ .Get "title" }}</a></cite></footer>
+  <footer><cite>{{ with .Get "cite" }}<a href="{{ . }}">{{ end }}{{ .Get "title" }}{{ if .Get "cite" }}</a>{{ end }}</cite></footer>
 </blockquote>
