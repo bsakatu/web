@@ -48,14 +48,14 @@ Registry path:  `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard La
 
 {{</ blockquote >}}
 
-| Value      | Interpretation                                   |
-| ---        | ---                                              |
-| 0x00000000 | Header: Version. Set to all zeroes.              |
-| 0x00000000 | Header: Flags Set to all zeroes.                 |
-| 0x00000003 | Three entries in the map (including null entry). |
-| 0x1D003A00 | Left Control -> CapsLock (0x001D -> 0x003A)      |
-| 0x3A001D00 | CapsLock -> Left Control (0x003A -> 0x001D)      |
-| 0x00000000 | Null terminator.                                 |
+| Value        | Interpretation                                                             |
+| ---          | ---                                                                        |
+| `0x00000000` | Header: Version. Set to all zeroes.                                        |
+| `0x00000000` | Header: Flags Set to all zeroes.                                           |
+| `0x00000003` | Three entries in the map (including null entry).                           |
+| `0x1D003A00` | <kbd>Left Control</kbd> → <kbd>CapsLock</kbd> (`0x001D` → `0x003A`)      |
+| `0x3A001D00` | <kbd>CapsLock</kbd> → <kbd>Left Control</kbd> (`0x003A` → `0x001D`)      |
+| `0x00000000` | Null terminator.                                                           |
 
 レジストリファイルでは以下のように書けます。改行はしなくてもいいですが見やすいので入れています。
 
