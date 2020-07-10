@@ -1,21 +1,30 @@
+{{- $scr := newScratch -}}
+{{- $s := (" " | safeHTMLAttr) -}}
+{{- $n := (print "\n" | safeHTMLAttr) -}}
+{{- if .Get "bq-cite-title" -}}
+  {{- $scr.Set "bq-indent" ("  " | safeHTMLAttr) -}}
+{{- else -}}
+  {{- $scr.Set "bq-indent" "" -}}
+{{- end -}}
+{{- $bq_indent := ($scr.Get "bq-indent") -}}
 {{- with .Get "org_license" -}}
-  {{- $.Scratch.Set "license" (split . " ") -}}
-  {{- if eq (index ($.Scratch.Get "license") 0) "CC" -}}
-    {{- $.Scratch.Set "org_license_link" "https://creativecommons.org/licenses/" -}}
-    {{- with (index ($.Scratch.Get "license") 1) -}}
+  {{- $scr.Set "license" (split . " ") -}}
+  {{- if eq (index ($scr.Get "license") 0) "CC" -}}
+    {{- $scr.Set "org_license_link" "https://creativecommons.org/licenses/" -}}
+    {{- with (index ($scr.Get "license") 1) -}}
       {{- if or (eq . "BY") (eq . "BY-SA") (eq . "BY-ND") (eq . "BY-NC") (eq . "BY-NC-SA") (eq . "BY-NC-ND") -}}
-        {{- $.Scratch.Add "org_license_link" (print (lower (index ($.Scratch.Get "license") 1)) "/") -}}
+        {{- $scr.Add "org_license_link" (print (lower (index ($scr.Get "license") 1)) "/") -}}
       {{- else if ne . "" -}}
         {{- errorf "CC license type is wrong." -}}
       {{- else -}}
         {{- errorf "CC license type is NOT exists." -}}
       {{- end -}}
     {{- end -}}
-    {{- with (index ($.Scratch.Get "license") 2) -}}
+    {{- with (index ($scr.Get "license") 2) -}}
       {{- if or (eq . "1.0") (eq . "2.0") (eq . "2.1") (eq . "2.5") (eq . "3.0") (eq . "4.0") -}}
-        {{- $.Scratch.Add "org_license_link" (print . "/") -}}
-        {{- if and (eq "2.1" .) (ne (index ($.Scratch.Get "license") 3) "") -}}
-          {{- $.Scratch.Add "org_license_link" (print (lower (index ($.Scratch.Get "license") 3)) "/") -}}
+        {{- $scr.Add "org_license_link" (print . "/") -}}
+        {{- if and (eq "2.1" .) (ne (index ($scr.Get "license") 3) "") -}}
+          {{- $scr.Add "org_license_link" (print (lower (index ($scr.Get "license") 3)) "/") -}}
         {{- end -}}
       {{- else -}}
         {{- errorf "CC license version is WRONG." -}}
@@ -29,19 +38,27 @@
   {{- with .Get "id" }} id="{{ . }}"{{ end -}}
   {{- with .Get "class" }} class="{{ . }}"{{ end -}}
   ><!-- Closing figure tag -->
+  {{ if .Get "bq-cite-title" -}}
+    <blockquote{{ with .Get "bq-cite-link" }} cite="{{ . }}"{{ end }}>{{ $n }}
+  {{- end -}}
   {{- if .Get "link" -}}
-  <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
-  {{- end }}
-  <img src="{{ .Get "src" }}"
-    {{- with .Get "alt" }} alt="{{ . }}"{{ end -}}
-    {{- with .Get "width" }} width="{{ . }}"{{ end -}}
-    {{- with .Get "height" }} height="{{ . }}"{{ end -}}
-  /> <!-- Closing img tag -->
+    {{ print $bq_indent $bq_indent }}<a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
+  {{- end -}}
+  {{ if not (.Get "link") }}{{ print $bq_indent $bq_indent }}{{ end -}}
+    <img src="{{ .Get "src" }}" 
+          {{- with .Get "width" }} width="{{ . }}"{{ end -}}
+          {{- with .Get "height" }} height="{{ . }}"{{ end -}}
+          {{- with .Get "alt" }} alt="{{ . }}"{{ end -}}{{ $s -}}
+    />
   {{- if .Get "link" }}</a>{{ end }}
+  {{ if .Get "bq-cite-title" -}}
+    {{ $bq_indent }}<footer><cite>{{ with .Get "bq-cite-link" }}<a href="{{ . }}">{{ end }}{{ .Get "bq-cite-title" }}{{ if .Get "bq-cite-link" }}</a>{{ end }}</cite></footer>
+  </blockquote>
+  {{ end -}}
   {{ with .Get "caption" -}}
     <figcaption>{{ . | markdownify }}</figcaption>
-  {{- end }}
-  {{ if .Get "org_link" -}}
-    <footer><small><a href="{{ .Get "org_link" }}">{{ .Get "org_title" }}</a> by <a href="{{ .Get "org_author_link" }}">{{ .Get "org_author" }}</a> / <a href="{{ $.Scratch.Get "org_license_link" }}" rel="license">{{ .Get "org_license" }}</a></small></footer>
+  {{- end -}}
+  {{ if .Get "org_link" }}{{ print $n $s $s -}}
+    <footer><small><a href="{{ .Get "org_link" }}">{{ .Get "org_title" }}</a> by <a href="{{ .Get "org_author_link" }}">{{ .Get "org_author" }}</a> / <a href="{{ $scr.Get "org_license_link" }}" rel="license">{{ .Get "org_license" }}</a></small></footer>
   {{- end }}
 </figure>
