@@ -401,5 +401,6 @@ main > article > section > h2,h3,h4,h5,h6 {
   padding: 0;
 }
 #changelog > dl > dd + dd {
+  width: 100%;
   padding-left: var(--changelog_date_width);
 }
