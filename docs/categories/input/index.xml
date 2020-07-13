@@ -17,7 +17,7 @@
       <pubDate>Mon, 13 Jul 2020 09:46:58 +0900</pubDate>
       
       <guid>/post/2020/07/13/macos-shortcut-key-is-different-every-lang/</guid>
-      <description>macOS の Numbers でオートフィルをショートカットキーで使おうとして調べた結果 Command+¥ と表示されていたが、手元の環境はシステム環境で US 配列を選択</description>
+      <description>macOS の Numbers でオートフィルをショートカットキーで使おうとして調べた結果 Command+¥ と表示されていたが、手元の環境はシステム環境で ANSI 配列を選択</description>
     </item>
     
     <item>
