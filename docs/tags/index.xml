@@ -6,7 +6,7 @@
     <description>Recent content in Tags on capyBaral</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Fri, 10 Jul 2020 23:01:27 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2020 09:46:58 +0900</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>keyboard</title>
       <link>/tags/keyboard/</link>
-      <pubDate>Fri, 10 Jul 2020 23:01:27 +0900</pubDate>
+      <pubDate>Mon, 13 Jul 2020 09:46:58 +0900</pubDate>
       
       <guid>/tags/keyboard/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>macOS</title>
+      <link>/tags/macos/</link>
+      <pubDate>Mon, 13 Jul 2020 09:46:58 +0900</pubDate>
+      
+      <guid>/tags/macos/</guid>
       <description></description>
     </item>
     

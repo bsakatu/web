@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>macOS での ショートカットキーが言語毎に異なる故の問題 | capyBaral</title>
+  <meta name="author" content="B-SAKATU" />
+  <meta name="generator" content="Hugo 0.71.1" />
+  <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/syntax.css" />
+  
+  
+  <link rel="alternate" type="application/rss+xml" href="/index.xml" title="capyBaral" />
+
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/">/capybaral</a>
+      </li>
+      <li>
+        <a href="/post/">~/zatsu</a>
+      </li>
+      <li>
+        <a href="/doc/">~/doc</a>
+      </li>
+      <li>
+        <a href="/categories/">~/categories</a>
+      </li>
+      <li>
+        <a href="/tags/">~/tags</a>
+      </li>
+      <li>
+        <a href="/index.xml">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
+            <title>feed</title>
+            <circle cx="68" cy="189" r="24" />
+            <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
+            <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <article>
+    <header>
+      <h1>macOS での ショートカットキーが言語毎に異なる故の問題</h1>
+      <dl id="doc-info">
+
+        <div id="published-date">
+          <dt>Published</dt>
+          <dd><time datetime="2020-07-13T09:46:58&#43;09:00">2020/07/13 09:46</time></dd>
+        </div>
+        
+        <div id="category">
+          <dt>Category</dt>
+          <dd><a href="/categories/input">Input</a></dd>
+        </div><div id="tag">
+          <dt>Tags</dt>
+          <dd><a href="/tags/keyboard">keyboard</a></dd>
+          <dd><a href="/tags/macos">macOS</a></dd>
+        </div>
+
+      </dl>
+      
+
+    </header>
+
+    <section>
+<p>macOS の Numbers でオートフィルをショートカットキーで使おうとして調べた結果 <kbd>Command</kbd>+<kbd>¥</kbd> と表示されていたが、手元の環境はシステム環境で US 配列を選択した自作キーボード (claw44) という状況だったので、いい感じに処理されるだろうと期待して <kbd>Command</kbd>+<kbd>\</kbd> を入力してみた。
+しかし動かず。設定で JIS 配列を選択すると US 配列前提のキーマップとなっている claw44 ではどうにもならず、別の一般的な JIS 配列のキーボードを引っ張り出して接続してみた結果、JIS 配列設定で JIS 配列キーボードを使えばさすがにショートカットキーは正常に反応した。
+そこから色々調べた結果、以下のような感じではないか推測と事実が得られた。</p>
+<ul>
+<li>macOS のアプリケーションにおいて、日本語環境 (?) でショートカットキーに <kbd>¥</kbd> を要求している場合、その <kbd>¥</kbd> は USB HID Usage としては <code>international3</code> を期待している</li>
+<li>システム環境設定でキーボード配列を US 配列にしていると <code>international3</code> キーを入力しても最終的な文字の発生までたどり着かない（ショートカットキーも発生しない）</li>
+<li>文字の発生に至らないキーであっても、Karabiner-Elements の EventViewer 上ではそのキーの押下は検知されている（そのため別のキーへの置き換えも可能）</li>
+<li>macOS のアプリケーションはシステムデフォルトまたはアプリケーションに対する言語設定で設定された言語に応じてショートカットキーを切り替え可能、かつそれはあくまで言語設定のみを反映しキーボード設定の配列の違いは考慮しない</li>
+</ul>
+<p>以上より、もし出来るのであれば最も適当な対処法はアプリケーションでのショートカットキーを任意で切り替えさせることである、が、そんな直接的な設定は存在しない。
+しかし macOS にはアプリケーションに対してシステムデフォルトとは異なる言語を認識させることが可能となっているので、ここで「英語」を設定してやるとショートカットキーも英語環境向け、つまり US 配列向けのそれに変わる。
+というわけで、Numbers やその他ショートカットキー的にどうしても使いづらいアプリケーションでは、アプリケーションの言語設定を「英語」と指定することでひとまずなんとかなる。
+もちろんそのアプリケーションの UI が全て英語になるのでそれとのトレードオフではあるが（個人的には最近どんどん英語 UI に変えていってしまっているのでそんなに気にしていない）。</p>
+<p>そもそも論として、そういう配列毎にあったりなかったりするキーをショートカットキーとして使わないでくれよ、という話。
+そしてそれをキーボードの配列毎に制御していないザル仕様。どうしてこうなった。
+macOS も <a href="/doc/how-to-input-japanese-more-convinient-with-us-layout/">Windows でやっているみたいにキーボード配列を自分で好き勝手定義</a>できれば良いんですけどね。やり方が分からない（そんな方法あるのか?）。</p>
+
+    </section>
+
+
+
+    <footer>
+      <nav><a href="/"> >> Home</a></nav>
+    </footer>
+  </article>
+</main>
+
+<footer>
+  <nav>
+    <ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/policy/">Policy</a></li>
+    </ul>
+  </nav>
+  <p>
+    <small>© B-SAKATU 2020 
+      <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+        <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
+        <img alt="BY" src="/img/license/by.svg" width="14" height="14" />
+        <img alt="NC" src="/img/license/nc.svg" width="14" height="14" />
+        <img alt="SA" src="/img/license/sa.svg" width="14" height="14" />
+      </a>
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>

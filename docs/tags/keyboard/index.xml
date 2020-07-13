@@ -6,10 +6,19 @@
     <description>Recent content in keyboard on capyBaral</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Fri, 10 Jul 2020 23:01:27 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2020 09:46:58 +0900</lastBuildDate>
     
 	<atom:link href="/tags/keyboard/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>macOS での ショートカットキーが言語毎に異なる故の問題</title>
+      <link>/post/2020/07/13/macos-shortcut-key-is-different-every-lang/</link>
+      <pubDate>Mon, 13 Jul 2020 09:46:58 +0900</pubDate>
+      
+      <guid>/post/2020/07/13/macos-shortcut-key-is-different-every-lang/</guid>
+      <description>macOS の Numbers でオートフィルをショートカットキーで使おうとして調べた結果 Command+¥ と表示されていたが、手元の環境はシステム環境で US 配列を選択</description>
+    </item>
     
     <item>
       <title>OADG テクニカル・リファレンス</title>
