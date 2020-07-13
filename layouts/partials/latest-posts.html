@@ -6,7 +6,9 @@
         <dt><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006/01/02" }}</time></dt>
         <dd><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></dd>
         {{ if eq $.Kind "taxonomy" -}}
-        <dd class="summary{{ if .Truncated }} truncated{{ end }}">{{ .Summary }}</dd>
+          {{ $summary_mod := replaceRE "<details id=\"changelog\">[\\s\\S]+?</details>\\s+([\\s\\S]+?)" "$1" .Content }}
+          {{ $summary_mod := replaceRE "([\\s\\S]*?)<h\\d[^>]*>[\\s\\S]+?</h\\d>\\s+([\\s\\S]*?)" "$1$2" $summary_mod }}
+        <dd class="summary{{ if .Truncated }} truncated{{ end }}">{{ substr (plainify $summary_mod) 0 140 }}</dd>
         {{- end }}
       </div>
   {{- end }}
