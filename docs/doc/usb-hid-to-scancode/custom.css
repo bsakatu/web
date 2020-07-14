@@ -1,0 +1,36 @@
+table > thead,
+table > tbody {
+  font-size: 0.9em;
+}
+
+table td:nth-of-type(4) > code,
+table td:nth-of-type(5) > code {
+  white-space: nowrap;
+}
+
+table td:nth-of-type(6) {
+  font-size: 0.8em;
+}
+
+table td:nth-of-type(7) > kbd,
+table td:nth-of-type(8) > kbd,
+table td:nth-of-type(9) > kbd,
+table td:nth-of-type(10) > kbd,
+table td:nth-of-type(11) > kbd,
+table td:nth-of-type(12) > kbd {
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+table:first-of-type > thead > tr:nth-of-type(1) > th:nth-child(5),
+table:first-of-type > thead > tr:nth-of-type(2) > th:nth-child(5),
+table:first-of-type > thead > tr:nth-of-type(2) > th:nth-child(6),
+table:first-of-type > thead > tr:nth-of-type(2) > th:nth-child(7),
+table:first-of-type > thead > tr:nth-of-type(3) > th:nth-child(1),
+table:first-of-type > thead > tr:nth-of-type(3) > th:nth-child(3),
+table:first-of-type > thead > tr:nth-of-type(3) > th:nth-child(5),
+table:first-of-type > tbody > tr > td:nth-child(7),
+table:first-of-type > tbody > tr > td:nth-child(9),
+table:first-of-type > tbody > tr > td:nth-child(11) {
+  border-left: 1px dashed #ccc;
+}

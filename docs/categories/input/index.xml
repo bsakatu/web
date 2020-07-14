@@ -6,10 +6,19 @@
     <description>Recent content in Input on capyBaral</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Mon, 13 Jul 2020 09:46:58 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2020 22:02:25 +0900</lastBuildDate>
     
 	<atom:link href="/categories/input/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>USB HID Usage ID の Scancode 変換と対応するキー</title>
+      <link>/doc/usb-hid-to-scancode/</link>
+      <pubDate>Tue, 14 Jul 2020 22:02:25 +0900</pubDate>
+      
+      <guid>/doc/usb-hid-to-scancode/</guid>
+      <description>概要 USB キーボードの内部で発生するコードである Usage ID、それに対応する Scancode とキーをまとめる。 そもそも USB HID Usage ID とは USB HID は各キーに対して Scancode と似たような</description>
+    </item>
     
     <item>
       <title>macOS での ショートカットキーが言語毎に異なる故の問題</title>

@@ -1,0 +1,3517 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>USB HID Usage ID の Scancode 変換と対応するキー | capyBaral</title>
+  <meta name="author" content="B-SAKATU" />
+  <meta name="generator" content="Hugo 0.71.1" />
+  <link rel="stylesheet" href="/css/bootstrap-reboot.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/syntax.css" />
+  
+  <link rel="stylesheet" href="custom.css" />
+  <link rel="alternate" type="application/rss+xml" href="/index.xml" title="capyBaral" />
+
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li>
+        <a href="/">/capybaral</a>
+      </li>
+      <li>
+        <a href="/post/">~/zatsu</a>
+      </li>
+      <li class="current">
+        <a href="/doc/">~/doc</a>
+      </li>
+      <li>
+        <a href="/categories/">~/categories</a>
+      </li>
+      <li>
+        <a href="/tags/">~/tags</a>
+      </li>
+      <li>
+        <a href="/index.xml">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16px" height="16px" id="feed-icon" viewBox="0 0 256 256">
+            <title>feed</title>
+            <circle cx="68" cy="189" r="24" />
+            <path d="M160 213h-34a82 82 0 0 0 -82 -82v-34a116 116 0 0 1 116 116z" />
+            <path d="M184 213A140 140 0 0 0 44 73 V 38a175 175 0 0 1 175 175z" />
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <article>
+    <header>
+      <h1>USB HID Usage ID の Scancode 変換と対応するキー</h1>
+      <dl id="doc-info">
+
+        <div id="published-date">
+          <dt>Published</dt>
+          <dd><time datetime="2020-07-14T22:02:25&#43;09:00">2020/07/14 22:02</time></dd>
+        </div>
+        
+        <div id="category">
+          <dt>Category</dt>
+          <dd><a href="/categories/input">Input</a></dd>
+        </div><div id="tag">
+          <dt>Tags</dt>
+          <dd><a href="/tags/keyboard">keyboard</a></dd>
+          <dd><a href="/tags/key-layout">key-layout</a></dd>
+          <dd><a href="/tags/windows">Windows</a></dd>
+          <dd><a href="/tags/macos">macOS</a></dd>
+          <dd><a href="/tags/reference">reference</a></dd>
+        </div>
+
+      </dl>
+      <details open id="toc">
+        <summary>Table of contents</summary>
+<nav id="TableOfContents">
+  <ol>
+    <li><a href="#general">概要</a></li>
+    <li><a href="#そもそも-usb-hid-usage-id-とは">そもそも USB HID Usage ID とは</a></li>
+    <li><a href="#usb-hid-usage-id-と-scancode-set-1-の変換対応表">USB HID Usage ID と Scancode (Set 1) の変換対応表</a></li>
+    <li><a href="#microsoft-の変換対応表と実際処理しているであろう-hiddll-との違いについて">Microsoft の変換対応表と実際処理しているであろう <code>hid.dll</code> との違いについて</a></li>
+    <li><a href="#reference">参考資料</a></li>
+  </ol>
+</nav>
+      </details>
+
+    </header>
+
+    <section>
+<h2 id="general">概要</h2>
+<p>USB キーボードの内部で発生するコードである Usage ID、それに対応する Scancode とキーをまとめる。</p>
+<h2 id="そもそも-usb-hid-usage-id-とは">そもそも USB HID Usage ID とは</h2>
+<p><abbr title="Universal Serial Bus Human Interface Device">USB HID</abbr> は各キーに対して Scancode と似たような固有の ID というかコードを定義しており、それを Usage ID と呼ぶ。
+Usage ID は HID の Usage Page というグループ毎に定義されているので、同じ Usage ID は各 Usage Page 毎に存在する。
+一次資料は USB の規格策定をしている <abbr title="USB Implementers Forum">USB-IF</abbr> が公開しているので興味あれば本記事末尾のリンクから参照のこと。</p>
+<p>本記事ではキーボードのグループである Keyboard/Keypad Page (0x07) と、一部のキーが属する Generic Desktop Page (0x01) のみを取り扱う。
+なお Usage ID から Scancode への変換に関する情報を macOS についても調べたが、そういう情報にたどり着けなかったため Windows に寄った内容でまとめてある。</p>
+<h2 id="usb-hid-usage-id-と-scancode-set-1-の変換対応表">USB HID Usage ID と Scancode (Set 1) の変換対応表</h2>
+<p>USB-IF の Usgae ID の定義、Microsoft が公開する Usage ID から Scancode への変換対応表、そして Windows の内部で実際にその変換をしていると思われる <code>hid.dll</code> の解析結果をまとめた。
+Table 1 はキーボードのキーである &quot;Keyboard/Keypad Page (0x07)&quot; について、Table 2 では Microsoft が公開する変換対応表に記載されている電源関係に関するキーのみを抽出した &quot;Generic Desktop Page (0x01)&quot; の一部について、となっている。
+なお <code>hid.dll</code> で下記内容が定義されている範囲については適当にバイナリエディタで探せば見つかる、とだけ書いておく。手元の Windows 10 (1909) と以前使っていた Windows 7 SP1 では内容に変わりはなかった。</p>
+
+
+<table>
+<caption>Usage IDs of Keyboard/Keypad Page (0x07)</caption>
+<thead>
+<tr>
+<th colspan="2">Usage ID</th>
+<!-- colspan -->
+<th rowspan="3">Usage Name</th>
+<th colspan="2">Scancode (Set 1)</th>
+<!-- colspan -->
+<th rowspan="3">diff</th>
+<th colspan="6">Key</th>
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+<!-- colspan -->
+</tr>
+<tr>
+<th rowspan="2">dec</th>
+<th rowspan="2">hex</th>
+<!-- rowspan -->
+<th rowspan="2">MS Ref.</th>
+<th rowspan="2"><code>hid.dll</code></th>
+<!-- rowspan -->
+<th colspan="2">ANSI</th>
+<!-- colspan -->
+<th colspan="2">ISO (typical)</th>
+<!-- colspan -->
+<th colspan="2">JIS</th>
+<!-- colspan -->
+</tr>
+<tr>
+<!-- rowspan -->
+<!-- rowspan -->
+<!-- rowspan -->
+<!-- rowspan -->
+<!-- rowspan -->
+<!-- rowspan -->
+<th>base</th>
+<th>shift</th>
+<th>base</th>
+<th>shift</th>
+<th>base</th>
+<th>shift</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>00</code></td>
+<td>Reserved (no event indicated)</td>
+<td><code>None</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>01</code></td>
+<td>Keyboard ErrorRollOver</td>
+<td><code>FF</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>02</code></td>
+<td>Keyboard POSTFail</td>
+<td><code>FC</code></td>
+<td><code>FF</code></td>
+<td>✓</td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>03</code></td>
+<td>Keyboard ErrorUndefined</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>04</code></td>
+<td>Keyboard a and A</td>
+<td><code>1E</code></td>
+<td><code>1E</code></td>
+<td></td>
+<td><kbd>a</kbd></td>
+<td><kbd>A</kbd></td>
+<td><kbd>a</kbd></td>
+<td><kbd>A</kbd></td>
+<td><kbd>a</kbd></td>
+<td><kbd>A</kbd></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>05</code></td>
+<td>Keyboard b and B</td>
+<td><code>30</code></td>
+<td><code>30</code></td>
+<td></td>
+<td><kbd>b</kbd></td>
+<td><kbd>B</kbd></td>
+<td><kbd>b</kbd></td>
+<td><kbd>B</kbd></td>
+<td><kbd>b</kbd></td>
+<td><kbd>B</kbd></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>06</code></td>
+<td>Keyboard c and C</td>
+<td><code>2E</code></td>
+<td><code>2E</code></td>
+<td></td>
+<td><kbd>c</kbd></td>
+<td><kbd>C</kbd></td>
+<td><kbd>c</kbd></td>
+<td><kbd>C</kbd></td>
+<td><kbd>c</kbd></td>
+<td><kbd>C</kbd></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>07</code></td>
+<td>Keyboard d and D</td>
+<td><code>20</code></td>
+<td><code>20</code></td>
+<td></td>
+<td><kbd>d</kbd></td>
+<td><kbd>D</kbd></td>
+<td><kbd>d</kbd></td>
+<td><kbd>D</kbd></td>
+<td><kbd>d</kbd></td>
+<td><kbd>D</kbd></td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>08</code></td>
+<td>Keyboard e and E</td>
+<td><code>12</code></td>
+<td><code>12</code></td>
+<td></td>
+<td><kbd>e</kbd></td>
+<td><kbd>E</kbd></td>
+<td><kbd>e</kbd></td>
+<td><kbd>E</kbd></td>
+<td><kbd>e</kbd></td>
+<td><kbd>E</kbd></td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>09</code></td>
+<td>Keyboard f and F</td>
+<td><code>21</code></td>
+<td><code>21</code></td>
+<td></td>
+<td><kbd>f</kbd></td>
+<td><kbd>F</kbd></td>
+<td><kbd>f</kbd></td>
+<td><kbd>F</kbd></td>
+<td><kbd>f</kbd></td>
+<td><kbd>F</kbd></td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>0A</code></td>
+<td>Keyboard g and G</td>
+<td><code>22</code></td>
+<td><code>22</code></td>
+<td></td>
+<td><kbd>g</kbd></td>
+<td><kbd>G</kbd></td>
+<td><kbd>g</kbd></td>
+<td><kbd>G</kbd></td>
+<td><kbd>g</kbd></td>
+<td><kbd>G</kbd></td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>0B</code></td>
+<td>Keyboard h and H</td>
+<td><code>23</code></td>
+<td><code>23</code></td>
+<td></td>
+<td><kbd>h</kbd></td>
+<td><kbd>H</kbd></td>
+<td><kbd>h</kbd></td>
+<td><kbd>H</kbd></td>
+<td><kbd>h</kbd></td>
+<td><kbd>H</kbd></td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>0C</code></td>
+<td>Keyboard i and I</td>
+<td><code>17</code></td>
+<td><code>17</code></td>
+<td></td>
+<td><kbd>i</kbd></td>
+<td><kbd>I</kbd></td>
+<td><kbd>i</kbd></td>
+<td><kbd>I</kbd></td>
+<td><kbd>i</kbd></td>
+<td><kbd>I</kbd></td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>0D</code></td>
+<td>Keyboard j and J</td>
+<td><code>24</code></td>
+<td><code>24</code></td>
+<td></td>
+<td><kbd>j</kbd></td>
+<td><kbd>J</kbd></td>
+<td><kbd>j</kbd></td>
+<td><kbd>J</kbd></td>
+<td><kbd>j</kbd></td>
+<td><kbd>J</kbd></td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>0E</code></td>
+<td>Keyboard k and K</td>
+<td><code>25</code></td>
+<td><code>25</code></td>
+<td></td>
+<td><kbd>k</kbd></td>
+<td><kbd>K</kbd></td>
+<td><kbd>k</kbd></td>
+<td><kbd>K</kbd></td>
+<td><kbd>k</kbd></td>
+<td><kbd>K</kbd></td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>0F</code></td>
+<td>Keyboard l and L</td>
+<td><code>26</code></td>
+<td><code>26</code></td>
+<td></td>
+<td><kbd>l</kbd></td>
+<td><kbd>L</kbd></td>
+<td><kbd>l</kbd></td>
+<td><kbd>L</kbd></td>
+<td><kbd>l</kbd></td>
+<td><kbd>L</kbd></td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>10</code></td>
+<td>Keyboard m and M</td>
+<td><code>32</code></td>
+<td><code>32</code></td>
+<td></td>
+<td><kbd>m</kbd></td>
+<td><kbd>M</kbd></td>
+<td><kbd>m</kbd></td>
+<td><kbd>M</kbd></td>
+<td><kbd>m</kbd></td>
+<td><kbd>M</kbd></td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>11</code></td>
+<td>Keyboard n and N</td>
+<td><code>31</code></td>
+<td><code>31</code></td>
+<td></td>
+<td><kbd>n</kbd></td>
+<td><kbd>N</kbd></td>
+<td><kbd>n</kbd></td>
+<td><kbd>N</kbd></td>
+<td><kbd>n</kbd></td>
+<td><kbd>N</kbd></td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>12</code></td>
+<td>Keyboard o and O</td>
+<td><code>18</code></td>
+<td><code>18</code></td>
+<td></td>
+<td><kbd>o</kbd></td>
+<td><kbd>O</kbd></td>
+<td><kbd>o</kbd></td>
+<td><kbd>O</kbd></td>
+<td><kbd>o</kbd></td>
+<td><kbd>O</kbd></td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>13</code></td>
+<td>Keyboard p and P</td>
+<td><code>19</code></td>
+<td><code>19</code></td>
+<td></td>
+<td><kbd>p</kbd></td>
+<td><kbd>P</kbd></td>
+<td><kbd>p</kbd></td>
+<td><kbd>P</kbd></td>
+<td><kbd>p</kbd></td>
+<td><kbd>P</kbd></td>
+</tr>
+<tr>
+<td>20</td>
+<td><code>14</code></td>
+<td>Keyboard q and Q</td>
+<td><code>10</code></td>
+<td><code>10</code></td>
+<td></td>
+<td><kbd>q</kbd></td>
+<td><kbd>Q</kbd></td>
+<td><kbd>q</kbd></td>
+<td><kbd>Q</kbd></td>
+<td><kbd>q</kbd></td>
+<td><kbd>Q</kbd></td>
+</tr>
+<tr>
+<td>21</td>
+<td><code>15</code></td>
+<td>Keyboard r and R</td>
+<td><code>13</code></td>
+<td><code>13</code></td>
+<td></td>
+<td><kbd>r</kbd></td>
+<td><kbd>R</kbd></td>
+<td><kbd>r</kbd></td>
+<td><kbd>R</kbd></td>
+<td><kbd>r</kbd></td>
+<td><kbd>R</kbd></td>
+</tr>
+<tr>
+<td>22</td>
+<td><code>16</code></td>
+<td>Keyboard s and S</td>
+<td><code>1F</code></td>
+<td><code>1F</code></td>
+<td></td>
+<td><kbd>s</kbd></td>
+<td><kbd>S</kbd></td>
+<td><kbd>s</kbd></td>
+<td><kbd>S</kbd></td>
+<td><kbd>s</kbd></td>
+<td><kbd>S</kbd></td>
+</tr>
+<tr>
+<td>23</td>
+<td><code>17</code></td>
+<td>Keyboard t and T</td>
+<td><code>14</code></td>
+<td><code>14</code></td>
+<td></td>
+<td><kbd>t</kbd></td>
+<td><kbd>T</kbd></td>
+<td><kbd>t</kbd></td>
+<td><kbd>T</kbd></td>
+<td><kbd>t</kbd></td>
+<td><kbd>T</kbd></td>
+</tr>
+<tr>
+<td>24</td>
+<td><code>18</code></td>
+<td>Keyboard u and U</td>
+<td><code>16</code></td>
+<td><code>16</code></td>
+<td></td>
+<td><kbd>u</kbd></td>
+<td><kbd>U</kbd></td>
+<td><kbd>u</kbd></td>
+<td><kbd>U</kbd></td>
+<td><kbd>u</kbd></td>
+<td><kbd>U</kbd></td>
+</tr>
+<tr>
+<td>25</td>
+<td><code>19</code></td>
+<td>Keyboard v and V</td>
+<td><code>2F</code></td>
+<td><code>2F</code></td>
+<td></td>
+<td><kbd>v</kbd></td>
+<td><kbd>V</kbd></td>
+<td><kbd>v</kbd></td>
+<td><kbd>V</kbd></td>
+<td><kbd>v</kbd></td>
+<td><kbd>V</kbd></td>
+</tr>
+<tr>
+<td>26</td>
+<td><code>1A</code></td>
+<td>Keyboard w and W</td>
+<td><code>11</code></td>
+<td><code>11</code></td>
+<td></td>
+<td><kbd>w</kbd></td>
+<td><kbd>W</kbd></td>
+<td><kbd>w</kbd></td>
+<td><kbd>W</kbd></td>
+<td><kbd>w</kbd></td>
+<td><kbd>W</kbd></td>
+</tr>
+<tr>
+<td>27</td>
+<td><code>1B</code></td>
+<td>Keyboard x and X</td>
+<td><code>2D</code></td>
+<td><code>2D</code></td>
+<td></td>
+<td><kbd>x</kbd></td>
+<td><kbd>X</kbd></td>
+<td><kbd>x</kbd></td>
+<td><kbd>X</kbd></td>
+<td><kbd>x</kbd></td>
+<td><kbd>X</kbd></td>
+</tr>
+<tr>
+<td>28</td>
+<td><code>1C</code></td>
+<td>Keyboard y and Y</td>
+<td><code>15</code></td>
+<td><code>15</code></td>
+<td></td>
+<td><kbd>y</kbd></td>
+<td><kbd>Y</kbd></td>
+<td><kbd>y</kbd></td>
+<td><kbd>Y</kbd></td>
+<td><kbd>y</kbd></td>
+<td><kbd>Y</kbd></td>
+</tr>
+<tr>
+<td>29</td>
+<td><code>1D</code></td>
+<td>Keyboard z and Z</td>
+<td><code>2C</code></td>
+<td><code>2C</code></td>
+<td></td>
+<td><kbd>z</kbd></td>
+<td><kbd>Z</kbd></td>
+<td><kbd>z</kbd></td>
+<td><kbd>Z</kbd></td>
+<td><kbd>z</kbd></td>
+<td><kbd>Z</kbd></td>
+</tr>
+<tr>
+<td>30</td>
+<td><code>1E</code></td>
+<td>Keyboard 1 and !</td>
+<td><code>02</code></td>
+<td><code>02</code></td>
+<td></td>
+<td><kbd>1</kbd></td>
+<td><kbd>!</kbd></td>
+<td><kbd>1</kbd></td>
+<td><kbd>!</kbd></td>
+<td><kbd>1</kbd></td>
+<td><kbd>!</kbd></td>
+</tr>
+<tr>
+<td>31</td>
+<td><code>1F</code></td>
+<td>Keyboard 2 and @</td>
+<td><code>03</code></td>
+<td><code>03</code></td>
+<td></td>
+<td><kbd>2</kbd></td>
+<td><kbd>@</kbd></td>
+<td><kbd>2</kbd></td>
+<td><kbd>&quot;</kbd></td>
+<td><kbd>2</kbd></td>
+<td><kbd>@</kbd></td>
+</tr>
+<tr>
+<td>32</td>
+<td><code>20</code></td>
+<td>Keyboard 3 and #</td>
+<td><code>04</code></td>
+<td><code>04</code></td>
+<td></td>
+<td><kbd>3</kbd></td>
+<td><kbd>#</kbd></td>
+<td><kbd>3</kbd></td>
+<td><kbd>£</kbd></td>
+<td><kbd>3</kbd></td>
+<td><kbd>#</kbd></td>
+</tr>
+<tr>
+<td>33</td>
+<td><code>21</code></td>
+<td>Keyboard 4 and $</td>
+<td><code>05</code></td>
+<td><code>05</code></td>
+<td></td>
+<td><kbd>4</kbd></td>
+<td><kbd>$</kbd></td>
+<td><kbd>4</kbd></td>
+<td><kbd>$</kbd></td>
+<td><kbd>4</kbd></td>
+<td><kbd>$</kbd></td>
+</tr>
+<tr>
+<td>34</td>
+<td><code>22</code></td>
+<td>Keyboard 5 and %</td>
+<td><code>06</code></td>
+<td><code>06</code></td>
+<td></td>
+<td><kbd>5</kbd></td>
+<td><kbd>%</kbd></td>
+<td><kbd>5</kbd></td>
+<td><kbd>%</kbd></td>
+<td><kbd>5</kbd></td>
+<td><kbd>%</kbd></td>
+</tr>
+<tr>
+<td>35</td>
+<td><code>23</code></td>
+<td>Keyboard 6 and ^</td>
+<td><code>07</code></td>
+<td><code>07</code></td>
+<td></td>
+<td><kbd>6</kbd></td>
+<td><kbd>^</kbd></td>
+<td><kbd>6</kbd></td>
+<td><kbd>^</kbd></td>
+<td><kbd>6</kbd></td>
+<td><kbd>^</kbd></td>
+</tr>
+<tr>
+<td>36</td>
+<td><code>24</code></td>
+<td>Keyboard 7 and &amp;</td>
+<td><code>08</code></td>
+<td><code>08</code></td>
+<td></td>
+<td><kbd>7</kbd></td>
+<td><kbd>&amp;</kbd></td>
+<td><kbd>7</kbd></td>
+<td><kbd>&amp;</kbd></td>
+<td><kbd>7</kbd></td>
+<td><kbd>&amp;</kbd></td>
+</tr>
+<tr>
+<td>37</td>
+<td><code>25</code></td>
+<td>Keyboard 8 and *</td>
+<td><code>09</code></td>
+<td><code>09</code></td>
+<td></td>
+<td><kbd>8</kbd></td>
+<td><kbd>*</kbd></td>
+<td><kbd>8</kbd></td>
+<td><kbd>*</kbd></td>
+<td><kbd>8</kbd></td>
+<td><kbd>*</kbd></td>
+</tr>
+<tr>
+<td>38</td>
+<td><code>26</code></td>
+<td>Keyboard 9 and (</td>
+<td><code>0A</code></td>
+<td><code>0A</code></td>
+<td></td>
+<td><kbd>9</kbd></td>
+<td><kbd>(</kbd></td>
+<td><kbd>9</kbd></td>
+<td><kbd>(</kbd></td>
+<td><kbd>9</kbd></td>
+<td><kbd>(</kbd></td>
+</tr>
+<tr>
+<td>39</td>
+<td><code>27</code></td>
+<td>Keyboard 0 and )</td>
+<td><code>0B</code></td>
+<td><code>0B</code></td>
+<td></td>
+<td><kbd>0</kbd></td>
+<td><kbd>)</kbd></td>
+<td><kbd>0</kbd></td>
+<td><kbd>)</kbd></td>
+<td><kbd>0</kbd></td>
+<td><kbd>)</kbd></td>
+</tr>
+<tr>
+<td>40</td>
+<td><code>28</code></td>
+<td>Keyboard Return (ENTER)</td>
+<td><code>1C</code></td>
+<td><code>1C</code></td>
+<td></td>
+<td><kbd>Enter</kbd></td>
+<td></td>
+<td><kbd>Enter</kbd></td>
+<td></td>
+<td><kbd>Enter</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>41</td>
+<td><code>29</code></td>
+<td>Keyboard ESCAPE</td>
+<td><code>01</code></td>
+<td><code>01</code></td>
+<td></td>
+<td><kbd>Escape</kbd></td>
+<td></td>
+<td><kbd>Escape</kbd></td>
+<td></td>
+<td><kbd>Escape</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>42</td>
+<td><code>2A</code></td>
+<td>Keyboard DELETE (Backspace)</td>
+<td><code>0E</code></td>
+<td><code>0E</code></td>
+<td></td>
+<td><kbd>Backspace</kbd></td>
+<td></td>
+<td><kbd>Backspace</kbd></td>
+<td></td>
+<td><kbd>Backspace</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>43</td>
+<td><code>2B</code></td>
+<td>Keyboard Tab</td>
+<td><code>0F</code></td>
+<td><code>0F</code></td>
+<td></td>
+<td><kbd>Tab</kbd></td>
+<td></td>
+<td><kbd>Tab</kbd></td>
+<td></td>
+<td><kbd>Tab</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>44</td>
+<td><code>2C</code></td>
+<td>Keyboard Spacebar</td>
+<td><code>39</code></td>
+<td><code>39</code></td>
+<td></td>
+<td><kbd>Spacebar</kbd></td>
+<td></td>
+<td><kbd>Spacebar</kbd></td>
+<td></td>
+<td><kbd>Spacebar</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>45</td>
+<td><code>2D</code></td>
+<td>Keyboard - and (underscore)</td>
+<td><code>0C</code></td>
+<td><code>0C</code></td>
+<td></td>
+<td><kbd>-</kbd></td>
+<td><kbd>_</kbd></td>
+<td><kbd>-</kbd></td>
+<td><kbd>_</kbd></td>
+<td><kbd>-</kbd></td>
+<td><kbd>=</kbd></td>
+</tr>
+<tr>
+<td>46</td>
+<td><code>2E</code></td>
+<td>Keyboard = and +</td>
+<td><code>0D</code></td>
+<td><code>0D</code></td>
+<td></td>
+<td><kbd>=</kbd></td>
+<td><kbd>+</kbd></td>
+<td><kbd>=</kbd></td>
+<td><kbd>+</kbd></td>
+<td><kbd>^</kbd></td>
+<td><kbd>~</kbd></td>
+</tr>
+<tr>
+<td>47</td>
+<td><code>2F</code></td>
+<td>Keyboard [ and {</td>
+<td><code>1A</code></td>
+<td><code>1A</code></td>
+<td></td>
+<td><kbd>[</kbd></td>
+<td><kbd>{</kbd></td>
+<td><kbd>[</kbd></td>
+<td><kbd>{</kbd></td>
+<td><kbd>@</kbd></td>
+<td><kbd>`</kbd></td>
+</tr>
+<tr>
+<td>48</td>
+<td><code>30</code></td>
+<td>Keyboard ] and }</td>
+<td><code>1B</code></td>
+<td><code>1B</code></td>
+<td></td>
+<td><kbd>]</kbd></td>
+<td><kbd>}</kbd></td>
+<td><kbd>]</kbd></td>
+<td><kbd>}</kbd></td>
+<td><kbd>[</kbd></td>
+<td><kbd>{</kbd></td>
+</tr>
+<tr>
+<td>49</td>
+<td><code>31</code></td>
+<td>Keyboard \ and |</td>
+<td><code>2B</code></td>
+<td><code>2B</code></td>
+<td></td>
+<td><kbd>\</kbd></td>
+<td><kbd>|</kbd></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>50</td>
+<td><code>32</code></td>
+<td>Keyboard Non-US # and ~</td>
+<td><code>2B</code></td>
+<td><code>2B</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><kbd>#</kbd></td>
+<td><kbd>~</kbd></td>
+<td><kbd>]</kbd></td>
+<td><kbd>}</kbd></td>
+</tr>
+<tr>
+<td>51</td>
+<td><code>33</code></td>
+<td>Keyboard ; and :</td>
+<td><code>27</code></td>
+<td><code>27</code></td>
+<td></td>
+<td><kbd>;</kbd></td>
+<td><kbd>:</kbd></td>
+<td><kbd>;</kbd></td>
+<td><kbd>:</kbd></td>
+<td><kbd>;</kbd></td>
+<td><kbd>+</kbd></td>
+</tr>
+<tr>
+<td>52</td>
+<td><code>34</code></td>
+<td>Keyboard ' and &quot;</td>
+<td><code>28</code></td>
+<td><code>28</code></td>
+<td></td>
+<td><kbd>'</kbd></td>
+<td><kbd>&quot;</kbd></td>
+<td><kbd>'</kbd></td>
+<td><kbd>@</kbd></td>
+<td><kbd>:</kbd></td>
+<td><kbd>*</kbd></td>
+</tr>
+<tr>
+<td>53</td>
+<td><code>35</code></td>
+<td>Keyboard Grave Accent and Tilde</td>
+<td><code>29</code></td>
+<td><code>29</code></td>
+<td></td>
+<td><kbd>`</kbd></td>
+<td><kbd>~</kbd></td>
+<td><kbd>`</kbd></td>
+<td><kbd>¬</kbd></td>
+<td><kbd>Hankaku / Zenkaku</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>54</td>
+<td><code>36</code></td>
+<td>Keyboard , and &lt;</td>
+<td><code>33</code></td>
+<td><code>33</code></td>
+<td></td>
+<td><kbd>,</kbd></td>
+<td><kbd>&lt;</kbd></td>
+<td><kbd>,</kbd></td>
+<td><kbd>&lt;</kbd></td>
+<td><kbd>,</kbd></td>
+<td><kbd>&lt;</kbd></td>
+</tr>
+<tr>
+<td>55</td>
+<td><code>37</code></td>
+<td>Keyboard . and &gt;</td>
+<td><code>34</code></td>
+<td><code>34</code></td>
+<td></td>
+<td><kbd>.</kbd></td>
+<td><kbd>&gt;</kbd></td>
+<td><kbd>.</kbd></td>
+<td><kbd>&gt;</kbd></td>
+<td><kbd>.</kbd></td>
+<td><kbd>&gt;</kbd></td>
+</tr>
+<tr>
+<td>56</td>
+<td><code>38</code></td>
+<td>Keyboard / and ?</td>
+<td><code>35</code></td>
+<td><code>35</code></td>
+<td></td>
+<td><kbd>/</kbd></td>
+<td><kbd>?</kbd></td>
+<td><kbd>/</kbd></td>
+<td><kbd>?</kbd></td>
+<td><kbd>/</kbd></td>
+<td><kbd>?</kbd></td>
+</tr>
+<tr>
+<td>57</td>
+<td><code>39</code></td>
+<td>Keyboard Caps Lock</td>
+<td><code>3A</code></td>
+<td><code>F1 08</code></td>
+<td>✓</td>
+<td><kbd>Caps Lock</kbd></td>
+<td></td>
+<td><kbd>Caps Lock</kbd></td>
+<td></td>
+<td><kbd>Eisu / Caps Lock</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>58</td>
+<td><code>3A</code></td>
+<td>Keyboard F1</td>
+<td><code>3B</code></td>
+<td><code>3B</code></td>
+<td></td>
+<td><kbd>F1</kbd></td>
+<td></td>
+<td><kbd>F1</kbd></td>
+<td></td>
+<td><kbd>F1</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>59</td>
+<td><code>3B</code></td>
+<td>Keyboard F2</td>
+<td><code>3C</code></td>
+<td><code>3C</code></td>
+<td></td>
+<td><kbd>F2</kbd></td>
+<td></td>
+<td><kbd>F2</kbd></td>
+<td></td>
+<td><kbd>F2</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>60</td>
+<td><code>3C</code></td>
+<td>Keyboard F3</td>
+<td><code>3D</code></td>
+<td><code>3D</code></td>
+<td></td>
+<td><kbd>F3</kbd></td>
+<td></td>
+<td><kbd>F3</kbd></td>
+<td></td>
+<td><kbd>F3</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>61</td>
+<td><code>3D</code></td>
+<td>Keyboard F4</td>
+<td><code>3E</code></td>
+<td><code>3E</code></td>
+<td></td>
+<td><kbd>F4</kbd></td>
+<td></td>
+<td><kbd>F4</kbd></td>
+<td></td>
+<td><kbd>F4</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>62</td>
+<td><code>3E</code></td>
+<td>Keyboard F5</td>
+<td><code>3F</code></td>
+<td><code>3F</code></td>
+<td></td>
+<td><kbd>F5</kbd></td>
+<td></td>
+<td><kbd>F5</kbd></td>
+<td></td>
+<td><kbd>F5</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>63</td>
+<td><code>3F</code></td>
+<td>Keyboard F6</td>
+<td><code>40</code></td>
+<td><code>40</code></td>
+<td></td>
+<td><kbd>F6</kbd></td>
+<td></td>
+<td><kbd>F6</kbd></td>
+<td></td>
+<td><kbd>F6</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>64</td>
+<td><code>40</code></td>
+<td>Keyboard F7</td>
+<td><code>41</code></td>
+<td><code>41</code></td>
+<td></td>
+<td><kbd>F7</kbd></td>
+<td></td>
+<td><kbd>F7</kbd></td>
+<td></td>
+<td><kbd>F7</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>65</td>
+<td><code>41</code></td>
+<td>Keyboard F8</td>
+<td><code>42</code></td>
+<td><code>42</code></td>
+<td></td>
+<td><kbd>F8</kbd></td>
+<td></td>
+<td><kbd>F8</kbd></td>
+<td></td>
+<td><kbd>F8</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>66</td>
+<td><code>42</code></td>
+<td>Keyboard F9</td>
+<td><code>43</code></td>
+<td><code>43</code></td>
+<td></td>
+<td><kbd>F9</kbd></td>
+<td></td>
+<td><kbd>F9</kbd></td>
+<td></td>
+<td><kbd>F9</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>67</td>
+<td><code>43</code></td>
+<td>Keyboard F10</td>
+<td><code>44</code></td>
+<td><code>44</code></td>
+<td></td>
+<td><kbd>F10</kbd></td>
+<td></td>
+<td><kbd>F10</kbd></td>
+<td></td>
+<td><kbd>F10</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>68</td>
+<td><code>44</code></td>
+<td>Keyboard F11</td>
+<td><code>57</code></td>
+<td><code>57</code></td>
+<td></td>
+<td><kbd>F11</kbd></td>
+<td></td>
+<td><kbd>F11</kbd></td>
+<td></td>
+<td><kbd>F11</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>69</td>
+<td><code>45</code></td>
+<td>Keyboard F12</td>
+<td><code>58</code></td>
+<td><code>58</code></td>
+<td></td>
+<td><kbd>F12</kbd></td>
+<td></td>
+<td><kbd>F12</kbd></td>
+<td></td>
+<td><kbd>F12</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>70</td>
+<td><code>46</code></td>
+<td>Keyboard PrintScreen</td>
+<td><code>E0 37</code></td>
+<td><code>F3</code></td>
+<td>✓</td>
+<td><kbd>PrintScreen</kbd></td>
+<td></td>
+<td><kbd>PrintScreen</kbd></td>
+<td></td>
+<td><kbd>PrintScreen</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>71</td>
+<td><code>47</code></td>
+<td>Keyboard Scroll Lock</td>
+<td><code>46</code></td>
+<td><code>F1 09</code></td>
+<td>✓</td>
+<td><kbd>Scroll Lock</kbd></td>
+<td></td>
+<td><kbd>Scroll Lock</kbd></td>
+<td></td>
+<td><kbd>Scroll Lock</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>72</td>
+<td><code>48</code></td>
+<td>Keyboard Pause</td>
+<td><code>E1 1D 45</code></td>
+<td><code>E1 1D 45</code></td>
+<td></td>
+<td><kbd>Pause</kbd></td>
+<td></td>
+<td><kbd>Pause</kbd></td>
+<td></td>
+<td><kbd>Pause</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>73</td>
+<td><code>49</code></td>
+<td>Keyboard Insert</td>
+<td><code>E0 52</code></td>
+<td><code>F0</code></td>
+<td>✓</td>
+<td><kbd>Insert</kbd></td>
+<td></td>
+<td><kbd>Insert</kbd></td>
+<td></td>
+<td><kbd>Insert</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>74</td>
+<td><code>4A</code></td>
+<td>Keyboard Home</td>
+<td><code>E0 47</code></td>
+<td><code>F0 01</code></td>
+<td>✓</td>
+<td><kbd>Home</kbd></td>
+<td></td>
+<td><kbd>Home</kbd></td>
+<td></td>
+<td><kbd>Home</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>75</td>
+<td><code>4B</code></td>
+<td>Keyboard PageUp</td>
+<td><code>E0 49</code></td>
+<td><code>F0 02</code></td>
+<td>✓</td>
+<td><kbd>PgUp</kbd></td>
+<td></td>
+<td><kbd>PgUp</kbd></td>
+<td></td>
+<td><kbd>PgUp</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>76</td>
+<td><code>4C</code></td>
+<td>Keyboard Delete Forward</td>
+<td><code>E0 53</code></td>
+<td><code>F0 03</code></td>
+<td>✓</td>
+<td><kbd>Delete</kbd></td>
+<td></td>
+<td><kbd>Delete</kbd></td>
+<td></td>
+<td><kbd>Delete</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>77</td>
+<td><code>4D</code></td>
+<td>Keyboard End</td>
+<td><code>E0 4F</code></td>
+<td><code>F0 04</code></td>
+<td>✓</td>
+<td><kbd>End</kbd></td>
+<td></td>
+<td><kbd>End</kbd></td>
+<td></td>
+<td><kbd>End</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>78</td>
+<td><code>4E</code></td>
+<td>Keyboard PageDown</td>
+<td><code>E0 51</code></td>
+<td><code>F0 05</code></td>
+<td>✓</td>
+<td><kbd>PgDn</kbd></td>
+<td></td>
+<td><kbd>PgDn</kbd></td>
+<td></td>
+<td><kbd>PgDn</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>79</td>
+<td><code>4F</code></td>
+<td>Keyboard RightArrow</td>
+<td><code>E0 4D</code></td>
+<td><code>F0 06</code></td>
+<td>✓</td>
+<td><kbd>Right</kbd></td>
+<td></td>
+<td><kbd>Right</kbd></td>
+<td></td>
+<td><kbd>Right</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>80</td>
+<td><code>50</code></td>
+<td>Keyboard LeftArrow</td>
+<td><code>E0 4B</code></td>
+<td><code>F0 07</code></td>
+<td>✓</td>
+<td><kbd>Left</kbd></td>
+<td></td>
+<td><kbd>Left</kbd></td>
+<td></td>
+<td><kbd>Left</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>81</td>
+<td><code>51</code></td>
+<td>Keyboard DownArrow</td>
+<td><code>E0 50</code></td>
+<td><code>F0 08</code></td>
+<td>✓</td>
+<td><kbd>Down</kbd></td>
+<td></td>
+<td><kbd>Down</kbd></td>
+<td></td>
+<td><kbd>Down</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>82</td>
+<td><code>52</code></td>
+<td>Keyboard UpArrow</td>
+<td><code>E0 48</code></td>
+<td><code>F0 09</code></td>
+<td>✓</td>
+<td><kbd>Up</kbd></td>
+<td></td>
+<td><kbd>Up</kbd></td>
+<td></td>
+<td><kbd>Up</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>83</td>
+<td><code>53</code></td>
+<td>Keypad Num Lock and Clear</td>
+<td><code>45</code></td>
+<td><code>F1 0A</code></td>
+<td>✓</td>
+<td><kbd>Num Lock</kbd></td>
+<td></td>
+<td><kbd>Num Lock</kbd></td>
+<td></td>
+<td><kbd>Num Lock</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>84</td>
+<td><code>54</code></td>
+<td>Keypad /</td>
+<td><code>E0 35</code></td>
+<td><code>E0 35</code></td>
+<td></td>
+<td><kbd>KP-/</kbd></td>
+<td></td>
+<td><kbd>KP-/</kbd></td>
+<td></td>
+<td><kbd>KP-/</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>85</td>
+<td><code>55</code></td>
+<td>Keypad *</td>
+<td><code>37</code></td>
+<td><code>37</code></td>
+<td></td>
+<td><kbd>KP-*</kbd></td>
+<td></td>
+<td><kbd>KP-*</kbd></td>
+<td></td>
+<td><kbd>KP-*</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>86</td>
+<td><code>56</code></td>
+<td>Keypad -</td>
+<td><code>4A</code></td>
+<td><code>4A</code></td>
+<td></td>
+<td><kbd>KP-—</kbd></td>
+<td></td>
+<td><kbd>KP-—</kbd></td>
+<td></td>
+<td><kbd>KP-—</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>87</td>
+<td><code>57</code></td>
+<td>Keypad +</td>
+<td><code>4E</code></td>
+<td><code>4E</code></td>
+<td></td>
+<td><kbd>KP-+</kbd></td>
+<td></td>
+<td><kbd>KP-+</kbd></td>
+<td></td>
+<td><kbd>KP-+</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>88</td>
+<td><code>58</code></td>
+<td>Keypad ENTER</td>
+<td><code>E0 1C</code></td>
+<td><code>E0 1C</code></td>
+<td></td>
+<td><kbd>KP-Enter</kbd></td>
+<td></td>
+<td><kbd>KP-Enter</kbd></td>
+<td></td>
+<td><kbd>KP-Enter</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>89</td>
+<td><code>59</code></td>
+<td>Keypad 1 and End</td>
+<td><code>4F</code></td>
+<td><code>4F</code></td>
+<td></td>
+<td><kbd>KP-1</kbd></td>
+<td><kbd>End</kbd></td>
+<td><kbd>KP-1</kbd></td>
+<td><kbd>End</kbd></td>
+<td><kbd>KP-1</kbd></td>
+<td><kbd>End</kbd></td>
+</tr>
+<tr>
+<td>90</td>
+<td><code>5A</code></td>
+<td>Keypad 2 and Down Arrow</td>
+<td><code>50</code></td>
+<td><code>50</code></td>
+<td></td>
+<td><kbd>KP-2</kbd></td>
+<td><kbd>Down</kbd></td>
+<td><kbd>KP-2</kbd></td>
+<td><kbd>Down</kbd></td>
+<td><kbd>KP-2</kbd></td>
+<td><kbd>Down</kbd></td>
+</tr>
+<tr>
+<td>91</td>
+<td><code>5B</code></td>
+<td>Keypad 3 and PageDn</td>
+<td><code>51</code></td>
+<td><code>51</code></td>
+<td></td>
+<td><kbd>KP-3</kbd></td>
+<td><kbd>PgDn</kbd></td>
+<td><kbd>KP-3</kbd></td>
+<td><kbd>PgDn</kbd></td>
+<td><kbd>KP-3</kbd></td>
+<td><kbd>PgDn</kbd></td>
+</tr>
+<tr>
+<td>92</td>
+<td><code>5C</code></td>
+<td>Keypad 4 and Left Arrow</td>
+<td><code>4B</code></td>
+<td><code>4B</code></td>
+<td></td>
+<td><kbd>KP-4</kbd></td>
+<td><kbd>Left</kbd></td>
+<td><kbd>KP-4</kbd></td>
+<td><kbd>Left</kbd></td>
+<td><kbd>KP-4</kbd></td>
+<td><kbd>Left</kbd></td>
+</tr>
+<tr>
+<td>93</td>
+<td><code>5D</code></td>
+<td>Keypad 5</td>
+<td><code>4C</code></td>
+<td><code>4C</code></td>
+<td></td>
+<td><kbd>KP-5</kbd></td>
+<td></td>
+<td><kbd>KP-5</kbd></td>
+<td></td>
+<td><kbd>KP-5</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>94</td>
+<td><code>5E</code></td>
+<td>Keypad 6 and Right Arrow</td>
+<td><code>4D</code></td>
+<td><code>4D</code></td>
+<td></td>
+<td><kbd>KP-6</kbd></td>
+<td><kbd>Right</kbd></td>
+<td><kbd>KP-6</kbd></td>
+<td><kbd>Right</kbd></td>
+<td><kbd>KP-6</kbd></td>
+<td><kbd>Right</kbd></td>
+</tr>
+<tr>
+<td>95</td>
+<td><code>5F</code></td>
+<td>Keypad 7 and Home</td>
+<td><code>47</code></td>
+<td><code>47</code></td>
+<td></td>
+<td><kbd>KP-7</kbd></td>
+<td><kbd>Home</kbd></td>
+<td><kbd>KP-7</kbd></td>
+<td><kbd>Home</kbd></td>
+<td><kbd>KP-7</kbd></td>
+<td><kbd>Home</kbd></td>
+</tr>
+<tr>
+<td>96</td>
+<td><code>60</code></td>
+<td>Keypad 8 and Up Arrow</td>
+<td><code>48</code></td>
+<td><code>48</code></td>
+<td></td>
+<td><kbd>KP-8</kbd></td>
+<td><kbd>Up</kbd></td>
+<td><kbd>KP-8</kbd></td>
+<td><kbd>Up</kbd></td>
+<td><kbd>KP-8</kbd></td>
+<td><kbd>Up</kbd></td>
+</tr>
+<tr>
+<td>97</td>
+<td><code>61</code></td>
+<td>Keypad 9 and PageUp</td>
+<td><code>49</code></td>
+<td><code>49</code></td>
+<td></td>
+<td><kbd>KP-9</kbd></td>
+<td><kbd>PgUp</kbd></td>
+<td><kbd>KP-9</kbd></td>
+<td><kbd>PgUp</kbd></td>
+<td><kbd>KP-9</kbd></td>
+<td><kbd>PgUp</kbd></td>
+</tr>
+<tr>
+<td>98</td>
+<td><code>62</code></td>
+<td>Keypad 0 and Insert</td>
+<td><code>52</code></td>
+<td><code>52</code></td>
+<td></td>
+<td><kbd>KP-0</kbd></td>
+<td><kbd>Insert</kbd></td>
+<td><kbd>KP-0</kbd></td>
+<td><kbd>Insert</kbd></td>
+<td><kbd>KP-0</kbd></td>
+<td><kbd>Insert</kbd></td>
+</tr>
+<tr>
+<td>99</td>
+<td><code>63</code></td>
+<td>Keypad . and Delete</td>
+<td><code>53</code></td>
+<td><code>53</code></td>
+<td></td>
+<td><kbd>KP-.</kbd></td>
+<td><kbd>Delete</kbd></td>
+<td><kbd>KP-.</kbd></td>
+<td><kbd>Delete</kbd></td>
+<td><kbd>KP-.</kbd></td>
+<td><kbd>Delete</kbd></td>
+</tr>
+<tr>
+<td>100</td>
+<td><code>64</code></td>
+<td>Keyboard Non-US \ and |</td>
+<td><code>56</code></td>
+<td><code>56</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><kbd>\</kbd></td>
+<td><kbd>|</kbd></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>101</td>
+<td><code>65</code></td>
+<td>Keyboard Application</td>
+<td><code>E0 5D</code></td>
+<td><code>E0 5D</code></td>
+<td></td>
+<td><kbd>App</kbd></td>
+<td></td>
+<td><kbd>App</kbd></td>
+<td></td>
+<td><kbd>App</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>102</td>
+<td><code>66</code></td>
+<td>Keyboard Power</td>
+<td><code>E0 5E</code></td>
+<td><code>E0 5E</code></td>
+<td></td>
+<td><kbd>Power</kbd></td>
+<td></td>
+<td><kbd>Power</kbd></td>
+<td></td>
+<td><kbd>Power</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>103</td>
+<td><code>67</code></td>
+<td>Keypad =</td>
+<td><code>59</code></td>
+<td><code>59</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>104</td>
+<td><code>68</code></td>
+<td>Keyboard F13</td>
+<td><code>64</code></td>
+<td><code>64</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>105</td>
+<td><code>69</code></td>
+<td>Keyboard F14</td>
+<td><code>65</code></td>
+<td><code>65</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>106</td>
+<td><code>6A</code></td>
+<td>Keyboard F15</td>
+<td><code>66</code></td>
+<td><code>66</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>107</td>
+<td><code>6B</code></td>
+<td>Keyboard F16</td>
+<td><code>67</code></td>
+<td><code>67</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>108</td>
+<td><code>6C</code></td>
+<td>Keyboard F17</td>
+<td><code>68</code></td>
+<td><code>68</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>109</td>
+<td><code>6D</code></td>
+<td>Keyboard F18</td>
+<td><code>69</code></td>
+<td><code>69</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>110</td>
+<td><code>6E</code></td>
+<td>Keyboard F19</td>
+<td><code>6A</code></td>
+<td><code>6A</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>111</td>
+<td><code>6F</code></td>
+<td>Keyboard F20</td>
+<td><code>6B</code></td>
+<td><code>6B</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>112</td>
+<td><code>70</code></td>
+<td>Keyboard F21</td>
+<td><code>6C</code></td>
+<td><code>6C</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>113</td>
+<td><code>71</code></td>
+<td>Keyboard F22</td>
+<td><code>6D</code></td>
+<td><code>6D</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>114</td>
+<td><code>72</code></td>
+<td>Keyboard F23</td>
+<td><code>6E</code></td>
+<td><code>6E</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>115</td>
+<td><code>73</code></td>
+<td>Keyboard F24</td>
+<td><code>76</code></td>
+<td><code>76</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>116</td>
+<td><code>74</code></td>
+<td>Keyboard Execute</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>117</td>
+<td><code>75</code></td>
+<td>Keyboard Help</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>118</td>
+<td><code>76</code></td>
+<td>Keyboard Menu</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>119</td>
+<td><code>77</code></td>
+<td>Keyboard Select</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>120</td>
+<td><code>78</code></td>
+<td>Keyboard Stop</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>121</td>
+<td><code>79</code></td>
+<td>Keyboard Again</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>122</td>
+<td><code>7A</code></td>
+<td>Keyboard Undo</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>123</td>
+<td><code>7B</code></td>
+<td>Keyboard Cut</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>124</td>
+<td><code>7C</code></td>
+<td>Keyboard Copy</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>125</td>
+<td><code>7D</code></td>
+<td>Keyboard Paste</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>126</td>
+<td><code>7E</code></td>
+<td>Keyboard Find</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>127</td>
+<td><code>7F</code></td>
+<td>Keyboard Mute</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>128</td>
+<td><code>80</code></td>
+<td>Keyboard Volume Up</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>129</td>
+<td><code>81</code></td>
+<td>Keyboard Volume Down</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>130</td>
+<td><code>82</code></td>
+<td>Keyboard Locking Caps Lock</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>131</td>
+<td><code>83</code></td>
+<td>Keyboard Locking Numb Lock</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>132</td>
+<td><code>84</code></td>
+<td>Keyboard Locking Scroll Lock</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>133</td>
+<td><code>85</code></td>
+<td>Keypad Comma</td>
+<td><code>7E</code></td>
+<td><code>7E</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>134</td>
+<td><code>86</code></td>
+<td>Keypad Equal Sign</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>135</td>
+<td><code>87</code></td>
+<td>Keyboard International1</td>
+<td><code>73</code></td>
+<td><code>73</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><kbd>\</kbd></td>
+<td><kbd>_</kbd></td>
+</tr>
+<tr>
+<td>136</td>
+<td><code>88</code></td>
+<td>Keyboard International2</td>
+<td><code>70</code></td>
+<td><code>70</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><kbd>Hira / Kana</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>137</td>
+<td><code>89</code></td>
+<td>Keyboard International3</td>
+<td><code>7D</code></td>
+<td><code>7D</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><kbd>¥</kbd></td>
+<td><kbd>|</kbd></td>
+</tr>
+<tr>
+<td>138</td>
+<td><code>8A</code></td>
+<td>Keyboard International4</td>
+<td><code>79</code></td>
+<td><code>79</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><kbd>Convert</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>139</td>
+<td><code>8B</code></td>
+<td>Keyboard International5</td>
+<td><code>7B</code></td>
+<td><code>7B</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><kbd>NonConvert</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>140</td>
+<td><code>8C</code></td>
+<td>Keyboard International6</td>
+<td><code>5C</code></td>
+<td><code>5C</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>141</td>
+<td><code>8D</code></td>
+<td>Keyboard International7</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>142</td>
+<td><code>8E</code></td>
+<td>Keyboard International8</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>143</td>
+<td><code>8F</code></td>
+<td>Keyboard International9</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>144</td>
+<td><code>90</code></td>
+<td>Keyboard LANG1</td>
+<td><code>F2</code></td>
+<td><code>F2</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><kbd>Kana (macOS)</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>145</td>
+<td><code>91</code></td>
+<td>Keyboard LANG2</td>
+<td><code>F1</code></td>
+<td><code>F2 01</code></td>
+<td>✓</td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><kbd>Eisu (macOS)</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>146</td>
+<td><code>92</code></td>
+<td>Keyboard LANG3</td>
+<td><code>78</code></td>
+<td><code>78</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>147</td>
+<td><code>93</code></td>
+<td>Keyboard LANG4</td>
+<td><code>77</code></td>
+<td><code>77</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>148</td>
+<td><code>94</code></td>
+<td>Keyboard LANG5</td>
+<td><code>76</code></td>
+<td><code>76</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>149</td>
+<td><code>95</code></td>
+<td>Keyboard LANG6</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>150</td>
+<td><code>96</code></td>
+<td>Keyboard LANG7</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>151</td>
+<td><code>97</code></td>
+<td>Keyboard LANG8</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>152</td>
+<td><code>98</code></td>
+<td>Keyboard LANG9</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>153</td>
+<td><code>99</code></td>
+<td>Keyboard Alternate Erase</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>154</td>
+<td><code>9A</code></td>
+<td>Keyboard SysReq/Attention</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>155</td>
+<td><code>9B</code></td>
+<td>Keyboard Cancel</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>156</td>
+<td><code>9C</code></td>
+<td>Keyboard Clear</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>157</td>
+<td><code>9D</code></td>
+<td>Keyboard Prior</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>158</td>
+<td><code>9E</code></td>
+<td>Keyboard Return</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>159</td>
+<td><code>9F</code></td>
+<td>Keyboard Separator</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>160</td>
+<td><code>A0</code></td>
+<td>Keyboard Out</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>161</td>
+<td><code>A1</code></td>
+<td>Keyboard Oper</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>162</td>
+<td><code>A2</code></td>
+<td>Keyboard Clear/Again</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>163</td>
+<td><code>A3</code></td>
+<td>Keyboard CrSel/Props</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>164</td>
+<td><code>A4</code></td>
+<td>Keyboard ExSel</td>
+<td><code>UNASSIGNED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>165</td>
+<td><code>A5</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>166</td>
+<td><code>A6</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>167</td>
+<td><code>A7</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>168</td>
+<td><code>A8</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>169</td>
+<td><code>A9</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>170</td>
+<td><code>AA</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>171</td>
+<td><code>AB</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>172</td>
+<td><code>AC</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>173</td>
+<td><code>AD</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>174</td>
+<td><code>AE</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>175</td>
+<td><code>AF</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>176</td>
+<td><code>B0</code></td>
+<td>Keypad 00</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>177</td>
+<td><code>B1</code></td>
+<td>Keypad 000</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>178</td>
+<td><code>B2</code></td>
+<td>Thousands Separator</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>179</td>
+<td><code>B3</code></td>
+<td>Decimal Separator</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>180</td>
+<td><code>B4</code></td>
+<td>Currency Unit</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>181</td>
+<td><code>B5</code></td>
+<td>Currency Sub-unit</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>182</td>
+<td><code>B6</code></td>
+<td>Keypad (</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>183</td>
+<td><code>B7</code></td>
+<td>Keypad )</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>184</td>
+<td><code>B8</code></td>
+<td>Keypad {</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>185</td>
+<td><code>B9</code></td>
+<td>Keypad }</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>186</td>
+<td><code>BA</code></td>
+<td>Keypad Tab</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>187</td>
+<td><code>BB</code></td>
+<td>Keypad Backspace</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>188</td>
+<td><code>BC</code></td>
+<td>Keypad A</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>189</td>
+<td><code>BD</code></td>
+<td>Keypad B</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>190</td>
+<td><code>BE</code></td>
+<td>Keypad C</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>191</td>
+<td><code>BF</code></td>
+<td>Keypad D</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>192</td>
+<td><code>C0</code></td>
+<td>Keypad E</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>193</td>
+<td><code>C1</code></td>
+<td>Keypad F</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>194</td>
+<td><code>C2</code></td>
+<td>Keypad XOR</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>195</td>
+<td><code>C3</code></td>
+<td>Keypad ^</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>196</td>
+<td><code>C4</code></td>
+<td>Keypad %</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>197</td>
+<td><code>C5</code></td>
+<td>Keypad &lt;</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>198</td>
+<td><code>C6</code></td>
+<td>Keypad &gt;</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>199</td>
+<td><code>C7</code></td>
+<td>Keypad &amp;</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>200</td>
+<td><code>C8</code></td>
+<td>Keypad &amp;&amp;</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>201</td>
+<td><code>C9</code></td>
+<td>Keypad |</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>202</td>
+<td><code>CA</code></td>
+<td>Keypad ||</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>203</td>
+<td><code>CB</code></td>
+<td>Keypad :</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>204</td>
+<td><code>CC</code></td>
+<td>Keypad #</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>205</td>
+<td><code>CD</code></td>
+<td>Keypad Space</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>206</td>
+<td><code>CE</code></td>
+<td>Keypad @</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>207</td>
+<td><code>CF</code></td>
+<td>Keypad !</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>208</td>
+<td><code>D0</code></td>
+<td>Keypad Memory Store</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>209</td>
+<td><code>D1</code></td>
+<td>Keypad Memory Recall</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>210</td>
+<td><code>D2</code></td>
+<td>Keypad Memory Clear</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>211</td>
+<td><code>D3</code></td>
+<td>Keypad Memory Add</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>212</td>
+<td><code>D4</code></td>
+<td>Keypad Memory Subtract</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>213</td>
+<td><code>D5</code></td>
+<td>Keypad Memory Multiply</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>214</td>
+<td><code>D6</code></td>
+<td>Keypad Memory Divide</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>215</td>
+<td><code>D7</code></td>
+<td>Keypad +/-</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>216</td>
+<td><code>D8</code></td>
+<td>Keypad Clear</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>217</td>
+<td><code>D9</code></td>
+<td>Keypad Clear Entry</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>218</td>
+<td><code>DA</code></td>
+<td>Keypad Binary</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>219</td>
+<td><code>DB</code></td>
+<td>Keypad Octal</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>220</td>
+<td><code>DC</code></td>
+<td>Keypad Decimal</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>221</td>
+<td><code>DD</code></td>
+<td>Keypad Hexadecimal</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>222</td>
+<td><code>DE</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>223</td>
+<td><code>DF</code></td>
+<td>Reserved</td>
+<td><code>RESERVED</code></td>
+<td><code>FF</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+<td><code>NA</code></td>
+<td></td>
+</tr>
+<tr>
+<td>224</td>
+<td><code>E0</code></td>
+<td>Keyboard LeftControl</td>
+<td><code>1D</code></td>
+<td><code>F1</code></td>
+<td>✓</td>
+<td><kbd>LCtrl</kbd></td>
+<td></td>
+<td><kbd>LCtrl</kbd></td>
+<td></td>
+<td><kbd>LCtrl</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>225</td>
+<td><code>E1</code></td>
+<td>Keyboard LeftShift</td>
+<td><code>2A</code></td>
+<td><code>F1 01</code></td>
+<td>✓</td>
+<td><kbd>LShift</kbd></td>
+<td></td>
+<td><kbd>LShift</kbd></td>
+<td></td>
+<td><kbd>LShift</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>226</td>
+<td><code>E2</code></td>
+<td>Keyboard LeftAlt</td>
+<td><code>38</code></td>
+<td><code>F1 02</code></td>
+<td>✓</td>
+<td><kbd>LAlt</kbd></td>
+<td></td>
+<td><kbd>LAlt</kbd></td>
+<td></td>
+<td><kbd>LAlt</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>227</td>
+<td><code>E3</code></td>
+<td>Keyboard Left GUI</td>
+<td><code>E0 5B</code></td>
+<td><code>F1 03</code></td>
+<td>✓</td>
+<td><kbd>LWin</kbd></td>
+<td></td>
+<td><kbd>LWin</kbd></td>
+<td></td>
+<td><kbd>LWin</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>228</td>
+<td><code>E4</code></td>
+<td>Keyboard RightControl</td>
+<td><code>E0 1D</code></td>
+<td><code>F1 04</code></td>
+<td>✓</td>
+<td><kbd>RCtrl</kbd></td>
+<td></td>
+<td><kbd>RCtrl</kbd></td>
+<td></td>
+<td><kbd>RCtrl</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>229</td>
+<td><code>E5</code></td>
+<td>Keyboard RightShift</td>
+<td><code>36</code></td>
+<td><code>F1 05</code></td>
+<td>✓</td>
+<td><kbd>RShift</kbd></td>
+<td></td>
+<td><kbd>RShift</kbd></td>
+<td></td>
+<td><kbd>RShift</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>230</td>
+<td><code>E6</code></td>
+<td>Keyboard RightAlt</td>
+<td><code>E0 38</code></td>
+<td><code>F1 06</code></td>
+<td>✓</td>
+<td><kbd>RAlt</kbd></td>
+<td></td>
+<td><kbd>RAlt</kbd></td>
+<td></td>
+<td><kbd>RAlt</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>231</td>
+<td><code>E7</code></td>
+<td>Keyboard Right GUI</td>
+<td><code>E0 5C</code></td>
+<td><code>F1 07</code></td>
+<td>✓</td>
+<td><kbd>RWin</kbd></td>
+<td></td>
+<td><kbd>RWin</kbd></td>
+<td></td>
+<td><kbd>RWin</kbd></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<table>
+<caption>Usage IDs of Generic Desktop Page (0x01) (partial; 81 – 83)</caption>
+<thead>
+<tr>
+<th colspan="2">Usage ID</th>
+<!-- colspan -->
+<th rowspan="2">Usage Name</th>
+<th colspan="2">Scancode (Set 1)</th>
+<!-- colspan -->
+<th rowspan="2">diff</th>
+<th rowspan="2">Key</th>
+</tr>
+<tr>
+<th>dec</th>
+<th>hex</th>
+<!-- rowspan -->
+<th>MS Ref.</th>
+<th><code>hid.dll</code></th>
+<!-- rowspan -->
+<!-- rowspan -->
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>129</td>
+<td><code>81</code></td>
+<td>System Power Down</td>
+<td><code>E0 5E</code></td>
+<td><code>E0 5E</code></td>
+<td></td>
+<td>System Power</td>
+</tr>
+<tr>
+<td>130</td>
+<td><code>82</code></td>
+<td>System Sleep</td>
+<td><code>E0 5F</code></td>
+<td><code>E0 5F</code></td>
+<td></td>
+<td>System Sleep</td>
+</tr>
+<tr>
+<td>131</td>
+<td><code>83</code></td>
+<td>System Wake Up</td>
+<td><code>E0 63</code></td>
+<td><code>E0 63</code></td>
+<td></td>
+<td>System Wake</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="microsoft-の変換対応表と実際処理しているであろう-hiddll-との違いについて">Microsoft の変換対応表と実際処理しているであろう <code>hid.dll</code> との違いについて</h2>
+<p>Microsoft の変換対応表と Windows の <code>hid.dll</code> を比較してみた結果、対応表とは異なるキーがそこそこ見受けられた。
+1つを除いて Scancode の prefix が <code>0xF0</code>–<code>0xF3</code> のいずれかとなっており、内部的に特別な処理をしているんだろうなあという印象を受ける。
+大まかに分類した結果は以下の通り。</p>
+<ul>
+<li>Keyboard POSTFail (上記で書いた prefix のつかない唯一の例外)</li>
+<li>Scancode (Set 1) において特殊な変換をするキー (Insert, PrintScreen, 等。詳しくは <a href="/doc/scancode/">Scancode まとめ記事</a>参照のこと。)</li>
+<li>Modifier</li>
+<li>Keyboard LANG2</li>
+<li>Keyboard Caps Lock</li>
+</ul>
+<p>上記の中で、Keyboard POSTFail, Scancode (Set 1) において特殊な変換をするキー、Modifiers、は特殊な扱いであることは概ね理解できる。
+Modifier は HID では8種それぞれ 1 bit ずつの flag としても扱われているので、なおのこと。
+ただし、<kbd>Pause</kbd> だけそのまま処理されているのはちょっと意外。
+LANG2 については、macOS において <kbd>英数</kbd> に割り当てられており、また prefix が LANG1 (<kbd>かな</kbd>) に割り当てられている <code>0xF2</code> であるのでこの関係か、と思えてしまう。
+しかし標準状態では特に使えるようにはなっていないので、なぜわざわざ prefix を与えて別で処理しているのかはよく分からない。改造配列を自分で作れば使えるかもしれないが……。
+Caps Lock についてはますます分からない。日本語環境で一般的な JIS 配列だと <kbd>英数 Caps Lock</kbd> となるから別の処理をしているのか、という程度しか想像できない。</p>
+<p>全体的に分かったような分からないような、いまいちしっくりこない感じ。詳しい人に聞いてみたいところ。</p>
+<h2 id="reference">参考資料</h2>
+<dl>
+<dt><a href="https://www.usb.org/sites/default/files/hut1_12.pdf">HID Usage Tables 1.12 (<time datetime="2004-10-28">10/28/2004</time>)</a></dt>
+<dd>USB-IF が公開している USB HID Usage の定義。直リンクしてしまっているのでリンク切れしていたら検索でたどり着いて。</dd>
+<dt><a href="http://download.microsoft.com/download/1/6/1/161ba512-40e2-4cc9-843a-923143f3456c/translate.pdf">USB HID to PS/2 Scan Code Translation Table</a></dt>
+<dd>Microsoft 社が公開している USB HID の Usage ID から Scancode (Set 1) への変換対応表。</dd>
+</dl>
+
+    </section>
+
+
+
+    <footer>
+      <nav><a href="/"> >> Home</a></nav>
+    </footer>
+  </article>
+</main>
+
+<footer>
+  <nav>
+    <ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/policy/">Policy</a></li>
+    </ul>
+  </nav>
+  <p>
+    <small>© B-SAKATU 2020 
+      <a rel="license" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">
+        <img alt="CC" src="/img/license/cc.svg" width="14" height="14" />
+        <img alt="BY" src="/img/license/by.svg" width="14" height="14" />
+        <img alt="NC" src="/img/license/nc.svg" width="14" height="14" />
+        <img alt="SA" src="/img/license/sa.svg" width="14" height="14" />
+      </a>
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>
