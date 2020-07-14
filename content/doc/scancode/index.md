@@ -2,7 +2,7 @@
 title: "主要キーレイアウトのキーとその Scancode まとめ"
 date: 2020-07-10T20:47:10+09:00
 categories: [Input]
-tags: [keyboard, key-layout, Windows]
+tags: [keyboard, key-layout, Windows, reference]
 toc: true
 draft: false
 
