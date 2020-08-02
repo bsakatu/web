@@ -161,10 +161,10 @@
 {{- $caption := $scr.Get "caption" -}}
 
 <!-- get and make attribution -->
-{{- $id := .Get "id" -}}
+{{- $id := (.Get "id" | default nil) -}}
 {{- $id := cond (ne $id nil) (printf " id=\"%v\"" $id) ""}}
 
-{{- $class := .Get "class" -}}
+{{- $class := (.Get "class" | default nil) -}}
 {{- $class := cond (ne $class nil) (printf " class=\"%v\"" $class) ""}}
 
 <!-- render table -->
