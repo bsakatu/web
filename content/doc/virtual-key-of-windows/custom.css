@@ -1,0 +1,156 @@
+table > thead,
+table > tbody {
+  font-size: 0.9em;
+}
+/* table#comparison-of-vk-for-us-and-isos {
+  font-size: 0.75em;
+} */
+table[id^="vk-"] > thead,
+table[id^="vk-"] > tbody,
+table[id^="sc2vk-"] > thead,
+table[id^="sc2vk-"] > tbody,
+table#comparison-of-vk-for-us-and-isos > thead,
+table#comparison-of-vk-for-us-and-isos > tbody {
+  font-size: 0.75em;
+}
+
+table code,
+table kbd {
+  white-space: pre-wrap;
+  word-break: keep-all
+}
+
+@media only screen and (min-width: 60em) {
+  table[id$="-all"],
+  table#vk-partial {
+    position: relative;
+    left: calc( -1 * (100vw - 60rem) / 2);
+  }
+  table[id$="-all"] > caption,
+  table#vk-partial > caption {
+    position: relative;
+    left: calc( (100vw - 60rem) / 2);
+  }
+}
+
+table#vk-partial > tbody > tr > td:nth-of-type(5),
+table#vk-partial > tbody > tr > td:nth-of-type(6) {
+  font-size: 0.9em;
+}
+table#sc2vk-all > tbody > tr > td:not(:first-child) {
+  font-size: 0.7em;
+}
+
+/* border */
+table[id^="vk-"] > thead > tr:first-child > th:first-child,
+table[id^="vk-"] > thead > tr:nth-child(2) > th:nth-child(2),
+table[id^="vk-"] > tbody > tr > td:nth-child(2),
+table[id^="sc2vk-"] > thead > tr:first-child > th:first-child,
+table[id^="sc2vk-"] > tbody > tr > td:first-child,
+table#comparison-of-vk-for-us-and-isos > thead > tr:first-child > th:first-child,
+table#comparison-of-vk-for-us-and-isos > tbody > tr > td:first-child {
+  border-right: 1px dashed #ccc;
+}
+table#vk-partial > thead > tr:first-child > th:nth-child(2) ~ th,
+table#vk-partial > thead > tr:nth-child(2) > th:nth-child(5),
+table#vk-partial > thead > tr:nth-child(2) > th:nth-child(7),
+table#vk-partial > thead > tr:nth-child(3) > th:nth-child(1),
+table#vk-partial > tbody > tr > td:nth-child(5),
+table#vk-partial > tbody > tr > td:nth-child(7),
+table#vk-name-all > thead > tr:nth-child(2) > th:nth-child(4),
+table#vk-name-all > thead > tr:nth-child(3) > th:nth-child(3),
+table#vk-name-all > tbody > tr > td:nth-child(5),
+table#vk-desc-all > thead > tr:nth-child(2) > th:nth-child(4),
+table#vk-desc-all > thead > tr:nth-child(3) > th:nth-child(3),
+table#vk-desc-all > tbody > tr > td:nth-child(5),
+table[id^="sc2vk-"] > thead > tr:nth-child(2) > th:nth-child(2),
+table#sc2vk-all > thead > tr:nth-child(2) > th:nth-child(3),
+table#sc2vk-all > thead > tr:nth-child(2) > th:nth-child(4),
+table#sc2vk-all > thead > tr:nth-child(2) > th:nth-child(5),
+table#sc2vk-all > thead > tr:nth-child(2) > th:nth-child(6),
+table#sc2vk-all > thead > tr:nth-child(3) > th:nth-child(7),
+table#sc2vk-all > thead > tr:nth-child(3) > th:nth-child(14),
+table#sc2vk-all > thead > tr:nth-child(3) > th:nth-child(17),
+table#sc2vk-all > thead > tr:nth-child(3) > th:nth-child(20),
+table#sc2vk-all > thead > tr:nth-child(3) > th:nth-child(21),
+table#sc2vk-all > tbody > tr > td:nth-child(8),
+table#sc2vk-all > tbody > tr > td:nth-child(15),
+table#sc2vk-all > tbody > tr > td:nth-child(18),
+table#sc2vk-all > tbody > tr > td:nth-child(21),
+table#sc2vk-all > tbody > tr > td:nth-child(22),
+table#sc2vk-partial > thead > tr:nth-child(3) > th:nth-child(2),
+table#sc2vk-partial > tbody > tr > td:nth-child(3),
+table#comparison-of-vk-for-us-and-isos > thead > tr:first-child > th:nth-child(2) ~ th,
+table#comparison-of-vk-for-us-and-isos > thead > tr:nth-child(2) > th:nth-child(2),
+table#comparison-of-vk-for-us-and-isos > thead > tr:nth-child(2) > th:nth-child(4),
+table#comparison-of-vk-for-us-and-isos > thead > tr:nth-child(2) > th:nth-child(6),
+table#comparison-of-vk-for-us-and-isos > tbody > tr > td:nth-child(3),
+table#comparison-of-vk-for-us-and-isos > tbody > tr > td:nth-child(5),
+table#comparison-of-vk-for-us-and-isos > tbody > tr > td:nth-child(7) {
+  border-left: 1px dashed #ccc;
+}
+
+table#sc2vk-all > thead > tr:first-child > th:nth-of-type(2) {
+  text-align: left;
+  padding-left: 4em;
+}
+
+/* cell width */
+table#vk-partial > tbody > tr > td:nth-of-type(3),
+table#vk-partial > tbody > tr > td:nth-of-type(5),
+table#vk-partial > tbody > tr > td:nth-of-type(6) {
+  min-width: 20em;
+}
+
+table#vk-desc-all > tbody > tr > td:nth-child(2) ~ td {
+  min-width: 15em;
+}
+
+table[id^="sc2vk-"] > thead > tr:first-child > th:first-child,
+table[id^="sc2vk-"] > tbody > tr > td:first-child {
+  width: 6em;
+}
+table[id^="sc2vk-"] > tbody > tr > td:first-child {
+  padding-left: 1.5em; 
+}
+
+table#comparison-of-vk-for-us-and-isos > thead > tr:first-child > th:first-child {
+  width: 6.5em;
+}
+table#comparison-of-vk-for-us-and-isos > tbody > tr > td:first-child {
+  padding-left: 1.5em; 
+}
+
+/* table selector */
+input[name="vk-tbl"],
+input[name="sc2vk-tbl"] {
+  display: none;
+}
+input[name="vk-tbl"] ~ ul,
+input[name^="sc2vk-tbl"] ~ ul {
+  width: 12em;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+input[name="vk-tbl"] ~ ul > li,
+input[name="sc2vk-tbl"] ~ ul > li {
+  display: inline-block;
+  margin: 0 0.5em;
+}
+input#vk-tbl_all:checked ~ ul > li > label[for="vk-tbl_all"],
+input#vk-tbl_partial:checked ~ ul > li > label[for="vk-tbl_partial"],
+input#sc2vk-tbl_all:checked ~ ul > li > label[for="sc2vk-tbl_all"],
+input#sc2vk-tbl_partial:checked ~ ul > li > label[for="sc2vk-tbl_partial"] {
+  border-bottom: 2px solid #007bff;
+}
+input#vk-tbl_partial:not(:checked) ~ table#vk-partial,
+input#vk-tbl_all:not(:checked) ~ table#vk-name-all,
+input#vk-tbl_all:not(:checked) ~ table#vk-desc-all,
+input#sc2vk-tbl_partial:not(:checked) ~ table#sc2vk-partial,
+input#sc2vk-tbl_all:not(:checked) ~ table#sc2vk-all {
+  visibility: hidden;
+  position: absolute;
+  left: -300%;
+}
+
