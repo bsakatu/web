@@ -6,10 +6,19 @@
     <description>Recent content in keyboard on capyBaral</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 14 Jul 2020 22:02:25 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 06 Aug 2020 14:13:00 +0900</lastBuildDate>
     
 	<atom:link href="/tags/keyboard/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Windows の Virtual-Key まとめ</title>
+      <link>/doc/virtual-key-of-windows/</link>
+      <pubDate>Thu, 06 Aug 2020 14:13:00 +0900</pubDate>
+      
+      <guid>/doc/virtual-key-of-windows/</guid>
+      <description>概要 Windows の Virtual-Key （いわゆる仮想キー）についてまとめる。 Virtual-Key とは Windows では PS/2 キーボードや USB キーボードから受け取ったキーコード（それぞれ Scancode と Usage ID）を Virtual-Key co</description>
+    </item>
     
     <item>
       <title>USB HID Usage ID の Scancode 変換と対応するキー</title>

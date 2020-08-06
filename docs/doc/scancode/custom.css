@@ -3,14 +3,20 @@ table > tbody {
   font-size: 0.75em;
 }
 
-table:not(#scancode-list) code {
+table code {
   white-space: normal;
   word-break:  keep-all;
 }
 table:not(#scancode-list) td:nth-of-type(4) > code,
 table:not(#scancode-list) td:nth-of-type(5) > code,
 table:not(#scancode-list) td:nth-of-type(6) > code,
-table:not(#scancode-list) td:nth-of-type(7) > code {
+table:not(#scancode-list) td:nth-of-type(7) > code,
+#scancode-list td:nth-of-type(23) > code,
+#scancode-list td:nth-of-type(24) > code,
+#scancode-list td:nth-of-type(25) > code,
+#scancode-list td:nth-of-type(26) > code,
+#scancode-list td:nth-of-type(27) > code,
+#scancode-list td:nth-of-type(28) > code {
   white-space: pre-wrap;
 }
 

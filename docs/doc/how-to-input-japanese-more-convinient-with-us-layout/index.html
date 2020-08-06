@@ -77,18 +77,18 @@
         <summary>Table of contents</summary>
 <nav id="TableOfContents">
   <ol>
-    <li><a href="#windows-日本語環境で-us-配列を使うには">Windows 日本語環境で US 配列を使うには</a></li>
-    <li><a href="#どこをいじるのか">どこをいじるのか</a></li>
-    <li><a href="#ところでスキャンコードとか仮想キーコードとは何か">ところでスキャンコードとか仮想キーコードとは何か</a></li>
-    <li><a href="#新たな-kbd106dll-を作る">新たな <code>kbd106.dll</code> を作る</a>
+    <li><a href="#how-to-use-us-layout-on-japanese-windows">Windows 日本語環境で US 配列を使うには</a></li>
+    <li><a href="#where-to-modify">どこをいじるのか</a></li>
+    <li><a href="#sc-and-vk">ところでスキャンコードとか仮想キーコードとは何か</a></li>
+    <li><a href="#make-new-kbd106-dll">新たな <code>kbd106.dll</code> を作る</a>
       <ol>
-        <li><a href="#環境構築">環境構築</a></li>
-        <li><a href="#改造内容">改造内容</a></li>
-        <li><a href="#ビルド">ビルド</a></li>
+        <li><a href="#prepare-tools">環境構築</a></li>
+        <li><a href="#what-to-modify">改造内容</a></li>
+        <li><a href="#build">ビルド</a></li>
       </ol>
     </li>
-    <li><a href="#設定適用">設定適用</a></li>
-    <li><a href="#欄外">欄外</a></li>
+    <li><a href="#apply-settings">設定適用</a></li>
+    <li><a href="#margin">欄外</a></li>
   </ol>
 </nav>
       </details>
@@ -100,7 +100,7 @@
 昨日は鴨南蛮さん (<a href="https://twitter.com/ralfdegen">@ralfdegen</a>) の「<a href="https://kamobanban.hateblo.jp/entry/2018/12/10/231150">今年1年の自作キーボード活動まとめ</a>」でした。</p>
 <p>ハードウェアやソフトウェア的につよつよな方がたくさんいらっしゃるので、しょぼしょぼしたネタでお茶を濁しておきます。残念ながら自作キーボードもキーキャップもキースイッチもケーブルも写真は一枚も出てきませんし <a href="https://github.com/qmk/qmk_firmware"><abbr title="Quantum Mechanical Keyboard">QMK</abbr></a> の話題もほぼありません!!! （わずかにあると言えばあるけど……）</p>
 <hr>
-<h2 id="windows-日本語環境で-us-配列を使うには">Windows 日本語環境で US 配列を使うには</h2>
+<h2 id="how-to-use-us-layout-on-japanese-windows">Windows 日本語環境で US 配列を使うには</h2>
 <p>日本語環境の Winodows の場合、一般的にはいわゆる <a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%BC%E9%85%8D%E5%88%97#109%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89">JIS 配列</a>のキーボード使用していると思います。しかし興味や様々な事情や思想や宗教上の理由などにより、<a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%BC%E9%85%8D%E5%88%97#101%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89">US 配列（ANSI 配列などとも）</a>を使ってみたい・使わなければならない人もいるはずです。また自作キーボード界隈であれば、キーボード、キーキャップ、ファームウェアなどが US 配列前提だったりするので、US 配列を避けて通るのはなかなか難しいでしょう。</p>
 <p>さて例えば、JIS キーボードを使っている人が US 配列に乗り換える第 1 歩としては、ハード環境は JIS キーボードのまま US 配列が使えればお手軽でしょう。実現するにはいくつかの方法でがありますが、例えば簡単な方法としては以下に挙げるような方法をとることになるかもしれません。</p>
 <ul>
@@ -116,7 +116,7 @@
 <li>改造版 JIS 配列を使う</li>
 </ul>
 <p>ここで、AX 配列を使うやり方は<a href="/doc/ax-layout-on-windows/" title="AX キーボードの配列を現行の Windows で使う">別記事</a>を書いているのでそちらを参照して下さい。今回の記事では JIS 配列を改造する手法について解説していきます。</p>
-<h2 id="どこをいじるのか">どこをいじるのか</h2>
+<h2 id="where-to-modify">どこをいじるのか</h2>
 <p>レジストリを弄ります。見るべきは3つのエントリで、それらは標準では以下のようになっているはずです。</p>
 
 
@@ -149,19 +149,19 @@
 </table>
 
 <p>この中の <code>LayerDriverJPN</code> というエントリで指定されている <code>kbd106.dll</code> がキーボードから入力された内容を最終的に OS 内の仮想キーコードへと変換する変換表になっています。これを望む変換表が書かれたファイルに指定を変更してあげれば所望の動作をしてくれるようになります。たとえば純粋な US 配列であれば <code>kbdus.dll</code> というファイルがあるのでそれを指定します。これらの変換表を含む定義ファイルは <code>C:\Windows\System32</code> フォルダに格納されています。見てみると分かりますが、他にも色々な定義ファイル (<code>kbd***.dll</code>) があります。気になる方は覗いてみるとよいです。</p>
-<h2 id="ところでスキャンコードとか仮想キーコードとは何か">ところでスキャンコードとか仮想キーコードとは何か</h2>
+<h2 id="sc-and-vk">ところでスキャンコードとか仮想キーコードとは何か</h2>
 <p>※知っている人は飛ばしてもらって構わない内容です。本当はこれだけで記事書いてもよかったけど時間がなかった（力尽きた）。</p>
 <p>今ではほとんど見ることもなくなった PS/2 キーボード、これのキーを押したときに PC に送信されるコードが<a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89">スキャンコード</a>です（リファレンスは「OADG テクニカルリファレンス」でググって下さいとだけ言っておきます）。これはキーボードの配列によってどの位置はどのコード、という風に定義されているので、JIS 配列のキーボードだろうが US 配列のキーボードだろうが、同じ位置のキーを押すと同じキーコードが送信されます。このスキャンコードを受け取って Windows 内部で用いる<a href="https://docs.microsoft.com/en-us/windows/desktop/inputdev/virtual-key-codes">仮想キーコード</a>へと変換するための設定が、まさに前述した <code>kbd106.dll</code> などになります。</p>
 <p>ちなみに現在一般的に使われている USB 接続のキーボードはもう一段階増えていて、<a href="https://www.usb.org/document-library/hid-usage-tables-112">HID Usage ID</a> (※リンク先にある PDF の 53 ページ以降参照)という、これまた似たようなキー毎にコードを割り当てたものを PC に送信する。この後の処理は根拠になる資料が見つからないので多分に想像ですが、<code>C:\Windows\System32\hid.dll</code> 内部や <a href="https://download.microsoft.com/download/1/6/1/161ba512-40e2-4cc9-843a-923143f3456c/translate.pdf">Microsoft の資料</a>を見ると、Usage ID から Scancode への変換表が存在するので、PS/2 キーボードに一手間加えて Usage ID → スキャンコード → 仮想キーコード、という流れで入力文字を処理しているのだと思われます。ちなみに macOS はそう言う資料を全然見つけられていないのでさっぱり分かりません。Usage ID から直接仮想キーのようなものを生成しているんじゃないかと想像はしていますが。</p>
-<h2 id="新たな-kbd106dll-を作る">新たな <code>kbd106.dll</code> を作る</h2>
+<h2 id="make-new-kbd106-dll">新たな <code>kbd106.dll</code> を作る</h2>
 <p>さて本筋に戻ります。今回弄りたい <code>kbd106.dll</code> ですが、Microsoft が<a href="https://github.com/Microsoft/Windows-driver-samples/tree/master/input/layout/fe_kbds/jpn/106">ソースを GitHub で公開している</a>ので弄り放題です。以前は <abbr title="Windows Driver Kit">WDK</abbr> に同梱されていたのでダウンロードしてインストールして、と多少の手間がかかったのですが、今は Web で簡単に見られるようになりました。
 （※ちなみに OS に含まれる <code>kbd106.dll</code> を直接バイナリ編集してしまうことも出来るのですが、それはライセンス的にグレーなのでここではまっとうな方法だけ書いておきます。一応バイナリエディタであれすればごにょごにょ。）</p>
 <p>以下、Windows のメジャーバージョンは 10 であると仮定して書きます。7 や 8 系はそれぞれに適した WDK をインストールして、以降で説明するソース編集をして dll を生成すれば同じく実現可能です。7, 8 系は所持していないので未確認（持っていたけど 10 にアップグレードしてしまった）。</p>
-<h3 id="環境構築">環境構築</h3>
+<h3 id="prepare-tools">環境構築</h3>
 <p>簡単に見られるとは言っても dll ファイルをコンバイルする必要があるので、下記リンク先の Microsoft が公開している手順に従って環境をセットアップする必要があります。とは言ってもたいしてやることはなく、Visual Studio Community 2017 （<time datetime="2018-12-11">2018/12/11</time> 時点）をインストールし、その後上記の GitHub リポジトリを clone するだけです。GitHub へのアクセスはVisual Studio 用の GitHub 拡張機能をインストールするとよいでしょう。</p>
 <p><a href="https://docs.microsoft.com/ja-jp/windows-hardware/drivers/download-the-wdk">Windows Driver Kit (WDK) のダウンロードします。 | Microsoft Docs</a><br>
 （※タイトルが変なのは Microsoft が悪い）</p>
-<h3 id="改造内容">改造内容</h3>
+<h3 id="what-to-modify">改造内容</h3>
 <p>ちなみに <code>kbd106.dll</code> の改造自体は<a href="https://ku6.jp/report/80.html" title="HHKBをAXキーボードレイアウトで使っているFF14プレイヤーの話 : 傾き指向プログラミング">他に紹介している記事</a>があったりするのですが、その内容が入力される見かけの文字を変えることしか考えておらず、仮想キーコードはそのままという内容でした。これだとショートカットキーがいくつかおかしな事になります。</p>
 <p>さて環境が作れたので編集に入っていきます。ちょっと煩雑なのでずらずら書いていきます。なおやり方は私の自己流なのでビルド出来れば方法は問いません（ほぼ備忘録）。</p>
 <ol>
@@ -389,13 +389,13 @@
 </ul>
 <p><kbd>CapsLock</kbd> については、日本語版の <kbd>英数 CapsLock</kbd> の挙動が好きではない・弄りにくくて不便なので US 配列仕様のシンプル動作版に変更（こうすると AutoHotkey で <kbd>Ctrl</kbd> ↔ <kbd>CapsLock</kbd> というやりたいのにやれない設定を適用出来るようになる）。<kbd>半角全角</kbd>については、<code>scancode = 0x5C</code> がスキャンコードとしては US 配列にも JIS 配列にも定義がないですが、Windows の設定としては USB HID の &quot;Keyboard International6 (<code>0x8C</code>)&quot; が変換元として定義されており、またどうやら PC-98 のテンキーカンマ用だったものの当然現在では限りなく使用されないはずのものなので、好きに使います。</p>
 <p>なおよく見ると分かりますが、<code>VK_OEM_5</code> (<kbd>\|</kbd>) が2つ存在しています。JIS 配列における <kbd>¥|</kbd> と <kbd>]}</kbd> の位置です。ここは好みや使用環境に寄るところもあるので、各自で好きに弄ってもらった方がいいと思いそのままにしてあります。あんまり弄りすぎると QMK や DvorakJ などで配列を作るときに苦労すると思うので、そういうツールを使う方々は程々に……。</p>
-<h3 id="ビルド">ビルド</h3>
+<h3 id="build">ビルド</h3>
 <p>さて、これで改造版 <code>kbd106.dll</code> を作成する準備は整いました。</p>
 <ol>
 <li>ビルドの構成を <code>Debug</code> から <code>Release</code> に変更し、プラットフォームは適用したい環境を選択し、ビルドする。</li>
 <li>ソースフォルダにフォルダが作られビルドしたファイル等々が生成されているはず。</li>
 </ol>
-<h2 id="設定適用">設定適用</h2>
+<h2 id="apply-settings">設定適用</h2>
 <p>ついに dll ファイルが完成したので設定適用していきます。</p>
 <p><code>106_us</code> フォルダに生成されるビルド後のフォルダやファイルの中から <code>kbd106_us.dll</code> をとりだし、これを <code>C:\Windows\System32</code> などのシステムフォルダにコピーし、レジストリを下記の通り編集し、再起動すれば設定は適用されているはずです</p>
 
@@ -432,7 +432,7 @@
 <p>さて、再起動が完了すればあとは動作確認です。メモ帳などで一通り打ってみて問題ないか確認し、できれば <a href="http://kts.sakaiweb.com/keymill.html" title="KT Software - Keymill">Keymill</a> などのスキャンコードと仮想キーコードを確認出来るソフトでテストするとよいでしょう。スキャンコードと仮想キーコードの対応を変えたキーの動作確認には特に。</p>
 <p>そういえば 32 bit 版のことをすっかり忘れていましたが、必要な場合は 32 bit 用にビルドして <code>C:\Windows\SysWOW64</code> に放り込めばいいと思います。これがないと動かないケースがあるのかいまいちちゃんと調べていませんが、今後ますます 32 bit のソフトウェアを使うことは減っていくのであんまり必要ないかも……。</p>
 <p>というわけで、これで動作すれば今回の改造は完了です。この改造方法はわりとどうにでもなるので、さらなるオレオレ配列を作るなりして遊んでみてもいいでしょう。よく分からない場合はメールなり Twitter なりで質問して下さい。コメント欄はまだ作っていないので……。</p>
-<h2 id="欄外">欄外</h2>
+<h2 id="margin">欄外</h2>
 <p>この記事をアドカレのネタとして採用するのかは自分の中でもわりと迷いがありました。しかし、自作キーボードで一般的に流通するキーキャップの文字（レジェンド）が基本的に US 配列を前提とし、その他の配列はオプションかそもそも無い、という状況であるのは覆すことの出来ない事実なので、もっと日本人が気軽に US 配列を使えれば日本での自作キーボード界の発展にほんのわずかばかりでも貢献出来るんじゃないか、と自分に言い聞かせて書いてみました。まあ半分は自分の備忘録なんですけど。</p>
 <hr>
 <p>明日の<a href="https://adventar.org/calendars/2964#list-2018-12-12">自作キーボード #2 Advent Calendar 2018 12日目の記事</a>は <a href="https://github.com/hinastory">hinastory さん</a>による「気が付いたら本棚がキーボード棚に変わっていた話」の予定です。</p>
