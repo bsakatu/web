@@ -1,4 +1,9 @@
 <blockquote{{ with .Get "cite" }} cite="{{ . }}"{{ end }}>
+{{ $indent := (.Get "indent" | default "yes") -}}
+{{- if (eq $indent "yes") -}}
 {{ .Inner | .Page.RenderString | replaceRE "(?m)^" "  " | .Page.RenderString }}
+{{- else -}}
+{{ .Inner | .Page.RenderString }}
+{{ end -}}
   <footer><cite>{{ with .Get "cite" }}<a href="{{ . }}">{{ end }}{{ .Get "title" }}{{ if .Get "cite" }}</a>{{ end }}</cite></footer>
 </blockquote>
